@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Properties on Lease | Family&Flats</title>
+  <meta name="description" content="Verified lease listings across Family&Flats projects with current availability, furnishing checks and visit support.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="/assets/css/tokens.css?v=phase3-listings">
+  <link rel="stylesheet" href="/assets/css/typography.css?v=phase3-listings">
+  <link rel="stylesheet" href="/assets/css/layout.css?v=phase3-listings">
+  <link rel="stylesheet" href="/assets/css/components.css?v=phase3-listings">
+  <link rel="stylesheet" href="/assets/css/header.css?v=phase3-listings">
+  <link rel="stylesheet" href="/assets/css/footer.css?v=footer-final">
+  <link rel="stylesheet" href="/assets/css/listings.css?v=phase3-listings">
+</head>
+<body data-listing-page="lease">
+  <div id="header-placeholder"></div>
+
+  <section class="ff-listing-hero">
+    <div class="ff-listing-wrap">
+      <span class="ff-mini"><i class="fa-solid fa-key"></i> Verified lease inventory</span>
+      <h1><span data-project-name>Gurugram</span> properties on lease.</h1>
+      <p>Explore published rental options with Family&Flats advisory, furnishing clarity, availability checks and visit planning.</p>
+      <div class="ff-listing-stats">
+        <div><strong data-listings-count>0</strong><span>Published lease listings</span></div>
+        <div><strong>Fresh</strong><span>Move-in checks</span></div>
+        <div><strong>1:1</strong><span>Advisor support</span></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="ff-listing-main">
+    <div class="ff-listing-toolbar">
+      <div class="ff-filter-panel" data-listing-filters>
+        <label>
+          BHK
+          <select data-filter="bhk">
+            <option value="all">All BHKs</option>
+            <option value="2bhk">2 BHK</option>
+            <option value="3bhk">3 BHK</option>
+            <option value="4bhk">4 BHK</option>
+          </select>
+        </label>
+        <label>
+          Project
+          <select data-filter="project">
+            <option value="all">All projects</option>
+          </select>
+        </label>
+        <label>
+          Rent
+          <select data-filter="budget">
+            <option value="all">Any rent</option>
+            <option value="under-75k">Under 75K</option>
+            <option value="75k-150k">75K - 1.5L</option>
+            <option value="150k-plus">1.5L+</option>
+            <option value="request">Rent on request</option>
+          </select>
+        </label>
+        <label>
+          Furnishing
+          <select data-filter="furnishing">
+            <option value="all">Any furnishing</option>
+            <option value="semi">Semi furnished</option>
+            <option value="fully">Fully furnished</option>
+            <option value="unfurnished">Unfurnished</option>
+          </select>
+        </label>
+        <label>
+          Move-in
+          <select data-filter="availability">
+            <option value="all">Any availability</option>
+            <option value="available">Available</option>
+            <option value="ready">Ready to move</option>
+            <option value="request">Check with owner</option>
+          </select>
+        </label>
+        <button type="button" class="ff-filter-reset" data-filter-reset>Reset</button>
+      </div>
+      <div class="ff-chip-row">
+        <a class="ff-nav-pill" href="/sale.html">Sale</a>
+        <a class="ff-nav-pill active" href="/lease.html">Lease</a>
+        <a class="ff-nav-pill" href="/projects/">Projects</a>
+      </div>
+    </div>
+
+    <section class="ff-listing-grid" data-listings-grid>
+      <div class="ff-empty-state"><h3>Loading lease listings...</h3></div>
+    </section>
+
+    <section class="ff-requirement-panel" data-requirement-panel>
+      <div>
+        <span class="ff-mini dark"><i class="fa-solid fa-key"></i> Tenant requirement</span>
+        <h2>Need a different rental option?</h2>
+        <p>Share your preferred project, furnishing, rent range and move-in date. Family&Flats will check live rental availability.</p>
+      </div>
+      <form class="ff-requirement-form" data-requirement-form>
+        <input name="name" type="text" placeholder="Your name" required>
+        <input name="phone" type="tel" placeholder="Phone number" required>
+        <select name="bhk" required>
+          <option value="">Preferred BHK</option>
+          <option>2 BHK</option>
+          <option>3 BHK</option>
+          <option>4 BHK</option>
+          <option>Any suitable option</option>
+        </select>
+        <input name="project" type="text" placeholder="Preferred project / location">
+        <input name="budget" type="text" placeholder="Rent range">
+        <select name="timeline">
+          <option value="">Move-in timeline</option>
+          <option>Immediate</option>
+          <option>Within 15 days</option>
+          <option>Within 30 days</option>
+          <option>Exploring</option>
+        </select>
+        <textarea name="notes" rows="3" placeholder="Furnishing, family/bachelor, pet, floor preference?"></textarea>
+        <button type="submit">Send Requirement on WhatsApp</button>
+      </form>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="/assets/data/listings.js?v=phase3-listings"></script>
+  <script src="/assets/js/listings.js?v=phase3-listings"></script>
+  <script src="/assets/js/main.js?v=phase3-listings"></script>
+</body>
+</html>
+

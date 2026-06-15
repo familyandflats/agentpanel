@@ -1,0 +1,34 @@
+Options -MultiViews
+
+RewriteEngine On
+RewriteBase /
+
+# Old blog URLs to new blog folder
+RedirectMatch 301 ^/blog-(.*)\.html$ /content/blogs/blog-$1.html
+
+# Old news URLs to new news folder
+RedirectMatch 301 ^/news-(.*)\.html$ /content/news/news-$1.html
+
+# Clean blog URLs: /blog-109
+RewriteRule ^blog-([0-9A-Za-z-]+)$ /content/blogs/blog-$1.html [L]
+
+# Clean news URLs: /news-12
+RewriteRule ^news-([0-9A-Za-z-]+)$ /content/news/news-$1.html [L]
+
+<IfModule mod_headers.c>
+  Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+  Header set Pragma "no-cache"
+  Header set Expires "0"
+
+  <FilesMatch "\.(html|js|css)$">
+    FileETag None
+    Header unset ETag
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+  </FilesMatch>
+</IfModule>
+# Family&Flats service detail redirects
+RewriteRule ^After-Sales-Services\.html$ services/after-sales-services.html [R=301,L]
+RewriteRule ^Buying-Property\.html$ services/buying-property.html [R=301,L]
+RewriteRule ^Selling-Property\.html$ services/selling-property.html [R=301,L]
+RewriteRule ^Mortgage-Service\.html$ services/mortgage-service.html [R=301,L]
+RewriteRule ^Exclusivity\.html$ services/exclusivity.html [R=301,L]

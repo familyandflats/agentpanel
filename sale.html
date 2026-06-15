@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Properties on Sale | Family&Flats</title>
+  <meta name="description" content="Verified resale listings across Family&Flats projects with project, BHK and advisory support.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="/assets/css/tokens.css?v=phase3-listings">
+  <link rel="stylesheet" href="/assets/css/typography.css?v=phase3-listings">
+  <link rel="stylesheet" href="/assets/css/layout.css?v=phase3-listings">
+  <link rel="stylesheet" href="/assets/css/components.css?v=phase3-listings">
+  <link rel="stylesheet" href="/assets/css/header.css?v=phase3-listings">
+  <link rel="stylesheet" href="/assets/css/footer.css?v=footer-final">
+  <link rel="stylesheet" href="/assets/css/listings.css?v=phase3-listings">
+</head>
+<body data-listing-page="sale">
+  <div id="header-placeholder"></div>
+
+  <section class="ff-listing-hero">
+    <div class="ff-listing-wrap">
+      <span class="ff-mini"><i class="fa-solid fa-shield-halved"></i> Verified resale inventory</span>
+      <h1><span data-project-name>Gurugram</span> properties on sale.</h1>
+      <p>Explore published resale options with Family&Flats advisory, current availability checks, photos, price context and visit planning.</p>
+      <div class="ff-listing-stats">
+        <div><strong data-listings-count>0</strong><span>Published sale listings</span></div>
+        <div><strong>Live</strong><span>Availability checks</span></div>
+        <div><strong>1:1</strong><span>Advisor support</span></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="ff-listing-main">
+    <div class="ff-listing-toolbar">
+      <div class="ff-filter-panel" data-listing-filters>
+        <label>
+          BHK
+          <select data-filter="bhk">
+            <option value="all">All BHKs</option>
+            <option value="2bhk">2 BHK</option>
+            <option value="3bhk">3 BHK</option>
+            <option value="4bhk">4 BHK</option>
+          </select>
+        </label>
+        <label>
+          Project
+          <select data-filter="project">
+            <option value="all">All projects</option>
+          </select>
+        </label>
+        <label>
+          Budget
+          <select data-filter="budget">
+            <option value="all">Any budget</option>
+            <option value="under-2cr">Under 2 Cr</option>
+            <option value="2-5cr">2 Cr - 5 Cr</option>
+            <option value="5cr-plus">5 Cr+</option>
+            <option value="request">Price on request</option>
+          </select>
+        </label>
+        <label>
+          Furnishing
+          <select data-filter="furnishing">
+            <option value="all">Any furnishing</option>
+            <option value="semi">Semi furnished</option>
+            <option value="fully">Fully furnished</option>
+            <option value="unfurnished">Unfurnished</option>
+          </select>
+        </label>
+        <label>
+          Floor
+          <select data-filter="floor">
+            <option value="all">Any floor</option>
+            <option value="lower">Lower floor</option>
+            <option value="middle">Middle floor</option>
+            <option value="higher">Higher floor</option>
+          </select>
+        </label>
+        <button type="button" class="ff-filter-reset" data-filter-reset>Reset</button>
+      </div>
+      <div class="ff-chip-row">
+        <a class="ff-nav-pill active" href="/sale.html">Sale</a>
+        <a class="ff-nav-pill" href="/lease.html">Lease</a>
+        <a class="ff-nav-pill" href="/projects/">Projects</a>
+      </div>
+    </div>
+
+    <section class="ff-listing-grid" data-listings-grid>
+      <div class="ff-empty-state"><h3>Loading sale listings...</h3></div>
+    </section>
+
+    <section class="ff-requirement-panel" data-requirement-panel>
+      <div>
+        <span class="ff-mini dark"><i class="fa-solid fa-list-check"></i> Requirement desk</span>
+        <h2>Did not find the right resale option?</h2>
+        <p>Share your preferred project, BHK, budget and timeline. Family&Flats will check current owner-side availability before you visit.</p>
+      </div>
+      <form class="ff-requirement-form" data-requirement-form>
+        <input name="name" type="text" placeholder="Your name" required>
+        <input name="phone" type="tel" placeholder="Phone number" required>
+        <select name="bhk" required>
+          <option value="">Preferred BHK</option>
+          <option>2 BHK</option>
+          <option>3 BHK</option>
+          <option>4 BHK</option>
+          <option>Any suitable option</option>
+        </select>
+        <input name="project" type="text" placeholder="Preferred project / location">
+        <input name="budget" type="text" placeholder="Budget range">
+        <select name="timeline">
+          <option value="">Buying timeline</option>
+          <option>Immediate</option>
+          <option>Within 30 days</option>
+          <option>1-3 months</option>
+          <option>Exploring</option>
+        </select>
+        <textarea name="notes" rows="3" placeholder="Any specific requirement?"></textarea>
+        <button type="submit">Send Requirement on WhatsApp</button>
+      </form>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="/assets/data/listings.js?v=phase3-listings"></script>
+  <script src="/assets/js/listings.js?v=phase3-listings"></script>
+  <script src="/assets/js/main.js?v=phase3-listings"></script>
+</body>
+</html>
+

@@ -1,0 +1,35 @@
+.ff-container {
+  width: min(var(--ff-container), calc(100% - 40px));
+  margin-inline: auto;
+}
+
+.ff-section {
+  padding: 72px 0;
+}
+
+.ff-section.ff-section-soft {
+  background: var(--ff-soft);
+}
+
+.ff-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.ff-grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ff-grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ff-page-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.ff-page-main {
+  flex: 1;
+}

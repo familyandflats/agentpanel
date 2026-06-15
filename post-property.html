@@ -1,0 +1,616 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Post Property | Family&Flats</title>
+<meta name="description" content="Family&Flats team property submission page for adding sale and lease listings."/>
+
+<link rel="stylesheet" href="assets/style.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="assets/css/contact.css">
+<style>
+body{
+  background:#f6f8ff;
+  color:#071225;
+}
+
+.post-hero{
+  padding:80px 24px 60px;
+  background:linear-gradient(135deg,#1747d6,#3158ff 48%,#7b35ff);
+  color:#fff;
+}
+
+.post-hero-inner{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:40px;
+  align-items:center;
+}
+
+.post-kicker{
+  display:inline-flex;
+  padding:9px 16px;
+  border-radius:999px;
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.24);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:20px;
+}
+
+.post-hero h1{
+  font-size:58px;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:-2.5px;
+  margin:0 0 18px;
+}
+
+.post-hero p{
+  max-width:640px;
+  color:rgba(255,255,255,.86);
+  font-size:17px;
+  line-height:1.7;
+  margin:0;
+}
+
+.post-panel{
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.26);
+  border-radius:26px;
+  padding:30px;
+  box-shadow:0 24px 70px rgba(0,0,0,.18);
+}
+
+.post-panel h3{
+  font-size:24px;
+  font-weight:900;
+  margin-bottom:18px;
+}
+
+.post-panel-row{
+  display:flex;
+  justify-content:space-between;
+  border-top:1px solid rgba(255,255,255,.22);
+  padding:16px 0;
+  font-weight:800;
+}
+
+.post-panel-row span:last-child{
+  color:#ffd75e;
+}
+
+.content{
+  max-width:1050px;
+  margin:-36px auto 120px;
+  padding:0 24px;
+  position:relative;
+  z-index:2;
+}
+
+.breadcrumb{
+  display:none;
+}
+
+.page-title{
+  display:none;
+}
+
+.form-card{
+  background:#fff;
+  border:1px solid #e2e8f0;
+  border-radius:26px;
+  padding:34px;
+  box-shadow:0 24px 80px rgba(15,23,42,.10);
+}
+
+.section-title{
+  font-size:22px;
+  font-weight:900;
+  color:#071225;
+  margin:8px 0 22px;
+  padding-top:12px;
+}
+
+.field{
+  margin-bottom:18px;
+}
+
+.field label{
+  display:block;
+  font-size:13px;
+  font-weight:900;
+  color:#18233a;
+  margin-bottom:8px;
+}
+
+.input,
+select,
+textarea,
+.multi-select summary{
+  width:100%;
+  min-height:50px;
+  border:1px solid #dbe3ef;
+  border-radius:12px;
+  padding:13px 15px;
+  background:#f8fafc;
+  font-size:14px;
+  font-weight:700;
+  color:#071225;
+  outline:none;
+}
+
+.input:focus,
+select:focus,
+textarea:focus{
+  border-color:#3158ff;
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(49,88,255,.10);
+}
+
+textarea{
+  min-height:110px;
+}
+
+.grid-2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.multi-options{
+  border:1px solid #dbe3ef;
+  border-radius:14px;
+  padding:14px;
+  margin-top:8px;
+  display:grid;
+  gap:9px;
+  background:#fff;
+  box-shadow:0 16px 40px rgba(15,23,42,.08);
+}
+
+.multi-options label{
+  font-size:13px;
+  font-weight:700;
+}
+
+#submitBtn{
+  margin-top:12px;
+  min-height:54px;
+  padding:0 28px;
+  border:0;
+  border-radius:14px;
+  background:linear-gradient(135deg,#3158ff,#6c2cff);
+  color:#fff;
+  font-size:15px;
+  font-weight:900;
+  box-shadow:0 18px 40px rgba(49,88,255,.28);
+}
+
+.status-message{
+  display:none;
+  margin-top:16px;
+  border-radius:12px;
+  padding:14px 16px;
+  font-weight:900;
+  font-size:13px;
+}
+
+.status-message.ok{
+  display:block;
+  background:#ecfdf3;
+  color:#15803d;
+  border:1px solid #bbf7d0;
+}
+
+.status-message.err{
+  display:block;
+  background:#fff1f2;
+  color:#be123c;
+  border:1px solid #fecdd3;
+}
+
+.bottom-bar{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:99;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(14px);
+  border-top:1px solid #e2e8f0;
+}
+
+.bottom-inner{
+  max-width:1050px;
+  margin:auto;
+  padding:12px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.bar-agent{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:900;
+}
+
+.bar-img{
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  background:#eaf2ff;
+  display:grid;
+  place-items:center;
+  color:#3158ff;
+}
+
+.bar-actions{
+  display:flex;
+  gap:10px;
+}
+
+.bar-btn{
+  padding:11px 18px;
+  border-radius:10px;
+  border:1px solid #22c55e;
+  color:#16a34a;
+  font-weight:900;
+  text-decoration:none;
+}
+
+.bar-btn.fill{
+  background:#22c55e;
+  color:#fff;
+}
+
+@media(max-width:900px){
+  .post-hero-inner,
+  .grid-2,
+  .grid-3{
+    grid-template-columns:1fr;
+  }
+
+  .post-hero h1{
+    font-size:42px;
+  }
+}
+</style>
+<link rel="stylesheet" href="/assets/css/tokens.css?v=phase3-batch2">
+<link rel="stylesheet" href="/assets/css/typography.css?v=phase3-batch2">
+<link rel="stylesheet" href="/assets/css/layout.css?v=phase3-batch2">
+<link rel="stylesheet" href="/assets/css/components.css?v=phase3-batch2">
+<link rel="stylesheet" href="/assets/css/forms.css?v=phase3-batch2">
+<link rel="stylesheet" href="/assets/css/header.css?v=phase3-batch2">
+<link rel="stylesheet" href="/assets/css/footer.css?v=footer-final">
+<link rel="stylesheet" href="/assets/css/responsive.css?v=phase3-batch2">
+</head>
+
+<body>
+<div id="header-placeholder"></div>
+
+<section class="post-hero">
+  <div class="post-hero-inner">
+    <div>
+      <span class="post-kicker">Family&Flats Team Submission</span>
+      <h1>Post verified property inventory faster.</h1>
+      <p>Add sale or lease inventory with project, pricing, view, furnishing, media links and submitter details. Final publishing happens only after admin approval.</p>
+    </div>
+
+    <div class="post-panel">
+      <h3>Submission Flow</h3>
+      <div class="post-panel-row"><span>Step 1</span><span>Team Adds</span></div>
+      <div class="post-panel-row"><span>Step 2</span><span>Admin Reviews</span></div>
+      <div class="post-panel-row"><span>Step 3</span><span>Website Publishes</span></div>
+    </div>
+  </div>
+</section>
+  <div class="content">
+    <nav class="breadcrumb"><a href="/index.html">Home</a><span>›</span><span>Post Property</span></nav>
+    <section class="page-title">
+      <h1>Post a Property</h1>
+    </section>
+
+    <section class="card form-card">
+      <form id="propertyForm">
+
+<h2 class="section-title">Property Basics</h2>
+
+<div class="grid-2">
+
+  <div class="field">
+    <label>Project Name *</label>
+    <input class="input" name="project_name" id="project_name" list="projectList" required placeholder="Type project name, e.g. Victory"/>
+    <datalist id="projectList">
+      <option value="IREO Victory Valley">
+      <option value="IREO Grand Arch">
+      <option value="IREO Skyon">
+      <option value="IREO Uptown">
+      <option value="IREO Corridors">
+    </datalist>
+  </div>
+
+<div class="field">
+  <label>Project Locality</label>
+  <input class="input" name="project_locality" id="project_locality" readonly placeholder="Auto-filled"/>
+</div>
+
+<div class="field">
+  <label>Sector</label>
+  <select name="sector" id="sector" required>
+    <option value="">Select Sector</option>
+    <option>58</option>
+    <option>60</option>
+    <option>66</option>
+    <option>67</option>
+    <option>67A</option>
+  </select>
+</div>
+
+<div class="field">
+  <label>City</label>
+  <input class="input" name="city" id="city" readonly placeholder="Auto-filled"/>
+</div>
+
+</div>
+
+
+<div class="grid-3">
+  <div class="field">
+    <label>Listing Type *</label>
+    <select name="listing_type" required>
+      <option value="">Select</option>
+      <option>Sale</option>
+      <option>Lease</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>Property Type *</label>
+    <select name="property_type" required>
+      <option value="">Select</option>
+      <option>Apartment</option>
+      <option>Penthouse</option>
+      <option>Villa</option>
+      <option>Builder Floor</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>BHK *</label>
+    <select name="bhk" required>
+      <option value="">Select</option>
+      <option>2 BHK</option>
+      <option>3 BHK</option>
+      <option>4 BHK</option>
+      <option>5 BHK</option>
+      <option>5+ BHK</option>
+    </select>
+  </div>
+</div>
+
+<div class="grid-2">
+  <div class="field">
+    <label>Size / Super Area *</label>
+    <input class="input" name="size_sqft" required placeholder="2450 sq.ft."/>
+  </div>
+
+  <div class="field">
+    <label>Price / Rent Display *</label>
+    <input class="input" name="price_display" required placeholder="4.25 Cr / 1.25 L"/>
+  </div>
+</div>
+
+<div class="grid-3">
+
+  <div class="field">
+    <label>Floor Category *</label>
+    <select name="floor_category" required>
+      <option value="">Select</option>
+      <option>Low Floor</option>
+      <option>Middle Floor</option>
+      <option>High Floor</option>
+      <option>Penthouse</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>Furnishing *</label>
+    <select name="furnishing" required>
+      <option value="">Select</option>
+      <option>Unfurnished</option>
+      <option>Semi Furnished</option>
+      <option>Fully Furnished</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>Parking *</label>
+    <select name="parking_available" required>
+      <option value="">Select</option>
+      <option>1 Covered</option>
+      <option>2 Covered</option>
+      <option>Open Parking</option>
+      <option>No Parking</option>
+      <option>To Be Confirmed</option>
+    </select>
+  </div>
+</div>
+
+<div class="grid-3">
+<div class="field">
+  <label>Exit Facing *</label>
+  <select name="exit_facing" required>
+    <option value="">Select</option>
+    <option>North</option>
+    <option>South</option>
+    <option>East</option>
+    <option>West</option>
+    <option>North-East</option>
+    <option>North-West</option>
+    <option>South-East</option>
+    <option>South-West</option>
+  </select>
+</div>
+
+<div class="field">
+  <label>View *</label>
+  <details class="multi-select">
+    <summary>Select View</summary>
+    <div class="multi-options">
+      <label><input type="checkbox" name="view_type" value="Pool Facing"> Pool Facing</label>
+      <label><input type="checkbox" name="view_type" value="City Facing"> City Facing</label>
+      <label><input type="checkbox" name="view_type" value="Club Facing"> Club Facing</label>
+      <label><input type="checkbox" name="view_type" value="Aravalli Facing"> Aravalli Facing</label>
+      <label><input type="checkbox" name="view_type" value="Park Facing"> Park Facing</label>
+      <label><input type="checkbox" name="view_type" value="Road Facing"> Road Facing</label>
+      <label><input type="checkbox" name="view_type" value="Garden Facing"> Garden Facing</label>
+      <label><input type="checkbox" name="view_type" value="Internal Facing"> Internal Facing</label>
+    </div>
+  </details>
+</div>
+
+<div class="field">
+  <label>Additional Rooms *</label>
+  <details class="multi-select">
+    <summary>Select Additional Rooms</summary>
+    <div class="multi-options">
+      <label><input type="checkbox" name="additional_rooms" value="Servant Room"> Servant Room</label>
+      <label><input type="checkbox" name="additional_rooms" value="Study Room"> Study Room</label>
+      <label><input type="checkbox" name="additional_rooms" value="Pooja Room"> Pooja Room</label>
+      <label><input type="checkbox" name="additional_rooms" value="Store Room"> Store Room</label>
+      <label><input type="checkbox" name="additional_rooms" value="Utility Room"> Utility Room</label>
+      <label><input type="checkbox" name="additional_rooms" value="None"> None</label>
+      <label><input type="checkbox" name="additional_rooms" value="To Be Confirmed"> To Be Confirmed</label>
+    </div>
+  </details>
+</div>
+</div>
+
+        <h2 class="section-title">Media & Notes</h2>
+        <div class="grid-2">
+          <div class="field"><label>Google Drive Photos Folder Link</label><input class="input" name="photos_folder_link" type="url" placeholder="https://drive.google.com/drive/folders/..."/></div>
+          <div class="field"><label>Video Link</label><input class="input" name="video_link" type="url" placeholder="https://youtube.com/... or Drive link"/></div>
+        </div>
+        <div class="field"><label>Internal Remarks</label><textarea name="remarks" placeholder="Owner expectations, keys, negotiation notes, photo status, etc."></textarea></div>
+        <h2 class="section-title">Submitter Details</h2>
+        <div class="grid-3">
+<div class="field">
+<label>Submitted By *</label>
+<select name="submitted_by" required>
+<option value="">Select Team Member</option>
+<option>Arun Bansal</option>
+<option>Nidhi Gupta</option>
+<option>Bablu Yadav</option>
+</select>
+</div>
+<div class="field">
+<label>Mobile Number *</label>
+<input
+class="input"
+id="submitted_mobile"
+name="submitted_mobile"
+type="tel"
+maxlength="10"
+pattern="[0-9]{10}"
+required
+placeholder="10 digit mobile number">
+</div>
+
+<div class="field">
+<label>Email</label>
+<input
+class="input"
+id="submitted_email"
+name="submitted_email"
+type="email"
+required
+placeholder="name@email.com">
+</div>
+
+</div>
+        <input type="hidden" name="approval_status" value="Pending"/>
+        <input type="hidden" name="website_status" value="Not Published"/>
+        <input type="hidden" name="source" value="post-property.html"/>
+
+        <button class="btn accent" type="submit" id="submitBtn">Submit Property for Review</button>
+        <div id="statusMessage" class="status-message"></div>
+      </form>
+    </section>
+  </div>
+
+<script>
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxau6ZGxOUMKKfDC33FFJ7kwi9K6eSSfU1ln2syrZHO0VTQD_qegW4aowjGOCBeeoJ1MA/exec";
+const form = document.getElementById("propertyForm");
+const statusMessage = document.getElementById("statusMessage");
+const submitBtn = document.getElementById("submitBtn");
+form.addEventListener("submit", async function(e){
+  e.preventDefault();
+  statusMessage.className = "status-message";
+  statusMessage.textContent = "";
+  if (GOOGLE_SCRIPT_URL.includes("PASTE_GOOGLE_APPS_SCRIPT")) {
+    statusMessage.className = "status-message err";
+    statusMessage.textContent = "Google Sheet connection is not added yet. Add your Apps Script Web App URL in this file.";
+    return;
+  }
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Submitting...";
+  const fd = new FormData(form);
+const data = Object.fromEntries(fd.entries());
+data.view_type = fd.getAll("view_type").join(", ");
+data.additional_rooms = fd.getAll("additional_rooms").join(", ");
+  data.submitted_at = new Date().toISOString();
+  try{
+    await fetch(GOOGLE_SCRIPT_URL, {method:"POST", mode:"no-cors", headers:{"Content-Type":"text/plain;charset=utf-8"}, body:JSON.stringify(data)});
+    statusMessage.className = "status-message ok";
+    statusMessage.textContent = "Property submitted successfully. It is now pending admin approval.";
+    form.reset();
+  }catch(err){
+    statusMessage.className = "status-message err";
+    statusMessage.textContent = "Submission failed. Please check internet or Apps Script URL.";
+  }finally{
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Submit Property for Review";
+  }
+});
+</script>
+
+<script>
+const projectMaster = {
+  "IREO Victory Valley": { locality: "Golf Course Extension Road", sector: "67", city: "Gurugram" },
+  "IREO Uptown": { locality: "Golf Course Extension Road", sector: "66", city: "Gurugram" },
+  "IREO Grand Arch": { locality: "Golf Course Extension Road", sector: "58", city: "Gurugram" },
+  "IREO Corridors": { locality: "Golf Course Extension Road", sector: "67A", city: "Gurugram" },
+  "IREO Skyon": { locality: "Golf Course Extension Road", sector: "60", city: "Gurugram" }
+};
+
+document.getElementById("project_name").addEventListener("change", function () {
+  const selected = projectMaster[this.value];
+  document.getElementById("project_locality").value = selected ? selected.locality : "";
+  document.getElementById("sector").value = selected ? selected.sector : "";
+  document.getElementById("city").value = selected ? selected.city : "";
+});
+</script>
+<!---footer-section-->
+
+<div id="footer-placeholder"></div>
+
+<script src="/assets/js/main.js?v=phase3-batch2"></script>
+</body>
+</html>
+
+

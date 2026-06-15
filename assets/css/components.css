@@ -1,0 +1,75 @@
+.ff-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 12px 18px;
+  border: 1px solid transparent;
+  border-radius: var(--ff-radius);
+  font-weight: 800;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ff-btn-primary {
+  background: var(--ff-blue);
+  color: var(--ff-white);
+}
+
+.ff-btn-primary:hover {
+  background: var(--ff-blue-700);
+  color: var(--ff-white);
+}
+
+.ff-btn-gold {
+  background: var(--ff-gold);
+  color: var(--ff-ink);
+}
+
+.ff-card {
+  border: 1px solid var(--ff-line);
+  border-radius: var(--ff-radius);
+  background: var(--ff-white);
+  box-shadow: var(--ff-shadow);
+}
+
+.ff-eyebrow {
+  color: var(--ff-gold);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.project-compliance {
+  padding: 48px 0;
+  background: var(--ff-paper);
+}
+
+.project-compliance__card {
+  max-width: 420px;
+  margin: 0 auto 24px;
+  text-align: center;
+}
+
+.project-compliance__card h2 {
+  margin-bottom: 18px;
+  color: var(--ff-ink);
+}
+
+.project-compliance__card img {
+  width: min(300px, 100%);
+  height: auto;
+  border-radius: var(--ff-radius);
+  border: 1px solid var(--ff-line);
+  box-shadow: var(--ff-shadow);
+}
+
+.project-compliance__disclaimer {
+  max-width: 980px;
+  margin: 0 auto;
+  color: var(--ff-muted);
+  text-align: center;
+}

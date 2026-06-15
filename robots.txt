@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /_archive/
+Disallow: /_reports/
+Disallow: /_source_material/
+
+Sitemap: https://familyandflats.com/sitemap.xml

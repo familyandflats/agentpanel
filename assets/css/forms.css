@@ -1,0 +1,39 @@
+.ff-form {
+  display: grid;
+  gap: 16px;
+}
+
+.ff-form label {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--ff-ink);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.ff-form input,
+.ff-form select,
+.ff-form textarea {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ff-line);
+  border-radius: var(--ff-radius);
+  padding: 0 14px;
+  color: var(--ff-ink);
+  background: var(--ff-white);
+  font: inherit;
+}
+
+.ff-form textarea {
+  min-height: 120px;
+  padding-block: 12px;
+  resize: vertical;
+}
+
+.ff-form input:focus,
+.ff-form select:focus,
+.ff-form textarea:focus {
+  border-color: var(--ff-gold);
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(200, 155, 60, 0.16);
+}
