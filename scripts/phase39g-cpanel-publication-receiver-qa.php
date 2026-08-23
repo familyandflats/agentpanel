@@ -30,6 +30,13 @@ function qa_temp_root(): string
     return $root;
 }
 
+function qa_private_secret_file(string $root, string $contents): string
+{
+    $path = $root . DIRECTORY_SEPARATOR . 'private-secret-fixture.txt';
+    file_put_contents($path, $contents);
+    return $path;
+}
+
 function qa_remove_tree(string $path): void
 {
     if (!is_dir($path)) {
@@ -115,12 +122,13 @@ function qa_submit(string $root, array|string $body, array $options = []): array
     $idempotencyHeader = is_array($body) ? (string) ($body['idempotencyKey'] ?? '') : (string) ($options['idempotencyHeader'] ?? '');
     return ff_publication_receive([
         'method' => $options['method'] ?? 'POST',
-        'configuredSecret' => $options['configuredSecret'] ?? 'phase39g-secret',
+        'configuredSecret' => array_key_exists('configuredSecret', $options) ? $options['configuredSecret'] : 'phase39g-secret',
         'secretHeader' => $options['secretHeader'] ?? 'phase39g-secret',
         'idempotencyHeader' => $options['idempotencyHeader'] ?? $idempotencyHeader,
         'rawBody' => $rawBody,
         'websiteRoot' => $root,
         'runtimeRoot' => $options['runtimeRoot'] ?? ($root . DIRECTORY_SEPARATOR . 'api' . DIRECTORY_SEPARATOR . 'publication' . DIRECTORY_SEPARATOR . 'runtime'),
+        'privateSecretPath' => $options['privateSecretPath'] ?? null,
         'simulateAtomicWriteFailure' => $options['simulateAtomicWriteFailure'] ?? false,
     ]);
 }
@@ -166,6 +174,150 @@ try {
 
     $publication = qa_publication();
     $envelope = qa_envelope($publication);
+
+    qa_check('private secret path derives from production website root', function (): void {
+        $expected = '/home/prkw9neh8rou/.familyflats/website_publish_secret';
+        qa_assert(ff_publication_private_secret_path('/home/prkw9neh8rou/public_html') === $expected, 'Production private secret path derivation mismatch.');
+    });
+
+    qa_check('env secret present wins over private file secret', function () use ($envelope): void {
+        $secretRoot = qa_temp_root();
+        try {
+            $privatePath = qa_private_secret_file($secretRoot, 'private-file-secret');
+            $result = qa_submit($secretRoot, $envelope, [
+                'configuredSecret' => 'env-secret',
+                'secretHeader' => 'env-secret',
+                'privateSecretPath' => $privatePath,
+            ]);
+            qa_assert($result['httpStatus'] === 200, 'Env secret should win and accept request.');
+        } finally {
+            qa_remove_tree($secretRoot);
+        }
+    });
+
+    qa_check('private file secret is accepted when env secret is absent', function () use ($envelope): void {
+        $secretRoot = qa_temp_root();
+        try {
+            $privatePath = qa_private_secret_file($secretRoot, "private-file-secret\n");
+            $result = qa_submit($secretRoot, $envelope, [
+                'configuredSecret' => '',
+                'secretHeader' => 'private-file-secret',
+                'privateSecretPath' => $privatePath,
+            ]);
+            qa_assert($result['httpStatus'] === 200, 'Private file secret should accept request.');
+        } finally {
+            qa_remove_tree($secretRoot);
+        }
+    });
+
+    qa_check('missing private secret file returns 503', function () use ($envelope): void {
+        $secretRoot = qa_temp_root();
+        try {
+            $result = qa_submit($secretRoot, $envelope, [
+                'configuredSecret' => '',
+                'secretHeader' => 'private-file-secret',
+                'privateSecretPath' => $secretRoot . DIRECTORY_SEPARATOR . 'missing-secret.txt',
+            ]);
+            qa_assert($result['httpStatus'] === 503, 'Missing private secret should return 503.');
+            qa_assert($result['body']['error']['code'] === 'WEBSITE_PUBLISH_SECRET_NOT_CONFIGURED', 'Expected not configured code.');
+        } finally {
+            qa_remove_tree($secretRoot);
+        }
+    });
+
+    qa_check('empty invalid and unreadable private secret sources return 503', function () use ($envelope): void {
+        $secretRoot = qa_temp_root();
+        try {
+            $emptyPath = qa_private_secret_file($secretRoot, " \n ");
+            $invalidPath = $secretRoot . DIRECTORY_SEPARATOR . 'invalid-secret-fixture.txt';
+            file_put_contents($invalidPath, "private\nfile");
+            $directoryPath = $secretRoot . DIRECTORY_SEPARATOR . 'secret-directory';
+            mkdir($directoryPath);
+            foreach ([$emptyPath, $invalidPath, $directoryPath] as $path) {
+                $result = qa_submit($secretRoot, $envelope, [
+                    'configuredSecret' => '',
+                    'secretHeader' => 'private-file-secret',
+                    'privateSecretPath' => $path,
+                ]);
+                qa_assert($result['httpStatus'] === 503, 'Invalid private secret source should return 503.');
+            }
+        } finally {
+            qa_remove_tree($secretRoot);
+        }
+    });
+
+    qa_check('private file secret is never echoed in unauthorized response', function () use ($envelope): void {
+        $secretRoot = qa_temp_root();
+        try {
+            $privatePath = qa_private_secret_file($secretRoot, 'private-file-secret');
+            $result = qa_submit($secretRoot, $envelope, [
+                'configuredSecret' => '',
+                'secretHeader' => 'wrong-secret',
+                'privateSecretPath' => $privatePath,
+            ]);
+            $encoded = ff_publication_json($result['body']);
+            qa_assert($result['httpStatus'] === 401, 'Wrong private-file secret should return 401.');
+            qa_assert(!str_contains($encoded, 'private-file-secret'), 'Private file secret leaked in response.');
+            qa_assert(!str_contains($encoded, 'wrong-secret'), 'Wrong request secret leaked in response.');
+        } finally {
+            qa_remove_tree($secretRoot);
+        }
+    });
+
+    qa_check('private file secret is never persisted in runtime state', function () use ($envelope): void {
+        $secretRoot = qa_temp_root();
+        try {
+            $privatePath = qa_private_secret_file($secretRoot, 'private-file-secret');
+            $result = qa_submit($secretRoot, $envelope, [
+                'configuredSecret' => '',
+                'secretHeader' => 'private-file-secret',
+                'privateSecretPath' => $privatePath,
+            ]);
+            qa_assert($result['httpStatus'] === 200, 'Private file secret request should succeed.');
+            $runtime = $secretRoot . DIRECTORY_SEPARATOR . 'api' . DIRECTORY_SEPARATOR . 'publication' . DIRECTORY_SEPARATOR . 'runtime';
+            $files = glob($runtime . DIRECTORY_SEPARATOR . 'idempotency' . DIRECTORY_SEPARATOR . '*.json') ?: [];
+            qa_assert(count($files) > 0, 'Expected private-file runtime state.');
+            foreach ($files as $file) {
+                qa_assert(!str_contains((string) file_get_contents($file), 'private-file-secret'), 'Private file secret leaked to runtime state.');
+            }
+        } finally {
+            qa_remove_tree($secretRoot);
+        }
+    });
+
+    qa_check('wrong request secret with private file configured returns 401', function () use ($envelope): void {
+        $secretRoot = qa_temp_root();
+        try {
+            $privatePath = qa_private_secret_file($secretRoot, 'private-file-secret');
+            $result = qa_submit($secretRoot, $envelope, [
+                'configuredSecret' => '',
+                'secretHeader' => 'not-the-secret',
+                'privateSecretPath' => $privatePath,
+            ]);
+            qa_assert($result['httpStatus'] === 401, 'Wrong request secret should return 401.');
+            qa_assert($result['body']['error']['code'] === 'WEBSITE_PUBLISH_SECRET_INVALID', 'Expected invalid secret code.');
+        } finally {
+            qa_remove_tree($secretRoot);
+        }
+    });
+
+    qa_check('correct private file secret reaches request validation', function () use ($envelope): void {
+        $secretRoot = qa_temp_root();
+        try {
+            $privatePath = qa_private_secret_file($secretRoot, 'private-file-secret');
+            $bad = $envelope;
+            $bad['contractVersion'] = '2.0';
+            $result = qa_submit($secretRoot, $bad, [
+                'configuredSecret' => '',
+                'secretHeader' => 'private-file-secret',
+                'privateSecretPath' => $privatePath,
+            ]);
+            qa_assert($result['httpStatus'] === 400, 'Correct private secret should reach envelope validation.');
+            qa_assert($result['body']['error']['code'] === 'CONTRACT_VERSION_UNSUPPORTED', 'Expected contract validation error.');
+        } finally {
+            qa_remove_tree($secretRoot);
+        }
+    });
 
     qa_check('payload hash uses compact sender-compatible canonical JSON', function () use ($publication): void {
         $canonical = ff_publication_canonicalize($publication);

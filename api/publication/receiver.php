@@ -66,12 +66,12 @@ function ff_publication_handle_http_request(): void
 function ff_publication_receive(array $input): array
 {
     $method = strtoupper(ff_publication_clean($input['method'] ?? ''));
-    $configuredSecret = ff_publication_clean($input['configuredSecret'] ?? '');
     $secretHeader = ff_publication_clean($input['secretHeader'] ?? '');
     $idempotencyHeader = ff_publication_clean($input['idempotencyHeader'] ?? '');
     $rawBody = (string) ($input['rawBody'] ?? '');
     $websiteRoot = (string) ($input['websiteRoot'] ?? '');
     $runtimeRoot = (string) ($input['runtimeRoot'] ?? (__DIR__ . '/runtime'));
+    $configuredSecret = ff_publication_resolve_secret($input, $websiteRoot);
 
     if ($method !== 'POST') {
         return ff_publication_fail(405, 'METHOD_NOT_ALLOWED', 'Website publication receiver accepts POST only.');
@@ -282,6 +282,53 @@ function ff_publication_validate_payload(array $payload): ?array
     }
 
     return null;
+}
+
+function ff_publication_resolve_secret(array $input, string $websiteRoot): string
+{
+    $environmentSecret = ff_publication_clean($input['configuredSecret'] ?? '');
+    if ($environmentSecret !== '') {
+        return $environmentSecret;
+    }
+
+    $privateSecretPath = ff_publication_clean($input['privateSecretPath'] ?? '');
+    if ($privateSecretPath === '') {
+        $privateSecretPath = ff_publication_private_secret_path($websiteRoot);
+    }
+
+    return ff_publication_read_private_secret($privateSecretPath);
+}
+
+function ff_publication_private_secret_path(string $websiteRoot): string
+{
+    $normalisedRoot = rtrim($websiteRoot, "\\/");
+    if (str_contains($normalisedRoot, '/')) {
+        $homeRoot = preg_replace('#/[^/]+$#', '', $normalisedRoot);
+        $homeRoot = is_string($homeRoot) && $homeRoot !== '' ? $homeRoot : $normalisedRoot;
+        return $homeRoot . '/.familyflats/website_publish_secret';
+    }
+
+    $homeRoot = dirname($normalisedRoot);
+    return $homeRoot . DIRECTORY_SEPARATOR . '.familyflats' . DIRECTORY_SEPARATOR . 'website_publish_secret';
+}
+
+function ff_publication_read_private_secret(string $path): string
+{
+    if ($path === '' || !is_file($path) || !is_readable($path)) {
+        return '';
+    }
+
+    $contents = file_get_contents($path);
+    if (!is_string($contents)) {
+        return '';
+    }
+
+    $secret = trim($contents);
+    if ($secret === '' || preg_match('/[\r\n\x00-\x1F\x7F]/', $secret) === 1) {
+        return '';
+    }
+
+    return $secret;
 }
 
 function ff_publication_materialize_feeds(string $websiteRoot, array $publication, string $operation, bool $simulateAtomicWriteFailure = false): array
