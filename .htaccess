@@ -3,6 +3,9 @@ Options -MultiViews
 RewriteEngine On
 RewriteBase /
 
+# Mahindra Luminare canonical project URL
+RewriteRule ^projects/mahindraluminare/?$ /projects/mahindra-luminare/ [R=301,L]
+
 # Old blog URLs to new blog folder
 RedirectMatch 301 ^/blog-(.*)\.html$ /content/blogs/blog-$1.html
 
