@@ -1,12 +1,28 @@
-name: Deploy to cPanel
+name: Validate and deploy to cPanel
 
 on:
+  pull_request:
   push:
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout files
+        uses: actions/checkout@v4
+
+      - name: Validate universal site shell
+        run: python .github/scripts/validate_site_shell.py
+
   deploy:
+    if: github.event_name == 'push'
+    needs: validate
     runs-on: ubuntu-latest
 
     steps:
@@ -22,3 +38,21 @@ jobs:
           protocol: ftp
           port: 21
           server-dir: /
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+
+  verify-production:
+    if: github.event_name == 'push'
+    needs: deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout files
+        uses: actions/checkout@v4
+
+      - name: Verify deployed site shell
+        run: |
+          sleep 5
+          python .github/scripts/validate_site_shell.py --live-base https://www.familyandflats.com
