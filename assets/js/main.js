@@ -48,6 +48,10 @@
       if (path.indexOf("?") === -1) requestPath = path + "?v=footer-standard-20260924c";
       options = { cache: "no-store" };
     }
+    if (path.indexOf("header.html") !== -1) {
+      if (path.indexOf("?") === -1) requestPath = path + "?v=header-standard-20260925a";
+      options = { cache: "no-store" };
+    }
     return fetch(requestPath, options)
       .then(function (response) {
         if (!response.ok) throw new Error(path + " failed with " + response.status);
@@ -69,6 +73,7 @@
 
     var header = document.getElementById("header-placeholder");
     if (header && !header.hasAttribute("data-include")) {
+      loadStyleOnce("/assets/css/header.css?v=header-standard-20260925a", "ff-shared-header-style");
       includeFragment(header, "/header.html").catch(function (error) {
         console.error("Header include failed:", error);
       });
