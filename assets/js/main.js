@@ -99,3 +99,20 @@
     loadIncludes();
   }
 })();
+
+/* Family&Flats Website Enquiry V1 */
+(function () {
+  if (!document.getElementById("ff-enquiry-css")) {
+    var link = document.createElement("link");
+    link.id = "ff-enquiry-css";
+    link.rel = "stylesheet";
+    link.href = "/assets/css/enquiry.css?v=enquiry-v1";
+    document.head.appendChild(link);
+  }
+  if (!document.getElementById("ff-enquiry-js")) {
+    var script = document.createElement("script");
+    script.id = "ff-enquiry-js";
+    script.src = "/assets/js/enquiry.js?v=enquiry-v1";
+    document.head.appendChild(script);
+  }
+})();

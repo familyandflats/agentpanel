@@ -3315,13 +3315,13 @@
     document.addEventListener("DOMContentLoaded", function () {
         const form = document.getElementById("contactForm");
 
-        form.addEventListener("submit", async function (event) {
+        form.addEventListener("ff-legacy-submit-disabled", async function (event) {
             event.preventDefault();
 
             const formData = new FormData(form);
 
             try {
-                const response = await fetch("send_email1.php", {
+                const response = await fetch("/api/public/enquiry", {
                     method: "POST",
                     body: formData
                 });
@@ -3334,7 +3334,7 @@
                     // togglePopup();
 
                     // âœ… Redirect to thank you page
-                    window.location.href = "thank-you.php";
+                    window.location.href = "/thank-you/";
                 } else {
                     alert(result.message);
                 }

@@ -3,6 +3,11 @@ Options -MultiViews
 RewriteEngine On
 RewriteBase /
 
+# Website Enquiry & CRM Unification V1 - canonical thank-you route
+RewriteRule ^thank-you\.php$ /thank-you/ [R=301,L]
+RewriteRule ^projects/[^/]+/thank-you\.php$ /thank-you/ [R=301,L]
+
+
 # Mahindra Luminare canonical project URL
 RewriteRule ^projects/mahindraluminare/?$ /projects/mahindra-luminare/ [R=301,L]
 
