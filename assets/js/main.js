@@ -1,4 +1,13 @@
 (function () {
+  function loadStyleOnce(href, id) {
+    if (id && document.getElementById(id)) return;
+    var link = document.createElement("link");
+    if (id) link.id = id;
+    link.rel = "stylesheet";
+    link.href = href;
+    document.head.appendChild(link);
+  }
+
   function initHeaderInteractions(scope) {
     var root = scope || document;
     root.querySelectorAll(".ff-nav-dropdown-trigger").forEach(function (trigger) {
@@ -33,7 +42,13 @@
   }
 
   function includeFragment(target, path) {
-    return fetch(path)
+    var requestPath = path;
+    var options;
+    if (path.indexOf("footer.html") !== -1) {
+      if (path.indexOf("?") === -1) requestPath = path + "?v=footer-standard-20260924c";
+      options = { cache: "no-store" };
+    }
+    return fetch(requestPath, options)
       .then(function (response) {
         if (!response.ok) throw new Error(path + " failed with " + response.status);
         return response.text();
@@ -60,7 +75,13 @@
     }
 
     var footer = document.getElementById("footer-placeholder");
+    if (!footer && !document.querySelector("footer")) {
+      footer = document.createElement("div");
+      footer.id = "footer-placeholder";
+      document.body.appendChild(footer);
+    }
     if (footer && !footer.hasAttribute("data-include")) {
+      loadStyleOnce("/assets/css/footer.css?v=footer-standard-20260924c", "ff-shared-footer-style");
       includeFragment(footer, "/footer.html").catch(function (error) {
         console.error("Footer include failed:", error);
       });

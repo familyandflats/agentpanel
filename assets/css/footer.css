@@ -1,4 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css");
+
 .site-footer {
+  width: 100% !important;
+  max-width: 100vw !important;
   background: var(--ff-dark, #0b111d);
   color: #e5e7eb;
   padding: 64px 0 24px;
@@ -277,4 +282,91 @@
     align-items: flex-start !important;
     flex-direction: column !important;
   }
+}
+
+/* Canonical footer rendering lock: shared appearance across all public pages. */
+.site-footer,
+.site-footer * { box-sizing: border-box !important; }
+.site-footer,
+.site-footer .footer-container,
+.site-footer .footer-grid,
+.site-footer .footer-col,
+.site-footer .footer-col h4,
+.site-footer .footer-col p,
+.site-footer .footer-col li,
+.site-footer .footer-col a,
+.site-footer .footer-disclaimer p,
+.site-footer .footer-bottom-row,
+.site-footer .footer-bottom-row p,
+.site-footer .footer-bottom-row a {
+  font-family: "Manrope", Arial, sans-serif !important;
+  letter-spacing: -0.015em !important;
+}
+.site-footer {
+  background: linear-gradient(135deg, #070b14 0%, #0f172a 45%, #111827 100%) !important;
+  color: #e5e7eb !important;
+  font-size: 15px !important;
+  line-height: 1.65 !important;
+  border-top: 1px solid rgba(255,255,255,0.08) !important;
+}
+.site-footer .footer-col h4 { color: #fff !important; }
+.site-footer .footer-col p,
+.site-footer .footer-col li,
+.site-footer .footer-col a { color: #cbd5e1 !important; }
+.site-footer .footer-col a:hover { color: #ffd166 !important; }
+.site-footer .footer-socials a {
+  background: rgba(255,255,255,0.08) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,0.16) !important;
+  font-weight: 400 !important;
+}
+.site-footer .footer-socials a:hover { background: #ffd166 !important; color: #0f172a !important; border-color: #ffd166 !important; }
+.site-footer .footer-socials i { display: inline-block !important; width: auto !important; height: auto !important; line-height: 1 !important; }
+.site-footer .footer-container {
+  padding: 0 !important;
+  width: min(1200px, calc(100vw - 50px)) !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  position: relative !important;
+  left: calc(50vw - 5px) !important;
+  transform: translateX(-50%) !important;
+}
+.site-footer .footer-col li { margin: 0 0 7px !important; }
+.site-footer .footer-socials { flex-wrap: wrap !important; }
+.site-footer .footer-disclaimer {
+  margin: 0 !important;
+  border-top: 1px solid rgba(255,255,255,0.10) !important;
+  color: #e5e7eb !important;
+  font-size: 15px !important;
+  line-height: 1.65 !important;
+  letter-spacing: -0.015em !important;
+}
+.site-footer .footer-bottom-row { border-color: rgba(255,255,255,0.10) !important; }
+.site-footer .footer-bottom-row p { color: #cbd5e1 !important; font-size: 14px !important; line-height: 1.75 !important; }
+.site-footer .footer-bottom-row a { font-size: 14px !important; line-height: 1.65 !important; }
+.site-footer .footer-grid.footer-grid-final { flex-direction: row !important; }
+.ff-whatsapp-float {
+  position: fixed !important;
+  width: 58px !important;
+  height: 58px !important;
+  bottom: 34px !important;
+  right: 34px !important;
+  background: #25d366 !important;
+  color: #fff !important;
+  border-radius: 999px !important;
+  text-align: center !important;
+  font-size: 28px !important;
+  box-shadow: 0 16px 34px rgba(37,211,102,0.34) !important;
+  z-index: 9999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  border: 0 !important;
+}
+.ff-whatsapp-float:hover { color: #fff !important; transform: translateY(-2px) !important; }
+.ff-whatsapp-float i { font-family: "Font Awesome 6 Brands" !important; font-size: 28px !important; line-height: 1 !important; }
+body:has(.ff-whatsapp-float) .float:not(.ff-whatsapp-float) { display: none !important; }
+@media (max-width: 640px) {
+  .ff-whatsapp-float { width: 52px !important; height: 52px !important; right: 20px !important; bottom: 24px !important; }
 }
