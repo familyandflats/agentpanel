@@ -1,6 +1,10 @@
 Options -MultiViews
 
 RewriteEngine On
+
+# SEO Phase 2 canonical host governance
+RewriteCond %{HTTP_HOST} ^www\.familyandflats\.com$ [NC]
+RewriteRule ^ https://familyandflats.com%{REQUEST_URI} [R=301,L,NE]
 RewriteBase /
 
 # Website Enquiry & CRM Unification V1 - canonical thank-you route
@@ -18,10 +22,10 @@ RedirectMatch 301 ^/blog-(.*)\.html$ /content/blogs/blog-$1.html
 RedirectMatch 301 ^/news-(.*)\.html$ /content/news/news-$1.html
 
 # Clean blog URLs: /blog-109
-RewriteRule ^blog-([0-9A-Za-z-]+)$ /content/blogs/blog-$1.html [L]
+RewriteRule ^blog-([0-9A-Za-z-]+)$ /content/blogs/blog-$1.html [R=301,L]
 
 # Clean news URLs: /news-12
-RewriteRule ^news-([0-9A-Za-z-]+)$ /content/news/news-$1.html [L]
+RewriteRule ^news-([0-9A-Za-z-]+)$ /content/news/news-$1.html [R=301,L]
 
 <IfModule mod_headers.c>
   Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
