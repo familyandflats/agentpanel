@@ -1,0 +1,136 @@
+:root {
+  --global-hero-height: 572px;
+  --global-hero-padding-block: 64px;
+  --global-hero-heading-max: 64px;
+}
+
+.site-hero,
+.page-hero,
+.home-hero,
+.home-search-hero,
+.resource-hero,
+.blogs-hero,
+.reviews-hero,
+.reviews-hero-premium,
+.services-hero,
+.services-hero-premium,
+.team-hero,
+.founder-hero,
+.ff-listing-hero,
+.sale-hero,
+.rent-hero,
+.projects-hero,
+.project-detail-hero,
+.skyon-hero {
+  height: var(--global-hero-height) !important;
+  min-height: var(--global-hero-height) !important;
+  max-height: var(--global-hero-height) !important;
+  padding-top: var(--global-hero-padding-block) !important;
+  padding-bottom: var(--global-hero-padding-block) !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+.home-search-hero,
+.reviews-hero-premium,
+.services-hero-premium,
+.team-hero,
+.ff-listing-hero,
+.projects-hero,
+.project-detail-hero,
+.skyon-hero {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.resource-hero-container,
+.reviews-hero-wrap,
+.services-hero-wrap,
+.team-hero-inner,
+.ff-listing-hero .ff-listing-wrap,
+.projects-hero .wrap,
+.hero-inner {
+  align-items: center !important;
+  max-height: calc(var(--global-hero-height) - (var(--global-hero-padding-block) * 2)) !important;
+}
+
+.home-search-content h1,
+.resource-hero h1,
+.reviews-hero h1,
+.services-hero h1,
+.services-hero-premium h1,
+.team-hero h1,
+.ff-listing-hero h1,
+.projects-hero h1,
+.project-detail-hero h1,
+.hero-copy h1 {
+  font-size: clamp(42px, 4.6vw, var(--global-hero-heading-max)) !important;
+  line-height: 1.02 !important;
+}
+
+.resource-hero p,
+.reviews-hero p,
+.services-hero p,
+.services-hero-premium p,
+.team-hero p,
+.ff-listing-hero p,
+.projects-hero p,
+.project-detail-hero p,
+.hero-copy p {
+  margin-top: 16px !important;
+  margin-bottom: 22px !important;
+  line-height: 1.65 !important;
+}
+
+.hero-actions,
+.reviews-hero-actions,
+.services-hero-actions {
+  margin-top: 0 !important;
+}
+
+.reviews-hero-card,
+.services-hero-card,
+.team-hero-card,
+.hero-panel {
+  max-height: calc(var(--global-hero-height) - (var(--global-hero-padding-block) * 2)) !important;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --global-hero-height: 520px;
+    --global-hero-padding-block: 70px;
+    --global-hero-heading-max: 54px;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --global-hero-height: 460px;
+    --global-hero-padding-block: 54px;
+    --global-hero-heading-max: 42px;
+  }
+
+  .site-hero,
+  .page-hero,
+  .home-hero,
+  .home-search-hero,
+  .resource-hero,
+  .blogs-hero,
+  .reviews-hero,
+  .reviews-hero-premium,
+  .services-hero,
+  .services-hero-premium,
+  .team-hero,
+  .founder-hero,
+  .ff-listing-hero,
+  .sale-hero,
+  .rent-hero,
+  .projects-hero,
+  .project-detail-hero,
+  .skyon-hero {
+    height: auto !important;
+    max-height: none !important;
+    min-height: var(--global-hero-height) !important;
+    overflow: visible !important;
+  }
+}
