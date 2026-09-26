@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Buyer and Tenant Requirements | Family&Flats</title>
+  <meta name="description" content="Live buyer and tenant requirements curated by Family&Flats.">
+  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href="https://familyandflats.com/requirements.html">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; color: #0f172a; background: #f8fafc; }
+    .ff-wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+    .ff-hero { padding: 56px 0 28px; }
+    .ff-eyebrow { color: #0057ff; font-size: 13px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+    h1 { margin: 8px 0 10px; font-size: clamp(30px, 5vw, 52px); line-height: 1.05; }
+    .ff-muted { color: #475569; max-width: 720px; line-height: 1.65; }
+    .ff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; padding: 20px 0 56px; }
+    .ff-card { border: 1px solid #d8e2f0; border-radius: 8px; background: #fff; padding: 18px; box-shadow: 0 8px 24px rgba(15, 23, 42, .06); }
+    .ff-card h2 { margin: 0 0 10px; font-size: 20px; }
+    .ff-card dl { display: grid; grid-template-columns: 110px 1fr; gap: 8px 10px; margin: 12px 0; }
+    .ff-card dt { color: #64748b; font-weight: 700; }
+    .ff-card dd { margin: 0; }
+    .ff-pill { display: inline-flex; padding: 5px 9px; border-radius: 999px; background: #eff6ff; color: #0057ff; font-weight: 800; font-size: 12px; }
+    .ff-button { display: inline-flex; margin-top: 10px; padding: 10px 14px; border-radius: 8px; background: #071226; color: #fff; text-decoration: none; font-weight: 800; }
+    .ff-empty { border: 1px dashed #cbd5e1; border-radius: 8px; padding: 24px; background: #fff; color: #64748b; }
+  </style>
+</head>
+<body>
+  <main class="ff-wrap">
+    <section class="ff-hero">
+      <div class="ff-eyebrow">Family&Flats Requirements</div>
+      <h1>Buyer and Tenant Requirements</h1>
+      <p class="ff-muted">Current public buyer and tenant requirements curated by Family&Flats. Contact details are private unless the admin explicitly publishes them.</p>
+    </section>
+    <section id="requirementsGrid" class="ff-grid" aria-live="polite">
+      <div class="ff-empty">Loading requirements...</div>
+    </section>
+  </main>
+
+  <script>
+    function esc(value) {
+      return String(value || "").replace(/[&<>"']/g, function (char) {
+        return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[char];
+      });
+    }
+    function card(item) {
+      const contact = item.contact_number
+        ? `<dt>Contact</dt><dd>${esc(item.contact_name || "Family&Flats")} ${esc(item.contact_number)}</dd>`
+        : "";
+      return `<article class="ff-card">
+        <span class="ff-pill">${esc(item.post_type || "Requirement")}</span>
+        <h2>${esc(item.public_title || "Requirement")}</h2>
+        <p>${esc(item.public_description || "")}</p>
+        <dl>
+          <dt>Project</dt><dd>${esc(item.project_name || "-")}</dd>
+          <dt>Config</dt><dd>${esc(item.configuration || "-")}</dd>
+          <dt>Budget</dt><dd>${esc(item.budget_display || "-")}</dd>
+          <dt>Remarks</dt><dd>${esc(item.remarks || "-")}</dd>
+          ${contact}
+        </dl>
+        <a class="ff-button" href="/contact-us.html">Enquire</a>
+      </article>`;
+    }
+    fetch("/assets/data/requirements-feed.json", { cache: "no-store" })
+      .then(function (response) { return response.ok ? response.json() : []; })
+      .then(function (items) {
+        const grid = document.getElementById("requirementsGrid");
+        grid.innerHTML = items && items.length
+          ? items.map(card).join("")
+          : '<div class="ff-empty">No public buyer or tenant requirements are published yet.</div>';
+      })
+      .catch(function () {
+        document.getElementById("requirementsGrid").innerHTML = '<div class="ff-empty">Could not load requirements right now.</div>';
+      });
+  </script>
+</body>
+</html>
