@@ -79,12 +79,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://familyandflats.com/privacy-policy.html</loc>
-    <lastmod>2026-06-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://familyandflats.com/projects/adani-samsara-ivana/</loc>
     <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
@@ -133,7 +127,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://familyandflats.com/projects/emaardigihomes/</loc>
+    <loc>https://familyandflats.com/projects/emaar-digi-homes/</loc>
     <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -211,7 +205,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://familyandflats.com/projects/ireovictoryvalley/</loc>
+    <loc>https://familyandflats.com/projects/ireo-victory-valley/</loc>
     <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -253,7 +247,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.familyandflats.com/projects/mahindra-luminare/</loc>
+    <loc>https://familyandflats.com/projects/mahindra-luminare/</loc>
     <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1609,15 +1603,33 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://familyandflats.com/listings/sale/ff-ivv-sale-001.html</loc>
-    <lastmod>2026-06-15</lastmod>
+    <loc>https://familyandflats.com/projects/ireo-victory-valley/2-bhk-for-rent/</loc>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://familyandflats.com/listings/lease/ff-ivv-rent-001.html</loc>
-    <lastmod>2026-06-15</lastmod>
+    <loc>https://familyandflats.com/projects/ireo-victory-valley/2-bhk-for-sale/</loc>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://familyandflats.com/projects/ireo-victory-valley/3-bhk-for-rent/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://familyandflats.com/projects/ireo-victory-valley/3-bhk-for-sale/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://familyandflats.com/founder.html</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 </urlset>
