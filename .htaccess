@@ -3,10 +3,6 @@ Options -MultiViews
 RewriteEngine On
 RewriteBase /
 
-# Account portal reverse proxy - keep customer account routes on familyandflats.com
-RewriteRule ^account/?$ https://familyflats-field-capture-v1.onrender.com/account [P,L]
-RewriteRule ^account/(.*)$ https://familyflats-field-capture-v1.onrender.com/account/$1 [P,L]
-
 # Website Enquiry & CRM Unification V1 - canonical thank-you route
 RewriteRule ^thank-you\.php$ /thank-you/ [R=301,L]
 RewriteRule ^projects/[^/]+/thank-you\.php$ /thank-you/ [R=301,L]
