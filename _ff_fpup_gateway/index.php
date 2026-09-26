@@ -11,7 +11,7 @@ function ff_allowed_path(string $path): bool {
         'chief-of-staff','client-property','client','communication-autopilot',
         'data-foundation','data-readiness','enterprise-direction','enterprise-intelligence',
         'execution-centre','field','field-admin','founder','founder-command','governance',
-        'integration-readiness','inventory-autopilot','login','mission-control',
+        'integration-readiness','inventory-autopilot','journey','login','mission-control',
         'operating-systems','operational-adoption','operations-documentation-autopilot',
         'os','owner','platform-control','post-property','production-platform',
         'property-submission','release-assurance','revenue-engine','security-access',
