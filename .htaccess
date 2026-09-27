@@ -31,6 +31,12 @@ RedirectMatch 301 ^/blog-(.*)\.html$ /content/blogs/blog-$1.html
 RedirectMatch 301 ^/news-(.*)\.html$ /content/news/news-$1.html
 
 # Clean blog URLs: /blog-109
+RewriteRule ^content/blogs/blog-106\.html$ /content/blogs/blog-105.html [R=301,L]
+RewriteRule ^content/blogs/blog-108\.html$ /content/blogs/blog-105.html [R=301,L]
+RewriteRule ^content/blogs/blog-113\.html$ /content/blogs/blog-105.html [R=301,L]
+RewriteRule ^content/blogs/blog-95\.html$ /content/blogs/blog-60.html [R=301,L]
+RewriteRule ^content/news/news-14-07-2025\.html$ /content/news/news-19-07-2025.html [R=301,L]
+RewriteRule ^content/news/news-23-08-2025\.html$ /content/news/news-21-08-2025.html [R=301,L]
 RewriteRule ^blog-([0-9A-Za-z-]+)$ /content/blogs/blog-$1.html [L]
 
 # Clean news URLs: /news-12
