@@ -108,6 +108,29 @@
 
 .ff-saved-link > span:first-child { font-size: 21px !important; font-weight: 400 !important; line-height: 1 !important; }
 
+.ff-sign-in {
+  display: inline-flex !important;
+  min-height: 38px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid #d7e2dc !important;
+  border-radius: 10px !important;
+  background: #fff !important;
+  padding: 0 14px !important;
+  color: #073b28 !important;
+  font-family: "Manrope", Arial, sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+}
+
+.ff-sign-in:hover {
+  border-color: #b8cec1 !important;
+  background: #f6faf7 !important;
+  color: #08733f !important;
+}
+
 .ff-post-property {
   display: inline-flex !important;
   min-height: 38px !important;
@@ -162,6 +185,7 @@
   .ff-saved-link { display: none !important; }
   .ff-header-menu { display: block !important; }
   .ff-brand-wordmark { font-size: 17px !important; }
+  .ff-sign-in,
   .ff-post-property {
     min-height: 31px !important;
     padding: 0 10px !important;
@@ -171,6 +195,7 @@
 
 @media (max-width: 640px) {
   .ff-site-header-inner { width: min(100% - 24px, 1440px) !important; }
+  .ff-sign-in,
   .ff-post-property { display: none !important; }
   .ff-brand-tagline { font-size: 7px !important; }
 }
