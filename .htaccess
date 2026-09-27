@@ -4,7 +4,7 @@ RewriteEngine On
 RewriteBase /
 
 # BEGIN FF FPUP CANONICAL PHP GATEWAY
-# Canonical Family&Flats application paths -> PHP gateway -> Render origin.
+# Canonical Family&Flats application paths -> PHP gateway -> Render origin. Account/mobile routing synced 2026-09-27.
 # Public website routes remain on cPanel.
 RewriteRule ^(?:_next|access-denied|access|account|agent|ai-operating-model|ai-organization|architecture-audit|architecture-truth|auth|business-control-autopilot|chief-of-staff|client-property|client|communication-autopilot|data-foundation|data-readiness|enterprise-direction|enterprise-intelligence|execution-centre|field|field-admin|founder|founder-command|governance|integration-readiness|inventory-autopilot|journey|login|mission-control|operating-systems|operational-adoption|operations-documentation-autopilot|os|owner|platform-control|post-property|production-platform|property-submission|release-assurance|revenue-engine|security-access|website-publication|workflow-validation|workspace)(?:/.*)?$ _ff_fpup_gateway/index.php [L]
 RewriteRule ^api/(?:account|auth|property-intake|field-media|local-auth|health|publication)(?:/.*)?$ _ff_fpup_gateway/index.php [L]

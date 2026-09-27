@@ -1,4 +1,5 @@
 <?php
+// Account/mobile gateway routes synced 2026-09-27.
 declare(strict_types=1);
 
 const FF_ORIGIN = 'https://familyflats-field-capture-v1.onrender.com';
