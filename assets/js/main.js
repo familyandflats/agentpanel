@@ -8,6 +8,38 @@
     document.head.appendChild(link);
   }
 
+  function appOriginForCurrentEnvironment() {
+    var host = String(window.location.hostname || "").toLowerCase();
+    var port = String(window.location.port || "");
+    var isLocalWebsitePreview =
+      (host === "localhost" || host === "127.0.0.1") &&
+      port === "8091";
+
+    return isLocalWebsitePreview
+      ? "http://localhost:3000"
+      : "";
+  }
+
+  function routeAppLinks(scope) {
+    var appOrigin = appOriginForCurrentEnvironment();
+    if (!appOrigin) return;
+
+    var root = scope || document;
+    root.querySelectorAll("a[href]").forEach(function (anchor) {
+      var href = anchor.getAttribute("href") || "";
+      if (
+        href === "/login" ||
+        href === "/account" ||
+        href === "/post-property" ||
+        href.indexOf("/post-property/") === 0 ||
+        href === "/founder" ||
+        href.indexOf("/founder/") === 0
+      ) {
+        anchor.setAttribute("href", appOrigin + href);
+      }
+    });
+  }
+
   function initHeaderInteractions(scope) {
     var root = scope || document;
     root.querySelectorAll(".ff-nav-dropdown-trigger").forEach(function (trigger) {
@@ -59,11 +91,14 @@
       })
       .then(function (html) {
         target.innerHTML = html;
+        routeAppLinks(target);
         if (path.indexOf("header.html") !== -1) initHeaderInteractions(target);
       });
   }
 
   function loadIncludes() {
+    routeAppLinks(document);
+
     var includes = document.querySelectorAll("[data-include]");
     includes.forEach(function (target) {
       includeFragment(target, target.getAttribute("data-include")).catch(function (error) {
