@@ -1,0 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap');
+html,body{font-family:"Manrope",Arial,sans-serif!important}
+body{margin:0;background:#f6f8f7;color:#0f172a}
+button,input,select{font-family:inherit}

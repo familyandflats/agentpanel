@@ -1,0 +1,1 @@
+fetch('/footer.html').then(r=>r.ok?r.text():'').then(html=>{const el=document.getElementById('footer-placeholder');if(el)el.innerHTML=html;}).catch(()=>{});
