@@ -18,7 +18,7 @@ function ff_allowed_path(string $path): bool {
         'property-submission','release-assurance','revenue-engine','security-access',
         'website-publication','workflow-validation','workspace'
     ];
-    $api = ['account','auth','property-intake','field-media','local-auth','health','publication'];
+    $api = ['account','auth','property-intake','field-media','local-auth','health','publication','employee','integrations'];
     $trim = ltrim($path, '/');
     $first = explode('/', $trim, 2)[0] ?? '';
     if (in_array($first, $top, true)) return true;
