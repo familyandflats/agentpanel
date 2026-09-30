@@ -16,7 +16,7 @@ function ff_allowed_path(string $path): bool {
         'operating-systems','operational-adoption','operations-documentation-autopilot',
         'os','owner','platform-control','post-property','production-platform',
         'property-submission','release-assurance','revenue-engine','security-access',
-        'website-publication','workflow-validation','workspace'
+        'verify-whatsapp','website-publication','workflow-validation','workspace'
     ];
     $api = ['account','auth','property-intake','field-media','local-auth','health','publication','employee','integrations'];
     $trim = ltrim($path, '/');
