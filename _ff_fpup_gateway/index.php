@@ -9,12 +9,12 @@ function ff_allowed_path(string $path): bool {
     $top = [
         '_next','access-denied','access','account','agent','ai-operating-model','ai-organization',
         'architecture-audit','architecture-truth','auth','business-control-autopilot',
-        'chief-of-staff','client-property','client','communication-autopilot',
-        'data-foundation','data-readiness','enterprise-direction','enterprise-intelligence',
+        'chief-of-staff','client-property','client','communication-autopilot','dashboard',
+        'data-foundation','data-readiness','employee','enterprise-direction','enterprise-intelligence',
         'execution-centre','field','field-admin','founder','founder-command','governance',
         'integration-readiness','inventory-autopilot','journey','login','mission-control',
         'operating-systems','operational-adoption','operations-documentation-autopilot',
-        'os','owner','platform-control','post-property','production-platform',
+        'os','owner','platform-control','post-property','post-requirement','production-platform',
         'property-submission','release-assurance','revenue-engine','security-access',
         'verify-whatsapp','website-publication','workflow-validation','workspace'
     ];
