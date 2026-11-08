@@ -42,6 +42,11 @@ jobs:
             **/.git*
             **/.git*/**
             **/.github/**
+            _familyflats_redesign_stage/**
+            website-design-lab/**
+            _to_delete/**
+            **/_backup*/**
+            **/*.md
 
   verify-production:
     if: github.event_name == 'push'

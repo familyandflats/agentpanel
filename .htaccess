@@ -3,6 +3,11 @@ Options -MultiViews
 RewriteEngine On
 RewriteBase /
 
+# BEGIN FF BACKUP GUARD (2026-11-08) - never serve working backups to visitors or Google
+RewriteRule (^|/)_(backup|archive|reports|source_material|to_delete)[^/]*(/|$) - [R=404,L]
+RewriteRule \.(bak|orig)(_[^/]*)?$ - [R=404,L]
+# END FF BACKUP GUARD
+
 # BEGIN FF FPUP CANONICAL PHP GATEWAY
 # Canonical Family&Flats application paths -> PHP gateway -> Render origin. Account/mobile routing synced 2026-09-27.
 # Public website routes remain on cPanel.

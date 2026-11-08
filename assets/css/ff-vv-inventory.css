@@ -1,0 +1,349 @@
+#vv-inventory{max-width:1180px;margin:0 auto}
+.vvi-mut{color:#556274;font-size:14px;margin:0}
+.vvi-tabs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+.vvi-pill{border:1px solid #e2e8f0;background:#fff;color:#0f172a;border-radius:999px;padding:10px 22px;font:inherit;font-weight:800;cursor:pointer}
+.vvi-pill.on{background:#0f172a;color:#fff;border-color:#0f172a}
+.vvi-filters{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:8px}
+.vvi-filters select{border:1px solid #cbd5e1;border-radius:12px;padding:10px 14px;font:inherit;font-size:14px;background:#fff;color:#0f172a}
+.vvi-h2{margin:32px 0 10px;font-size:22px;font-weight:900;color:#0f172a}
+.vvi-h3{margin:22px 0 12px;font-size:18px;font-weight:900;color:#0f172a}
+.vvi-card{background:#fff;border:1px solid #e2e8f0;border-radius:22px;box-shadow:0 18px 55px rgba(15,23,42,.06);margin-bottom:14px;overflow:hidden}
+.vvi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.vvi-grid .vvi-card{margin:0}
+.vvi-photo{height:190px;background-size:cover;background-position:center;position:relative}
+.vvi-count{position:absolute;right:12px;bottom:12px;background:rgba(15,23,42,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:#fff;font-size:12px;font-weight:800;border-radius:999px;padding:4px 10px}
+.vvi-photo .vvi-badge{position:absolute;left:12px;top:12px;background:#fff}
+.vvi-body{padding:18px 20px 20px}
+.vvi-body h4,.vvi-head h4{margin:0 0 4px;font-size:19px;font-weight:900;color:#0f172a}
+.vvi-price{font-size:22px;font-weight:900;color:#0f172a;margin:8px 0}
+.vvi-badge{display:inline-block;font-size:11px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:#eef2ff;color:#2447c9}
+.vvi-badge.ok{background:#e3f4ea;color:#0b5d3b}
+.vvi-tag{display:inline-block;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;background:#f1f5f9;color:#475569;margin:0 6px 6px 0}
+.vvi-btn{border:1px solid #cbd5e1;background:#fff;color:#0f172a;border-radius:12px;padding:9px 16px;font:inherit;font-weight:800;font-size:14px;cursor:pointer}
+.vvi-btn.dark{background:#0f172a;color:#fff;border-color:#0f172a;margin-top:10px}
+.vvi-rows,.vvi-group{padding:6px 20px}
+.vvi-group{padding:16px 20px}
+.vvi-head{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;cursor:pointer}
+.vvi-right{text-align:right}
+.vvi-row{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;border-top:1px solid #e2e8f0;padding:14px 0}
+.vvi-rows .vvi-row:first-child{border-top:0}
+.vvi-list{margin-top:12px}
+.vvi-actions{display:flex;gap:10px;align-items:center}
+.vvi-empty{text-align:center;padding:24px}
+@media(max-width:992px){.vvi-grid{grid-template-columns:1fr}}
+.vvi-tag.vvi-reduced{background:#e3f4ea;color:#0b5d3b;font-weight:800}
+
+/* agent ads: aligned columns (Ref. | Price | Area | Agents | Details | Advertised | Enquire) */
+.vvi-ad{display:grid;grid-template-columns:84px 150px 110px 84px minmax(0,1fr) 74px 104px;gap:14px;align-items:center;border-top:1px solid #e2e8f0;padding:12px 0;font-size:14px;color:#0f172a}
+.vvi-ad-head{border-top:0;padding:2px 0 8px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#556274}
+.vvi-ad .vvi-c-price{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.vvi-ad .vvi-c-price .vvi-tag{margin:0;font-size:11px;padding:2px 8px}
+.vvi-ad .vvi-c-num{font-variant-numeric:tabular-nums;color:#334155}
+.vvi-ad .vvi-c-tags .vvi-tag{margin:2px 6px 2px 0}
+.vvi-ad .vvi-c-date{color:#556274;font-size:13px}
+.vvi-ad .vvi-c-act{justify-self:end}
+@media(max-width:860px){
+  .vvi-ad-head{display:none}
+  .vvi-ad{grid-template-columns:1fr 1fr;gap:8px 14px}
+  .vvi-ad [data-l]::before{content:attr(data-l);display:block;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#556274;margin-bottom:2px}
+  .vvi-ad .vvi-c-tags{grid-column:1/-1}
+  .vvi-ad .vvi-c-act{grid-column:2;justify-self:end}
+}
+
+/* agent ads: one project photo per layout group, then compact tiles (5 per row) */
+.vvg{background:#fff;border:1px solid #e5e7eb;border-radius:20px;overflow:hidden;margin:0 0 22px}
+.vvg-photo{position:relative;margin:0;height:220px}
+.vvg-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.vvg-photo figcaption{position:absolute;left:14px;bottom:14px;background:rgba(15,23,42,.8);color:#fff;font-size:12px;font-weight:700;padding:5px 10px;border-radius:8px}
+.vvg-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;padding:18px 20px 6px}
+.vvg-head h4{margin:0;font-size:20px;font-weight:800;color:#0f172a}
+.vvg-head p{margin:0;font-size:14px;color:#475569}
+.vvg-head p b{color:#0f172a}
+.vvt-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;padding:12px 20px 20px}
+.vvt{border:1px solid #e5e7eb;border-radius:14px;padding:12px 14px 10px;display:flex;flex-direction:column;gap:5px;background:#fff}
+.vvt-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:2px}
+.vvt-unv{background:#fef3c7;color:#78350f;font-size:10px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:3px 8px;border-radius:999px}
+.vvt-req{background:#f1f5f9;color:#475569;font-size:10px;font-weight:700;padding:3px 8px;border-radius:999px}
+.vvt-top{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+.vvt-price{font-size:18px;font-weight:800;color:#0f172a}
+.vvt-date{font-size:11px;color:#556274;white-space:nowrap}
+.vvt-meta{margin:0;font-size:12px;color:#475569}
+.vvt-detail{margin:0;font-size:11px;font-weight:700;color:#0b5d3b;min-height:15px}
+.vvt-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #f1f5f9;margin-top:4px;padding-top:8px;font-size:11px;color:#556274}
+.vvt-enq{border:0;background:none;padding:6px 0 6px 8px;font:inherit;font-size:13px;font-weight:800;color:#0b5d3b;cursor:pointer}
+.vvt-enq:hover{color:#08402a;text-decoration:underline}
+@media(max-width:1100px){.vvt-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:860px){.vvt-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.vvg-photo{height:180px}}
+@media(max-width:560px){.vvt-grid{grid-template-columns:repeat(2,minmax(0,1fr));padding:10px 12px 14px;gap:10px}.vvg-head{padding:14px 12px 4px}.vvg-photo{height:150px}}
+
+/* slider: one row per layout, arrows / swipe for the rest */
+.vvg-photo{height:160px}
+.vvt-slider{position:relative;padding:12px 20px 20px}
+.vvt-track{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 48px) / 5);gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none;outline-offset:4px}
+.vvt-track::-webkit-scrollbar{display:none}
+.vvt-track .vvt{scroll-snap-align:start}
+.vvt-nav{display:none;position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:999px;border:1px solid #e2e8f0;background:#fff;color:#0f172a;box-shadow:0 6px 18px rgba(15,23,42,.14);cursor:pointer;align-items:center;justify-content:center;z-index:2;transition:opacity .2s}
+.vvt-scrolls .vvt-nav{display:flex}
+.vvt-prev{left:4px}.vvt-next{right:4px}
+.vvt-nav:disabled{opacity:0;pointer-events:none}
+.vvt-nav:hover{background:#f8fafc}
+@media(max-width:1100px){.vvt-track{grid-auto-columns:calc((100% - 36px) / 4)}}
+@media(max-width:860px){.vvt-track{grid-auto-columns:calc((100% - 24px) / 3)}.vvg-photo{height:150px}}
+@media(max-width:560px){.vvt-slider{padding:10px 12px 14px}.vvt-track{grid-auto-columns:calc((100% - 12px) / 2.2);gap:10px}.vvg-photo{height:140px}.vvt-nav{display:none!important}}
+
+/* fixes: arrows get their own gutter; phone tiles wide enough for one-line prices */
+.vvt-slider{padding:12px 34px 20px}
+.vvt-nav{width:40px;height:40px}
+.vvt-prev{left:6px}.vvt-next{right:6px}
+.vvt-price{white-space:nowrap}
+.vvt-top{flex-wrap:wrap}
+@media(max-width:560px){.vvt-slider{padding:10px 12px 14px}.vvt-track{grid-auto-columns:calc((100% - 10px) / 1.55)}}
+
+/* audit fixes (6 Nov) */
+.vvg.vvg-cont{margin-top:-8px}
+.vvi-feature-list{display:grid;gap:18px}
+.vvi-feature{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);margin:0}
+.vvi-feature .vvi-photo{height:100%;min-height:280px}
+.vvi-feature .vvi-body{padding:28px 30px;display:flex;flex-direction:column;gap:10px;justify-content:center}
+.vvi-feature h4{font-size:24px;margin:0}
+.vvi-feature .vvi-price{font-size:30px}
+.vvi-kicker{margin:0;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0b5d3b}
+.vvi-feature-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:6px}
+.vvi-feature-actions .vvi-btn.dark{margin-top:0}
+.vvi-filters select{min-width:200px}
+@media(max-width:760px){
+  .vvi-feature{grid-template-columns:1fr}
+  .vvi-feature .vvi-photo{min-height:220px}
+  .vvi-feature .vvi-body{padding:20px}
+  .vvi-filters{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .vvi-filters select{min-width:0;width:100%}
+}
+
+/* agent ads, summary first (6 Nov): BHK tabs -> layout cards -> flat list on demand */
+.vvd-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 18px}
+.vvd-tab{display:inline-flex;align-items:center;gap:8px;border:1px solid #cbd5e1;background:#fff;color:#0f172a;border-radius:999px;padding:10px 18px;font:inherit;font-weight:800;font-size:15px;cursor:pointer}
+.vvd-tab span{background:#f1f5f9;color:#475569;border-radius:999px;padding:2px 8px;font-size:12px}
+.vvd-tab.on{background:#0f172a;border-color:#0f172a;color:#fff}
+.vvd-tab.on span{background:rgba(255,255,255,.18);color:#fff}
+.vvd-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.vvd-card{background:#fff;border:1px solid #e2e8f0;border-radius:20px;padding:22px 22px 20px;display:flex;flex-direction:column;gap:4px;box-shadow:0 12px 34px rgba(15,23,42,.05)}
+.vvd-card.on{border-color:#0f172a;box-shadow:0 0 0 1px #0f172a,0 12px 34px rgba(15,23,42,.08)}
+.vvd-card p{margin:0}
+.vvd-size{font-size:15px;font-weight:700;color:#475569}
+.vvd-range{font-size:24px;font-weight:800;color:#0f172a;margin-top:6px!important}
+.vvd-typ{font-size:13px;color:#556274}
+.vvd-count{font-size:14px;font-weight:700;color:#0b5d3b;margin-top:10px!important}
+.vvd-view{margin-top:14px;align-self:flex-start;border:1px solid #0f172a;background:#fff;color:#0f172a;border-radius:12px;padding:10px 16px;font:inherit;font-weight:800;font-size:14px;cursor:pointer}
+.vvd-card.on .vvd-view,.vvd-view:hover{background:#0f172a;color:#fff}
+.vvd-panel{margin-top:18px;background:#fff;border:1px solid #e2e8f0;border-radius:20px;overflow:hidden}
+.vvd-panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:18px 22px;border-bottom:1px solid #e2e8f0;background:#f8fafc}
+.vvd-panel-head h4{margin:0;font-size:18px;font-weight:800;color:#0f172a}
+.vvd-panel-head p{margin:4px 0 0;font-size:13px;color:#475569}
+.vvd-close{border:0;background:none;font-size:26px;line-height:1;color:#556274;cursor:pointer;width:44px;height:44px}
+.vvd-row{display:grid;grid-template-columns:150px 120px minmax(0,1fr) 80px 110px;gap:14px;align-items:center;padding:14px 22px;border-top:1px solid #f1f5f9}
+.vvd-list .vvd-row:first-child{border-top:0}
+.vvd-p b{display:block;font-size:17px;color:#0f172a}
+.vvd-p span{font-size:11px;color:#556274}
+.vvd-a{font-size:14px;color:#334155;font-variant-numeric:tabular-nums}
+.vvd-d{font-size:13px;color:#0b5d3b;font-weight:600}
+.vvd-t{font-size:12px;color:#556274}
+.vvd-e{justify-self:end}
+@media(max-width:700px){
+  .vvd-cards{grid-template-columns:1fr}
+  .vvd-row{grid-template-columns:1fr auto;gap:4px 12px;padding:14px 16px}
+  .vvd-a,.vvd-d,.vvd-t{grid-column:1}
+  .vvd-e{grid-column:2;grid-row:1 / span 3;align-self:center}
+  .vvd-panel-head{padding:14px 16px}
+}
+
+.vvd-cards{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+@media(max-width:700px){.vvd-d:empty{display:none}}
+
+.vvd-all{display:inline-flex;align-items:center;gap:10px;margin:18px 0 6px;padding:13px 22px;border-radius:999px;background:#0b5d3b;color:#fff !important;font-weight:800;font-size:15px;text-decoration:none !important;box-shadow:0 8px 22px rgba(11,93,59,.28);transition:transform .15s ease,box-shadow .15s ease,background .15s ease}
+.vvd-all:hover{background:#08402a;transform:translateY(-2px);box-shadow:0 12px 28px rgba(11,93,59,.35)}
+.vvd-all:focus-visible{outline:3px solid #86efac;outline-offset:3px}
+.vvd-all .vvd-arrow{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#fff;color:#0b5d3b;font-size:15px;transition:transform .15s ease}
+.vvd-all:hover .vvd-arrow{transform:translateX(3px)}
+@media(max-width:620px){.vvd-all{display:flex;justify-content:center;width:100%;box-sizing:border-box}}
+
+/* line up price, average, count and button across the cards of a row, whatever the length of the size label */
+.vvd-size{min-height:2.9em}
+@supports (grid-template-rows:subgrid){
+  .vvd-card{display:grid;grid-template-rows:subgrid;grid-row:span 6;align-content:start;row-gap:4px}
+  .vvd-size{min-height:0}
+  .vvd-card>.vvd-view{align-self:start;justify-self:start}
+}
+
+.vvd-note{font-weight:600;color:#0b5d3b}
+
+.vvd-size{min-height:0!important;display:flex;flex-direction:column;gap:2px}
+.vvd-sz{font-size:15px;font-weight:700;color:#475569}
+.vvd-bhk{font-size:14px;font-weight:800;color:#0f172a}
+.vvd-note{font-size:13px;font-weight:600;color:#0b5d3b}
+.vvd-range{white-space:nowrap}
+.vvd-range.long{font-size:20px}
+
+.vvd-all{display:flex;width:fit-content;margin:22px auto 6px}
+@media(max-width:620px){.vvd-all{width:100%}}
+
+/* fewer than 5 layouts: keep the cards centred */
+.vvd-cards{grid-template-columns:repeat(auto-fit,minmax(200px,222px));justify-content:center}
+@media(max-width:620px){.vvd-cards{grid-template-columns:1fr}}
+
+/* two clearly separated blocks: verified (green) and agent-advertised (neutral) */
+.vvs{border-radius:28px;padding:34px 34px 30px;margin:26px 0;position:relative}
+.vvs-ver{background:linear-gradient(180deg,#e8f5ee 0%,#f4faf6 100%);border:1px solid #cfe6d9}
+.vvs-ads{background:#fff;border:1px solid #e2e8f0;box-shadow:0 18px 50px rgba(15,23,42,.06)}
+.vvs-head{text-align:center;max-width:720px;margin:0 auto 24px}
+.vvs-tag{display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 8px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.vvs-ver .vvs-tag{background:#0b5d3b;color:#fff}
+.vvs-ads .vvs-tag{background:#eef2ff;color:#4338ca;box-shadow:inset 0 0 0 1px #c7d2fe}
+.vvs-dot{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#fff;font-size:12px;letter-spacing:0;text-transform:none}
+.vvs-ver .vvs-dot{color:#0b5d3b}.vvs-ads .vvs-dot{color:#4338ca;font-style:italic;font-family:Georgia,serif;font-weight:700}
+.vvs-title{margin:14px 0 8px!important;font-size:34px!important;line-height:1.15;font-weight:800;letter-spacing:-.02em;color:#0f172a}
+.vvs-sub{margin:0!important;font-size:15px;color:#475569}
+.vvs-ads .vvd-tabs{justify-content:center}
+@media(max-width:700px){.vvs{padding:24px 16px 20px;border-radius:22px}.vvs-title{font-size:26px!important}}
+
+/* more than 4 layouts: 4 cards visible, arrows slide to the rest */
+.vvd-slider{position:relative;padding:0 30px}
+.vvd-cards.slide{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:calc((100% - 48px) / 4);grid-template-rows:repeat(6,auto);justify-content:start;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:4px 2px 12px}
+.vvd-cards.slide::-webkit-scrollbar{display:none}
+.vvd-cards.slide .vvd-card{scroll-snap-align:start}
+.vvd-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:46px;height:46px;border-radius:50%;border:0;background:#0b5d3b;color:#fff;font-size:30px;line-height:1;padding:0 0 4px;cursor:pointer;box-shadow:0 10px 24px rgba(11,93,59,.3);transition:background .15s,opacity .15s}
+.vvd-nav:hover{background:#08402a}
+.vvd-nav:disabled{opacity:.25;cursor:default;box-shadow:none}
+.vvd-nav.prev{left:-12px}.vvd-nav.next{right:-12px}
+@media(max-width:900px){.vvd-cards.slide{grid-auto-columns:calc((100% - 16px) / 2)}}
+@media(max-width:620px){.vvd-slider{padding:0}.vvd-cards.slide{grid-auto-columns:82%}.vvd-nav{display:none}}
+
+.vvs-head{max-width:1040px}
+@media(min-width:1000px){.vvs-sub{white-space:nowrap}}
+
+/* flat enquiry pop-up (ff-vv-enquiry.js) */
+html.vvm-open{overflow:hidden}
+.vvm{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:16px}
+.vvm[hidden]{display:none}
+.vvm-back{position:absolute;inset:0;background:rgba(15,23,42,.55);backdrop-filter:blur(2px)}
+.vvm-box{position:relative;width:min(460px,100%);max-height:calc(100vh - 32px);overflow:auto;background:#fff;border-radius:24px;padding:26px 26px 22px;box-shadow:0 30px 80px rgba(15,23,42,.35)}
+.vvm-x{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;border:0;background:#f1f5f9;font-size:22px;line-height:1;cursor:pointer;color:#0f172a}
+.vvm-kicker{margin:0;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0b5d3b}
+.vvm-box h3{margin:6px 40px 10px 0;font-size:22px;color:#0f172a}
+.vvm-flat{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;background:#f0f7f3;border:1px solid #d5eadf;border-radius:14px;padding:12px 14px}
+.vvm-flat b{font-size:22px;color:#0f172a}.vvm-flat span{font-size:13px;color:#0b5d3b;font-weight:600}
+.vvm-flat .vvm-ref{color:#556274;font-weight:500;margin-left:auto}
+.vvm-promise{margin:12px 0 4px;font-size:14px;line-height:1.5;color:#475569}
+#vvm-form{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+#vvm-form label{font-size:13px;font-weight:700;color:#334155;margin-top:6px}#vvm-form label span{font-weight:500;color:#94a3b8}
+#vvm-form input:not([type=checkbox]){font:inherit;font-size:16px;padding:12px 14px;border:1px solid #cbd5e1;border-radius:12px;width:100%;box-sizing:border-box}
+#vvm-form input:focus{outline:2px solid #0b5d3b;outline-offset:1px;border-color:#0b5d3b}
+#vvm-form .vvm-consent{display:flex;gap:8px;align-items:flex-start;font-weight:500;color:#475569}
+.vvm-err{margin:2px 0 0;min-height:18px;font-size:13px;color:#b91c1c}
+#vvm-send{margin-top:2px;min-height:50px;border:0;border-radius:14px;background:#0b5d3b;color:#fff;font:inherit;font-weight:800;font-size:16px;cursor:pointer}
+#vvm-send:hover{background:#08402a}#vvm-send:disabled{opacity:.6;cursor:default}
+.vvm-note{margin:6px 0 0;font-size:12px;color:#556274;text-align:center}
+.vv-hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;opacity:0}
+
+/* rent/price ranges must never cross the card edge: the unit is small and the figure shrinks with its length */
+.vvd-range small{font-size:.55em;font-weight:700;color:#556274;margin-left:2px}
+.vvd-range.xlong{font-size:17px}
+.vvd-range.xxlong{font-size:15px}
+.vvd-card{min-width:0}
+.vvd-range{max-width:100%;overflow:hidden;text-overflow:clip}
+/* price per sq. ft. (sale) or per sq. ft. per month (rent) */
+.vvd-psf{font-size:13px;font-weight:700;color:#0b5d3b}
+.vvd-p em.vvd-psf{display:block;font-style:normal;font-size:11.5px;margin-top:1px}
+.vvi-psf{font-size:13px;font-weight:700;color:#0b5d3b;margin:-4px 0 6px}
+.vvi-c-price .vvi-psf{display:block;margin:2px 0 0;font-size:11.5px}
+
+/* average rent/price and average per sq. ft.: labels on the left, both figures in one right-aligned column */
+.vvd-card p.vvd-typ,.vvd-card p.vvd-psf{display:grid;grid-template-columns:minmax(0,1fr) 68px;column-gap:8px;align-items:baseline}
+.vvd-typ span,.vvd-psf span{font-size:12.5px;font-weight:600;color:#556274;line-height:1.25}
+.vvd-typ b,.vvd-psf b{text-align:right;font-size:14px;font-weight:800;color:#0f172a;white-space:nowrap}
+.vvd-psf b{color:#0b5d3b}
+
+/* both average lines stay on one line */
+.vvd-card p.vvd-typ,.vvd-card p.vvd-psf{grid-template-columns:minmax(0,1fr) 62px;column-gap:6px}
+.vvd-typ span,.vvd-psf span{white-space:nowrap;font-size:12px}
+.vvd-typ b,.vvd-psf b{font-size:13.5px}
+.vvd-card p.vvd-typ,.vvd-card p.vvd-psf{grid-template-columns:minmax(0,1fr) auto}
+.vvd-typ span,.vvd-psf span{font-size:11.5px}
+.vvd-typ span{font-size:11px;letter-spacing:-.1px}
+
+/* every layout card has the same size, on every tab: one width, one height */
+.vvd-cards{align-items:stretch}
+.vvd-card{box-sizing:border-box;min-height:340px;align-self:stretch}
+@media(min-width:621px){
+  .vvd-cards{grid-template-columns:repeat(auto-fit,222px)}
+  .vvd-cards.slide{grid-template-columns:none;grid-auto-columns:222px;gap:16px}
+  .vvd-card{width:222px}
+}
+
+/* equal-height cards: no subgrid (it ignores a fixed height); every line has a fixed height so rows still line up */
+@media(min-width:621px){
+  .vvd-card{display:flex;flex-direction:column;grid-row:auto;grid-template-rows:none;height:340px;min-height:340px;row-gap:0;gap:0}
+  .vvd-cards.slide{grid-template-rows:auto}
+  .vvd-card .vvd-size{min-height:62px}
+  .vvd-card .vvd-range{height:34px;line-height:34px;margin-top:8px!important;overflow:hidden}
+  .vvd-card p.vvd-typ,.vvd-card p.vvd-psf{min-height:22px;align-items:center}
+  .vvd-card .vvd-count{margin-top:14px!important}
+  .vvd-card>.vvd-view{margin-top:auto;align-self:flex-start}
+}
+
+/* all cards exactly the size of the original Sale 3 BHK card: 222 x 323 */
+@media(min-width:621px){
+  .vvd-card{height:323px;min-height:323px}
+}
+
+/* exactly 4 full cards in view (3 on medium screens, 2 on small); the cards of every tab share that same width,
+   and an arrow moves the row by one card so one new card enters while one leaves */
+@media(min-width:621px){ .vvd-cards{--n:2} }
+@media(min-width:760px){ .vvd-cards{--n:3} }
+@media(min-width:1100px){ .vvd-cards{--n:4} }
+@media(min-width:621px){
+  .vvd-cards{--w:calc((100% - 16px * (var(--n) - 1)) / var(--n))}
+  .vvd-cards:not(.slide){grid-template-columns:repeat(auto-fit,var(--w));justify-content:center;gap:16px;padding:4px 2px 12px;margin:0 30px}
+  .vvd-cards.slide{grid-template-columns:none;grid-auto-columns:var(--w);gap:16px;justify-content:start}
+  .vvd-card{width:auto;min-width:0}
+}
+
+/* Verified flats: centred cards (3 per row), page links side by side */
+.vvi-vgrid{display:flex;flex-wrap:wrap;justify-content:center;gap:20px}
+.vvi-vgrid .vvi-card{flex:0 1 calc(33.333% - 14px);min-width:260px;max-width:340px}
+.vvi-pagelinks{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:8px}
+.vvi-pagelinks .vvd-all{margin:14px 0 6px}
+@media(max-width:992px){.vvi-vgrid .vvi-card{flex:1 1 100%;max-width:none}}
+
+#vvi-bhktabs .vvd-tabs{justify-content:center;margin:6px 0 20px}
+
+.vvi-cardbtns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.vvi-cardbtns .vvi-btn{margin-top:0;text-decoration:none;display:inline-flex;align-items:center}
+
+a.vvd-view{display:inline-block;text-decoration:none;box-sizing:border-box;text-align:center}
+/* hero card slideshow */
+.vv-hero-image .vv-slides{position:absolute;inset:0}
+.vv-hero-image .vv-slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s ease}
+.vv-hero-image .vv-slides img.on{opacity:1}
+.vv-hero-image .vv-dots{position:absolute;left:0;right:0;bottom:12px;display:flex;gap:8px;justify-content:center;z-index:2}
+.vv-hero-image .vv-dots button{width:11px;height:11px;border-radius:50%;border:1px solid rgba(15,23,42,.6);background:rgba(255,255,255,.6);color:#0f172a;padding:0;cursor:pointer}
+.vv-hero-image .vv-dots button.on{background:#fff;border-color:#0f172a}
+.vv-hero-image .vv-dots button:focus-visible{outline:3px solid #facc15;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){.vv-hero-image .vv-slides img{transition:none}}
+
+/* ---- verified feature card, design B: natural-shape photo + thumbnail strip (7 Nov 2026) ---- */
+.vvi-feature.vvi-fx{display:flex;align-items:stretch}
+.vvi-fx .vvi-fx-main{flex:none;width:300px;height:auto;min-height:0;aspect-ratio:3/4;display:block}
+.vvi-fx.land .vvi-fx-main{width:380px;aspect-ratio:4/3}
+.vvi-fx .vvi-fx-strip{flex:none;width:128px;display:flex;flex-direction:column;gap:6px;padding:6px}
+.vvi-fx .vvi-fx-t{flex:1;min-height:0;border-radius:10px;background-size:cover;background-position:center;position:relative;display:block;overflow:hidden}
+.vvi-fx .vvi-fx-more{position:absolute;inset:0;background:rgba(15,23,42,.55);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
+.vvi-fx .vvi-body{flex:1;min-width:0}
+@media(max-width:760px){
+  .vvi-feature.vvi-fx{flex-direction:column}
+  .vvi-fx .vvi-fx-main,.vvi-fx.land .vvi-fx-main{width:100%;max-height:460px}
+  .vvi-fx .vvi-fx-strip{width:auto;flex-direction:row;height:96px;padding:6px}
+}
+
+/* top copy of the "see all on one page" button, directly under the BHK tabs */
+.vvi-toplink:empty{display:none}
+.vvi-toplink{display:flex;justify-content:center;margin:-8px 0 8px}
+.vvi-toplink .vvd-all{margin:0 auto}

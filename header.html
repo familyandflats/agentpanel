@@ -6,28 +6,20 @@
       </span>
       <span class="ff-brand-tagline">GURGAON REAL ESTATE</span>
     </a>
-    <nav aria-label="Primary" class="ff-primary-nav">
-      <a class="ff-header-link" href="/search?transaction=buy"><span>Buy</span></a>
-      <a class="ff-header-link" href="/search?transaction=rent"><span>Rent</span></a>
-      <a class="ff-header-link" href="/search?transaction=new-projects"><span>New Projects</span></a>
-      <a class="ff-header-link" href="/projects/"><span>Projects</span></a>
-      <a class="ff-header-link" href="/locations/golf-course-extension-road-gurugram/"><span>Areas</span><span aria-hidden="true" class="ff-header-chevron">⌄</span></a>
-    </nav>
+    <form class="ff-header-finder" id="ff-header-finder" role="search" action="/search/" aria-label="Find available flats">
+<input type="hidden" name="transaction" value="buy">
+<div class="ff-header-transaction" role="group" aria-label="Buy or Rent"><button type="button" data-transaction="buy" class="is-active" aria-pressed="true">Buy</button><button type="button" data-transaction="rent" aria-pressed="false">Rent</button></div>
+<label class="ff-header-project-field"><span class="ff-header-sr-only">Search project</span><input id="ff-header-project" name="query" list="ff-header-projects" autocomplete="off" placeholder="Search Project" required><datalist id="ff-header-projects"><option value="Mahindra Luminare"></option><option value="IREO Victory Valley"></option></datalist></label>
+<label class="ff-header-sr-only" for="ff-header-bhk">BHK</label><select id="ff-header-bhk" name="bhk" aria-label="BHK"><option value="">BHK</option><option>2 BHK</option><option>3 BHK</option><option>4 BHK</option><option>5 BHK</option></select>
+<label class="ff-header-sr-only" for="ff-header-furnishing">Furnishing</label><select id="ff-header-furnishing" name="furnishing" aria-label="Furnishing"><option value="">Furnishing</option><option>Furnished</option><option>Semi-Furnished</option><option>Unfurnished</option></select>
+<button type="submit" class="ff-header-submit">View Flats</button></form>
     <div class="ff-header-actions">
       <span class="ff-saved-link"><span aria-hidden="true">♡</span><span>Saved</span></span>
       <a class="ff-sign-in" href="/login">Sign In</a>
       <a class="ff-post-property" href="/post-property/form">Post Property</a>
       <details class="ff-header-menu">
         <summary aria-label="Open navigation">☰</summary>
-        <nav aria-label="Menu navigation" class="ff-header-menu-panel">
-          <a class="ff-header-link" href="/search?transaction=buy"><span>Buy</span></a>
-          <a class="ff-header-link" href="/search?transaction=rent"><span>Rent</span></a>
-          <a class="ff-header-link" href="/search?transaction=new-projects"><span>New Projects</span></a>
-          <a class="ff-header-link" href="/projects/"><span>Projects</span></a>
-          <a class="ff-header-link" href="/locations/golf-course-extension-road-gurugram/"><span>Areas</span><span aria-hidden="true" class="ff-header-chevron">⌄</span></a>
-          <a class="ff-header-link" href="/login">Sign In</a>
-          <a class="ff-header-link" href="/post-property/form">Post Property</a>
-        </nav>
+        <nav aria-label="Account navigation" class="ff-header-menu-panel"><a class="ff-header-link" href="/login">Sign In</a><a class="ff-header-link" href="/post-property/form">Post Property</a></nav>
       </details>
     </div>
   </div>

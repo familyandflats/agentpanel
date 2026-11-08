@@ -3,3 +3,8 @@ _reports/
 _source_material/
 *.zip
 *.log
+# 8 Nov 2026: working folders never go to git or the live site
+_to_delete/
+website-design-lab/
+_backup*/
+**/_backup*/

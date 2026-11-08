@@ -174,24 +174,24 @@
         <p><a href="/projects/ireo-victory-valley/">View IREO Victory Valley project overview</a></p>
       </div>
       <form class="ff-requirement-form" data-requirement-form>
-        <input name="name" type="text" placeholder="Your name" required>
-        <input name="phone" type="tel" placeholder="Phone number" required>
-        <select name="intent" required>
+        <input name="name" type="text" placeholder="Your name" required aria-label="Your name">
+        <input name="phone" type="tel" placeholder="Phone number" required aria-label="Phone number">
+        <select name="intent" required aria-label="Intent">
           <option value="">Requirement type</option>
           <option>Buy</option>
           <option>Lease</option>
           <option>Explore</option>
         </select>
-        <input name="location" type="text" value="Golf Course Extension Road" placeholder="Preferred location">
-        <input name="budget" type="text" placeholder="Budget range">
-        <select name="timeline">
+        <input name="location" type="text" value="Golf Course Extension Road" placeholder="Preferred location" aria-label="Preferred location">
+        <input name="budget" type="text" placeholder="Budget range" aria-label="Budget range">
+        <select name="timeline" aria-label="Timeline">
           <option value="">Timeline</option>
           <option>Immediate</option>
           <option>Within 30 days</option>
           <option>1-3 months</option>
           <option>Exploring</option>
         </select>
-        <textarea name="notes" rows="3" placeholder="Any specific requirement?"></textarea>
+        <textarea name="notes" rows="3" placeholder="Any specific requirement?" aria-label="Any specific requirement?"></textarea>
         <button type="submit">Send Requirement on WhatsApp</button>
       </form>
     </section>

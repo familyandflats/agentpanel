@@ -351,12 +351,12 @@
   height: 58px !important;
   bottom: 34px !important;
   right: 34px !important;
-  background: #25d366 !important;
+  background: #128c7e !important;
   color: #fff !important;
   border-radius: 999px !important;
   text-align: center !important;
   font-size: 28px !important;
-  box-shadow: 0 16px 34px rgba(37,211,102,0.34) !important;
+  box-shadow: 0 16px 34px rgba(18,140,126,0.34) !important;
   z-index: 9999 !important;
   display: flex !important;
   align-items: center !important;
@@ -370,3 +370,7 @@ body:has(.ff-whatsapp-float) .float:not(.ff-whatsapp-float) { display: none !imp
 @media (max-width: 640px) {
   .ff-whatsapp-float { width: 52px !important; height: 52px !important; right: 20px !important; bottom: 24px !important; }
 }
+
+/* Solid colour behind the footer gradient and social icons, so contrast checks (and browsers that skip gradients) see the real dark background. Added 8 Nov 2026. */
+footer.site-footer { background-color: #0f172a !important; }
+footer.site-footer .footer-socials a { background-color: #1f2738 !important; }

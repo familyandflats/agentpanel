@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>IREO Victory Valley Sector 67, Gurugram | Family&amp;Flats</title>
- <meta name="description" content="Explore IREO Victory Valley in Sector 67, Gurugram with Family&amp;Flats advisory, current availability checks, photos, sale and lease support." />
+  <title>IREO Victory Valley Sector 67 Gurgaon | Resale &amp; Rent Flats</title>
+ <meta name="description" content="88 flats advertised for sale &amp; 49 for rent in IREO Victory Valley, Sector 67 Gurgaon. 2–4 BHK &amp; penthouses from ₹2.8 Cr, rent from ₹60,000/month. Prices checked with owners before visits." />
  <link rel="canonical" href="https://familyandflats.com/projects/ireo-victory-valley/">
- <meta property="og:title" content="IREO Victory Valley Sector 67, Gurugram | Family&amp;Flats">
- <meta property="og:description" content="Explore IREO Victory Valley in Sector 67, Gurugram with Family&amp;Flats advisory, current availability checks, photos, sale and lease support.">
+ <meta property="og:title" content="IREO Victory Valley Sector 67 Gurgaon | Resale &amp; Rent Flats">
+ <meta property="og:description" content="88 flats advertised for sale &amp; 49 for rent in IREO Victory Valley, Sector 67 Gurgaon. 2–4 BHK &amp; penthouses from ₹2.8 Cr, rent from ₹60,000/month. Prices checked with owners before visits.">
  <meta property="og:type" content="website">
  <meta property="og:url" content="https://familyandflats.com/projects/ireo-victory-valley/">
- <meta property="og:image" content="https://familyandflats.com/projects/ireo-victory-valley/images/source-1.jpg">
+ <meta property="og:image" content="https://familyandflats.com/projects/ireovictoryvalley/images/ff-vv-hero-1.jpg">
   <meta name="keywords" content="IREO Victory Valley, IREO Victory Valley Gurgaon, Sector 67 flats, flats for sale in Gurugram, Family&Flats" />
 
   <link rel="shortcut icon" type="image/x-icon" href="/assets/logo-new-fav.png">
@@ -24,10 +24,10 @@
   <link rel="stylesheet" href="/assets/css/layout.css?v=phase3-batch8-redesign">
   <link rel="stylesheet" href="/assets/css/components.css?v=phase3-batch8-redesign">
   <link rel="stylesheet" href="/assets/css/forms.css?v=phase3-batch8-redesign">
-  <link rel="stylesheet" href="/assets/css/header.css?v=phase3-batch8-redesign">
-  <link rel="stylesheet" href="/assets/css/footer.css?v=footer-final">
+  <link rel="stylesheet" href="/assets/css/header.css?v=phase3-batch8-redesign-b">
+  <link rel="stylesheet" href="/assets/css/footer.css?v=footer-final-2">
   <link rel="stylesheet" href="/assets/css/responsive.css?v=phase3-batch8-redesign">
-  <link rel="stylesheet" href="/assets/css/project-detail.css?v=phase3-batch8-redesign">
+  <link rel="stylesheet" href="/assets/css/project-detail.css?v=phase3-batch8-redesign-2">
   <style>
     body {
       margin: 0;
@@ -48,22 +48,17 @@
 
     .vv-gallery {
       display: grid;
-      grid-template-columns: 1.2fr .8fr .8fr;
-      gap: 18px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
     }
 
     .vv-gallery img {
       width: 100%;
-      height: 260px;
+      height: 220px;
       object-fit: cover;
       border-radius: 22px;
       border: 1px solid #e2e8f0;
       box-shadow: 0 18px 55px rgba(15, 23, 42, .08);
-    }
-
-    .vv-gallery img:first-child {
-      height: 538px;
-      grid-row: span 2;
     }
 
     .vv-contact-panel {
@@ -180,17 +175,50 @@
       line-height: 1.7;
     }
 
+    .vv-form-title { margin: 0 0 4px; font-size: 22px; font-weight: 900; color: #0f172a; }
+    .vv-form-sub { margin: 0 0 16px; color: #64748b; font-size: 14px; }
+    .vv-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
+    .vv-full { grid-column: 1 / -1; }
+    .vv-ref { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; padding: 9px 12px; border-radius: 12px; background: #eef2ff; color: #2447c9; font-size: 14px; font-weight: 700; }
+    .vv-ref[hidden] { display: none; }
+    .vv-form-card .vv-ref button { width: auto; min-height: 0; padding: 4px 12px; border-radius: 10px; border: 1px solid #c7d2fe; background: #fff; color: #2447c9; font-size: 13px; }
+    .vv-form-card .vv-consent { display: flex; gap: 10px; align-items: flex-start; font-weight: 600; font-size: 14px; color: #334155; margin-bottom: 8px; }
+    .vv-form-card .vv-consent input { width: auto; margin: 3px 0 0; }
+    .vv-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+    .vv-err { min-height: 20px; margin: 0 0 8px; color: #b42318; font-size: 13px; font-weight: 700; }
+    .vv-ok { padding: 16px; border-radius: 14px; background: #e3f4ea; color: #0b5d3b; font-weight: 700; }
+    .vv-rera-no { margin: 12px 0 0; color: #475569; font-size: 14px; font-weight: 700; text-align: center; }
+
+    .smart-photo.vv-overview-photo {
+      background: linear-gradient(to top, rgba(15, 23, 42, .55), rgba(15, 23, 42, .05)), url("/projects/ireovictoryvalley/images/club-gallery.jpg") center/cover;
+      --project-photo-caption: "Project photo · walkway, clubhouse and towers";
+    }
+    .vv-steps { list-style: none; counter-reset: s; margin: 28px 0 0; padding: 24px 0 0; border-top: 1px solid #e2e8f0; display: grid; gap: 18px; }
+    .vv-steps li { counter-increment: s; display: grid; grid-template-columns: 36px 1fr; column-gap: 14px; align-items: start; }
+    .vv-steps li::before { content: counter(s); grid-row: span 2; width: 36px; height: 36px; border-radius: 999px; background: #e3f4ea; color: #0b5d3b; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+    .vv-steps b { font-size: 16px; color: #0f172a; }
+    .vv-steps span { font-size: 14px; color: #475569; line-height: 1.55; margin-top: 2px; }
+
     @media (max-width: 992px) {
-      .vv-gallery,
+      .first-fold-panel { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+    }
+    @media (max-width: 560px) {
+      .first-fold-panel { gap: 10px !important; padding: 12px !important; }
+      .first-fold-panel .fold-item { padding: 14px !important; }
+      .first-fold-panel .fold-item strong { font-size: 15px !important; }
+      .float { width: 50px !important; height: 50px !important; right: 14px !important; bottom: 16px !important; font-size: 24px !important; }
+    }
+
+    @media (max-width: 620px) { .vv-form-grid { grid-template-columns: 1fr; } }
+
+    @media (max-width: 992px) {
       .vv-contact-panel,
       .vv-faq {
         grid-template-columns: 1fr;
       }
 
-      .vv-gallery img,
-      .vv-gallery img:first-child {
-        height: 260px;
-        grid-row: auto;
+      .vv-gallery img {
+        height: 220px;
       }
 
       .vv-amenity-grid {
@@ -198,18 +226,26 @@
       }
     }
 
+    @media (max-width: 992px) and (min-width: 621px) {
+      .vv-gallery { grid-template-columns: repeat(2, 1fr); }
+    }
+
     @media (max-width: 620px) {
+      .vv-gallery { grid-template-columns: 1fr; }
       .vv-amenity-grid {
         grid-template-columns: 1fr;
       }
     }
   </style>
  <link rel="stylesheet" href="/assets/css/listings.css?v=phase3-all-projects">
+ <link rel="stylesheet" href="/assets/css/ff-vv-inventory.css?v=psf18">
+<style id="ff-img-auto-height">:where(img[width][height]){height:auto}</style>
 </head>
 
 <body>
   <div id="header-placeholder"></div>
 
+  <main id="main-content">
   <section class="project-detail-hero">
     <div class="hero-inner">
       <div class="hero-copy">
@@ -219,29 +255,24 @@
         </div>
         <h1>
           IREO Victory Valley
-          <span>verified resale options.</span>
+          <span>flats for sale &amp; rent in Sector 67, Gurgaon.</span>
         </h1>
         <p>
-          A cleaner project page for serious buyers and owners: project highlights, practical availability context, sale cards, photos, RERA details and direct Family&Flats advisory support.
+          Project highlights, current availability, RERA details and direct Family&amp;Flats advisory support, with every enquiry handled by our team.
         </p>
         <div class="hero-actions">
           <a href="#Ready-to-move" class="hero-primary">
             <i class="fa-solid fa-house-circle-check"></i>
             View Sale Options
           </a>
-          <a href="https://wa.me/919899273673?text=Hi%20Family%26Flats%2C%20please%20share%20current%20IREO%20Victory%20Valley%20options." target="_blank" class="hero-secondary">
-            <i class="fa-brands fa-whatsapp"></i>
+          <a href="#enquire" class="hero-secondary">
+            <i class="fa-solid fa-calendar-check"></i>
             Check Availability
           </a>
         </div>
       </div>
       <div class="hero-visual">
-        <div class="hero-img vv-hero-image">
-          <div class="visual-card">
-            <h3>IREO Victory Valley</h3>
-            <p>Sector 67, Golf Course Extension Road, Gurugram  |  2/3/4 BHK residences</p>
-          </div>
-        </div>
+        <div class="hero-img vv-hero-image" role="group" aria-roledescription="carousel" aria-label="IREO Victory Valley photos"><div class="vv-slides"><img src="/projects/ireovictoryvalley/images/ff-vv-hero-1.jpg" alt="Aerial view of the clubhouse and pond at IREO Victory Valley" class="on" width="1400" height="649"><img src="/projects/ireovictoryvalley/images/ff-vv-hero-2.jpg" alt="Swimming pool and clubhouse at dusk" loading="lazy" width="1400" height="574"><img src="/projects/ireovictoryvalley/images/ff-vv-hero-3.jpg" alt="Residential tower and pool island" loading="lazy" width="1050" height="1400"><img src="/projects/ireovictoryvalley/images/ff-vv-hero-4.jpg" alt="Night aerial view of the pool and landscaped paths" loading="lazy" width="1400" height="788"><img src="/projects/ireovictoryvalley/images/ff-vv-hero-5.jpg" alt="Clubhouse and landscaped podium by night" loading="lazy" width="1400" height="661"><img src="/projects/ireovictoryvalley/images/ff-vv-hero-6.jpg" alt="Tower view at night between the buildings" loading="lazy" width="1400" height="1050"></div><div class="vv-dots" role="tablist" aria-label="Choose photo"></div></div>
       </div>
     </div>
   </section>
@@ -265,6 +296,67 @@
     </div>
   </section>
 
+  <section id="Ready-to-move" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="mini"><i class="fa-solid fa-key"></i> Available now</span>
+        <h2>Sale and lease options in IREO Victory Valley.</h2>
+        <p>Verified flats come first. Below them, advertisements from the market are grouped by configuration so similar offers stay easy to compare.</p>
+      </div>
+      <div id="vv-inventory"></div>
+    </div>
+  </section>
+
+  <!-- ff-seo-summary:start (generated by scripts/generate-project-seo.js; do not edit by hand) -->
+  <section class="section white ff-price-guide" id="price-guide" aria-labelledby="price-guide-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="mini"><i class="fa-solid fa-indian-rupee-sign"></i> Price guide</span>
+        <h2 id="price-guide-title">IREO Victory Valley price list: sale and rent</h2>
+        <p>Asking prices from 137 current listings in IREO Victory Valley, Sector 67, Gurugram. Last updated 1 November 2026.</p>
+      </div>
+      <div class="ff-pg-grid">
+        <div class="ff-pg-card">
+          <h3>Flats for sale in IREO Victory Valley</h3>
+          <div class="ff-pg-scroll"><table class="ff-pg-table">
+            <thead><tr><th scope="col">Configuration</th><th scope="col">Price range</th><th scope="col">Avg. ₹/sq. ft.</th><th scope="col">Size</th><th scope="col">Flats</th></tr></thead>
+            <tbody><tr><th scope="row"><a href="/projects/ireo-victory-valley/2-bhk-for-sale/">2 BHK for sale</a></th><td>₹2.80–3.20 Cr</td><td>₹21,200</td><td>1,435–1,450 sq. ft.</td><td>8</td></tr><tr><th scope="row"><a href="/projects/ireo-victory-valley/3-bhk-for-sale/">3 BHK for sale</a></th><td>₹4.25–7.00 Cr</td><td>₹20,200</td><td>2,367–3,460 sq. ft.</td><td>46</td></tr><tr><th scope="row"><a href="/projects/ireo-victory-valley/4-bhk-for-sale/">4 BHK for sale</a></th><td>₹5.70–7.25 Cr</td><td>₹20,500</td><td>2,830–3,500 sq. ft.</td><td>27</td></tr><tr><th scope="row"><a href="/projects/ireo-victory-valley/penthouse-for-sale/">Penthouse for sale</a></th><td>₹9.00–11.50 Cr</td><td>₹18,800</td><td>5,000–5,920 sq. ft.</td><td>6</td></tr></tbody>
+          </table></div>
+        </div>
+        <div class="ff-pg-card">
+          <h3>Flats for rent in IREO Victory Valley</h3>
+          <div class="ff-pg-scroll"><table class="ff-pg-table">
+            <thead><tr><th scope="col">Configuration</th><th scope="col">Monthly rent</th><th scope="col">Size</th><th scope="col">Flats</th></tr></thead>
+            <tbody><tr><th scope="row"><a href="/projects/ireo-victory-valley/2-bhk-for-rent/">2 BHK for rent</a></th><td>₹60,000–80,000/month</td><td>1,435–1,471 sq. ft.</td><td>12</td></tr><tr><th scope="row"><a href="/projects/ireo-victory-valley/3-bhk-for-rent/">3 BHK for rent</a></th><td>₹80,000–1,25,000/month</td><td>2,400–3,337 sq. ft.</td><td>22</td></tr><tr><th scope="row"><a href="/projects/ireo-victory-valley/4-bhk-for-rent/">4 BHK for rent</a></th><td>₹1,10,000–1,65,000/month</td><td>2,840–3,628 sq. ft.</td><td>10</td></tr><tr><th scope="row"><a href="/projects/ireo-victory-valley/penthouse-for-rent/">Penthouse for rent</a></th><td>₹1,50,000–1,90,000/month</td><td>4,600–5,900 sq. ft.</td><td>5</td></tr></tbody>
+          </table></div>
+        </div>
+      </div>
+      <div class="ff-pg-verified">
+        <h3>Verified by Family&amp;Flats</h3>
+        <ul><li><a href="/listings/sale/ff-ivv-sale-002.html">4BHK Flat on Sale in IREO Victory Valley</a> · 2,850 sq. ft. · ₹5.8 Cr · 2nd Floor</li><li><a href="/listings/sale/ff-ivv-sale-003.html">4BHK Flat on Sale in IREO Victory Valley</a> · 2,850 sq. ft. · ₹5.7 Cr · Lower Floor</li><li><a href="/listings/sale/ff-ivv-sale-004.html">4BHK Duplex Penthouse on Sale in IREO Victory Valley</a> · 5,400 sq. ft. · ₹10 Cr · 39th &amp; 40th Floor</li><li><a href="/listings/lease/ff-ivv-rent-002.html">3BHK Fully Furnished Flat on Lease in IREO Victory Valley</a> · 2,400 sq. ft. · ₹95,000/month · Higher Floor</li></ul>
+      </div>
+      <p class="ff-pg-note">Prices are owner and agent asking prices, not final transaction values. Family&amp;Flats confirms availability and price with the owner before every visit.</p>
+    </div>
+  </section>
+  <style>
+    .ff-pg-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .ff-pg-card{border:1px solid #e2e8f0;border-radius:22px;background:#fff;padding:22px;min-width:0}
+    .ff-pg-card h3,.ff-pg-verified h3{margin:0 0 12px;font-size:18px;font-weight:900;color:#0f172a}
+    .ff-pg-scroll{overflow-x:auto}
+    .ff-pg-table{width:100%;border-collapse:collapse;font-size:14px}
+    .ff-pg-table th,.ff-pg-table td{padding:10px 8px;border-bottom:1px solid #eef2f7;text-align:left;white-space:nowrap;color:#334155}
+    .ff-pg-table thead th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#64748b}
+    .ff-pg-table tbody th a{color:#2447c9;font-weight:800}
+    .ff-pg-verified{margin-top:20px;border:1px solid #e2e8f0;border-radius:22px;background:#fff;padding:22px}
+    .ff-pg-verified ul{margin:0;padding-left:18px;color:#334155;line-height:1.9}
+    .ff-pg-verified a{color:#2447c9;font-weight:800}
+    .ff-pg-note{margin:14px 0 0;color:#64748b;font-size:13px}
+    @media (max-width:992px){.ff-pg-grid{grid-template-columns:1fr}}
+  </style>
+  <!-- ff-seo-summary:end -->
+
+
+
   <section class="section">
     <div class="wrap">
       <div class="section-head">
@@ -276,7 +368,7 @@
       </div>
 
       <div class="smart-grid">
-        <div class="smart-photo" style="background-image:url('images/ireo-victory-valley.jpg');"></div>
+        <div class="smart-photo vv-overview-photo" role="img" aria-label="IREO Victory Valley walkway, clubhouse and towers"></div>
         <div class="smart-content">
           <div class="smart-row">
             <i class="fa-solid fa-tree-city"></i>
@@ -315,8 +407,8 @@
     <div class="wrap">
       <div class="section-head">
         <span class="mini"><i class="fa-solid fa-star"></i> Lifestyle cues</span>
-        <h2>Amenity-rich living without brochure clutter.</h2>
-        <p>These are the high-signal project cues users ask about before scheduling a visit.</p>
+        <h2>Amenity-rich living</h2>
+        <p>The cues buyers ask about before scheduling a visit.</p>
       </div>
       <div class="vv-amenity-grid">
         <article class="vv-amenity">
@@ -347,93 +439,50 @@
     <div class="wrap">
       <div class="section-head">
         <span class="mini"><i class="fa-solid fa-images"></i> Project gallery</span>
-        <h2>Actual visual context for the project.</h2>
-        <p>Photos are kept prominent because buyers need to inspect the building, club and apartment feel quickly.</p>
+        <h2>The project in pictures</h2>
+        <p>Photos of the building, club and grounds.</p>
       </div>
       <div class="vv-gallery">
-        <img src="/projects/ireovictoryvalley/images/vic-banner.jpg" alt="IREO Victory Valley exterior">
-        <img src="/projects/ireovictoryvalley/images/vic-club-img.jpg" alt="IREO Victory Valley club area">
-        <img src="/projects/ireovictoryvalley/images/club-gall-vic.jpg" alt="IREO Victory Valley amenities">
-        <img src="/projects/ireovictoryvalley/images/project-vic-view.jpg" alt="IREO Victory Valley project view">
-        <img src="/projects/ireovictoryvalley/images/vic-project.jpg" alt="IREO Victory Valley towers">
+        <img src="/projects/ireovictoryvalley/images/vic-banner.jpg" alt="IREO Victory Valley tower exterior" width="864" height="1152" loading="lazy" decoding="async">
+        <img src="/projects/ireovictoryvalley/images/vic-club-img.jpg" alt="IREO Victory Valley clubhouse" width="1338" height="613" loading="lazy" decoding="async">
+        <img src="/projects/ireovictoryvalley/images/project-vic-view.jpg" alt="IREO Victory Valley evening view" width="1600" height="742" loading="lazy" decoding="async">
+        <img src="/projects/ireovictoryvalley/images/club-gall-vic.jpg" alt="IREO Victory Valley pool and amenities" width="1152" height="544" loading="lazy" decoding="async">
+        <img src="/projects/ireovictoryvalley/images/vic-project.jpg" alt="IREO Victory Valley towers" width="300" height="300" loading="lazy" decoding="async">
+        <img src="/projects/ireovictoryvalley/images/club-gallery.jpg" alt="IREO Victory Valley landscaped greens" width="1280" height="577" loading="lazy" decoding="async">
       </div>
     </div>
   </section>
 
-  <section id="Ready-to-move" class="project-listings-section">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="mini"><i class="fa-solid fa-key"></i> Sale options</span>
-        <h2>Verified IREO Victory Valley sale requirement flow.</h2>
-        <p>These cards keep the old page's important unit categories but present them in the new listing format.</p>
+  
+
+  <!-- ff-bhk-pages:start (generated by generate-bhk-pages.js) -->
+    <section class="section" id="browse-by-type" aria-label="Browse IREO Victory Valley by configuration">
+      <div class="container" style="max-width:1180px;margin:0 auto;padding:0 24px">
+        <h2 style="margin:0 0 12px;font-size:24px">Browse IREO Victory Valley by configuration</h2>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px">
+          <a href="/projects/ireo-victory-valley/2-bhk-for-sale/" style="border:1px solid #cbd5e1;background:#fff;border-radius:999px;padding:10px 18px;font-weight:800;color:#0f172a">2 BHK for sale <span style="color:#64748b;font-weight:600">· 8</span></a>
+          <a href="/projects/ireo-victory-valley/3-bhk-for-sale/" style="border:1px solid #cbd5e1;background:#fff;border-radius:999px;padding:10px 18px;font-weight:800;color:#0f172a">3 BHK for sale <span style="color:#64748b;font-weight:600">· 46</span></a>
+          <a href="/projects/ireo-victory-valley/4-bhk-for-sale/" style="border:1px solid #cbd5e1;background:#fff;border-radius:999px;padding:10px 18px;font-weight:800;color:#0f172a">4 BHK for sale <span style="color:#64748b;font-weight:600">· 27</span></a>
+          <a href="/projects/ireo-victory-valley/penthouse-for-sale/" style="border:1px solid #cbd5e1;background:#fff;border-radius:999px;padding:10px 18px;font-weight:800;color:#0f172a">Penthouse for sale <span style="color:#64748b;font-weight:600">· 6</span></a>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px">
+          <a href="/projects/ireo-victory-valley/2-bhk-for-rent/" style="border:1px solid #cbd5e1;background:#fff;border-radius:999px;padding:10px 18px;font-weight:800;color:#0f172a">2 BHK for rent <span style="color:#64748b;font-weight:600">· 12</span></a>
+          <a href="/projects/ireo-victory-valley/3-bhk-for-rent/" style="border:1px solid #cbd5e1;background:#fff;border-radius:999px;padding:10px 18px;font-weight:800;color:#0f172a">3 BHK for rent <span style="color:#64748b;font-weight:600">· 22</span></a>
+          <a href="/projects/ireo-victory-valley/4-bhk-for-rent/" style="border:1px solid #cbd5e1;background:#fff;border-radius:999px;padding:10px 18px;font-weight:800;color:#0f172a">4 BHK for rent <span style="color:#64748b;font-weight:600">· 10</span></a>
+          <a href="/projects/ireo-victory-valley/penthouse-for-rent/" style="border:1px solid #cbd5e1;background:#fff;border-radius:999px;padding:10px 18px;font-weight:800;color:#0f172a">Penthouse for rent <span style="color:#64748b;font-weight:600">· 5</span></a>
+        </div>
       </div>
-
-      <div class="project-listing-grid">
-        <article class="project-listing-card">
-          <div class="listing-img">
-            <img src="/projects/ireovictoryvalley/images/2bhk-img.jpg" alt="2BHK flat in IREO Victory Valley">
-            <span>Ready To Move</span>
-          </div>
-          <div class="listing-body">
-            <h3>2BHK Flat</h3>
-            <p>Sector 67, Golf Course Extension Road, Gurugram</p>
-            <div class="listing-meta">
-              <div><strong>2BHK + 2T</strong><small>Layout</small></div>
-              <div><strong>1435</strong><small>Sq. Ft.</small></div>
-              <div><strong>Higher</strong><small>Floor</small></div>
-            </div>
-            <div class="listing-price">Price on Request</div>
-            <a class="listing-btn" href="https://wa.me/919899273673?text=Hi%20Family%26Flats%2C%20please%20share%202BHK%20options%20in%20IREO%20Victory%20Valley." target="_blank">Check 2BHK Options</a>
-          </div>
-        </article>
-
-        <article class="project-listing-card">
-          <div class="listing-img">
-            <img src="/projects/ireovictoryvalley/images/3bhk-on-sale.jpg" alt="3BHK flat in IREO Victory Valley">
-            <span>Resale</span>
-          </div>
-          <div class="listing-body">
-            <h3>3BHK Flat</h3>
-            <p>Sector 67, Golf Course Extension Road, Gurugram</p>
-            <div class="listing-meta">
-              <div><strong>3BHK</strong><small>Layout</small></div>
-              <div><strong>Available</strong><small>Inventory</small></div>
-              <div><strong>Owner</strong><small>Side Check</small></div>
-            </div>
-            <div class="listing-price">Price on Request</div>
-            <a class="listing-btn" href="https://wa.me/919899273673?text=Hi%20Family%26Flats%2C%20please%20share%203BHK%20options%20in%20IREO%20Victory%20Valley." target="_blank">Check 3BHK Options</a>
-          </div>
-        </article>
-
-        <article class="project-listing-card">
-          <div class="listing-img">
-            <img src="/projects/ireovictoryvalley/images/4bhk-onsale.jpg" alt="4BHK flat in IREO Victory Valley">
-            <span>Premium</span>
-          </div>
-          <div class="listing-body">
-            <h3>4BHK Flat</h3>
-            <p>Sector 67, Golf Course Extension Road, Gurugram</p>
-            <div class="listing-meta">
-              <div><strong>4BHK</strong><small>Layout</small></div>
-              <div><strong>Large</strong><small>Format</small></div>
-              <div><strong>Photos</strong><small>On Request</small></div>
-            </div>
-            <div class="listing-price">Price on Request</div>
-            <a class="listing-btn" href="https://wa.me/919899273673?text=Hi%20Family%26Flats%2C%20please%20share%204BHK%20options%20in%20IREO%20Victory%20Valley." target="_blank">Check 4BHK Options</a>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
+    </section>
+    <script>window.FF_VV_PAGES = ["2-bhk-for-sale","3-bhk-for-sale","4-bhk-for-sale","penthouse-for-sale","2-bhk-for-rent","3-bhk-for-rent","4-bhk-for-rent","penthouse-for-rent"];</script>
+    <!-- ff-bhk-pages:end -->
+<section class="section" id="enquire">
     <div class="wrap">
       <div class="vv-contact-panel">
         <div class="vv-contact-copy">
           <span class="mini"><i class="fa-solid fa-message"></i> Fast enquiry</span>
           <h2>Want current availability before visiting?</h2>
           <p>
-            Share your requirement and the Family&Flats team will check real options, floor, view, size, price context, photos and site visit feasibility. This keeps the process practical and avoids stale listings.
+            Share your requirement and the Family&amp;Flats team will check real options, floor, view, size, price context and visit feasibility. Every enquiry comes to us, so you deal with one team throughout.
           </p>
           <div class="hero-actions">
             <a href="/projects/ireovictoryvalley/images/Ireo-Victory-valley.pdf" class="hero-primary" download>
@@ -445,24 +494,31 @@
               Call Advisor
             </a>
           </div>
+          <ol class="vv-steps">
+            <li><b>We check the flat</b><span>Availability, price and floor confirmed with the owner or agent, usually the same day.</span></li>
+            <li><b>Photos and video on WhatsApp</b><span>See the actual flat before you spend time on a visit.</span></li>
+            <li><b>Visit and negotiation</b><span>One Family&amp;Flats advisor arranges the visit and supports you to closing.</span></li>
+          </ol>
         </div>
 
-        <form class="vv-form-card" data-ff-enquiry="true" method="POST">
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" placeholder="Your name" required>
-          <label for="phone">Phone Number</label>
-          <input id="phone" name="phone" type="tel" placeholder="+91" required>
-          <label for="requirement">Requirement</label>
-          <select id="requirement" name="requirement" required>
-            <option value="">Select requirement</option>
-            <option>2BHK Sale</option>
-            <option>3BHK Sale</option>
-            <option>4BHK Sale</option>
-            <option>Owner assistance</option>
-          </select>
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="4" placeholder="Budget, floor preference, timing"></textarea>
-          <button type="submit">Send Enquiry</button>
+        <form id="vv-enquiry" class="vv-form-card" data-ff-enquiry="off" novalidate>
+          <h3 class="vv-form-title">Tell us what you are looking for</h3>
+          <p class="vv-form-sub">Your requirement reaches the Family&amp;Flats team for follow-up.</p>
+          <div class="vv-ref" id="vv-ref" hidden>
+            <span>Enquiring about <b id="vv-ref-id"></b><span id="vv-ref-kind"></span></span>
+            <button type="button" id="vv-ref-remove">Remove</button>
+          </div>
+          <div class="vv-form-grid">
+            <div><label for="vv-name">Name *</label><input id="vv-name" name="name" type="text" autocomplete="name"></div>
+            <div><label for="vv-phone">Mobile *</label><input id="vv-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"></div>
+            <div><label for="vv-looking">Looking to</label><select id="vv-looking" name="transactionType"><option value="BUY">Buy</option><option value="LEASE">Rent</option></select></div>
+            <div><label for="vv-config">Configuration</label><select id="vv-config" name="configuration"><option value="">Any configuration</option><option>2 BHK</option><option>3 BHK</option><option>4 BHK</option><option>5 BHK</option><option>4 BHK Penthouse</option><option>5 BHK Penthouse</option></select></div>
+            <div class="vv-full"><label for="vv-note">Anything specific?</label><textarea id="vv-note" name="message" rows="3" placeholder="Floor, furnishing, view, visit timing"></textarea></div>
+            <label class="vv-full vv-consent"><input type="checkbox" id="vv-consent" name="consent"> I agree to be contacted by Family&amp;Flats about my requirement.</label>
+            <input class="vv-hp" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Company">
+            <p class="vv-full vv-err" id="vv-err" role="alert"></p>
+            <button type="submit" class="vv-full" id="vv-send">Send requirement</button>
+          </div>
         </form>
       </div>
     </div>
@@ -478,19 +534,35 @@
       <div class="vv-faq">
         <article>
           <h3>Is IREO Victory Valley ready to move?</h3>
-          <p>Yes, the page treats it as a ready-to-move resale-led project. Exact unit availability should be checked live.</p>
+          <p>Yes. IREO Victory Valley is a completed, ready-to-move project, so every flat listed here is a resale or rental home with no construction wait. Availability changes quickly, so Family&amp;Flats confirms each flat with the owner before you visit.</p>
         </article>
         <article>
-          <h3>Can I get current prices?</h3>
-          <p>Yes. Prices depend on size, floor, view, condition, furnishing and owner expectation, so Family&Flats verifies before sharing.</p>
+          <h3>What is the price of flats in IREO Victory Valley?</h3>
+          <p data-ff-gen="faq-sale-price">Current asking prices in IREO Victory Valley (88 flats for sale, updated 1 November 2026) are 2 BHK: ₹2.80–3.30 Cr; 3 BHK: ₹4.25–7.00 Cr; 4 BHK: ₹5.70–7.25 Cr; Penthouse: ₹9.00–11.50 Cr. That works out to an average of about ₹20,400 per sq. ft. for 2, 3 and 4 BHK flats. Final price depends on floor, view, condition and furnishing, so Family&amp;Flats confirms each flat with the owner before you visit.</p>
         </article>
         <article>
-          <h3>Are photos available before visit?</h3>
-          <p>For serious enquiries, photos or video context can be checked before scheduling a physical visit.</p>
+          <h3>What is the rent for a flat in IREO Victory Valley?</h3>
+          <p data-ff-gen="faq-rent">Current rents in IREO Victory Valley (49 flats for rent) are 2 BHK: ₹60,000–80,000 a month; 3 BHK: ₹80,000–1,25,000 a month; 4 BHK: ₹1,10,000–1,65,000 a month; Penthouse: ₹1,50,000–1,90,000 a month. Maintenance, deposit and furnishing terms vary by owner and are confirmed before a visit.</p>
         </article>
         <article>
-          <h3>Can owners list their flat?</h3>
-          <p>Yes. Owners can share flat details privately for resale support, pricing guidance and lead handling.</p>
+          <h3>What flat sizes are available in IREO Victory Valley?</h3>
+          <p data-ff-gen="faq-sizes">Across flats for sale and rent, typical super areas are 2 BHK: 1,435–1,471 sq. ft.; 3 BHK: 2,367–3,460 sq. ft.; 4 BHK: 2,830–3,628 sq. ft.; Penthouse: 4,600–5,920 sq. ft. Some 3 and 4 BHK layouts include a servant room, study or duplex level.</p>
+        </article>
+        <article>
+          <h3>Where is IREO Victory Valley located?</h3>
+          <p>IREO Victory Valley is in Sector 67 on Golf Course Extension Road, Gurugram (Gurgaon), Haryana. It is a gated community of about 25 acres with 750+ homes, a clubhouse, pool and large central greens.</p>
+        </article>
+        <article>
+          <h3>Can I see photos or a video of a flat before visiting?</h3>
+          <p>Yes. For serious enquiries, Family&amp;Flats shares current photos or a video of the actual flat on WhatsApp, so you only visit the flats that fit.</p>
+        </article>
+        <article>
+          <h3>I own a flat in IREO Victory Valley. Can you help me sell or rent it?</h3>
+          <p>Yes. Share your flat details privately and Family&amp;Flats will suggest a realistic price from current listings, market it to verified buyers or tenants, and handle the enquiries.</p>
+        </article>
+        <article>
+          <h3>Who do I deal with for flats advertised on this page?</h3>
+          <p>Always Family&amp;Flats. We confirm availability and details with the owner or agent, then arrange the visit and support you through negotiation and closing.</p>
         </article>
       </div>
     </div>
@@ -500,25 +572,26 @@
     <div class="container">
       <div class="project-compliance__card">
         <h2>Agent RERA</h2>
-        <a href="/projects/ireovictoryvalley/images/Agent-rera.jpeg" target="_blank">
-          <img src="/projects/ireovictoryvalley/images/Agent-rera.jpeg" alt="Agent RERA certificate">
+        <a href="/projects/ireovictoryvalley/images/Agent-rera.jpeg" target="_blank" aria-label="Open Agent RERA certificate">
+          <img src="/projects/ireovictoryvalley/images/Agent-rera.jpeg" alt="Agent RERA certificate" width="486" height="478" loading="lazy" decoding="async">
         </a>
+        <p class="vv-rera-no">HARERA Gurugram registration no. RC/HARERA/GGM/1766/1361/2022/134 &middot; Real estate agent</p>
       </div>
-      <p class="project-compliance__disclaimer"><strong>Disclaimer:</strong> This website is for informational purposes only and does not claim to be the official site. All property details are for reference and may vary. We are an independent real estate consultancy and an authorized channel partner.</p>
     </div>
   </section>
+  </main>
 
 
- <section class="section"><div class="wrap"><div class="ff-project-listing-tabs"><div class="section-head" style="margin:0;"><span class="mini"><i class="fa-solid fa-list-check"></i> Live inventory</span><h2>Sale and lease options in IREO Victory Valley.</h2><p>Published listings appear here automatically. If none are published, users get a clear availability-check path.</p></div><div class="ff-chip-row"><a class="ff-nav-pill" href="/sale.html?project=ireovictoryvalley">Sale</a><a class="ff-nav-pill" href="/lease.html?project=ireovictoryvalley">Lease</a></div></div><div class="ff-listing-grid" data-project-listings="ireovictoryvalley" data-listing-type="sale"></div><div class="ff-listing-gap"></div><div class="ff-listing-grid" data-project-listings="ireovictoryvalley" data-listing-type="lease"></div></div></section>
+ 
 
  <div id="footer-placeholder"></div>
 
-  <a href="https://api.whatsapp.com/send?phone=919899273673&text=Hi%20Family%26Flats%2C%20I%20want%20current%20IREO%20Victory%20Valley%20sale%20options." class="float" target="_blank">
+  <a href="https://api.whatsapp.com/send?phone=919899273673&text=Hi%20Family%26Flats%2C%20I%20want%20current%20IREO%20Victory%20Valley%20sale%20options." class="float" target="_blank" aria-label="Chat with Family&amp;Flats on WhatsApp">
     <i class="fa-brands fa-whatsapp"></i>
   </a>
 
   <script src="/assets/js/main.js?v=phase3-batch8-redesign"></script>
-<script src="/assets/data/listings.js?v=phase3-all-projects"></script><script src="/assets/js/listings.js?v=phase3-all-projects"></script>
-<script type="application/ld+json" data-ff-project-schema>{"@context":"https://schema.org","@type":"WebPage","name":"IREO Victory Valley","description":"Explore IREO Victory Valley in Sector 67, Gurugram with Family&Flats advisory, current availability checks, photos, sale and lease support.","url":"https://familyandflats.com/projects/ireo-victory-valley/","about":{"@type":"Place","name":"IREO Victory Valley","address":"Sector 67, Gurugram"},"publisher":{"@type":"RealEstateAgent","name":"Family&Flats","url":"https://familyandflats.com/"}}</script>
+<script src="/assets/data/listings.js?v=phase3-all-projects"></script><script src="/assets/data/agent-ads.js?v=design2d"></script><script src="/assets/data/verified-listings.js?v=design2c"></script><script src="/assets/js/listings.js?v=phase3-all-projects"></script><script src="/assets/js/ff-vv-enquiry.js?v=enq2"></script><script src="/assets/js/ff-hero-slides.js?v=1"></script><script src="/assets/js/ff-newtab-links.js?v=1"></script><script src="/assets/js/ff-vv-inventory.js?v=psf18"></script>
+<script type="application/ld+json" data-ff-project-schema>{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://familyandflats.com/projects/ireo-victory-valley/#webpage","url":"https://familyandflats.com/projects/ireo-victory-valley/","name":"IREO Victory Valley Sector 67 Gurgaon | Resale & Rent Flats","description":"88 flats advertised for sale & 49 for rent in IREO Victory Valley, Sector 67 Gurgaon. 2–4 BHK & penthouses from ₹2.8 Cr, rent from ₹60,000/month. Prices checked with owners before visits.","inLanguage":"en-IN","dateModified":"2026-11-01","isPartOf":{"@id":"https://familyandflats.com/#website"},"about":{"@id":"https://familyandflats.com/projects/ireo-victory-valley/#project"},"breadcrumb":{"@id":"https://familyandflats.com/projects/ireo-victory-valley/#breadcrumb"},"primaryImageOfPage":"https://familyandflats.com/projects/ireovictoryvalley/images/ff-vv-hero-1.jpg","publisher":{"@id":"https://familyandflats.com/#agent"}},{"@type":"WebSite","@id":"https://familyandflats.com/#website","url":"https://familyandflats.com/","name":"Family&Flats","publisher":{"@id":"https://familyandflats.com/#agent"}},{"@type":"BreadcrumbList","@id":"https://familyandflats.com/projects/ireo-victory-valley/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://familyandflats.com/"},{"@type":"ListItem","position":2,"name":"Projects in Gurugram","item":"https://familyandflats.com/projects/"},{"@type":"ListItem","position":3,"name":"IREO Victory Valley","item":"https://familyandflats.com/projects/ireo-victory-valley/"}]},{"@type":"ApartmentComplex","@id":"https://familyandflats.com/projects/ireo-victory-valley/#project","name":"IREO Victory Valley","url":"https://familyandflats.com/projects/ireo-victory-valley/","image":"https://familyandflats.com/projects/ireovictoryvalley/images/ff-vv-hero-1.jpg","description":"IREO Victory Valley is a ready-to-move residential project by IREO in Sector 67, Golf Course Extension Road, Gurugram (Gurgaon), spread over about 25 acres with 750+ homes in 2, 3 and 4 BHK and penthouse layouts.","address":{"@type":"PostalAddress","streetAddress":"Sector 67, Golf Course Extension Road","addressLocality":"Gurugram","addressRegion":"Haryana","addressCountry":"IN"},"numberOfAccommodationUnits":{"@type":"QuantitativeValue","minValue":750},"amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Clubhouse","value":true},{"@type":"LocationFeatureSpecification","name":"Swimming pool","value":true},{"@type":"LocationFeatureSpecification","name":"Fitness centre","value":true},{"@type":"LocationFeatureSpecification","name":"Landscaped central greens","value":true},{"@type":"LocationFeatureSpecification","name":"Gated community with security","value":true}]},{"@type":"RealEstateAgent","@id":"https://familyandflats.com/#agent","name":"Family&Flats","url":"https://familyandflats.com/","telephone":"+91-98992-73673","identifier":{"@type":"PropertyValue","propertyID":"HARERA Gurugram agent registration","value":"RC/HARERA/GGM/1766/1361/2022/134"},"areaServed":{"@type":"City","name":"Gurugram"}},{"@type":"ItemList","@id":"https://familyandflats.com/projects/ireo-victory-valley/#verified-flats","name":"Verified flats in IREO Victory Valley","itemListElement":[{"@type":"ListItem","position":1,"url":"https://familyandflats.com/listings/sale/ff-ivv-sale-002.html","name":"4BHK Flat on Sale in IREO Victory Valley"},{"@type":"ListItem","position":2,"url":"https://familyandflats.com/listings/sale/ff-ivv-sale-003.html","name":"4BHK Flat on Sale in IREO Victory Valley"},{"@type":"ListItem","position":3,"url":"https://familyandflats.com/listings/sale/ff-ivv-sale-004.html","name":"4BHK Duplex Penthouse on Sale in IREO Victory Valley"},{"@type":"ListItem","position":4,"url":"https://familyandflats.com/listings/lease/ff-ivv-rent-002.html","name":"3BHK Fully Furnished Flat on Lease in IREO Victory Valley"}]},{"@type":"FAQPage","@id":"https://familyandflats.com/projects/ireo-victory-valley/#faq","mainEntity":[{"@type":"Question","name":"Is IREO Victory Valley ready to move?","acceptedAnswer":{"@type":"Answer","text":"Yes. IREO Victory Valley is a completed, ready-to-move project, so every flat listed here is a resale or rental home with no construction wait. Availability changes quickly, so Family&Flats confirms each flat with the owner before you visit."}},{"@type":"Question","name":"What is the price of flats in IREO Victory Valley?","acceptedAnswer":{"@type":"Answer","text":"Current asking prices in IREO Victory Valley (88 flats for sale, updated 1 November 2026) are 2 BHK: ₹2.80–3.30 Cr; 3 BHK: ₹4.25–7.00 Cr; 4 BHK: ₹5.70–7.25 Cr; Penthouse: ₹9.00–11.50 Cr. That works out to an average of about ₹20,400 per sq. ft. for 2, 3 and 4 BHK flats. Final price depends on floor, view, condition and furnishing, so Family&Flats confirms each flat with the owner before you visit."}},{"@type":"Question","name":"What is the rent for a flat in IREO Victory Valley?","acceptedAnswer":{"@type":"Answer","text":"Current rents in IREO Victory Valley (49 flats for rent) are 2 BHK: ₹60,000–80,000 a month; 3 BHK: ₹80,000–1,25,000 a month; 4 BHK: ₹1,10,000–1,65,000 a month; Penthouse: ₹1,50,000–1,90,000 a month. Maintenance, deposit and furnishing terms vary by owner and are confirmed before a visit."}},{"@type":"Question","name":"What flat sizes are available in IREO Victory Valley?","acceptedAnswer":{"@type":"Answer","text":"Across flats for sale and rent, typical super areas are 2 BHK: 1,435–1,471 sq. ft.; 3 BHK: 2,367–3,460 sq. ft.; 4 BHK: 2,830–3,628 sq. ft.; Penthouse: 4,600–5,920 sq. ft. Some 3 and 4 BHK layouts include a servant room, study or duplex level."}},{"@type":"Question","name":"Where is IREO Victory Valley located?","acceptedAnswer":{"@type":"Answer","text":"IREO Victory Valley is in Sector 67 on Golf Course Extension Road, Gurugram (Gurgaon), Haryana. It is a gated community of about 25 acres with 750+ homes, a clubhouse, pool and large central greens."}},{"@type":"Question","name":"Can I see photos or a video of a flat before visiting?","acceptedAnswer":{"@type":"Answer","text":"Yes. For serious enquiries, Family&Flats shares current photos or a video of the actual flat on WhatsApp, so you only visit the flats that fit."}},{"@type":"Question","name":"I own a flat in IREO Victory Valley. Can you help me sell or rent it?","acceptedAnswer":{"@type":"Answer","text":"Yes. Share your flat details privately and Family&Flats will suggest a realistic price from current listings, market it to verified buyers or tenants, and handle the enquiries."}},{"@type":"Question","name":"Who do I deal with for flats advertised on this page?","acceptedAnswer":{"@type":"Answer","text":"Always Family&Flats. We confirm availability and details with the owner or agent, then arrange the visit and support you through negotiation and closing."}}]}]}</script>
 </body>
 </html>

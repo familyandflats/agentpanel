@@ -298,6 +298,15 @@ textarea{
 <link rel="stylesheet" href="/assets/css/header.css?v=phase3-batch2">
 <link rel="stylesheet" href="/assets/css/footer.css?v=footer-final">
 <link rel="stylesheet" href="/assets/css/responsive.css?v=phase3-batch2">
+
+<link rel="canonical" href="https://familyandflats.com/post-property.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Family&amp;Flats">
+<meta property="og:title" content="Post Property | Family&amp;Flats">
+<meta property="og:description" content="Family&amp;Flats team property submission page for adding sale and lease listings.">
+<meta property="og:url" content="https://familyandflats.com/post-property.html">
+<meta property="og:image" content="https://familyandflats.com/assets/logo-new.png">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body>
@@ -322,7 +331,7 @@ textarea{
   <div class="content">
     <nav class="breadcrumb"><a href="/index.html">Home</a><span>›</span><span>Post Property</span></nav>
     <section class="page-title">
-      <h1>Post a Property</h1>
+      <h1 role="heading" aria-level="2">Post a Property</h1>
     </section>
 
     <section class="card form-card">
@@ -334,7 +343,7 @@ textarea{
 
   <div class="field">
     <label>Project Name *</label>
-    <input class="input" name="project_name" id="project_name" list="projectList" required placeholder="Type project name, e.g. Victory"/>
+    <input class="input" name="project_name" id="project_name" list="projectList" required placeholder="Type project name, e.g. Victory" aria-label="Type project name, e.g. victory" />
     <datalist id="projectList">
       <option value="IREO Victory Valley">
       <option value="IREO Grand Arch">
@@ -346,12 +355,12 @@ textarea{
 
 <div class="field">
   <label>Project Locality</label>
-  <input class="input" name="project_locality" id="project_locality" readonly placeholder="Auto-filled"/>
+  <input class="input" name="project_locality" id="project_locality" readonly placeholder="Auto-filled" aria-label="Auto filled" />
 </div>
 
 <div class="field">
   <label>Sector</label>
-  <select name="sector" id="sector" required>
+  <select name="sector" id="sector" required aria-label="Sector">
     <option value="">Select Sector</option>
     <option>58</option>
     <option>60</option>
@@ -363,7 +372,7 @@ textarea{
 
 <div class="field">
   <label>City</label>
-  <input class="input" name="city" id="city" readonly placeholder="Auto-filled"/>
+  <input class="input" name="city" id="city" readonly placeholder="Auto-filled" aria-label="Auto filled" />
 </div>
 
 </div>
@@ -372,7 +381,7 @@ textarea{
 <div class="grid-3">
   <div class="field">
     <label>Listing Type *</label>
-    <select name="listing_type" required>
+    <select name="listing_type" required aria-label="Listing type">
       <option value="">Select</option>
       <option>Sale</option>
       <option>Lease</option>
@@ -381,7 +390,7 @@ textarea{
 
   <div class="field">
     <label>Property Type *</label>
-    <select name="property_type" required>
+    <select name="property_type" required aria-label="Property type">
       <option value="">Select</option>
       <option>Apartment</option>
       <option>Penthouse</option>
@@ -392,7 +401,7 @@ textarea{
 
   <div class="field">
     <label>BHK *</label>
-    <select name="bhk" required>
+    <select name="bhk" required aria-label="Bhk">
       <option value="">Select</option>
       <option>2 BHK</option>
       <option>3 BHK</option>
@@ -406,12 +415,12 @@ textarea{
 <div class="grid-2">
   <div class="field">
     <label>Size / Super Area *</label>
-    <input class="input" name="size_sqft" required placeholder="2450 sq.ft."/>
+    <input class="input" name="size_sqft" required placeholder="2450 sq.ft." aria-label="2450 sq.ft." />
   </div>
 
   <div class="field">
     <label>Price / Rent Display *</label>
-    <input class="input" name="price_display" required placeholder="4.25 Cr / 1.25 L"/>
+    <input class="input" name="price_display" required placeholder="4.25 Cr / 1.25 L" aria-label="4.25 cr / 1.25 l" />
   </div>
 </div>
 
@@ -419,7 +428,7 @@ textarea{
 
   <div class="field">
     <label>Floor Category *</label>
-    <select name="floor_category" required>
+    <select name="floor_category" required aria-label="Floor category">
       <option value="">Select</option>
       <option>Low Floor</option>
       <option>Middle Floor</option>
@@ -430,7 +439,7 @@ textarea{
 
   <div class="field">
     <label>Furnishing *</label>
-    <select name="furnishing" required>
+    <select name="furnishing" required aria-label="Furnishing">
       <option value="">Select</option>
       <option>Unfurnished</option>
       <option>Semi Furnished</option>
@@ -440,7 +449,7 @@ textarea{
 
   <div class="field">
     <label>Parking *</label>
-    <select name="parking_available" required>
+    <select name="parking_available" required aria-label="Parking available">
       <option value="">Select</option>
       <option>1 Covered</option>
       <option>2 Covered</option>
@@ -454,7 +463,7 @@ textarea{
 <div class="grid-3">
 <div class="field">
   <label>Exit Facing *</label>
-  <select name="exit_facing" required>
+  <select name="exit_facing" required aria-label="Exit facing">
     <option value="">Select</option>
     <option>North</option>
     <option>South</option>
@@ -503,15 +512,15 @@ textarea{
 
         <h2 class="section-title">Media & Notes</h2>
         <div class="grid-2">
-          <div class="field"><label>Google Drive Photos Folder Link</label><input class="input" name="photos_folder_link" type="url" placeholder="https://drive.google.com/drive/folders/..."/></div>
-          <div class="field"><label>Video Link</label><input class="input" name="video_link" type="url" placeholder="https://youtube.com/... or Drive link"/></div>
+          <div class="field"><label>Google Drive Photos Folder Link</label><input class="input" name="photos_folder_link" type="url" placeholder="https://drive.google.com/drive/folders/..." aria-label="Https://drive.google.com/drive/folders/..." /></div>
+          <div class="field"><label>Video Link</label><input class="input" name="video_link" type="url" placeholder="https://youtube.com/... or Drive link" aria-label="Https://youtube.com/... or drive link" /></div>
         </div>
-        <div class="field"><label>Internal Remarks</label><textarea name="remarks" placeholder="Owner expectations, keys, negotiation notes, photo status, etc."></textarea></div>
+        <div class="field"><label>Internal Remarks</label><textarea name="remarks" placeholder="Owner expectations, keys, negotiation notes, photo status, etc." aria-label="Owner expectations, keys, negotiation notes, photo status, etc."></textarea></div>
         <h2 class="section-title">Submitter Details</h2>
         <div class="grid-3">
 <div class="field">
 <label>Submitted By *</label>
-<select name="submitted_by" required>
+<select name="submitted_by" required aria-label="Submitted by">
 <option value="">Select Team Member</option>
 <option>Arun Bansal</option>
 <option>Nidhi Gupta</option>
@@ -528,7 +537,7 @@ type="tel"
 maxlength="10"
 pattern="[0-9]{10}"
 required
-placeholder="10 digit mobile number">
+placeholder="10 digit mobile number" aria-label="10 digit mobile number">
 </div>
 
 <div class="field">
@@ -539,7 +548,7 @@ id="submitted_email"
 name="submitted_email"
 type="email"
 required
-placeholder="name@email.com">
+placeholder="name@email.com" aria-label="Name@email.com">
 </div>
 
 </div>

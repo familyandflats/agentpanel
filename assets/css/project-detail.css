@@ -260,7 +260,7 @@ a{
 }
 
 .hero-secondary{
-  background:rgba(255,255,255,.10);
+  background:rgba(15,23,42,.24);
   border:1px solid rgba(255,255,255,.24);
   color:#fff !important;
   backdrop-filter:blur(10px);
@@ -339,7 +339,7 @@ a{
 
 .fold-item span{
   display:block;
-  color:#64748b;
+  color:#556274;
   font-size:12px;
   font-weight:900;
   letter-spacing:.10em;
@@ -845,11 +845,11 @@ a{
   height:58px;
   bottom:34px;
   right:34px;
-  background:#25d366;
+  background:#128c7e;
   color:#fff !important;
   border-radius:999px;
   font-size:28px;
-  box-shadow:0 16px 34px rgba(37,211,102,.34);
+  box-shadow:0 16px 34px rgba(18,140,126,.34);
   z-index:9999;
   display:flex;
   align-items:center;

@@ -3,5 +3,8 @@ Allow: /
 Disallow: /_archive/
 Disallow: /_reports/
 Disallow: /_source_material/
+Disallow: /*/_backup
+Disallow: /_backup
+Disallow: /_to_delete/
 
 Sitemap: https://familyandflats.com/sitemap.xml
