@@ -35,7 +35,10 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
+          # 8 Nov 2026: GoDaddy resets plain-FTP data connections; use explicit FTPS like the local secure upload script.
+          protocol: ftps
+          security: loose
+          log-level: standard
           port: 21
           server-dir: /
           exclude: |
