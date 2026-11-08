@@ -16,3 +16,9 @@ A live-first hotfix is allowed only for an urgent outage. Before closure, the ex
 
 ## Closure gate
 Do not declare work complete if any production-only permanent change remains, if the source worktree is dirty, or if local HEAD differs from the pushed canonical branch.
+
+## Parity baseline (8 Nov 2026)
+Live `public_html` was reconciled to this repository and verified file by file: 1,545 of 1,545 deployable files identical (commit 7bc4372).
+- Nobody edits files on GoDaddy directly, including AI sessions. Change locally, commit, push, let the GitHub deploy run, then run the drift check.
+- The GitHub deploy uses explicit FTPS. Files on the server must stay writable (0644), or the deploy stops with "553 Permission denied".
+- Working folders, backups, reports and zip packages never go into `public_html`. Keep them outside it.
