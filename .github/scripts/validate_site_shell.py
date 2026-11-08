@@ -47,7 +47,7 @@ TAG_RE = re.compile(r"<(header|footer)\b[^>]*>", re.IGNORECASE)
 CLASS_RE = re.compile(r"\bclass\s*=\s*([\"'])(.*?)\1", re.IGNORECASE | re.DOTALL)
 
 REQUIRED_FILES = {
-    "header.html": ("ff-site-header", "Buy", "New Projects", "Areas", "Post Property"),
+    "header.html": ("ff-site-header", "Buy", "ff-header-finder", "View Flats", "Post Property"),
     "footer.html": ("site-footer", "Explore", "Company", "Contact Us"),
     "assets/css/header.css": (".ff-site-header", ".ff-site-header-inner"),
     "assets/css/footer.css": (".site-footer", ".footer-container"),
@@ -189,7 +189,7 @@ def validate_live(base_url: str) -> list[str]:
     base = base_url.rstrip("/")
 
     assets = {
-        "/header.html": ("ff-site-header", "New Projects", "Post Property"),
+        "/header.html": ("ff-site-header", "ff-header-finder", "Post Property"),
         "/footer.html": ("site-footer", "Contact Us"),
         "/assets/css/header.css": (".ff-site-header",),
         "/assets/css/footer.css": (".site-footer",),
