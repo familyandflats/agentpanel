@@ -64,3 +64,21 @@ jobs:
         run: |
           sleep 5
           python .github/scripts/validate_site_shell.py --live-base https://www.familyandflats.com
+
+  # 8 Nov 2026: after every deploy, prove the live server matches this commit file by file.
+  drift-check:
+    if: github.event_name == 'push'
+    needs: deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout files
+        uses: actions/checkout@v4
+
+      - name: Compare every deployable file with the live server
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: python scripts/live-web-drift-audit.py
