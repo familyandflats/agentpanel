@@ -84,6 +84,28 @@
     modal.hidden = true; document.documentElement.classList.remove("vvm-open");
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
+
+  // If the enquiry service cannot be reached, hand the same details to WhatsApp so no enquiry is lost.
+  var FF_WA_NUMBER = "919899273673";
+  function showWhatsAppFallback(el, p) {
+    var lines = ["New enquiry from familyandflats.com"];
+    function add(label, v) { if (v) lines.push(label + ": " + v); }
+    add("Name", p.name); add("Mobile", p.phone); add("Email", p.email);
+    add("Looking to", p.transactionType === "LEASE" ? "Rent" : (p.transactionType ? "Buy" : ""));
+    add("Project", p.project); add("Configuration", p.configuration); add("Flat", p.listingRef);
+    add("Budget", p.budget); add("Timeline", p.timeline); add("Message", p.message);
+    lines.push("Page: " + window.location.href);
+    var url = "https://wa.me/" + FF_WA_NUMBER + "?text=" + encodeURIComponent(lines.join("\n"));
+    el.textContent = "";
+    var msg = document.createElement("span");
+    msg.textContent = "Our form couldn't send this just now. Tap below to send the same details on WhatsApp, or call +91 98992 73673.";
+    var a = document.createElement("a");
+    a.href = url; a.target = "_blank"; a.rel = "noopener";
+    a.textContent = "Send on WhatsApp";
+    a.setAttribute("style", "display:inline-block;margin-top:8px;padding:10px 16px;background:#1f8f4e;color:#fff;border-radius:9px;font-weight:800;text-decoration:none");
+    el.appendChild(msg); el.appendChild(document.createElement("br")); el.appendChild(a);
+  }
+
   function submitModal(e) {
     e.preventDefault();
     var q = function (id) { return modal.querySelector(id); };
@@ -107,7 +129,7 @@
       .then(function () { window.location.href = "/thank-you/?source=" + (current.kind === "photos" ? "photo-request" : "flat-enquiry"); })
       .catch(function (err) {
         btn.disabled = false; btn.textContent = "Get photos & details of this flat";
-        q("#vvm-err").textContent = (err && err.message) || "Unable to submit right now. Please call or WhatsApp us.";
+        showWhatsAppFallback(q("#vvm-err"), payload);
       });
   }
 
@@ -160,7 +182,7 @@
       .then(function () { window.location.href = "/thank-you/?source=" + (state.kind === "photos" ? "photo-request" : "website-enquiry"); })
       .catch(function (err) {
         btn.disabled = false; btn.textContent = "Send requirement";
-        $("vv-err").textContent = (err && err.message) || "Unable to submit right now. Please call or WhatsApp us.";
+        showWhatsAppFallback($("vv-err"), payload);
       });
   });
 

@@ -148,7 +148,7 @@
   if (!document.getElementById("ff-enquiry-js")) {
     var script = document.createElement("script");
     script.id = "ff-enquiry-js";
-    script.src = "/assets/js/enquiry.js?v=enquiry-v1";
+    script.src = "/assets/js/enquiry.js?v=enquiry-v2-wa";
     document.head.appendChild(script);
   }
 })();

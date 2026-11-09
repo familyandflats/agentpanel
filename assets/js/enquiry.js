@@ -101,6 +101,28 @@
     }
   }
 
+
+  // If the enquiry service cannot be reached, hand the same details to WhatsApp so no enquiry is lost.
+  var FF_WA_NUMBER = "919899273673";
+  function showWhatsAppFallback(el, p) {
+    var lines = ["New enquiry from familyandflats.com"];
+    function add(label, v) { if (v) lines.push(label + ": " + v); }
+    add("Name", p.name); add("Mobile", p.phone); add("Email", p.email);
+    add("Looking to", p.transactionType === "LEASE" ? "Rent" : (p.transactionType ? "Buy" : ""));
+    add("Project", p.project); add("Configuration", p.configuration); add("Flat", p.listingRef);
+    add("Budget", p.budget); add("Timeline", p.timeline); add("Message", p.message);
+    lines.push("Page: " + window.location.href);
+    var url = "https://wa.me/" + FF_WA_NUMBER + "?text=" + encodeURIComponent(lines.join("\n"));
+    el.textContent = "";
+    var msg = document.createElement("span");
+    msg.textContent = "Our form couldn't send this just now. Tap below to send the same details on WhatsApp, or call +91 98992 73673.";
+    var a = document.createElement("a");
+    a.href = url; a.target = "_blank"; a.rel = "noopener";
+    a.textContent = "Send on WhatsApp";
+    a.setAttribute("style", "display:inline-block;margin-top:8px;padding:10px 16px;background:#1f8f4e;color:#fff;border-radius:9px;font-weight:800;text-decoration:none");
+    el.appendChild(msg); el.appendChild(document.createElement("br")); el.appendChild(a);
+  }
+
   function submit(form) {
     var endpoint = apiUrl();
     var status = form.querySelector("[data-ff-enquiry-status]");
@@ -152,8 +174,8 @@
         window.location.href = "/thank-you/?source=website-enquiry";
       })
       .catch(function (error) {
-        status.textContent = error.message || "Unable to submit right now. Please call or WhatsApp us.";
         status.dataset.state = "error";
+        showWhatsAppFallback(status, payload);
         if (button) button.disabled = false;
       });
   }
