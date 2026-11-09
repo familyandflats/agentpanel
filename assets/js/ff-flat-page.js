@@ -20,7 +20,8 @@
   var h1 = bhk + " BHK Flat " + (isLease ? "for Rent" : "for Sale") + " in " + item.project;
   var msg = "Hi Family&Flats, I am interested in " + item.id + " (" + bhk + " BHK, " + item.project + "). Please share details and a visit slot.";
   var wa = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(msg);
-  document.title = h1 + " | Family&Flats";
+  // The page's own <title> (written by scripts/prerender-flat-pages.js) stays: it is unique per flat.
+  if (!document.title) document.title = h1 + " | Family&Flats";
 
   var facts = [["Configuration", bhk + " BHK"], ["Area", size ? size.toLocaleString("en-IN") + " sq. ft." : "On request"], ["Floor", item.floor], ["Furnishing", item.furnishing], ["Availability", item.availability], [isLease ? "Monthly rent" : "Asking price", priceText]];
   if (psf) facts.push(["Rate", psf.replace(" per sq. ft.", " / sq. ft.")]);
