@@ -1641,7 +1641,7 @@
   <!-- ff-bhk-pages:start -->
   <url>
     <loc>https://familyandflats.com/projects/ireo-victory-valley/2-bhk-for-sale/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1653,19 +1653,19 @@
   </url>
   <url>
     <loc>https://familyandflats.com/projects/ireo-victory-valley/4-bhk-for-sale/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://familyandflats.com/projects/ireo-victory-valley/penthouse-for-sale/</loc>
-    <lastmod>2026-09-06</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://familyandflats.com/projects/ireo-victory-valley/2-bhk-for-rent/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1678,6 +1678,12 @@
   <url>
     <loc>https://familyandflats.com/projects/ireo-victory-valley/4-bhk-for-rent/</loc>
     <lastmod>2026-10-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://familyandflats.com/projects/ireo-victory-valley/5-bhk-for-rent/</loc>
+    <lastmod>2026-07-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

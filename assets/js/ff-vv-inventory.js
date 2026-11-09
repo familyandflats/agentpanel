@@ -14,7 +14,9 @@
     return Object.keys(byId).map(function (k) { return byId[k]; });
   })();
   var ads = (window.FF_AGENT_ADS || []).filter(function (a) { return a.projectSlug === SLUG; });
-  var state = { type: "Sale", bhk: "", days: 0, sort: "bhk", open: {}, adTab: null, openLayout: null };   // default: 2 BHK first, then 3 BHK...   // days 0 = any time (ads never expire)
+  // featured partners: agents with more than 10 different listings here, or who say they have more than 10
+  var partners = (window.FF_AGENT_PARTNERS || []).filter(function (p) { return p.projectSlug === SLUG; });
+  var state = { type: "Sale", bhk: "", days: 0, sort: "bhk", open: {}, adTab: null, openLayout: null, partner: null };   // default: 2 BHK first, then 3 BHK...   // days 0 = any time (ads never expire)
 
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
@@ -33,7 +35,9 @@
     m = t.match(/([\d.]+)\s*k\b/); if (m) return parseFloat(m[1]) * 1e3;
     m = t.match(/(\d{4,})/); return m ? +m[1] : 0;
   }
+  // price on request: the agent gave no price; refRange = similar flats' prices (never this flat's price)
   function money(type, n) {
+    if (!n) return "Price on request";
     return type === "Lease" ? "\u20B9" + Math.round(n).toLocaleString("en-IN") + "/mo" : "\u20B9" + (n / 1e7).toFixed(2) + " Cr";
   }
   // price per sq. ft. (sale) or per sq. ft. per month (rent); approx = size is the layout's, not the ad's
@@ -49,7 +53,20 @@
     var n = (String(label || "").match(/\d[\d,]*/g) || []).map(function (x) { return +x.replace(/,/g, ""); }).filter(function (x) { return x >= 500; });
     return n.length ? (Math.min.apply(null, n) + Math.max.apply(null, n)) / 2 : 0;
   }
+  function refNote(a) {
+    if (a.price || !a.refRange) return "";
+    var lo = a.refRange[0], hi = a.refRange[1];
+    var r = a.type === "Lease" ? "\u20B9" + lo.toLocaleString("en-IN") + "\u2013" + hi.toLocaleString("en-IN") + "/mo"
+      : "\u20B9" + (lo / 1e7).toFixed(2) + "\u2013" + (hi / 1e7).toFixed(2) + " Cr";
+    return '<span class="vvi-ref">Similar flats: ' + r + '</span>';
+  }
+  function featBadge(a) {
+    return a.featured ? '<span class="vvi-feat" title="This flat is advertised by a featured partner">\u2605 Featured partner ' + esc(a.partner || "") + '</span>' : "";
+  }
+  function byPrice(x, y) { return (x.price ? 0 : 1) - (y.price ? 0 : 1) || (x.price || 0) - (y.price || 0); }
   function range(list) {
+    list = list.filter(function (a) { return a.price; });
+    if (!list.length) return "Price on request";
     var p = list.map(function (a) { return a.price; }), lo = Math.min.apply(null, p), hi = Math.max.apply(null, p), t = list[0].type;
     if (lo === hi) return t === "Lease" ? "\u20B9" + lo.toLocaleString("en-IN") + "<small>/mo</small>" : money(t, lo);
     return t === "Lease"
@@ -175,8 +192,8 @@
   function adRow(a) {
     var n = (a.agents && a.agents.length) || 1;
     return '<div class="vvi-ad">' +
-      '<span class="vvi-c-id" data-l="Ref."><b>' + esc(a.id) + '</b>' + (a.photos ? ' <span class="vvi-badge">' + a.photos + ' photos</span>' : "") + '</span>' +
-      '<span class="vvi-c-price" data-l="Price"><b>' + money(a.type, a.price) + '</b>' + (psf(a.type, a.price, a.size) ? '<span class="vvi-psf">' + psf(a.type, a.price, a.size) + '</span>' : "") + (a.reduced ? '<span class="vvi-tag vvi-reduced">Price reduced</span>' : "") + '</span>' +
+      '<span class="vvi-c-id" data-l="Ref."><b>' + esc(a.id) + '</b>' + featBadge(a) + (a.photos ? ' <span class="vvi-badge">' + a.photos + ' photos</span>' : "") + '</span>' +
+      '<span class="vvi-c-price" data-l="Price"><b>' + money(a.type, a.price) + '</b>' + refNote(a) + (psf(a.type, a.price, a.size) ? '<span class="vvi-psf">' + psf(a.type, a.price, a.size) + '</span>' : "") + (a.reduced ? '<span class="vvi-tag vvi-reduced">Price reduced</span>' : "") + '</span>' +
       '<span class="vvi-c-num" data-l="Area">' + (a.size ? a.size.toLocaleString("en-IN") + ' sq. ft.' : '<span class="vvi-mut">Not stated</span>') + '</span>' +
       '<span class="vvi-c-num" data-l="Agents">' + n + (n > 1 ? " agents" : " agent") + '</span>' +
       '<span class="vvi-c-tags">' + (a.tags && a.tags.length ? tags(a.tags) : '<span class="vvi-mut">No further details</span>') + '</span>' +
@@ -199,7 +216,7 @@
         if (u) (byUnit[u] = byUnit[u] || []).push(a); else rest.push(a);
       });
       Object.keys(byUnit).map(function (u) { return { anchor: "u:" + u, ads: byUnit[u] }; }).concat(clusterBySize(rest)).forEach(function (c) {
-        var l = c.ads.slice().sort(function (x, y) { return x.price - y.price || x._age - y._age; });
+        var l = c.ads.slice().sort(function (x, y) { return byPrice(x, y) || x._age - y._age; });
         var sizes = l.map(function (a) { return a.size || 0; }).filter(Boolean);
         var um = /([\d,]{3,})/.exec(l[0].unit || "");
         var pent = l.every(isPent);
@@ -247,13 +264,13 @@
     var slide = inTab.length > 4;   // more than 4 layouts: show 4 and slide for the rest
     html += (slide ? '<div class="vvd-slider"><button type="button" class="vvd-nav prev" data-slide="-1" aria-label="Previous layouts">&#8249;</button>' : '') +
       '<div class="vvd-cards' + (slide ? ' slide' : '') + '">' + inTab.map(function (g) {
-      var prices = g.l.map(function (a) { return a.price; });
-      var average = prices.reduce(function (t, p) { return t + p; }, 0) / prices.length;
+      var prices = g.l.map(function (a) { return a.price; }).filter(Boolean);
+      var average = prices.length ? prices.reduce(function (t, p) { return t + p; }, 0) / prices.length : 0;
       var sz = g.l.map(function (a) { return a.size; }).filter(Boolean), base = 0;
       if (sz.length) base = sz.reduce(function (t, x) { return t + x; }, 0) / sz.length; else base = layoutMid(g.l[0].unit);
       var lease = g.l[0].type === "Lease";
-      var avgVal = lease ? "\u20B9" + Math.round(average).toLocaleString("en-IN") : money("Sale", average);
-      var psfVal = base ? "\u20B9" + (lease ? Math.round(average / base) : Math.round(average / base / 100) * 100).toLocaleString("en-IN") : "";
+      var avgVal = !average ? "On request" : lease ? "\u20B9" + Math.round(average).toLocaleString("en-IN") : money("Sale", average);
+      var psfVal = base && average ? "\u20B9" + (lease ? Math.round(average / base) : Math.round(average / base / 100) * 100).toLocaleString("en-IN") : "";
       var on = open && open.k === g.k, n = g.l.length;
       return '<article class="vvd-card' + (on ? " on" : "") + '">' +
         cardHead(g) +
@@ -282,7 +299,7 @@
     var sq = a.size ? psf(a.type, a.price, a.size) : psf(a.type, a.price, mid, true);
     var details = (a.reduced ? ["Price reduced"] : []).concat(a.tags || []).slice(0, 3).join(" · ");
     return '<div class="vvd-row">' +
-      '<div class="vvd-p"><b>' + money(a.type, a.price) + '</b>' + (sq ? '<em class="vvd-psf">' + sq + '</em>' : "") + '<span>Ref. ' + esc(a.id) + '</span></div>' +
+      '<div class="vvd-p"><b>' + money(a.type, a.price) + '</b>' + refNote(a) + (sq ? '<em class="vvd-psf">' + sq + '</em>' : "") + '<span>Ref. ' + esc(a.id) + '</span>' + featBadge(a) + '</div>' +
       '<div class="vvd-a">' + (a.size ? a.size.toLocaleString("en-IN") + " sq ft" : '<span class="vvi-mut">Size not stated</span>') + '</div>' +
       '<div class="vvd-d">' + esc(details) + '</div>' +
       '<div class="vvd-t">' + dateLabel(a.advertisedOn) + '</div>' +
@@ -294,6 +311,26 @@
     return x.getFullYear() + "-" + ("0" + (x.getMonth() + 1)).slice(-2) + "-" + ("0" + x.getDate()).slice(-2);
   }
 
+  function partnersHtml() {
+    if (!partners.length) return "";
+    var cards = partners.slice(0, 6).map(function (p) {
+      var mine = ads.filter(function (a) { return (a.agents || []).indexOf(p.partner) >= 0; });
+      var sale = mine.filter(function (a) { return a.type === "Sale"; }).length, rent = mine.length - sale;
+      var bhks = mine.map(function (a) { return a.bhk; }).filter(function (b, i, l) { return l.indexOf(b) === i; }).sort().join(", ");
+      var last = mine.map(function (a) { return a.advertisedOn; }).sort().pop();
+      return '<article class="vvp-card"><div class="vvp-top"><span class="vvp-code">Partner ' + esc(p.partner) + '</span><span class="vvi-feat">\u2605 Featured</span></div>' +
+        '<p class="vvp-stat"><b>' + mine.length + '</b> ' + (mine.length === 1 ? "flat" : "flats") + ' here \u00B7 <b>' + sale + '</b> for sale, <b>' + rent + '</b> for rent</p>' +
+        '<p class="vvp-stat">' + (bhks ? esc(bhks) + ' BHK' : "") + (last ? ' \u00B7 updated ' + dateLabel(last) : "") + '</p>' +
+        (p.claim ? '<p class="vvp-claim">Says ' + p.claim + '+ options available \u2013 ask us</p>' : '') +
+        '<div class="vvp-btns"><button type="button" class="vvp-btn" data-partner="' + esc(p.partner) + '" aria-expanded="' + (state.partner === p.partner) + '">' + (state.partner === p.partner ? "Hide their flats" : "See their flats") + '</button>' +
+        '<button type="button" class="vvp-btn wa" data-askpartner="' + esc(p.partner) + '">Ask Family&amp;Flats</button></div></article>';
+    }).join("") + (partners.length > 6 ? '<article class="vvp-card vvp-more"><p class="vvp-stat"><b>+' + (partners.length - 6) + ' more featured partners</b></p><p class="vvp-stat">Their flats carry the \u2605 badge below.</p></article>' : "");
+    var open = state.partner && ads.filter(function (a) { return (a.agents || []).indexOf(state.partner) >= 0; }).sort(function (x, y) { return x.type.localeCompare(y.type) * -1 || x.bhk - y.bhk || byPrice(x, y); });
+    return '<div class="vvp-strip">' + cards + '</div>' + (open ? '<section class="vvd-panel" aria-label="Flats of partner ' + esc(state.partner) + '">' +
+      '<div class="vvd-panel-head"><div><h4>Partner ' + esc(state.partner) + ': ' + open.length + (open.length === 1 ? " flat" : " flats") + '</h4><p>Sale first, lowest price first \u00B7 every enquiry comes to Family&amp;Flats</p></div>' +
+      '<button type="button" class="vvd-close" data-partner="' + esc(state.partner) + '" aria-label="Close list">\u00D7</button></div>' +
+      '<div class="vvd-list">' + open.map(function (a) { return flatLine(a, layoutMid(a.unit)).replace('<div class="vvd-a">', '<div class="vvd-a">' + (a.type === "Lease" ? "Rent \u00B7 " : "Sale \u00B7 ") + a.bhk + ' BHK \u00B7 '); }).join("") + '</div></section>' : "");
+  }
   function shell() {
     mount.innerHTML =
       '<div class="vvi-tabs" id="vvi-type"><button class="vvi-pill on" data-t="Sale">Sale</button><button class="vvi-pill" data-t="Lease">Lease</button></div>' +
@@ -304,6 +341,11 @@
         '<h3 class="vvs-title" id="vvs-ver-h">Verified by Family&amp;Flats</h3>' +
         '</div>' +
         '<div id="vvi-ver"></div></section>' +
+      (partners.length ? '<section class="vvs vvs-partners" aria-labelledby="vvs-par-h">' +
+        '<div class="vvs-head"><span class="vvs-tag"><span class="vvs-dot">\u2605</span>Most flats in Victory Valley</span>' +
+        '<h3 class="vvs-title" id="vvs-par-h">Featured partners</h3>' +
+        '<p class="vvs-sub">Partners appear by code only. Every enquiry comes to Family&amp;Flats; we check price and availability with the partner and arrange your visit.</p>' +
+        '</div><div id="vvi-partners"></div></section>' : '') +
       '<section class="vvs vvs-ads" aria-labelledby="vvs-ads-h">' +
         '<div class="vvs-head"><span class="vvs-tag"><span class="vvs-dot">i</span>From the market</span>' +
         '<h3 class="vvs-title" id="vvs-ads-h">Agent-advertised</h3>' +
@@ -328,6 +370,8 @@
     document.getElementById("vvi-toplink").innerHTML = state.adTab ? pageLink(state.adTab) : "";
     document.getElementById("vvi-ver").innerHTML = verifiedHtml();
     document.getElementById("vvi-ads").innerHTML = adsHtml();
+    var pm = document.getElementById("vvi-partners");
+    if (pm) pm.innerHTML = partnersHtml();
     fitRanges();
     var track = document.querySelector("#vvi-ads .vvd-cards.slide");
     if (track) {
@@ -367,6 +411,11 @@
     if (t.dataset.slide) {
       var track = document.querySelector("#vvi-ads .vvd-cards.slide"), card = track && track.querySelector(".vvd-card");
       if (track && card) track.scrollBy({ left: (+t.dataset.slide) * (card.getBoundingClientRect().width + 16), behavior: "smooth" }); setTimeout(sliderArrows, 500);
+      return;
+    }
+    if (t.dataset.partner) { state.partner = state.partner === t.dataset.partner ? null : t.dataset.partner; draw(); return; }
+    if (t.dataset.askpartner) {
+      enquire("Partner " + t.dataset.askpartner, "", "", "I would like to see the flats of featured partner " + t.dataset.askpartner + " at " + PROJECT + ".");
       return;
     }
     if (t.dataset.adtab) { state.adTab = t.dataset.adtab; state.openLayout = null; draw(); return; }

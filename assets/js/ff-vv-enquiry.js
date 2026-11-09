@@ -27,7 +27,7 @@
     var type = (a && a.type) || (v && v.type) || opts.type || "Sale";
     var bhk = (a && a.bhk) || opts.bhk || (v && (/(\d)/.exec(v.bhk || "") || [])[1]) || "";
     var pent = a ? ((a.tags || []).indexOf("Penthouse") >= 0 || /penthouse/i.test(a.unit || "")) : !!opts.pent;
-    var price = a ? (type === "Lease" ? "₹" + Math.round(a.price).toLocaleString("en-IN") + "/month" : "₹" + (a.price / 1e7).toFixed(2) + " Cr")
+    var price = a && !a.price ? "Price on request" : a ? (type === "Lease" ? "₹" + Math.round(a.price).toLocaleString("en-IN") + "/month" : "₹" + (a.price / 1e7).toFixed(2) + " Cr")
                   : v ? String(v.price || "").replace(/^Rs\.?\s*/i, "₹") : (opts.price || "");
     var size = a && a.size ? a.size.toLocaleString("en-IN") + " sq ft" : v && v.size ? String(v.size).replace(/sq\.?\s*ft\.?/i, "sq ft") : (opts.size || "");
     var details = a ? (a.tags || []).filter(function (t) { return t !== "Penthouse"; }).slice(0, 3).join(" · ") : v ? [v.floor, v.furnishing].filter(Boolean).join(" · ") : "";
