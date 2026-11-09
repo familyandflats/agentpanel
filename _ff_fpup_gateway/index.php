@@ -1,8 +1,8 @@
 <?php
-// Account/mobile gateway routes synced 2026-09-27.
+// Account/mobile gateway routes synced 2026-09-27. Origin moved from Render to Google Cloud Run 2026-11-09.
 declare(strict_types=1);
 
-const FF_ORIGIN = 'https://familyflats-field-capture-v1.onrender.com';
+const FF_ORIGIN = 'https://familyflats-os-7b6ypqww4q-as.a.run.app';
 const FF_CANONICAL = 'https://www.familyandflats.com';
 
 function ff_allowed_path(string $path): bool {
@@ -32,14 +32,18 @@ function ff_allowed_path(string $path): bool {
 function ff_rewrite_value(string $value): string {
     return str_replace(
         [
+            'https://familyflats-os-7b6ypqww4q-as.a.run.app',
             'https://familyflats-field-capture-v1.onrender.com',
             'https://field.familyandflats.com',
+            'https%3A%2F%2Ffamilyflats-os-7b6ypqww4q-as.a.run.app',
             'https%3A%2F%2Ffamilyflats-field-capture-v1.onrender.com',
             'https%3A%2F%2Ffield.familyandflats.com'
         ],
         [
             FF_CANONICAL,
             FF_CANONICAL,
+            FF_CANONICAL,
+            rawurlencode(FF_CANONICAL),
             rawurlencode(FF_CANONICAL),
             rawurlencode(FF_CANONICAL)
         ],
