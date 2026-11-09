@@ -3,6 +3,11 @@ Options -MultiViews
 RewriteEngine On
 RewriteBase /
 
+# BEGIN FF CANONICAL HOST (2026-11-09) - one site: www -> non-www (301)
+RewriteCond %{HTTP_HOST} ^www\.familyandflats\.com$ [NC]
+RewriteRule ^(.*)$ https://familyandflats.com/$1 [R=301,L]
+# END FF CANONICAL HOST
+
 # BEGIN FF BACKUP GUARD (2026-11-08) - never serve working backups to visitors or Google
 RewriteRule (^|/)_(backup|archive|reports|source_material|to_delete)[^/]*(/|$) - [R=404,L]
 RewriteRule \.(bak|orig)(_[^/]*)?$ - [R=404,L]
@@ -29,6 +34,13 @@ RewriteRule ^project-detail\.html$ /projects/ireo-skyon/ [R=301,L]
 # Mahindra Luminare canonical project URL
 RewriteRule ^projects/mahindraluminare/?$ /projects/mahindra-luminare/ [R=301,L]
 
+# Duplicate project folders -> canonical project pages (2026-11-09)
+RewriteRule ^projects/ireoskyon(/.*)?$ /projects/ireo-skyon/ [R=301,L]
+RewriteRule ^projects/victoryvalley(/.*)?$ /projects/ireo-victory-valley/ [R=301,L]
+RewriteRule ^projects/regrandarch(/.*)?$ /projects/ireograndarch/ [R=301,L]
+RewriteRule ^projects/re-conscienthineselevate(/.*)?$ /projects/conscienthineselevate/ [R=301,L]
+RewriteRule ^projects/emaar-digi-?homes(/.*)?$ /projects/emaardigihomes/ [R=301,L]
+
 # Old blog URLs to new blog folder
 RedirectMatch 301 ^/blog-(.*)\.html$ /content/blogs/blog-$1.html
 
@@ -48,14 +60,17 @@ RewriteRule ^blog-([0-9A-Za-z-]+)$ /content/blogs/blog-$1.html [L]
 RewriteRule ^news-([0-9A-Za-z-]+)$ /content/news/news-$1.html [L]
 
 <IfModule mod_headers.c>
-  Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
-  Header set Pragma "no-cache"
-  Header set Expires "0"
-
-  <FilesMatch "\.(html|js|css)$">
-    FileETag None
-    Header unset ETag
+  # Pages, CSS and JS: browser must re-check every visit, so updates show at once (2026-11-09)
+  <FilesMatch "\.(html|htm|js|css|json|xml|txt)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+  # App gateway (logged-in founder/employee pages): never stored
+  <FilesMatch "\.php$">
     Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+  </FilesMatch>
+  # Images, video and fonts: cache for 1 day (replaced photos get new file names)
+  <FilesMatch "\.(jpe?g|png|webp|avif|gif|svg|ico|mp4|webm|woff2?|ttf)$">
+    Header set Cache-Control "public, max-age=86400"
   </FilesMatch>
 </IfModule>
 # Family&Flats service detail redirects
