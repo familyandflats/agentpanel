@@ -1,4 +1,4 @@
-/* Family&Flats agent advertisements. Generated 2026-11-09T11:36:08.972Z by the founder dashboard (import). Ads: 180. Only founder-approved ads appear here. Contains no agent identity. Do not edit by hand. */
+/* Family&Flats agent advertisements. Generated 2026-11-09T11:47:17.692Z by the founder dashboard (import). Ads: 180. Only founder-approved ads appear here. Contains no agent identity. Do not edit by hand. */
 window.FF_AGENT_ADS = [
   {"id":"FF-1046","projectSlug":"ireovictoryvalley","type":"Sale","bhk":3,"size":2500,"price":52500000,"tags":["Servant room","Semi-furnished","Mid-rise tower","Park-facing"],"advertisedOn":"2026-11-01","unit":"2,485–2,585 sq. ft.","agents":["VV-04","VV-49","VV-69"],"agent":"VV-04"},
   {"id":"FF-1063","projectSlug":"ireovictoryvalley","type":"Sale","bhk":3,"size":2398,"price":46000000,"tags":["Middle floor","Servant room","Semi-furnished"],"advertisedOn":"2026-11-01","unit":"2,367–2,452 sq. ft.","agents":["VV-18","VV-35","VV-50","VV-115","VV-130","VV-56","VV-152","VV-159"],"agent":"VV-18"},
