@@ -14,7 +14,7 @@
     var h = window.location.hostname;
     return h === "localhost" || h === "127.0.0.1"
       ? (window.location.port === "3000" ? "/api/public/enquiry" : "http://localhost:3000/api/public/enquiry")   // same origin when the dashboard serves the site
-      : "https://familyflats-field-capture-v1.onrender.com/api/public/enquiry";
+      : "https://field.familyandflats.com/api/public/enquiry";
   }
 
   // ---------------------------------------------------------------- flat pop-up

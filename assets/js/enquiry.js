@@ -12,7 +12,7 @@
   function apiUrl() {
     var configured = String(settings().enquiryApiUrl || "").trim();
     if (configured) return configured;
-    return isLocal() ? "http://localhost:3000/api/public/enquiry" : "https://familyflats-field-capture-v1.onrender.com/api/public/enquiry";
+    return isLocal() ? "http://localhost:3000/api/public/enquiry" : "https://field.familyandflats.com/api/public/enquiry";
   }
 
   function isEnquiryForm(form) {
