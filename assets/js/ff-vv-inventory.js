@@ -144,7 +144,7 @@
     if (!list.length) return '<p class="vvi-mut">No verified ' + tabLabel(state.adTab) + ' flats right now. Share your requirement below and we will check live options.</p>';
     var withPhoto = list.filter(function (i) { return i.image; }).sort(function (x, y) { return photoCount(y) - photoCount(x); });
     var noPhoto = list.filter(function (i) { return !i.image; });
-    return (withPhoto.length ? '<div class="vvi-grid vvi-vgrid">' + withPhoto.map(photoCard).join("") + "</div>" : "") +
+    return (withPhoto.length === 1 ? featureCard(withPhoto[0]) : withPhoto.length ? '<div class="vvi-grid vvi-vgrid">' + withPhoto.map(photoCard).join("") + "</div>" : "") +
       (noPhoto.length ? '<div class="vvi-card vvi-rows">' + noPhoto.map(noPhotoRow).join("") + "</div>" : "");
   }
 
@@ -333,7 +333,7 @@
   }
   function shell() {
     mount.innerHTML =
-      '<div class="vvi-tabs" id="vvi-type"><button class="vvi-pill on" data-t="Sale">Sale</button><button class="vvi-pill" data-t="Lease">Lease</button></div>' +
+      '<div class="vvi-tabs" id="vvi-type"><button class="vvi-pill on" data-t="Sale">Buy</button><button class="vvi-pill" data-t="Lease">Rent</button></div>' +
       '<div id="vvi-bhktabs"></div>' +
       '<div id="vvi-toplink" class="vvi-toplink"></div>' +
       '<section class="vvs vvs-ver" aria-labelledby="vvs-ver-h">' +
@@ -341,16 +341,16 @@
         '<h3 class="vvs-title" id="vvs-ver-h">Verified by Family&amp;Flats</h3>' +
         '</div>' +
         '<div id="vvi-ver"></div></section>' +
+      '<section class="vvs vvs-ads" aria-labelledby="vvs-ads-h">' +
+        '<div class="vvs-head"><span class="vvs-tag"><span class="vvs-dot">i</span>Listed by agents · confirmed by us before your visit</span>' +
+        '<h3 class="vvs-title" id="vvs-ads-h">From the market</h3>' +
+        '</div>' +
+        '<div id="vvi-ads"></div></section>' +
       (partners.length ? '<section class="vvs vvs-partners" aria-labelledby="vvs-par-h">' +
         '<div class="vvs-head"><span class="vvs-tag"><span class="vvs-dot">\u2605</span>Most flats in Victory Valley</span>' +
         '<h3 class="vvs-title" id="vvs-par-h">Featured partners</h3>' +
         '<p class="vvs-sub">Partners appear by code only. Every enquiry comes to Family&amp;Flats; we check price and availability with the partner and arrange your visit.</p>' +
-        '</div><div id="vvi-partners"></div></section>' : '') +
-      '<section class="vvs vvs-ads" aria-labelledby="vvs-ads-h">' +
-        '<div class="vvs-head"><span class="vvs-tag"><span class="vvs-dot">i</span>From the market</span>' +
-        '<h3 class="vvs-title" id="vvs-ads-h">Agent-advertised</h3>' +
-        '</div>' +
-        '<div id="vvi-ads"></div></section>';
+        '</div><div id="vvi-partners"></div></section>' : '');
   }
   // a price range may never cross its card: shrink the figure one pixel at a time until it fits (never below 12px)
   function fitRanges() {
@@ -367,7 +367,7 @@
     var old = document.querySelector("#vvi-ads .vvd-cards.slide"), keepX = old ? old.scrollLeft : 0, keepTab = state._slideTab;
     document.getElementById("vvi-bhktabs").innerHTML = tabsHtml();
     // same "see all on one page" button as below the ads, repeated right under the BHK tabs so it is seen first
-    document.getElementById("vvi-toplink").innerHTML = state.adTab ? pageLink(state.adTab) : "";
+    document.getElementById("vvi-toplink").innerHTML = "";   // design B: the "see all" link sits at the end of the section only
     document.getElementById("vvi-ver").innerHTML = verifiedHtml();
     document.getElementById("vvi-ads").innerHTML = adsHtml();
     var pm = document.getElementById("vvi-partners");
@@ -432,9 +432,7 @@
       return;
     }
     if (t.dataset.t) {
-      state.type = t.dataset.t;
-      Array.prototype.forEach.call(document.querySelectorAll("#vvi-type .vvi-pill"), function (p) { p.classList.toggle("on", p === t); });
-      draw();
+      setType(t.dataset.t);
     } else if (t.dataset.g) {
       var k = t.dataset.g, cur = state.open[k];
       if (cur === undefined) cur = t.dataset.first === "true";
@@ -452,6 +450,16 @@
     else return;
     draw();
   });
+
+  // Buy/Rent is one choice on the whole page: the hero search, the price cards and this section follow each other.
+  function setType(type) {
+    if (type !== "Sale" && type !== "Lease") return;
+    var changed = state.type !== type;
+    state.type = type;
+    Array.prototype.forEach.call(document.querySelectorAll("#vvi-type .vvi-pill"), function (p) { p.classList.toggle("on", p.dataset.t === type); });
+    if (changed) { draw(); document.dispatchEvent(new CustomEvent("ff:vv-type", { detail: type })); }
+  }
+  window.FFVVInventory = { setType: setType, getType: function () { return state.type; } };
 
   shell();
   draw();

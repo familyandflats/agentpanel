@@ -63,5 +63,6 @@
   Array.prototype.forEach.call(document.querySelectorAll(".vvb-seg button"), function (b) {
     b.addEventListener("click", function () { type = b.dataset.type === "Lease" ? "Lease" : "Sale"; render(type); });
   });
+  document.addEventListener("ff:vv-type", function (e) { type = e.detail === "Lease" ? "Lease" : "Sale"; render(type); });
   render(type);
 })();

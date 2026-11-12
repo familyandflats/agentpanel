@@ -32,13 +32,19 @@
   }
   var sale = ADS.filter(function (a) { return a.type === "Sale"; }).length, rent = ADS.length - sale;
   if (ADS.length) { document.getElementById("vvb-sale").textContent = sale; document.getElementById("vvb-rent").textContent = rent; }
+  function setSeg(t) {
+    type = t;
+    Array.prototype.forEach.call(form.querySelectorAll(".vvb-seg button"), function (b) { var on = b.dataset.type === t; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on ? "true" : "false"); });
+    refresh();
+  }
   Array.prototype.forEach.call(form.querySelectorAll(".vvb-seg button"), function (btn) {
     btn.addEventListener("click", function () {
-      type = btn.dataset.type;
-      Array.prototype.forEach.call(form.querySelectorAll(".vvb-seg button"), function (b) { var on = b === btn; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on ? "true" : "false"); });
-      refresh();
+      setSeg(btn.dataset.type);
+      if (window.FFVVInventory) window.FFVVInventory.setType(btn.dataset.type);   // the listings below follow
     });
   });
+  // Buy/Rent chosen in the listings section: the hero follows
+  document.addEventListener("ff:vv-type", function (e) { if (e.detail !== type) setSeg(e.detail); });
   sel.addEventListener("change", refresh);
   form.addEventListener("submit", function (e) {
     e.preventDefault();
