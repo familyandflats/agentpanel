@@ -108,13 +108,14 @@
   // Few verified flats: a wide card (photo left, details right) instead of one lonely grid card
   function featureCard(i) {
     var n = photoCount(i);
+    var u = i.detailUrl ? esc(i.detailUrl) : "";
     return '<article class="vvi-card vvi-feature">' +
-      '<div class="vvi-photo" style="background-image:url(\'' + esc(i.image) + '\')"><span class="vvi-badge ok">Verified</span><span class="vvi-count">' + n + (n === 1 ? ' photo' : ' photos') + '</span></div>' +
+      (u ? '<a class="vvi-photo" href="' + u + '" aria-label="See all ' + n + ' photos of this flat"' : '<div class="vvi-photo"') + ' style="background-image:url(\'' + esc(i.image) + '\')"><span class="vvi-badge ok">Verified</span><span class="vvi-count">' + (u ? 'See all ' : '') + n + (n === 1 ? ' photo' : ' photos') + '</span>' + (u ? '</a>' : '</div>') +
       '<div class="vvi-body"><p class="vvi-kicker">Checked by Family&amp;Flats \u00B7 real photos</p>' +
-      '<h4>' + bhkNum(i.bhk) + ' BHK \u00B7 ' + sizeLabel(i) + '</h4>' +
+      '<h4>' + (u ? '<a href="' + u + '">' : '') + bhkNum(i.bhk) + ' BHK \u00B7 ' + sizeLabel(i) + (u ? '</a>' : '') + '</h4>' +
       '<div class="vvi-price">' + vPrice(i) + '</div>' + vPsf(i) +
       '<div>' + tags([i.floor, i.furnishing, i.availability].filter(Boolean)) + '</div>' +
-      '<div class="vvi-feature-actions"><button class="vvi-btn dark" data-enq="' + esc(i.id) + '" data-bhk="' + bhkNum(i.bhk) + '" data-type="' + esc(i.type) + '">Enquire about this flat</button>' +
+      '<div class="vvi-feature-actions">' + (u ? '<a class="vvi-btn dark vvi-view" href="' + u + '">View flat and photos</a>' : '') + '<button class="vvi-btn' + (u ? '' : ' dark') + '" data-enq="' + esc(i.id) + '" data-bhk="' + bhkNum(i.bhk) + '" data-type="' + esc(i.type) + '">Enquire</button>' +
       '<span class="vvi-mut">Ref. ' + esc(i.id) + '</span></div></div></article>';
   }
   function noPhotoRow(i) {

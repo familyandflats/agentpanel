@@ -36,3 +36,11 @@
 #vv-inventory .vvp-code{white-space:nowrap;font-size:16px}
 #vv-inventory .vvp-btns{display:flex;flex-wrap:wrap;gap:8px}
 @media (max-width:640px){#vv-inventory .vvp-strip{display:grid;grid-auto-flow:column;grid-auto-columns:82%;grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}#vv-inventory .vvp-card{scroll-snap-align:start}}
+/* verified feature card: photo and title open the flat page with all photos */
+#vv-inventory a.vvi-photo{display:block;text-decoration:none;cursor:pointer}
+#vv-inventory a.vvi-photo:focus-visible{outline:3px solid #facc15;outline-offset:-3px}
+#vv-inventory a.vvi-photo .vvi-count{transition:background .2s}
+#vv-inventory a.vvi-photo:hover .vvi-count{background:#0B1B33}
+#vv-inventory .vvi-feature h4 a{color:inherit;text-decoration:none}
+#vv-inventory .vvi-feature h4 a:hover{color:#13804A}
+#vv-inventory .vvi-feature-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
