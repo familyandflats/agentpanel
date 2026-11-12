@@ -95,3 +95,4 @@
 #enquire .vv-steps li{display:block}
 #enquire .vv-steps li::before{background:#0B1B33;color:#fff;width:30px;height:30px}
 @media (max-width:860px){.vvx-pricelist .ff-pg-card:first-child th:nth-child(4),.vvx-pricelist .ff-pg-card:first-child td:nth-child(4){display:none}}
+#browse-by-type .container>div{display:flex;flex-wrap:wrap}
