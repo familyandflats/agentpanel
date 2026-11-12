@@ -1,0 +1,869 @@
+{
+ "_about": "Project pages in the IREO Victory Valley design, built by scripts/generate-project-pages.py. Facts: Family&Flats research of 12 Nov 2026 (Haryana RERA portal, developer documents, listing portals) and the earlier pages; nothing guessed. stage is shown as a pill only when set; stageResearched is kept for the record. photos are files in projects/<slug>/images/.",
+ "projects": {
+  "ireograndarch": {
+   "name": "IREO Grand Arch",
+   "sector": "58",
+   "developer": "IREO",
+   "stage": "ready",
+   "stageResearched": "ready",
+   "possession": "Completed",
+   "bhk": [
+    "2 BHK",
+    "3 BHK",
+    "4 BHK"
+   ],
+   "kind": "apartments",
+   "size": "About 28 acres, 10 towers",
+   "rera": null,
+   "photos": [
+    [
+     "main-banner.jpg",
+     "Towers among palm and neem trees"
+    ],
+    [
+     "blog-9-img.jpg",
+     "Central courtyard and gardens from above"
+    ],
+    [
+     "club-gall.jpg",
+     "Landscaped walkway between towers"
+    ],
+    [
+     "blog-1.jpeg",
+     "The arch towers (developer image)"
+    ],
+    [
+     "blog-2-img.jpg",
+     "Tower entrance at dusk (developer image)"
+    ],
+    [
+     "ireo-grandarch1.jpg",
+     "Lobby and reception (developer image)"
+    ],
+    [
+     "blog-5-img.jpg",
+     "Sample living room"
+    ]
+   ],
+   "brochure": "IREO-Grand-Arch.pdf",
+   "amenities": [
+    [
+     "fa-water-ladder",
+     "Pool and clubhouse",
+     "Clubhouse, pool and recreation zones for residents."
+    ],
+    [
+     "fa-seedling",
+     "Open spaces and greens",
+     "Landscaped areas and open spaces between the towers."
+    ],
+    [
+     "fa-building",
+     "High-rise and mid-rise mix",
+     "Different tower heights, floors and views to choose from."
+    ],
+    [
+     "fa-road",
+     "Golf Course Extension Road",
+     "Sector 58, on Golf Course Extension Road."
+    ]
+   ],
+   "aboutExtra": "Homes come in simplex and duplex formats; 3 and 4 BHK have a servant room."
+  },
+  "conscienthineselevate": {
+   "name": "Conscient Hines Elevate",
+   "sector": "59",
+   "developer": "Conscient and Hines",
+   "stage": "possession",
+   "stageResearched": "possession",
+   "possession": "Phase 1 from Dec 2024; Phase 2 due early 2026",
+   "bhk": [
+    "3 BHK",
+    "4 BHK"
+   ],
+   "kind": "apartments",
+   "size": "About 7.8 acres, 5 towers, 556 homes",
+   "rera": null,
+   "photos": [
+    [
+     "elevate.jpg",
+     "Entrance water feature and towers"
+    ],
+    [
+     "banner.webp",
+     "Elevate towers (developer image)"
+    ],
+    [
+     "club-view.jpg",
+     "Pool deck and towers (developer image)"
+    ],
+    [
+     "project-view-1.jpg",
+     "Towers from the street"
+    ],
+    [
+     "living-room.jpg",
+     "Sample living room (developer image)"
+    ],
+    [
+     "living-room-1.jpg",
+     "Sample bedroom"
+    ],
+    [
+     "club-view-1.webp",
+     "Clubhouse waterfall pool (developer image)"
+    ]
+   ],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": "A joint development of Conscient Infrastructure and Hines."
+  },
+  "mahindra-luminare": {
+   "name": "Mahindra Luminare",
+   "sector": "59",
+   "developer": "Mahindra Lifespaces",
+   "stage": "",
+   "stageResearched": "under-construction",
+   "possession": "Older phases ready; current phase due Aug 2026",
+   "bhk": [
+    "3 BHK",
+    "4 BHK"
+   ],
+   "kind": "apartments",
+   "size": "About 7 acres, 3 towers",
+   "rera": "GGM/551/283/2022/26",
+   "photos": [
+    [
+     "med-mu7bwls7-g128g-desktop.webp",
+     "Clubhouse entrance"
+    ],
+    [
+     "med-mu7bwyd7-zoscn-desktop.webp",
+     "Swimming pool"
+    ],
+    [
+     "med-mu7bwps5-jvrt7-desktop.webp",
+     "Balcony view at sunset"
+    ],
+    [
+     "med-mu7bwq4c-o51d3-desktop.webp",
+     "Wraparound balcony"
+    ],
+    [
+     "med-mu7bwnh3-t03em-desktop.webp",
+     "Banquet hall"
+    ],
+    [
+     "med-mu7bwmm4-8w8mx-desktop.webp",
+     "Billiards room"
+    ],
+    [
+     "med-mu7bwm4a-pur2p-desktop.webp",
+     "Squash court"
+    ],
+    [
+     "med-mu7bwzzn-crvja-desktop.webp",
+     "Tennis court"
+    ],
+    [
+     "med-mu7bwmxd-00vc7-desktop.webp",
+     "Gym"
+    ],
+    [
+     "med-mu7bwoh3-1mtxv-desktop.webp",
+     "Lobby"
+    ],
+    [
+     "med-mu7bwo6r-5wsvk-desktop.webp",
+     "Bedroom"
+    ]
+   ],
+   "brochure": null,
+   "amenities": [
+    [
+     "fa-water-ladder",
+     "Pool and clubhouse",
+     "Clubhouse with a swimming pool and banquet hall."
+    ],
+    [
+     "fa-dumbbell",
+     "Gym and courts",
+     "Gym, squash and tennis courts."
+    ],
+    [
+     "fa-chess",
+     "Games rooms",
+     "Billiards and indoor games rooms."
+    ],
+    [
+     "fa-road",
+     "Golf Course Extension Road",
+     "Sector 59, on Golf Course Extension Road."
+    ]
+   ],
+   "aboutExtra": ""
+  },
+  "paras-floret": {
+   "name": "Paras Floret",
+   "sector": "59",
+   "developer": "Paras Buildtech",
+   "stage": "under-construction",
+   "stageResearched": "under-construction",
+   "possession": "Builder target 2027; RERA May 2028",
+   "bhk": [
+    "2 BHK",
+    "3 BHK"
+   ],
+   "kind": "low-rise floors",
+   "size": "About 6.25 acres",
+   "rera": "GGM/628/360/2022/103",
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "tata-raisina-residency": {
+   "name": "TATA Raisina Residency",
+   "sector": "59",
+   "developer": "Tata Housing",
+   "stage": "ready",
+   "stageResearched": "ready",
+   "possession": "Since about 2013",
+   "bhk": [
+    "3 BHK",
+    "4 BHK",
+    "5 BHK"
+   ],
+   "kind": "apartments",
+   "size": "About 12 acres, 9 towers",
+   "rera": null,
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "ireo-skyon": {
+   "name": "IREO Skyon",
+   "sector": "60",
+   "developer": "IREO",
+   "stage": "ready",
+   "stageResearched": "ready",
+   "possession": "Completed",
+   "bhk": [
+    "2 BHK",
+    "3 BHK",
+    "4 BHK"
+   ],
+   "kind": "apartments",
+   "size": null,
+   "rera": null,
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "pioneer-park": {
+   "name": "Pioneer Park",
+   "sector": "61",
+   "developer": "Pioneer Urban",
+   "stage": "ready",
+   "stageResearched": "ready",
+   "possession": "Completed",
+   "bhk": [
+    "3 BHK",
+    "4 BHK",
+    "5 BHK"
+   ],
+   "kind": "apartments",
+   "size": null,
+   "rera": null,
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "puri-the-aravallis": {
+   "name": "Puri The Aravallis",
+   "sector": "61",
+   "developer": "Puri Constructions",
+   "stage": "",
+   "stageResearched": "under-construction",
+   "possession": "2026–27 (sources differ)",
+   "bhk": [
+    "3 BHK",
+    "4 BHK"
+   ],
+   "kind": "apartments",
+   "size": "About 9 acres",
+   "rera": "GGM/592/324/2022/67",
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "smart-world-orchard": {
+   "name": "Smart World Orchard",
+   "sector": "61",
+   "developer": "Smartworld Developers",
+   "stage": "possession",
+   "stageResearched": "possession",
+   "possession": "From Dec 2024",
+   "bhk": [
+    "2 BHK",
+    "3 BHK"
+   ],
+   "kind": "low-rise floors",
+   "size": null,
+   "rera": "GGM/505/237/2021/73 and GGM/506/238/2021/74",
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "conscient-elevate-reserve": {
+   "name": "Conscient Elevate Reserve",
+   "sector": "62",
+   "developer": "Conscient",
+   "stage": "under-construction",
+   "stageResearched": "under-construction",
+   "possession": "Oct 2030",
+   "bhk": [
+    "3 BHK",
+    "4 BHK"
+   ],
+   "kind": "apartments",
+   "size": "About 4.85 acres, 2 towers",
+   "rera": "GGM/757/489/2023/101",
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "conscient-heritage-one": {
+   "name": "Conscient Heritage One",
+   "sector": "62",
+   "developer": "Conscient",
+   "stage": "ready",
+   "stageResearched": "ready",
+   "possession": "Since about 2015",
+   "bhk": [
+    "3 BHK",
+    "4 BHK"
+   ],
+   "kind": "apartments",
+   "size": "About 7 acres, 3 towers, 288 homes",
+   "rera": null,
+   "photos": [
+    [
+     "source-4.jpg",
+     "Pool deck between the towers"
+    ],
+    [
+     "source-5.jpg",
+     "Fountain lawn and towers"
+    ]
+   ],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "emaar-amaris": {
+   "name": "Emaar Amaris",
+   "sector": "62",
+   "developer": "Emaar India",
+   "stage": "under-construction",
+   "stageResearched": "under-construction",
+   "possession": "Builder target 2028; RERA Aug 2029",
+   "bhk": [
+    "2 BHK",
+    "3 BHK",
+    "4 BHK"
+   ],
+   "kind": "apartments",
+   "size": "About 6 acres, 4 towers",
+   "rera": "GGM/885/617/2024/112",
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "emaardigihomes": {
+   "name": "Emaar DigiHomes",
+   "sector": "62",
+   "developer": "Emaar India",
+   "stage": "ready",
+   "stageResearched": "ready",
+   "possession": "Handed over from Apr 2023",
+   "bhk": [
+    "2 BHK",
+    "3 BHK"
+   ],
+   "kind": "apartments",
+   "size": "About 5.6 acres, 3 towers, 504 homes",
+   "rera": "GGM/337/69/2019/31",
+   "photos": [
+    [
+     "club-view.webp",
+     "Clubhouse (developer image)"
+    ],
+    [
+     "banner.jpg",
+     "Entrance lobby (developer image)"
+    ],
+    [
+     "3bhk.jpeg",
+     "Inside a 3 BHK"
+    ]
+   ],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": "Homes have smart-home controls."
+  },
+  "emaar-urban-oasis": {
+   "name": "Emaar Urban Oasis",
+   "sector": "62",
+   "developer": "Emaar India",
+   "stage": "under-construction",
+   "stageResearched": "under-construction",
+   "possession": "About Jul 2027",
+   "bhk": [
+    "3 BHK",
+    "4 BHK"
+   ],
+   "kind": "apartments",
+   "size": null,
+   "rera": null,
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "pioneer-araya": {
+   "name": "Pioneer Araya",
+   "sector": "62",
+   "developer": "Pioneer Urban",
+   "stage": "ready",
+   "stageResearched": "ready",
+   "possession": "Since about 2019",
+   "bhk": [
+    "3 BHK",
+    "4 BHK",
+    "5 BHK"
+   ],
+   "kind": "apartments",
+   "size": null,
+   "rera": null,
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "pioneer-presidia": {
+   "name": "Pioneer Presidia",
+   "sector": "62",
+   "developer": "Pioneer Urban",
+   "stage": "ready",
+   "stageResearched": "ready",
+   "possession": "Since about 2019",
+   "bhk": [
+    "3 BHK",
+    "4 BHK",
+    "5 BHK"
+   ],
+   "kind": "apartments",
+   "size": "About 11 acres",
+   "rera": null,
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "adani-samsara-ivana": {
+   "name": "Adani Samsara Ivana",
+   "sector": "63",
+   "developer": "Adani Realty",
+   "stage": "under-construction",
+   "stageResearched": "under-construction",
+   "possession": "Builder target 2027; RERA Jun 2029",
+   "bhk": [
+    "4 BHK"
+   ],
+   "kind": "low-rise floors",
+   "size": "About 7 acres",
+   "rera": "GGM/896/628/2024/123",
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "dlf-the-arbour": {
+   "name": "DLF The Arbour",
+   "sector": "63",
+   "developer": "DLF",
+   "stage": "under-construction",
+   "stageResearched": "under-construction",
+   "possession": "31 Mar 2030 (DLF allotment letter)",
+   "bhk": [
+    "4 BHK"
+   ],
+   "kind": "apartments",
+   "size": "About 25 acres, 5 towers",
+   "rera": "GGM/671/403/2023/15",
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "birla-navya": {
+   "name": "Birla Navya",
+   "sector": "63A",
+   "developer": "Birla Estates",
+   "stage": "possession",
+   "stageResearched": "possession",
+   "possession": "Earlier pockets delivered from 2024",
+   "bhk": [
+    "2 BHK",
+    "3 BHK",
+    "4 BHK"
+   ],
+   "kind": "low-rise floors",
+   "size": null,
+   "rera": null,
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "birla-navya-avik": {
+   "name": "Birla Navya Avik",
+   "sector": "63A",
+   "developer": "Birla Estates",
+   "stage": "under-construction",
+   "stageResearched": "under-construction",
+   "possession": "Phase 1 Apr 2027; Phase 2 about 2029–30",
+   "bhk": [
+    "3 BHK",
+    "4 BHK"
+   ],
+   "kind": "low-rise floors",
+   "size": null,
+   "rera": "GGM/673/405/2023/17; GGM/909/641/2025/12",
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "laburnum-victory-floors": {
+   "name": "Laburnum Victory Floors",
+   "sector": "63A",
+   "developer": "Laburnum Developers",
+   "stage": "",
+   "stageResearched": "possession",
+   "possession": "About 2025",
+   "bhk": [
+    "3 BHK + study"
+   ],
+   "kind": "independent floors",
+   "size": null,
+   "rera": null,
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": "The floors are inside Anant Raj Estate."
+  },
+  "silverglades-legacy": {
+   "name": "Silverglades Legacy",
+   "sector": "63A",
+   "developer": "Silverglades",
+   "stage": "under-construction",
+   "stageResearched": "under-construction",
+   "possession": "Builder target Dec 2030; RERA Dec 2031",
+   "bhk": [
+    "3 BHK",
+    "4 BHK",
+    "5 BHK"
+   ],
+   "kind": "apartments",
+   "size": "About 10.5 acres, 5 towers",
+   "rera": "GGM/861/593/2024/88",
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "tarc-ishva": {
+   "name": "TARC Ishva",
+   "sector": "63A",
+   "developer": "TARC",
+   "stage": "under-construction",
+   "stageResearched": "under-construction",
+   "possession": "About 2028–29",
+   "bhk": [
+    "3 BHK",
+    "4 BHK"
+   ],
+   "kind": "apartments",
+   "size": "About 7 acres, 5 towers",
+   "rera": "GGM/865/597/2024/92",
+   "photos": [
+    [
+     "source-4.jpg",
+     "Entrance court (developer image)"
+    ]
+   ],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": "Its last phase, Ishvara, launched in March 2026."
+  },
+  "m3m-altitude": {
+   "name": "M3M Altitude",
+   "sector": "65",
+   "developer": "M3M",
+   "stage": "",
+   "stageResearched": "under-construction",
+   "possession": "Sources say Jun 2026 or 2028",
+   "bhk": [
+    "4 BHK"
+   ],
+   "kind": "apartments",
+   "size": "About 4 acres, 3 towers",
+   "rera": "GGM/821/553/2024/48",
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": "Part of M3M Golf Estate."
+  },
+  "m3m-golf-estate": {
+   "name": "M3M Golf Estate",
+   "sector": "65",
+   "developer": "M3M",
+   "stage": "ready",
+   "stageResearched": "ready",
+   "possession": "Completed",
+   "bhk": [
+    "3 BHK",
+    "4 BHK",
+    "5 BHK"
+   ],
+   "kind": "apartments",
+   "size": null,
+   "rera": null,
+   "photos": [
+    [
+     "source-5.jpg",
+     "Golf greens and towers (developer image)"
+    ]
+   ],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "m3mheights": {
+   "name": "M3M Heights",
+   "sector": "65",
+   "developer": "M3M",
+   "stage": "possession",
+   "stageResearched": "possession",
+   "possession": "From mid 2024",
+   "bhk": [
+    "2 BHK",
+    "3 BHK"
+   ],
+   "kind": "apartments",
+   "size": null,
+   "rera": "GGM/688/420/2023/32",
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "m3m-latitude": {
+   "name": "M3M Latitude",
+   "sector": "65",
+   "developer": "M3M",
+   "stage": "ready",
+   "stageResearched": "ready",
+   "possession": "About Dec 2023",
+   "bhk": [
+    "3 BHK",
+    "4 BHK"
+   ],
+   "kind": "apartments",
+   "size": "1 tower",
+   "rera": null,
+   "photos": [
+    [
+     "source-5.jpg",
+     "Latitude tower (developer image)"
+    ]
+   ],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "trump-towers": {
+   "name": "Trump Towers",
+   "sector": "65",
+   "developer": "Tribeca and M3M",
+   "stage": "possession",
+   "stageResearched": "possession",
+   "possession": "Handed over from 2025",
+   "bhk": [
+    "3 BHK",
+    "4 BHK"
+   ],
+   "kind": "apartments",
+   "size": "2 towers, 47 floors",
+   "rera": null,
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "emaar-mgf-marbella": {
+   "name": "Emaar MGF Marbella",
+   "sector": "66",
+   "developer": "Emaar India",
+   "stage": "ready",
+   "stageResearched": "ready",
+   "possession": "Completed",
+   "bhk": [
+    "4 BHK",
+    "5 BHK"
+   ],
+   "kind": "villas and plots",
+   "size": null,
+   "rera": null,
+   "photos": [
+    [
+     "source-4.jpg",
+     "Marbella villas (developer image)"
+    ]
+   ],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": "A new phase, Marbella Terraces, launched in 2026."
+  },
+  "emaar-mgf-pal-terraces-select": {
+   "name": "Emaar MGF Palm Terraces Select",
+   "sector": "66",
+   "developer": "Emaar India",
+   "stage": "ready",
+   "stageResearched": "ready",
+   "possession": "Since about 2018",
+   "bhk": [
+    "4 BHK",
+    "5 BHK"
+   ],
+   "kind": "apartments",
+   "size": null,
+   "rera": "19 of 2018",
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "emaar-mgf-the-palm-drive": {
+   "name": "Emaar MGF The Palm Drive",
+   "sector": "66",
+   "developer": "Emaar India",
+   "stage": "ready",
+   "stageResearched": "ready",
+   "possession": "Completed",
+   "bhk": [
+    "2 BHK",
+    "3 BHK",
+    "4 BHK",
+    "5 BHK"
+   ],
+   "kind": "apartments",
+   "size": null,
+   "rera": null,
+   "photos": [
+    [
+     "source-2.jpg",
+     "Low-rise block at night"
+    ],
+    [
+     "source-3.jpg",
+     "Towers at night"
+    ],
+    [
+     "source-1.png",
+     "Pool and low-rise block (developer image)"
+    ],
+    [
+     "source-4.jpg",
+     "Towers and clubhouse (developer image)"
+    ]
+   ],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "ireouptown": {
+   "name": "IREO Uptown",
+   "sector": "66",
+   "developer": "IREO",
+   "stage": "ready",
+   "stageResearched": "ready",
+   "possession": "Since about 2015",
+   "bhk": [
+    "2 BHK",
+    "3 BHK",
+    "4 BHK"
+   ],
+   "kind": "apartments",
+   "size": "About 11 acres, 5 towers",
+   "rera": null,
+   "photos": [
+    [
+     "source-4.jpeg",
+     "Uptown towers (developer image)"
+    ]
+   ],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "smart-world-the-edition": {
+   "name": "Smart World The Edition",
+   "sector": "66",
+   "developer": "Smartworld Developers",
+   "stage": "under-construction",
+   "stageResearched": "under-construction",
+   "possession": "Builder target 2028; RERA 2031",
+   "bhk": [
+    "3 BHK",
+    "4 BHK"
+   ],
+   "kind": "apartments",
+   "size": "About 10 acres",
+   "rera": "GGM/756/488/2023/100",
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  },
+  "m3m-merlin": {
+   "name": "M3M Merlin",
+   "sector": "67",
+   "developer": "M3M",
+   "stage": "ready",
+   "stageResearched": "ready",
+   "possession": "From Feb 2017",
+   "bhk": [
+    "3 BHK",
+    "4 BHK"
+   ],
+   "kind": "apartments",
+   "size": "About 13 acres",
+   "rera": null,
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "aboutExtra": ""
+  }
+ }
+}

@@ -2,7 +2,7 @@
    Sends to the Family&Flats CRM endpoint used by the rest of the site. */
 (function () {
   "use strict";
-  var PROJECT = "IREO Victory Valley";
+  var PROJECT = (document.getElementById("vv-enquiry") && document.getElementById("vv-enquiry").getAttribute("data-project")) || "IREO Victory Valley";
   var form = document.getElementById("vv-enquiry");
   if (!form) return;
   var state = { ref: "", kind: "enquiry" };

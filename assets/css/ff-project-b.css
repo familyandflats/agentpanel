@@ -1,0 +1,66 @@
+/* Family&Flats project pages (scripts/generate-project-pages.py): the few parts the IREO Victory Valley
+   styles don't cover. Same colours and type as ff-vv-*-b.css. */
+.vvb-pills .vvb-pill-new{background:#FDF3E1;color:#8A5A00}
+.vvb-pills .vvb-pill-uc{background:#EAF0FB;color:#1E4B8F}
+.pjb-ask .vvb-go{white-space:nowrap}
+
+#Ready-to-move .pjb-none{display:flex;flex-wrap:wrap;gap:20px 32px;align-items:center;justify-content:space-between;background:#fff;border:1px solid #E6EAF0;border-radius:20px;padding:28px;font-family:Manrope,Arial,sans-serif;color:#0B1B33}
+#Ready-to-move .pjb-none>div:first-child{flex:1 1 420px;min-width:0}
+#Ready-to-move .pjb-none h3{margin:0 0 6px;font:800 20px/1.25 Manrope,Arial,sans-serif;color:#0B1B33}
+#Ready-to-move .pjb-none p{margin:0;color:#33445C;font-size:15px;line-height:1.6}
+.pjb-none-cta{display:flex;flex-wrap:wrap;gap:10px}
+.pjb-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:10px;border:1px solid transparent;background:#13804A;color:#fff!important;font:800 15px Manrope,Arial,sans-serif;text-decoration:none!important;white-space:nowrap}
+.pjb-btn:hover{background:#0C5E36}
+.pjb-btn.line{background:#fff;border-color:#C9D3DF;color:#0B1B33!important}
+.pjb-btn.line:hover{border-color:#0B1B33;background:#fff}
+.pjb-also{margin:16px 0 0;font:600 15px/1.6 Manrope,Arial,sans-serif;color:#5A6B82}
+.pjb-also a{color:#13804A;font-weight:800;text-decoration:none}
+.pjb-also a:hover{text-decoration:underline}
+
+.pjb-near{margin:56px 0 0!important;padding:0!important;background:none!important;font-family:Manrope,Arial,sans-serif;color:#0B1B33}
+.pjb-near .wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+.pjb-near h2{margin:0;font:800 clamp(26px,3vw,34px)/1.15 Manrope,Arial,sans-serif;letter-spacing:-.02em;color:#0B1B33}
+.pjb-near h2+p{margin:6px 0 18px;color:#5A6B82;font-size:15px}
+.pjb-near-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.pjb-near-grid a{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid #E6EAF0;border-radius:16px;padding:12px;text-decoration:none;color:#0B1B33;min-width:0}
+.pjb-near-grid a:hover{border-color:#0B1B33}
+.pjb-near-grid img,.pjb-mono{width:72px;height:72px;border-radius:12px;object-fit:cover;flex:0 0 auto}
+.pjb-mono{display:grid;place-items:center;background:#0B1B33;color:#D8BC82;font-weight:800;font-size:20px}
+.pjb-near-grid span{min-width:0}
+.pjb-near-grid b{display:block;font-size:16px;line-height:1.3}
+.pjb-near-grid small{display:block;margin-top:3px;color:#5A6B82;font-size:13px;line-height:1.4}
+@media (max-width:600px){#Ready-to-move .pjb-none{padding:20px}.pjb-none-cta{width:100%}.pjb-none-cta .pjb-btn{flex:1 1 160px}}
+/* hero without photos: facts card in the photos' place */
+.pjb-glance{background:#fff;border:1px solid #E6EAF0;border-radius:20px;padding:24px 26px;font-family:Manrope,Arial,sans-serif;color:#0B1B33;box-shadow:0 18px 40px -28px rgba(11,27,51,.35)}
+.pjb-glance-k{margin:0 0 12px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#13804A}
+.pjb-glance dl{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:0 20px}
+.pjb-glance dl div{padding:11px 0;border-top:1px solid #E6EAF0;min-width:0}
+.pjb-glance dt{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5A6B82}
+.pjb-glance dd{margin:4px 0 0;font-weight:700;font-size:15px;line-height:1.4;overflow-wrap:anywhere}
+.pjb-glance-n{margin:14px 0 0;font-size:13px;color:#5A6B82}
+.vv-collage.pjb-one{display:block}
+.vv-collage.pjb-one .vv-tile-big{width:100%;height:100%}
+@media (max-width:600px){.pjb-glance dl{grid-template-columns:1fr}}
+/* One hero shape per category: empty photo slots become info tiles in the category colour */
+.vvb-pills .vvb-pill-pos{background:#F1ECFB;color:#5B3FA8}
+.pjb-info{display:flex;flex-direction:column;justify-content:center;gap:6px;padding:18px 20px;cursor:default;font-family:Manrope,Arial,sans-serif;color:#0B1B33;background:#F2F4F7;border:1px solid #E6EAF0;text-decoration:none}
+.pjb-info .pjb-info-k{margin:0;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#5A6B82}
+.pjb-info .pjb-info-v{margin:0;font-size:17px;font-weight:800;line-height:1.3;overflow-wrap:anywhere}
+.pjb-info-big{justify-content:flex-start;padding:24px 26px}
+.pjb-info-big dl{margin:8px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+.pjb-info-big dl div{padding:10px 0;border-top:1px solid rgba(11,27,51,.1);min-width:0}
+.pjb-info-big dt{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5A6B82}
+.pjb-info-big dd{margin:3px 0 0;font-weight:700;font-size:15px;line-height:1.35;overflow-wrap:anywhere}
+.pjb-info-n{margin:auto 0 0;font-size:13px;color:#5A6B82}
+.pjb-c-ready.pjb-info{background:#E8F5EE;border-color:#CBE8D7}.pjb-c-ready .pjb-info-k{color:#13804A}
+.pjb-c-possession.pjb-info{background:#F1ECFB;border-color:#DED3F5}.pjb-c-possession .pjb-info-k{color:#5B3FA8}
+.pjb-c-under-construction.pjb-info{background:#EAF0FB;border-color:#D2DEF4}.pjb-c-under-construction .pjb-info-k{color:#1E4B8F}
+.pjb-c-new-launch.pjb-info{background:#FDF3E1;border-color:#F3DDB2}.pjb-c-new-launch .pjb-info-k{color:#8A5A00}
+.pjb-info-wa{background:#fff;border-color:#CBE8D7;cursor:pointer}.pjb-info-wa .pjb-info-k{color:#13804A}.pjb-info-wa:hover{border-color:#13804A}
+.pjb-info-wa:focus-visible{outline:3px solid #facc15;outline-offset:3px}
+@media (max-width:900px){.pjb-info{padding:14px 16px}.pjb-info .pjb-info-v{font-size:15px}.pjb-info-big{padding:18px}}
+@media (max-width:600px){.vv-collage:has(.pjb-info){grid-template-columns:1fr 1fr;grid-template-rows:auto auto;height:auto}
+.vv-collage:has(.pjb-info) .vv-tile-big{grid-row:auto;grid-column:1 / 3;min-height:220px}
+.vv-collage:has(.pjb-info) button.vv-tile-big img{position:absolute;inset:0}
+.vv-collage:has(.pjb-info) .vv-tile:not(.vv-tile-big){min-height:112px}}
+.vv-collage .pjb-info .pjb-info-v,.vv-collage .pjb-info dd{color:#0B1B33}

@@ -45,7 +45,7 @@ function projects() {
     // Configurations: every BHK size the project's own page mentions (e.g. "2/3/4 BHK", "3 and 4 BHK", "4BHK").
     const nums = new Set();
     // Read only the page body: the site header injected into every page has a "2/3/4/5 BHK" filter.
-    const body = h.replace(/<header[\s\S]*?<\/header>/gi, "").replace(/<footer[\s\S]*?<\/footer>/gi, "").replace(/<select[\s\S]*?<\/select>/gi, "");
+    const body = h.replace(/<section class="section pjb-near"[\s\S]*?<\/section>/gi, "").replace(/<header[\s\S]*?<\/header>/gi, "").replace(/<footer[\s\S]*?<\/footer>/gi, "").replace(/<select[\s\S]*?<\/select>/gi, "");
     for (const m of body.matchAll(/((?:\b[1-6]\s*(?:\/|,|&|and|-)\s*)*[1-6])\s*BHK/gi)) for (const d of m[1].match(/[1-6]/g)) nums.add(+d);
     const list = [...nums].sort();
     const cfg = list.length ? (list.length > 1 ? list.slice(0, -1).join(", ") + " and " + list[list.length - 1] : String(list[0])) + " BHK" : "";
