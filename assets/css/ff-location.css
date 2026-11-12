@@ -1,0 +1,53 @@
+/* Family&Flats area pages (/locations/...). Uses the site tokens from tokens.css. */
+.ffloc *,.ffloc *::before,.ffloc *::after{box-sizing:border-box}
+.ffloc{max-width:var(--ff-container,1200px);margin:0 auto;padding:28px max(16px,env(safe-area-inset-left,0px)) 64px;display:grid;gap:44px;color:var(--ff-ink)}
+.ffloc-crumbs{font-size:13px;color:var(--ff-muted);display:flex;gap:8px;flex-wrap:wrap}
+.ffloc-crumbs a{color:var(--ff-blue)}
+.ffloc-hero{display:grid;gap:14px}
+.ffloc-kicker{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ff-blue)}
+.ffloc h1{font-size:clamp(28px,4.4vw,44px);line-height:1.1;margin:0;letter-spacing:-.02em;text-wrap:balance}
+.ffloc-lede{font-size:17px;line-height:1.6;color:#334155;max-width:68ch;margin:0}
+.ffloc-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:640px}
+.ffloc-facts div{border:1px solid var(--ff-line);border-radius:var(--ff-radius);padding:12px 14px;background:var(--ff-soft)}
+.ffloc-facts b{display:block;font-size:26px;font-weight:800;color:var(--ff-blue);font-variant-numeric:tabular-nums}
+.ffloc-facts span{font-size:13px;color:var(--ff-muted)}
+.ffloc-cta{display:flex;flex-wrap:wrap;gap:10px}
+.ffloc-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;font-weight:700;font-size:14px;background:#15803d;color:#fff}
+.ffloc-btn.ghost{background:#fff;color:var(--ff-blue);border:1px solid var(--ff-line)}
+.ffloc-sec{display:grid;gap:14px}
+.ffloc h2{font-size:24px;margin:0;letter-spacing:-.01em}
+.ffloc-note{margin:0;color:var(--ff-muted);font-size:14px}
+.ffloc-flats{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.ffloc-flat,.ffloc-proj{display:grid;gap:4px;align-content:start;border:1px solid var(--ff-line);border-radius:12px;overflow:hidden;background:#fff;padding-bottom:12px;min-width:0;transition:box-shadow .15s}
+.ffloc-flat:hover,.ffloc-proj:hover,.ffloc-flat:focus-visible,.ffloc-proj:focus-visible{box-shadow:var(--ff-shadow)}
+.ffloc-flat img,.ffloc-proj img{width:100%;aspect-ratio:16/11;object-fit:cover;background:var(--ff-soft);max-width:100%;height:auto}
+.ffloc-flat>*:not(img),.ffloc-proj>*:not(img){padding:0 12px}
+.ffloc-flat b,.ffloc-proj b{font-size:15px;margin-top:6px}
+.ffloc-flat span,.ffloc-proj span{font-size:13px;color:var(--ff-muted)}
+.ffloc-flat strong{font-size:17px;color:var(--ff-blue)}
+.ffloc-tag{font-size:11px!important;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#15803d!important;margin-top:8px}
+.ffloc-jump{display:flex;flex-wrap:wrap;gap:6px}
+.ffloc-jump a{font-size:13px;font-weight:700;padding:6px 11px;border-radius:999px;border:1px solid var(--ff-line);color:var(--ff-blue);background:#fff}
+.ffloc-jump small{color:var(--ff-muted);font-weight:600;margin-left:3px}
+.ffloc-sector{display:grid;gap:10px;scroll-margin-top:90px;padding-top:8px}
+.ffloc-sector h3{font-size:18px;margin:0;border-bottom:1px solid var(--ff-line);padding-bottom:6px}
+.ffloc-sector h3 small{font-size:13px;font-weight:600;color:var(--ff-muted);margin-left:6px}
+.ffloc-projs{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.ffloc-proj{grid-template-columns:72px minmax(0,1fr)!important;align-items:center;gap:12px!important;padding:8px!important}
+.ffloc-proj>*:not(img){padding:0!important}
+.ffloc-proj img,.ffloc-ph{width:72px!important;height:72px;aspect-ratio:1/1!important;border-radius:8px;object-fit:cover}
+.ffloc-ph{display:flex;align-items:center;justify-content:center;background:var(--ff-soft);border:1px solid var(--ff-line);color:var(--ff-blue);font-weight:800;font-size:15px;letter-spacing:.04em}
+.ffloc-pt{display:grid;gap:2px;min-width:0}
+.ffloc-pt b{font-size:15px;margin:0!important}
+.ffloc-pt span{font-size:13px;color:var(--ff-muted)}
+.ffloc-two{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;align-items:start}
+.ffloc-two p{color:#334155;line-height:1.6}
+.ffloc-faq{margin:0;display:grid;gap:12px}
+.ffloc-faq dt{font-weight:700}
+.ffloc-faq dd{margin:2px 0 0;color:#334155;line-height:1.55}
+.ffloc a:focus-visible{outline:2px solid var(--ff-blue);outline-offset:2px}
+@media (max-width:760px){.ffloc-two{grid-template-columns:minmax(0,1fr)}.ffloc-facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ffloc-inv{font-size:12.5px!important;color:#334155!important;margin-top:2px}
+.ffloc-inv b{font-weight:800;color:var(--ff-blue)}
+.ffloc-inv b.v{color:#15803d}
+.ffloc-inv.none{color:var(--ff-muted)!important;font-style:italic}
