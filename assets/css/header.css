@@ -223,3 +223,7 @@
 
 /* the Furnishing dropdown needs a little more room than BHK (text was clipped) */
 @media(min-width:531px){.ff-header-finder select[name="furnishing"]{flex:0 1 128px!important;max-width:140px!important;min-width:110px!important}}
+/* 12 Nov 2026: reserve the header's height before main.js injects it, so the page does not jump (CLS) */
+#header-placeholder{min-height:77px}
+@media (max-width:900px){#header-placeholder{min-height:90px}}
+@media (max-width:530px){#header-placeholder{min-height:134px}}

@@ -110,7 +110,7 @@
     var n = photoCount(i);
     var u = i.detailUrl ? esc(i.detailUrl) : "";
     return '<article class="vvi-card vvi-feature">' +
-      (u ? '<a class="vvi-photo" href="' + u + '" aria-label="See all ' + n + ' photos of this flat"' : '<div class="vvi-photo"') + ' style="background-image:url(\'' + esc(i.image) + '\')"><span class="vvi-badge ok">Verified</span><span class="vvi-count">' + (u ? 'See all ' : '') + n + (n === 1 ? ' photo' : ' photos') + '</span>' + (u ? '</a>' : '</div>') +
+      (u ? '<a class="vvi-photo" href="' + u + '"' : '<div class="vvi-photo"') + ' style="background-image:url(\'' + esc(i.image) + '\')"><span class="vvi-badge ok">Verified</span><span class="vvi-count">' + (u ? 'See all ' : '') + n + (n === 1 ? ' photo' : ' photos') + '</span>' + (u ? '</a>' : '</div>') +
       '<div class="vvi-body"><p class="vvi-kicker">Checked by Family&amp;Flats \u00B7 real photos</p>' +
       '<h4>' + (u ? '<a href="' + u + '">' : '') + bhkNum(i.bhk) + ' BHK \u00B7 ' + sizeLabel(i) + (u ? '</a>' : '') + '</h4>' +
       '<div class="vvi-price">' + vPrice(i) + '</div>' + vPsf(i) +
