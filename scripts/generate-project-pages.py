@@ -10,13 +10,13 @@ Uses the Victory Valley page's own styles and scripts (hero collage + photo view
 enquiry form), so every project page looks the same. Facts come only from scripts/project-pages.json.
 Afterwards run inject-shell.py --apply (rule 2.9), then the deploy check.
 """
-import html, json, os, re, sys
+import hashlib, html, json, os, re, sys
 from PIL import Image
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 SITE = 'https://familyandflats.com'
 WA = '919899273673'
-V = 'pj3'
+V = 'pj4'
 STAGES = {
     'new-launch': ('New launch', 'vvb-pill-new'),
     'under-construction': ('Under construction', 'vvb-pill-uc'),
@@ -93,6 +93,51 @@ def bhk_text(b):
     return ', '.join(b[:-1]) + ' and ' + b[-1] if len(b) > 1 else (b[0] if b else '')
 
 
+def are_ads():
+    """Anant Raj Estate ads (assets/data/anant-raj-ads.js), minus the same held-back misreads as the Buy/Rent pages."""
+    src = open(os.path.join(ROOT, 'assets/data/anant-raj-ads.js'), encoding='utf-8').read()
+    ads = json.loads(src[src.index('['):src.rindex(']') + 1])
+    out = []
+    for a in ads:
+        if a['kind'] == 'Plot' and a.get('cr') and a.get('plot') and not (2 <= a['cr'] * 100 / a['plot'] <= 5):
+            continue
+        if a['kind'] == 'Independent floor' and a.get('bhk') == 1:
+            continue
+        out.append(a)
+    return out, hashlib.md5(src.encode('utf-8')).hexdigest()[:8]
+
+
+def are_texts(P):
+    """Lead, about, facts and FAQs for Anant Raj Estate; price ranges are worked out from the listings on the page."""
+    ads, _ = are_ads()
+    fl = lambda b: [a['cr'] for a in ads if a['kind'] == 'Independent floor' and a['txn'] == 'Sale' and a.get('bhk') == b and a.get('cr')]
+    rent = [a['rentL'] for a in ads if a['kind'] == 'Independent floor' and a['txn'] == 'Rent' and a.get('rentL')]
+    rates = [a.get('rateL') or a['cr'] * 100 / a['plot'] for a in ads if a['kind'] == 'Plot' and (a.get('rateL') or (a.get('cr') and a.get('plot')))]
+    sizes = [a['plot'] for a in ads if a['kind'] == 'Plot' and a.get('plot')]
+    n = lambda k, t=None: sum(1 for a in ads if a['kind'] == k and (t is None or a['txn'] == t))
+    num = lambda v: f"{v:.2f}".rstrip('0').rstrip('.')
+    rng = lambda v: f"₹{num(min(v))}–{num(max(v))} Cr"
+    faqs = [["What kind of property is there in Anant Raj Estate?", "Anant Raj Estate in Sector 63A is a large plotted community on Golf Course Extension Road with residential plots, villas and independent floors. Builders build about four floors on one plot, and each floor is sold or rented on its own."]]
+    if fl(3) or fl(4):
+        faqs.append(["What is the price of an independent floor in Anant Raj Estate?", "In the listings on this page, " + " and ".join(f"{b} BHK floors are asked at about {rng(fl(b))}" for b in (3, 4) if fl(b)) + ". Plot size, floor, terrace rights and basement share change the price; Family&Flats confirms the final price with the owner side before your visit."])
+    if rent:
+        faqs.append(["What is the rent for a floor in Anant Raj Estate?", f"Floors listed for rent on this page are asked at about ₹{int(round(min(rent) * 1e5)):,}–{int(round(max(rent) * 1e5)):,} a month. Maintenance, deposit and furnishing terms vary; we confirm them before your visit."])
+    if rates:
+        faqs.append(["What is the price of a plot in Anant Raj Estate?", f"Plots on this page are asked at about ₹{min(rates):.2f}–{max(rates):.2f} lakh per sq yd. Plot sizes listed range from {min(sizes)} to {max(sizes)} sq yd. Corner, park-facing and road-width differences change the rate."])
+    faqs += [["Can I see photos or a video before visiting?", "Yes. For serious enquiries, Family&Flats shares current photos or a video of the actual floor, villa or plot on WhatsApp, so you only visit what fits."],
+             ["I own a floor, villa or plot in Anant Raj Estate. Can you help me sell or rent it?", "Yes. Share the block, plot size and floor with us on WhatsApp or in the form below. We suggest a realistic price and market it to verified buyers or tenants."],
+             ["Where is Anant Raj Estate?", "Sector 63A on Golf Course Extension Road, Gurugram (Gurgaon), Haryana."],
+             ["Who do I deal with?", "Always Family&Flats. We check availability, price and floor with the owner or agent, arrange the visit and support you through negotiation and paperwork."]]
+    counts = f"{n('Independent floor', 'Sale')} floors for sale, {n('Independent floor', 'Rent')} for rent, {n('Plot')} plots and {n('Villa')} villas"
+    lead = f"A ready plotted community by {P['developer']} in Sector 63A on Golf Course Extension Road. Listed now: {counts}. We check each one with the owner side before any visit."
+    about = (f"Anant Raj Estate is a ready plotted community by {P['developer']} in Sector 63A on Golf Course Extension Road, Gurugram, with residential plots, villas and independent floors. "
+             "On an independent floor plot a builder usually builds about four floors, and each is sold or rented on its own: upper ground (often with a basement share), middle floors and a top floor, sometimes with terrace rights. "
+             "Listings come from agents' current offers, read and checked by Family&Flats; price on request means we get the price for you.")
+    facts = [["Developer", P['developer']], ["Location", "Sector 63A, Golf Course Extension Road"], ["Size", P.get('size') or "Ask us"],
+             ["Homes", "Independent floors, villas and plots"], ["Status", "Ready to move"], ["Completed", P.get('possession') or "Ask us"]]
+    return lead, about, facts, faqs
+
+
 def texts(P):
     """Lead, about, facts and FAQs, written only from the facts in project-pages.json."""
     name, sec, dev, st = P['name'], P['sector'], P['developer'], P.get('stage') or ''
@@ -155,7 +200,16 @@ def page(slug, P, road):
     uc = st in ('under-construction', 'new-launch')
     url = f'{SITE}/projects/{slug}/'
     stage = STAGES.get(st)
-    lead, about, facts, faqs = texts(P)
+    are = P.get('inventory') == 'are'
+    lead, about, facts, faqs = are_texts(P) if are else texts(P)
+    if are:
+        ads_, _ = are_ads()
+        cnt = lambda k, t=None: sum(1 for a in ads_ if a['kind'] == k and (t is None or a['txn'] == t))
+        f3 = [a['cr'] for a in ads_ if a['kind'] == 'Independent floor' and a['txn'] == 'Sale' and a.get('bhk') == 3 and a.get('cr')]
+        P = dict(P, glance=P.get('glance') or [["Developer", P['developer']], ["Homes", "Independent floors, villas and plots"],
+                                              ["Listed now", f"{len(ads_)} floors, villas and plots"], ["Sector", "63A, Golf Course Extension Road"]],
+                 desc=P.get('desc') or (f"{cnt('Independent floor', 'Sale')} independent floors for sale, {cnt('Independent floor', 'Rent')} for rent, {cnt('Plot')} plots and {cnt('Villa')} villas in Anant Raj Estate, Sector 63A, Golf Course Extension Road, Gurgaon."
+                                        + (f" 3 BHK floors from \u20b9{min(f3):g} Cr." if f3 else "") + " Every enquiry handled by Family&Flats."))
     none_text = ("We share the developer's current price list and payment plan, and any bookings being resold (transfers), with what is still due. Tell us the BHK and budget." if uc else f"We have contacts in {E(name)}. Tell us the BHK and budget, and we check current homes with owners, then send photos, floor and final price on WhatsApp before any visit.")
     P = dict(P, lead=P.get('lead') or lead, about=P.get('about') or about, facts=P.get('facts') or facts, faqs=P.get('faqs') or faqs,
              pills=P.get('pills') or ([P['size'].split(',')[0]] if P.get('size') else []) + [bhk_text(P['bhk'])],
@@ -171,7 +225,8 @@ def page(slug, P, road):
     if len(title) > 60:
         title = f'{name} Sector {sector} | Family&Flats'
     desc = f"{name}, Sector {sector}, Golf Course Extension Road, Gurgaon: {bhk_text(P['bhk'])} {P.get('kind') or ''}{', ' + stage[0].lower() if stage else ''}. Checked with owners, photos before you visit."
-    desc = re.sub(r'\s+', ' ', desc)[:160]
+    desc = re.sub(r'\s+', ' ', P.get('desc') or desc)[:160]
+    title = P.get('title') or title
     pills = ''.join([f'<li class="{stage[1]}">{E(stage[0])}</li>'] if stage else []) + ''.join(f'<li>{E(p)}</li>' for p in P['pills'] if p)
     near = nearby(slug, sector, road)
     gallery = [{'src': p['src'], 'w': p['w'], 'h': p['h'], 'alt': p['alt']} for p in photos]
@@ -183,7 +238,7 @@ def page(slug, P, road):
         + (f'<img src="{p["src"]}" srcset="{p["sm"]} 800w, {p["src"]} {p["w"]}w" sizes="(max-width:900px) 100vw, 680px" alt="{E(p["alt"])}" width="{p["w"]}" height="{p["h"]}" fetchpriority="high">' if big_
            else f'<img src="{p["sm"]}" alt="{E(p["alt"])}" width="{p["w"]}" height="{p["h"]}" loading="lazy">')
         + (f'<span class="vv-more">+{n - 3} photos</span>' if i == 2 and n > 3 else '') + '</button>')
-    glance = [["Developer", P['developer']], ["Size", P.get('size') or "Ask us"], ["Homes", f"{bhk_text(P['bhk'])} {P.get('kind') or 'homes'}"], ["Sector", f"{sector}, Golf Course Extension Road"]]
+    glance = P.get('glance') or [["Developer", P['developer']], ["Size", P.get('size') or "Ask us"], ["Homes", f"{bhk_text(P['bhk'])} {P.get('kind') or 'homes'}"], ["Sector", f"{sector}, Golf Course Extension Road"]]
     tile_glance = (f'<div class="vv-tile vv-tile-big pjb-info pjb-info-big pjb-c-{cat}"><p class="pjb-info-k">At a glance</p>'
         f'<dl>{"".join(f"<div><dt>{E(k)}</dt><dd>{E(v)}</dd></div>" for k, v in glance)}</dl>'
         f'<p class="pjb-info-n">Photos after our next visit</p></div>')
@@ -209,6 +264,18 @@ def page(slug, P, road):
          'address': {'@type': 'PostalAddress', 'streetAddress': f'Sector {sector}, Golf Course Extension Road', 'addressLocality': 'Gurugram', 'addressRegion': 'Haryana', 'addressCountry': 'IN'}},
         {'@type': 'FAQPage', 'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in P['faqs']]},
     ]}
+    if are:
+        inv_block = ('      <div id="are-inventory" data-project="' + E(name) + '"></div>\n'
+                     '      <p class="pjb-also">Listings come from agents\' current offers, read and checked by Family&amp;Flats. Price on request: ask us and we get the price. We confirm every property before your visit.</p>\n')
+        are_v = are_ads()[1]
+        extra_js = f'<script src="/assets/data/anant-raj-ads.js?v={are_v}"></script>\n<script src="/assets/js/ff-are-inventory.js?v={V}"></script>\n'
+    else:
+        inv_block = f'''      <div class="pjb-none">
+        <div><h3>No listings on our website right now</h3><p>{none_text}</p></div>
+        <div class="pjb-none-cta"><a class="pjb-btn" href="#enquire" data-ask>Ask for current flats</a><a class="pjb-btn line" href="https://wa.me/{WA}?text={quote(wa_text)}" rel="noopener">WhatsApp us</a></div>
+      </div>
+'''
+        extra_js = ''
     cfg_opts = ''.join(f'<option>{E(b)}</option>' for b in P['bhk'])
     brochure = f'/projects/{slug}/images/{P["brochure"]}' if P.get('brochure') and os.path.exists(os.path.join(ROOT, f'projects/{slug}/images/{P["brochure"]}')) else ''
     return f'''﻿<!DOCTYPE html>
@@ -286,11 +353,7 @@ def page(slug, P, road):
         <h2>Homes available now</h2>
         <p>Flats visited by our team come first, then current listings from agents. Every enquiry comes to Family&amp;Flats.</p>
       </div>
-      <div class="pjb-none">
-        <div><h3>No listings on our website right now</h3><p>{none_text}</p></div>
-        <div class="pjb-none-cta"><a class="pjb-btn" href="#enquire" data-ask>Ask for current flats</a><a class="pjb-btn line" href="https://wa.me/{WA}?text={quote(wa_text)}" rel="noopener">WhatsApp us</a></div>
-      </div>
-      <p class="pjb-also">Ready to look elsewhere too? <a href="/sale.html">Homes for sale in Gurugram</a> · <a href="/lease.html">Homes for rent in Gurugram</a></p>
+{inv_block}      <p class="pjb-also">Ready to look elsewhere too? <a href="/sale.html">Homes for sale in Gurugram</a> · <a href="/lease.html">Homes for rent in Gurugram</a></p>
     </div>
   </section>
 
@@ -385,7 +448,7 @@ def page(slug, P, road):
 <script src="/assets/js/ff-vv-enquiry.js?v={V}"></script>
 <script src="/assets/js/ff-vv-gallery.js?v={V}"></script>
 <script src="/assets/js/ff-vv-faq.js?v=1"></script>
-<script src="/assets/js/ff-project-b.js?v={V}"></script>
+{extra_js}<script src="/assets/js/ff-project-b.js?v={V}"></script>
 </body>
 </html>
 '''

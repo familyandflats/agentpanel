@@ -864,6 +864,34 @@
    "brochure": null,
    "amenities": null,
    "aboutExtra": ""
+  },
+  "anant-raj-estate": {
+   "name": "Anant Raj Estate",
+   "sector": "63A",
+   "developer": "Anant Raj",
+   "stage": "ready",
+   "stageResearched": "ready",
+   "possession": "Plots, floors and villas delivered",
+   "bhk": [
+    "2 BHK floor",
+    "3 BHK floor",
+    "4 BHK floor",
+    "Villa",
+    "Plot"
+   ],
+   "kind": "floors, villas and plots",
+   "size": null,
+   "rera": null,
+   "photos": [],
+   "brochure": null,
+   "amenities": null,
+   "inventory": "are",
+   "title": "Anant Raj Estate Sector 63A Gurgaon | Floors, Villas & Plots",
+   "pills": [
+    "Independent floors",
+    "Villas",
+    "Plots"
+   ]
   }
  }
 }
