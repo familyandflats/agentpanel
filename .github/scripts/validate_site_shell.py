@@ -91,6 +91,29 @@ def has_placeholder(text: str, name: str) -> bool:
     return bool(re.search(rf"\bid\s*=\s*['\"]{re.escape(name)}['\"]", text, re.IGNORECASE))
 
 
+PRERENDER_RE = {
+    name: re.compile(
+        r'<div id="%s-placeholder"[^>]*\bdata-ff-prerender="[^"]*"[^>]*>(.*?)</div><!--/ff-%s-->' % (name, name),
+        re.DOTALL,
+    )
+    for name in ("header", "footer")
+}
+
+
+def strip_prerendered(text: str, rel: str, canon: dict[str, str], errors: list[str]) -> str:
+    """Pages may carry a build-time copy of header.html / footer.html inside their placeholder
+    (written by _seo_work/inject-shell.py so search engines see the links without JavaScript).
+    A copy is allowed only if it is byte-for-byte the current canonical file; otherwise it has drifted."""
+    for name, pattern in PRERENDER_RE.items():
+        def check(match: re.Match) -> str:
+            body = match.group(1).replace("\r\n", "\n").strip()
+            if canon.get(name) is None or body != canon[name]:
+                errors.append(f"Prerendered {name} in {rel} differs from {name}.html: run inject-shell.py --apply")
+            return f'<div id="{name}-placeholder"></div>'
+        text = pattern.sub(check, text)
+    return text
+
+
 def validate_repository() -> tuple[list[str], dict[str, int]]:
     errors: list[str] = []
     stats = {"markup_files": 0, "header_sources": 0, "footer_sources": 0}
@@ -116,6 +139,11 @@ def validate_repository() -> tuple[list[str], dict[str, int]]:
         if len(re.findall(r"<footer\b", footer_text, re.IGNORECASE)) != 1:
             errors.append("footer.html must contain exactly one <footer> element")
 
+    canon = {
+        name: read_text(ROOT / f"{name}.html").replace("\r\n", "\n").strip()
+        for name in ("header", "footer")
+        if (ROOT / f"{name}.html").is_file()
+    }
     for path in ROOT.rglob("*"):
         if not path.is_file() or is_excluded(path):
             continue
@@ -141,6 +169,8 @@ def validate_repository() -> tuple[list[str], dict[str, int]]:
         if suffix not in MARKUP_SUFFIXES:
             continue
         stats["markup_files"] += 1
+        if rel not in ("header.html", "footer.html"):
+            text = strip_prerendered(text, rel, canon, errors)
 
         for match in TAG_RE.finditer(text):
             tag_name = match.group(1).lower()
