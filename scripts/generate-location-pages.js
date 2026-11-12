@@ -168,7 +168,7 @@ function build(road) {
   <link rel="stylesheet" href="/assets/css/header.css?v=remove-top-project-search-20260620a">
   <link rel="stylesheet" href="/assets/css/footer.css?v=footer-final">
   <link rel="stylesheet" href="/assets/css/ff-location.css?v=1">
-  <link rel="stylesheet" href="/assets/css/ff-location-b.css?v=2">
+  <link rel="stylesheet" href="/assets/css/ff-location-b.css?v=3">
   <script type="application/ld+json">
 ${JSON.stringify(ld, null, 2)}
   </script>
@@ -195,6 +195,11 @@ ${flats.length ? `
       <p class="ffloc-note">Checked by Family&amp;Flats, with real photos. Prices are asking prices; confirm before a visit.</p>
       <div class="ffloc-flats">${flats.map(flatCard).join("")}</div>
     </section>` : ""}
+    <section class="ffloc-sec" aria-labelledby="ffloc-browse">
+      <h2 id="ffloc-browse">Homes for sale and rent on ${esc(road.name)}</h2>
+      <p class="ffloc-note">Our verified homes and current agent listings across these projects, each on one page.</p>
+      <p class="ffloc-browse"><a class="ffloc-btn" href="/sale.html">Homes for sale</a> <a class="ffloc-btn ghost" href="/lease.html">Homes for rent</a></p>
+    </section>
     <section class="ffloc-sec" aria-labelledby="ffloc-projects">
       <h2 id="ffloc-projects">All ${P.length} projects, by sector</h2>
       <p class="ffloc-note">${totalAds ? `Flat counts are agent advertisements imported${asOf ? ` on ${esc(asOf)}` : ""}; Family&amp;Flats checks price and availability with the owner side before a visit. "Verified" flats have been checked by our team, with real photos.` : ""} Projects without a count may still have flats: ask and we check current availability.</p>
