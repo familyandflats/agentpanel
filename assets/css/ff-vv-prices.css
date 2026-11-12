@@ -1,0 +1,16 @@
+/* IREO Victory Valley "Prices right now" cards (design B). Built live from window.FF_AGENT_ADS by ff-vv-prices.js. */
+.vvpr-prices{max-width:1180px;margin:56px auto 0;padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px));box-sizing:content-box;color:#0B1B33}
+.vvpr-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:8px 24px;margin-bottom:18px}
+.vvpr-head h2{margin:0;font:800 clamp(26px,3vw,34px)/1.15 Manrope,Arial,sans-serif;letter-spacing:-.02em;color:#0B1B33}
+.vvpr-head h2 span{color:#5A6B82;font-weight:700}
+.vvpr-note{margin:0;font-size:14px;color:#5A6B82}
+.vvpr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.vvpr-card{display:flex;flex-direction:column;gap:6px;padding:22px;border:1px solid #E6EAF0;border-radius:16px;background:#fff;color:#0B1B33;text-decoration:none;transition:border-color .2s,box-shadow .2s;min-width:0}
+.vvpr-card:hover{border-color:#13804A;box-shadow:0 10px 28px rgba(11,27,51,.08)}
+.vvpr-card:focus-visible{outline:3px solid #facc15;outline-offset:2px}
+.vvpr-name{font:800 20px Manrope,Arial,sans-serif}
+.vvpr-size{font-size:14px;color:#5A6B82}
+.vvpr-price{font:800 24px Manrope,Arial,sans-serif;margin-top:6px;font-variant-numeric:tabular-nums}
+.vvpr-price small{font-size:14px;font-weight:700;color:#5A6B82}
+.vvpr-count{font-size:14px;font-weight:700;color:#13804A}
+@media (max-width:520px){.vvpr-prices{margin-top:36px}.vvpr-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.vvpr-card{padding:14px}.vvpr-name{font-size:17px}.vvpr-price{font-size:17px}}

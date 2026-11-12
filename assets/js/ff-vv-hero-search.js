@@ -4,6 +4,16 @@
   var form = document.getElementById("vvb-search");
   if (!form) return;
   var ADS = (window.FF_AGENT_ADS || []).filter(function (a) { return !a.projectSlug || a.projectSlug === "ireovictoryvalley"; });
+  // Verified flats count too, exactly as in the listings section below.
+  var VER = (function () {
+    var byId = {};
+    (window.FF_LISTINGS || []).concat(window.FF_VERIFIED_LISTINGS || []).forEach(function (i) {
+      if (i.projectSlug === "ireovictoryvalley" && /verified/i.test(i.status || "")) byId[i.id] = i;
+    });
+    return Object.keys(byId).map(function (k) { return { type: i_type(byId[k]), bhk: (/(\d)/.exec(String(byId[k].bhk || "")) || [])[1], tags: byId[k].tags, unit: byId[k].unit || byId[k].title }; });
+    function i_type(i) { return i.type; }
+  })();
+  ADS = ADS.concat(VER);
   var PAGES = ["2-bhk-for-sale","3-bhk-for-sale","4-bhk-for-sale","penthouse-for-sale","2-bhk-for-rent","3-bhk-for-rent","4-bhk-for-rent","5-bhk-for-rent","penthouse-for-rent"];
   var type = "Sale", sel = document.getElementById("vvb-bhk"), go = document.getElementById("vvb-go");
   function isPent(a) { return (a.tags || []).indexOf("Penthouse") >= 0 || /penthouse/i.test(a.unit || ""); }
