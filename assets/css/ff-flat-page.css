@@ -63,3 +63,25 @@
 @media(max-width:900px){.ffp-thumb{height:0;padding-bottom:98px}.ffp-thumbs{display:flex}.ffp-thumb{flex:0 0 74px;padding-bottom:98px}}
 .ffp-lb .cap{position:absolute;left:0;right:0;bottom:14px;text-align:center;color:#fff;font-weight:700;font-size:15px}
 .ffp-thumb{cursor:zoom-in}
+/* 12 Nov 2026: design B polish (same colours, font and buttons as the Victory Valley pages) */
+.ffp{--ink:#0B1B33;--mut:#5A6B82;--line:#E6EAF0;--green:#13804A;font-family:Manrope,Arial,sans-serif}
+.ffp h1{font-weight:800;letter-spacing:-.02em}
+.ffp-badge{background:#EAF5EF;color:#0C5E36}
+.ffp-gal{border-radius:16px}
+.ffp-sec{border-radius:16px;padding:22px 24px}
+.ffp-sec h2{font-weight:800;letter-spacing:-.01em}
+.ffp-fact{background:#F6F8FB;border-radius:12px}
+.ffp-fact dd{font-weight:800}
+.ffp-sec p{color:#3D4E66}
+.ffp-note{background:#F6F8FB;border-color:#E6EAF0}
+.ffp-note,.ffp-note p{color:#3D4E66}
+.ffp-box{border-radius:16px;box-shadow:0 10px 30px rgba(11,27,51,.07)}
+.ffp-price{font-weight:800;letter-spacing:-.01em}
+.ffp-btn{border-radius:10px;font-weight:800}
+.ffp-btn.wa{background:#13804A;color:#fff !important}
+.ffp-btn.wa:hover{background:#0C5E36}
+.ffp-btn.ghost{border:1px solid #D8DEE7}
+.ffp-btn.ghost:hover{border-color:#0B1B33}
+.ffp-mini{border-radius:14px}
+.ffp-mini:hover{border-color:#13804A;box-shadow:0 10px 28px rgba(11,27,51,.08)}
+.ffp-mini b{font-weight:800}
