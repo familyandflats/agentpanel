@@ -41,6 +41,11 @@ RewriteRule ^projects/regrandarch(/.*)?$ /projects/ireograndarch/ [R=301,L]
 RewriteRule ^projects/re-conscienthineselevate(/.*)?$ /projects/conscienthineselevate/ [R=301,L]
 RewriteRule ^projects/emaar-digi-?homes(/.*)?$ /projects/emaardigihomes/ [R=301,L]
 
+# Victory Valley flats taken off the website on 12 Nov 2026 (never marketed; starting fresh)
+RewriteRule ^listings/sale/ff-ivv-sale-00[134]\.html$ /projects/ireo-victory-valley/ [R=301,L]
+RewriteRule ^listings/lease/ff-ivv-rent-00[12]\.html$ /projects/ireo-victory-valley/ [R=301,L]
+RewriteRule ^property-ff-ivv-(sale|rent)-001\.html$ /projects/ireo-victory-valley/ [R=301,L]
+
 # Old blog URLs to new blog folder
 RedirectMatch 301 ^/blog-(.*)\.html$ /content/blogs/blog-$1.html
 
