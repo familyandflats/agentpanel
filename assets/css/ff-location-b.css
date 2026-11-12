@@ -88,3 +88,6 @@
   .ffloc-projs{grid-template-columns:minmax(0,1fr)}
   .ffloc-cta .ffloc-btn:not(.ghost){flex:1}
 }
+/* lighter hero photo (12 Nov): 1000 px on desktop, 600 px on phones */
+.ffloc-hero::after{background-image:url("/projects/ireovictoryvalley/images/ff-vv-ov-12-1000.webp")}
+@media (max-width:900px){.ffloc-hero::after{background-image:url("/projects/ireovictoryvalley/images/ff-vv-ov-12-600.webp")}}

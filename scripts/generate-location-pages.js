@@ -44,7 +44,9 @@ function projects() {
     const name = unesc(ld || title).replace(/ (verified|curated|flats for sale|project guide).*$/i, "").replace(/,? Sector \d+[A-Z]?\b.*$/i, "").trim();
     // Configurations: every BHK size the project's own page mentions (e.g. "2/3/4 BHK", "3 and 4 BHK", "4BHK").
     const nums = new Set();
-    for (const m of h.matchAll(/((?:\b[1-6]\s*(?:\/|,|&|and|-)\s*)*[1-6])\s*BHK/gi)) for (const d of m[1].match(/[1-6]/g)) nums.add(+d);
+    // Read only the page body: the site header injected into every page has a "2/3/4/5 BHK" filter.
+    const body = h.replace(/<header[\s\S]*?<\/header>/gi, "").replace(/<footer[\s\S]*?<\/footer>/gi, "").replace(/<select[\s\S]*?<\/select>/gi, "");
+    for (const m of body.matchAll(/((?:\b[1-6]\s*(?:\/|,|&|and|-)\s*)*[1-6])\s*BHK/gi)) for (const d of m[1].match(/[1-6]/g)) nums.add(+d);
     const list = [...nums].sort();
     const cfg = list.length ? (list.length > 1 ? list.slice(0, -1).join(", ") + " and " + list[list.length - 1] : String(list[0])) + " BHK" : "";
     // Card photo: the page's share image if that file exists, else the first photo of this project the page shows.
@@ -107,7 +109,7 @@ function build(road) {
   const devs = [...devCount.keys()].sort((a, b) => devCount.get(b) - devCount.get(a) || a.localeCompare(b));
   const url = `${SITE}/locations/${road.slug}/`;
   const title = `${road.name} Flats: ${P.length} Projects | Family&Flats`; // 50-60 characters (SEO rule 2.6)
-  const desc = `Compare ${P.length} residential projects on ${road.name}, Gurugram, in Sectors ${sectors[0]} to ${sectors[sectors.length - 1]}: ${devs.slice(0, 5).join(", ")} and more, with verified flats for sale and rent.`;
+  const desc = `Compare ${P.length} residential projects on ${road.name}, Gurugram, in Sectors ${sectors[0]} to ${sectors[sectors.length - 1]}: ${devs.slice(0, 3).join(", ")} and more, with verified flats for sale and rent.`;
   const wa = `https://wa.me/${PHONE}?text=${encodeURIComponent(`Hi Family&Flats, I am looking for a flat on ${road.name}. Please share options.`)}`;
   const flatCard = (f) => {
     const isLease = f.type === "Lease", bhk = (String(f.bhk).match(/\d+/) || [""])[0];
@@ -166,7 +168,7 @@ function build(road) {
   <link rel="stylesheet" href="/assets/css/header.css?v=remove-top-project-search-20260620a">
   <link rel="stylesheet" href="/assets/css/footer.css?v=footer-final">
   <link rel="stylesheet" href="/assets/css/ff-location.css?v=1">
-  <link rel="stylesheet" href="/assets/css/ff-location-b.css?v=1">
+  <link rel="stylesheet" href="/assets/css/ff-location-b.css?v=2">
   <script type="application/ld+json">
 ${JSON.stringify(ld, null, 2)}
   </script>
