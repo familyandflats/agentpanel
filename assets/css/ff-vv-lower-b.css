@@ -1,0 +1,97 @@
+/* IREO Victory Valley lower page (design B): about, price list, browse, enquiry, FAQ, RERA. */
+.vvx-section,.vvx-rera,#browse-by-type,#enquire,#faq{color:#0B1B33;font-family:Manrope,Arial,sans-serif}
+.vvx-wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+.vvx-section{margin:72px 0 0;padding:0;background:none}
+.vvx-head{margin:0 0 20px}
+.vvx-head h2,#browse-by-type h2,#enquire h2{margin:0;font:800 clamp(26px,3vw,34px)/1.15 Manrope,Arial,sans-serif!important;letter-spacing:-.02em;color:#0B1B33}
+.vvx-head p{margin:8px 0 0;font-size:15px;line-height:1.55;color:#5A6B82;max-width:720px}
+/* About + amenities */
+.vvx-about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start}
+.vvx-about-text h2{margin:0 0 14px;font:800 clamp(26px,3vw,34px)/1.15 Manrope,Arial,sans-serif;letter-spacing:-.02em}
+.vvx-about-text>p{margin:0 0 22px;font-size:16px;line-height:1.65;color:#3D4E66}
+.vvx-facts{margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
+.vvx-facts div{padding:14px 0;border-top:1px solid #E6EAF0}
+.vvx-facts dt{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5A6B82}
+.vvx-facts dd{margin:4px 0 0;font-size:15px;font-weight:700}
+.vvx-amenities{border:1px solid #E6EAF0;border-radius:16px;padding:24px}
+.vvx-amenities h3{margin:0 0 6px;font:800 18px Manrope,Arial,sans-serif}
+.vvx-amenities ul{list-style:none;margin:0;padding:0}
+.vvx-amenities li{display:flex;gap:14px;padding:14px 0;border-top:1px solid #F0F2F6}
+.vvx-amenities li:first-child{border-top:0}
+.vvx-amenities i{flex:none;width:40px;height:40px;border-radius:10px;background:#EAF5EF;color:#13804A;display:grid;place-items:center;font-size:16px}
+.vvx-amenities b{display:block;font-size:15px}
+.vvx-amenities span{display:block;margin-top:2px;font-size:14px;color:#5A6B82;line-height:1.45}
+/* Price list */
+.vvx-pricelist .ff-pg-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.vvx-pricelist .ff-pg-card{border:1px solid #E6EAF0;border-radius:16px;padding:8px 20px 4px;background:#fff;min-width:0;overflow-x:auto}
+.vvx-pricelist .ff-pg-card h3{margin:12px 0 4px;font:800 16px Manrope,Arial,sans-serif}
+.vvx-pricelist table{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+.vvx-pricelist th{text-align:left;font-size:12px;font-weight:700;color:#5A6B82;padding:10px 8px 10px 0;border-bottom:1px solid #E6EAF0;white-space:nowrap}
+.vvx-pricelist td{padding:12px 8px 12px 0;border-bottom:1px solid #F0F2F6;white-space:nowrap}
+.vvx-pricelist tr:last-child td{border-bottom:0}
+.vvx-pricelist td:first-child a,.vvx-pricelist td:first-child{font-weight:800;color:#0B1B33}
+.vvx-pricelist td a{color:#13804A;text-decoration:none}
+.vvx-pricelist td a:hover{text-decoration:underline}
+.vvx-pricelist .ff-pg-note{margin:14px 0 0;font-size:13px;color:#5A6B82;line-height:1.5}
+/* Browse by configuration (generated block with inline styles) */
+#browse-by-type{margin:56px 0 0!important;padding:0!important;background:none!important}
+#browse-by-type .container{padding:0 16px!important}
+#browse-by-type h2{margin-bottom:16px!important;font-size:22px!important}
+#browse-by-type a{border:0!important;border-radius:0!important;background:none!important;padding:0!important;font-weight:700!important;color:#13804A!important;text-decoration:none}
+#browse-by-type a:hover{text-decoration:underline}
+#browse-by-type a span{display:none}
+#browse-by-type .container>div{gap:10px 28px!important;margin-bottom:12px!important}
+/* Enquiry */
+#enquire{margin:72px 0 0;padding:0!important;background:none!important}
+#enquire .wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+#enquire .vv-contact-panel{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start;background:#F6F8FB!important;border:1px solid #E6EAF0;border-radius:20px;padding:44px;box-shadow:none!important;color:#0B1B33}
+#enquire .vv-contact-copy p{color:#3D4E66;font-size:16px;line-height:1.6}
+#enquire .vvx-links{font-size:15px;font-weight:700}
+#enquire .vvx-links a{color:#13804A}
+#enquire .vv-steps{margin:20px 0 0;padding:0;list-style:none;counter-reset:s}
+#enquire .vv-steps li{counter-increment:s;position:relative;padding:12px 0 12px 44px;border-top:1px solid #E6EAF0}
+#enquire .vv-steps li::before{content:counter(s);position:absolute;left:0;top:12px;width:30px;height:30px;border-radius:50%;background:#0B1B33;color:#fff;display:grid;place-items:center;font-size:13px;font-weight:800}
+#enquire .vv-steps b{display:block;font-size:15px}
+#enquire .vv-steps span{display:block;font-size:14px;color:#5A6B82}
+#enquire .vv-form-card{background:#fff;border:1px solid #E6EAF0;border-radius:16px;padding:24px;box-shadow:0 10px 30px rgba(11,27,51,.07)}
+#enquire .vv-form-title{font:800 18px Manrope,Arial,sans-serif;margin:0}
+#enquire .vv-form-sub{color:#5A6B82;font-size:14px}
+#enquire input:not([type=checkbox]),#enquire select,#enquire textarea{border:1px solid #D8DEE7!important;border-radius:10px!important;font:600 15px Manrope,Arial,sans-serif;background:#fff}
+#enquire #vv-send{background:#13804A!important;color:#fff!important;border:0!important;border-radius:10px!important;padding:14px!important;font:800 15px Manrope,Arial,sans-serif;cursor:pointer}
+#enquire #vv-send:hover{background:#0C5E36!important}
+/* FAQ accordion */
+#faq{margin:72px 0 0;padding:0!important;background:none!important}
+#faq .wrap{max-width:860px;margin:0 auto;padding:0 16px}
+#faq .vv-faq{display:block!important;border-top:1px solid #E6EAF0}
+#faq .vv-faq article{border:0!important;border-bottom:1px solid #E6EAF0!important;border-radius:0!important;background:none!important;box-shadow:none!important;padding:0!important}
+#faq .vv-faq h3{margin:0;font:700 17px/1.4 Manrope,Arial,sans-serif;color:#0B1B33}
+#faq .vv-faq h3 button{all:unset;box-sizing:border-box;width:100%;display:flex;justify-content:space-between;gap:16px;padding:20px 0;cursor:pointer}
+#faq .vv-faq h3 button:focus-visible{outline:3px solid #facc15;outline-offset:2px}
+#faq .vv-faq h3 button::after{content:"+";font-size:22px;line-height:1;color:#13804A;flex:none}
+#faq .vv-faq h3 button[aria-expanded=true]::after{content:"\2212"}
+#faq .vv-faq p{margin:0 0 20px;font-size:15px;line-height:1.65;color:#3D4E66}
+#faq .vv-faq.is-acc article:not(.open) p{display:none}
+/* RERA */
+.vvx-rera{margin:56px 0 0;padding:20px 0;border-top:1px solid #E6EAF0}
+.vvx-rera p{margin:0;font-size:13px;color:#5A6B82;line-height:1.6}
+.vvx-rera a{color:#13804A;font-weight:700}
+@media (max-width:860px){
+ .vvx-section,#enquire,#faq{margin-top:48px}
+ .vvx-about-grid,#enquire .vv-contact-panel,.vvx-pricelist .ff-pg-grid{grid-template-columns:1fr;gap:24px}
+ #enquire .vv-contact-panel{padding:22px 16px;border-radius:16px}
+ .vvx-facts{grid-template-columns:1fr 1fr}
+ .vvx-pricelist .ff-pg-card{padding:6px 14px 2px}
+ .vvx-pricelist table{font-size:13px}
+ .vvx-pricelist th:nth-child(3),.vvx-pricelist td:nth-child(3){display:none}
+}
+/* fixes: price list row headers, enquiry copy card, steps layout */
+.vvx-pricelist tbody th{padding:12px 8px 12px 0;border-bottom:1px solid #F0F2F6;font-size:14px;color:#0B1B33}
+.vvx-pricelist tbody tr:last-child th{border-bottom:0}
+.vvx-pricelist tbody th a{font-weight:800;color:#0B1B33;text-decoration:none}
+.vvx-pricelist tbody th a:hover{color:#13804A}
+#enquire .vv-contact-copy{background:none!important;border:0!important;box-shadow:none!important;padding:0!important}
+#enquire .vv-contact-copy h2{margin-bottom:12px}
+#enquire .vv-steps{display:block;border-top:0;padding-top:0}
+#enquire .vv-steps li{display:block}
+#enquire .vv-steps li::before{background:#0B1B33;color:#fff;width:30px;height:30px}
+@media (max-width:860px){.vvx-pricelist .ff-pg-card:first-child th:nth-child(4),.vvx-pricelist .ff-pg-card:first-child td:nth-child(4){display:none}}
