@@ -5,20 +5,48 @@
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function num(s) { var m = String(s || "").replace(/,/g, "").match(/(\d+(?:\.\d+)?)/); return m ? +m[1] : 0; }
 
-  // search (same destinations as before)
+  // search: a project name opens its page (Victory Valley + home type opens that BHK page),
+  // "Golf Course Extension" or "Sector NN" opens the area page, anything else the sale or rent list.
   var mode = "buy";
   function seg(group, btn) { $$("button", group).forEach(function (b) { var on = b === btn; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on ? "true" : "false"); }); }
+  var PROJECTS = [["IREO Grand Arch", "/projects/ireograndarch/"], ["Conscient Hines Elevate", "/projects/conscienthineselevate/"], ["Mahindra Luminare", "/projects/mahindra-luminare/"], ["Paras Floret", "/projects/paras-floret/"], ["TATA Raisina Residency", "/projects/tata-raisina-residency/"], ["IREO Skyon", "/projects/ireo-skyon/"], ["Pioneer Park", "/projects/pioneer-park/"], ["Puri The Aravallis", "/projects/puri-the-aravallis/"], ["Smart World Orchard", "/projects/smart-world-orchard/"], ["Conscient Elevate Reserve", "/projects/conscient-elevate-reserve/"], ["Conscient Heritage One", "/projects/conscient-heritage-one/"], ["Emaar Amaris", "/projects/emaar-amaris/"], ["Emaar DigiHomes", "/projects/emaardigihomes/"], ["Emaar Urban Oasis", "/projects/emaar-urban-oasis/"], ["Pioneer Araya", "/projects/pioneer-araya/"], ["Pioneer Presidia", "/projects/pioneer-presidia/"], ["Adani Samsara Ivana", "/projects/adani-samsara-ivana/"], ["DLF The Arbour", "/projects/dlf-the-arbour/"], ["Anant Raj Estate", "/projects/anant-raj-estate/"], ["Birla Navya", "/projects/birla-navya/"], ["Birla Navya Avik", "/projects/birla-navya-avik/"], ["Laburnum Victory Floors", "/projects/laburnum-victory-floors/"], ["Silverglades Legacy", "/projects/silverglades-legacy/"], ["TARC Ishva", "/projects/tarc-ishva/"], ["M3M Altitude", "/projects/m3m-altitude/"], ["M3M Golf Estate", "/projects/m3m-golf-estate/"], ["M3M Heights", "/projects/m3mheights/"], ["M3M Latitude", "/projects/m3m-latitude/"], ["Trump Towers", "/projects/trump-towers/"], ["Emaar MGF Marbella", "/projects/emaar-mgf-marbella/"], ["Emaar MGF Palm Terraces Select", "/projects/emaar-mgf-pal-terraces-select/"], ["Emaar MGF The Palm Drive", "/projects/emaar-mgf-the-palm-drive/"], ["IREO Uptown", "/projects/ireouptown/"], ["Smart World The Edition", "/projects/smart-world-the-edition/"], ["IREO Victory Valley", "/projects/ireo-victory-valley/"], ["M3M Merlin", "/projects/m3m-merlin/"]];
+  var VV_PAGES = { buy: ["2", "3", "4", "penthouse"], lease: ["2", "3", "4", "5", "penthouse"] };
+  var SECTORS = ["58", "59", "60", "61", "62", "63", "63a", "65", "66", "67"];
+  function norm(t) { return String(t || "").toLowerCase().replace(/&/g, " and ").replace(/[^a-z0-9]+/g, " ").trim(); }
+  function findProject(q) {
+    var words = norm(q).split(" ").filter(function (w) { return w && !/^(the|in|at|flat|flats|for|sale|rent|bhk|gurgaon|gurugram)$/.test(w); });
+    if (!words.length) return null;
+    var hits = PROJECTS.filter(function (pr) {
+      var n = " " + norm(pr[0]) + " ";
+      return words.every(function (w) { return n.indexOf(" " + w) >= 0; });
+    });
+    return hits.length === 1 ? hits[0] : hits.length ? "many" : null;
+  }
+  function destination(q, bhk) {
+    var n = norm(q), want = bhk === "Penthouse" ? "penthouse" : (String(bhk).match(/\d/) || [""])[0];
+    var word = mode === "lease" ? "rent" : "sale";
+    if (mode !== "projects") {
+      var sec = n.match(/sector\s*(\d+\s*a?)\b/);
+      if (sec && SECTORS.indexOf(sec[1].replace(/\s/g, "")) >= 0) return "/locations/golf-course-extension-road-gurugram/#sector-" + sec[1].replace(/\s/g, "");
+    }
+    if (/golf course ext|gcer|extension road/.test(n)) return "/locations/golf-course-extension-road-gurugram/";
+    var pr = findProject(q);
+    if (pr === "many") return "/locations/golf-course-extension-road-gurugram/";   // e.g. "M3M" or "Emaar": show them all
+    if (pr) {
+      if (pr[1] === "/projects/ireo-victory-valley/" && mode !== "projects" && want && VV_PAGES[mode === "lease" ? "lease" : "buy"].indexOf(want) >= 0)
+        return pr[1] + (want === "penthouse" ? "penthouse" : want + "-bhk") + "-for-" + word + "/";
+      return pr[1];
+    }
+    if (mode === "projects") return "/projects.html";
+    var url = mode === "lease" ? "/lease.html" : "/sale.html";
+    return want && want !== "penthouse" ? url + "?bhk=" + want + "bhk" : url;
+  }
   var form = $("#homeSearch");
   if (form) {
     $$(".hb-seg button", form).forEach(function (b) { b.addEventListener("click", function () { mode = b.getAttribute("data-mode"); seg(b.parentNode, b); }); });
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var q = ($("#homeQuery").value || "").trim(), bhk = $("#homeBhk").value;
-      if (mode === "projects") { location.href = q ? "/projects.html?query=" + encodeURIComponent(q) : "/projects.html"; return; }
-      var url = mode === "lease" ? "/lease.html" : "/sale.html", p = [];
-      if (q) p.push("query=" + encodeURIComponent(q));
-      if (bhk) p.push("bhk=" + encodeURIComponent(bhk));
-      location.href = url + (p.length ? "?" + p.join("&") : "");
+      location.href = destination(($("#homeQuery").value || "").trim(), $("#homeBhk").value);
     });
   }
 

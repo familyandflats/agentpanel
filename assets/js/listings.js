@@ -184,6 +184,10 @@
     document.querySelectorAll("[data-project-name]").forEach((el) => { el.textContent = projectFilter ? projectName : "Gurugram"; });
     if (count) count.textContent = String(filtered.length);
     populateProjectFilter(list);
+    // ?bhk=3bhk (from the home page search) preselects the BHK filter
+    const bhkParam = slug(qs("bhk")).replace(/-/g, "");
+    const bhkSelect = document.querySelector('[data-filter="bhk"]');
+    if (bhkParam && bhkSelect && Array.from(bhkSelect.options).some((o) => o.value === bhkParam)) bhkSelect.value = bhkParam;
     initRequirementForm(mode);
 
     if (!grid) return;
