@@ -17,7 +17,9 @@
   var priceText = String(item.price || "").replace(/^Rs\.?\s*/i, "₹");
   var cr = /cr/i.test(item.price || "") ? num(item.price) * 1e7 : 0;
   var psf = cr && size ? "₹" + (Math.round(cr / size / 100) * 100).toLocaleString("en-IN") + " per sq. ft." : "";
-  var h1 = bhk + " BHK Flat " + (isLease ? "for Rent" : "for Sale") + " in " + item.project;
+  var kindTxt = (item.bhk || "") + " " + (item.title || "");
+  var kind = /penthouse/i.test(kindTxt) ? bhk + " BHK " + (/duplex/i.test(kindTxt) ? "Duplex " : "") + "Penthouse" : bhk + " BHK Flat";
+  var h1 = kind + " " + (isLease ? "for Rent" : "for Sale") + " in " + item.project;
   var msg = "Hi Family&Flats, I am interested in " + item.id + " (" + bhk + " BHK, " + item.project + "). Please share details and a visit slot.";
   var wa = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(msg);
   // The page's own <title> (written by scripts/prerender-flat-pages.js) stays: it is unique per flat.

@@ -48,15 +48,44 @@ for (const item of all) {
   const mainRe = /(<main class="ffp" id="ffp-root">)([\s\S]*?)(<\/main>)/;
   if (!mainRe.test(src)) { console.log(`SKIP ${item.detailUrl}: no <main id="ffp-root">`); problems++; continue; }
   let out = src.replace(mainRe, (m, a, b, c) => `${a}\n    ${block}\n  ${c}`);
-  // Unique title: configuration + size + floor, so two 4 BHK pages never share one.
+  // Short title (Google shows about 60 characters): type + project + price; size is added only when two flats would share one.
   const size = num(item.size), isLease = item.type === "Lease";
-  const title = `${num(item.bhk)} BHK Flat ${isLease ? "for Rent" : "for Sale"} in ${item.project}` + (size ? `, ${size.toLocaleString("en-IN")} sq. ft.` : "") + (item.floor ? `, ${item.floor}` : "") + " | Family&Flats";
-  const tEsc = title.replace(/&/g, "&amp;").replace(/&amp;Flats/g, "&Flats");
-  out = out.replace(/<title>[\s\S]*?<\/title>/, `<title>${title}</title>`)
-           .replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${title.replace(/&/g, "&amp;")}$2`)
+  const pent = /penthouse/i.test((item.bhk || "") + " " + (item.title || ""));
+  const label = pent ? (/duplex/i.test((item.bhk || "") + " " + (item.title || "")) ? "Duplex Penthouse" : "Penthouse") : `${num(item.bhk)} BHK`;
+  const priceTxt = String(item.price || ""), pn = num(priceTxt);
+  const priceVal = !pn ? 0 : /cr/i.test(priceTxt) ? Math.round(pn * 1e7) : /lakh|lac/i.test(priceTxt) ? Math.round(pn * 1e5) : Math.round(pn);
+  const priceShow = !priceVal ? "" : isLease ? "₹" + priceVal.toLocaleString("en-IN") + "/month" : "₹" + (priceVal / 1e7).toFixed(2).replace(/\.00$/, "") + " Cr";
+  const base = `${label} for ${isLease ? "Rent" : "Sale"} in ${item.project}`;
+  const twin = all.some((o) => o !== item && o.detailUrl && /verified/i.test(o.status || "") && o.type === item.type && o.bhk === item.bhk && o.price === item.price);
+  const title = base + (priceShow ? `, ${priceShow}` : "") + (twin && size ? `, ${size.toLocaleString("en-IN")} sq ft` : "");
+  const tHtml = title.replace(/&/g, "&amp;");
+  // Structured data for Google: breadcrumb (project > BHK page > flat) and the listing itself
+  const word = isLease ? "rent" : "sale";
+  const bhkSlug = pent ? `penthouse-for-${word}` : `${num(item.bhk)}-bhk-for-${word}`;
+  const projUrl = SITE + (item.projectUrl || "/projects/ireo-victory-valley/");
+  const pageUrl = SITE + item.detailUrl;
+  const imgs = (item.gallery || [item.image]).filter(Boolean).slice(0, 6).map((u) => SITE + u);
+  const ld = [
+    { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE + "/" },
+      { "@type": "ListItem", position: 2, name: item.project, item: projUrl },
+      { "@type": "ListItem", position: 3, name: `${pent ? "Penthouse" : num(item.bhk) + " BHK"} for ${word}`, item: `${projUrl}${bhkSlug}/` },
+      { "@type": "ListItem", position: 4, name: title, item: pageUrl } ] },
+    { "@context": "https://schema.org", "@type": "RealEstateListing", name: title, url: pageUrl, image: imgs,
+      about: { "@type": "Apartment", name: `${label} in ${item.project}`, numberOfRooms: num(item.bhk) || undefined,
+        floorSize: size ? { "@type": "QuantitativeValue", value: size, unitCode: "FTK" } : undefined,
+        address: { "@type": "PostalAddress", streetAddress: "Sector 67, Golf Course Extension Road", addressLocality: "Gurugram", addressRegion: "Haryana", addressCountry: "IN" } },
+      ...(priceVal ? { offers: { "@type": "Offer", price: priceVal, priceCurrency: "INR", availability: "https://schema.org/InStock",
+        ...(isLease ? { priceSpecification: { "@type": "UnitPriceSpecification", price: priceVal, priceCurrency: "INR", unitText: "MONTH" } } : {}) } } : {}),
+      provider: { "@type": "RealEstateAgent", name: "Family&Flats", url: SITE + "/", telephone: "+91-98992-73673" } } ];
+  const LDS = "<!-- ff-flat-ld:start -->", LDE = "<!-- ff-flat-ld:end -->";
+  const ldBlock = `${LDS}\n  ${ld.map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join("\n  ")}\n  ${LDE}`;
+  out = out.replace(/<title>[\s\S]*?<\/title>/, `<title>${tHtml}</title>`)
+           .replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${tHtml}$2`)
            .replace(/<link rel="canonical" href="\/([^"]*)">/, `<link rel="canonical" href="${SITE}/$1">`)
            .replace(/(<meta property="og:url" content=")\/([^"]*")/, `$1${SITE}/$2`)
-           .replace(/ff-flat-page\.js\?v=\d+/, "ff-flat-page.js?v=5");
+           .replace(/ff-flat-page\.js\?v=\d+/, "ff-flat-page.js?v=7");
+  out = out.includes(LDS) ? out.replace(new RegExp(LDS + "[\\s\\S]*?" + LDE), ldBlock) : out.replace("</head>", `  ${ldBlock}\n</head>`);
   out = out.replace(/\n/g, nl);
   if (out !== raw) { changed++; if (check) console.log(`OUT OF DATE ${item.detailUrl}`); else { fs.writeFileSync(file, out); console.log(`WROTE ${item.detailUrl}`); } }
 }
