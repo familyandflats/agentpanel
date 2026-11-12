@@ -244,5 +244,39 @@ window.FF_LISTINGS = [
       "Balcony garden with open views",
       "Visit coordination through Family&Flats"
     ]
+  },
+  {
+    id: "FF-IVV-RENT-001",
+    flatId: "C3501",
+    type: "Lease",
+    status: "Verified",
+    title: "2BHK Flat on Lease in IREO Victory Valley",
+    project: "IREO Victory Valley",
+    projectSlug: "ireovictoryvalley",
+    projectUrl: "/projects/ireo-victory-valley/",
+    location: "Sector 67, Golf Course Extension Road, Gurugram",
+    bhk: "2BHK + 2T",
+    size: "1435 Sq. Ft.",
+    floor: "35th Floor",
+    furnishing: "Semi Furnished",
+    availability: "Available",
+    price: "Rs. 65,000 / month",
+    priceNote: "Monthly rent plus maintenance and other charges. Deposit and terms confirmed before visit.",
+    image: "/projects/ireovictoryvalley/images/2bhk-on-lease.jpg",
+    photoCount: 2,
+    gallery: [
+      "/projects/ireovictoryvalley/images/2bhk-on-lease.jpg",
+      "/projects/ireovictoryvalley/images/2bhk-rent.jpg"
+    ],
+    captions: ["Balcony with open city view", "Bedroom with wardrobes"],
+    photoNote: "These photos were taken earlier and are not colour-corrected. Family&Flats shares current photos and a video on WhatsApp before you visit.",
+    detailUrl: "/listings/lease/ff-ivv-rent-001.html",
+    description: "A verified 2BHK flat for lease in Tower C of IREO Victory Valley, about 1,435 sq. ft., on the 35th floor with open city views, semi furnished and available now.",
+    highlights: [
+      "Tower C, 35th floor",
+      "About 1,435 sq. ft., 2BHK + 2T",
+      "Semi furnished, available now",
+      "Visit coordination through Family&Flats"
+    ]
   }
 ];
