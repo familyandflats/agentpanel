@@ -27,6 +27,12 @@
 
   var facts = [["Configuration", bhk + " BHK"], ["Area", size ? size.toLocaleString("en-IN") + " sq. ft." : "On request"], ["Floor", item.floor], ["Furnishing", item.furnishing], ["Availability", item.availability], [isLease ? "Monthly rent" : "Asking price", priceText]];
   if (psf) facts.push(["Rate", psf.replace(" per sq. ft.", " / sq. ft.")]);
+  // 13 Nov 2026 (Arun): balcony and entrance direction, car parkings and club membership on every flat page
+  if (item.balconyFacing) facts.push(["Balcony faces", item.balconyFacing]);
+  if (item.entranceFacing) facts.push(["Entrance faces", item.entranceFacing]);
+  if (item.carParkings != null) facts.push(["Car parking", item.carParkings ? String(item.carParkings) : "None"]);
+  if (item.clubMembership != null) facts.push(["Club membership", item.clubMembership ? "Yes" : "No"]);
+  if ((item.features || []).length) facts.push(["Facing / view", item.features.join(", ")]);
   facts.push(["Project", item.project], ["Reference", item.id]);
 
   var others = all.filter(function (i) { return i && i.id !== item.id && i.projectSlug === item.projectSlug && /verified/i.test(i.status || "") && i.type === item.type && i.detailUrl; });

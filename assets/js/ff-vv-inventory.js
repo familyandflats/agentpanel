@@ -90,6 +90,17 @@
     return (list || []).map(function (t) { return '<span class="vvi-tag">' + esc(t) + "</span>"; }).join("");
   }
 
+  // floor, furnishing, availability, then what makes the flat different (13 Nov 2026: balcony and entrance direction,
+  // car parkings, club membership, view)
+  function vTags(i) {
+    var t = [i.type === "Lease" && /maintenance/i.test(i.priceNote || "") ? "Rent plus maintenance" : "", i.floor, i.furnishing, i.availability];
+    if (i.balconyFacing) t.push(i.balconyFacing + "-facing balcony");
+    if (i.entranceFacing) t.push(i.entranceFacing + " entrance");
+    (i.features || []).forEach(function (f) { t.push(f); });
+    if (i.carParkings) t.push(i.carParkings + (i.carParkings === 1 ? " car parking" : " car parkings"));
+    if (i.clubMembership === true) t.push("Club membership");
+    return t.filter(Boolean);
+  }
   function photoCount(i) { return i.photoCount || (i.gallery && i.gallery.length) || (i.image ? 1 : 0); }
   function sizeLabel(i) { var n = sizeNum(i.size); return n ? n.toLocaleString("en-IN") + " sq. ft." : "Size on request"; }
   function vPrice(i) {
@@ -103,7 +114,7 @@
       '<div class="vvi-photo" style="background-image:url(\'' + esc(i.image) + '\')"><span class="vvi-badge ok">Verified</span><span class="vvi-count">' + n + (n === 1 ? ' photo' : ' photos') + '</span></div>' +
       '<div class="vvi-body"><h4>' + bhkNum(i.bhk) + ' BHK \u00B7 ' + sizeLabel(i) + '</h4>' +
       '<div class="vvi-price">' + vPrice(i) + '</div>' + vPsf(i) +
-      '<div>' + tags([i.floor, i.furnishing, i.availability].filter(Boolean)) + '</div>' +
+      '<div>' + tags(vTags(i)) + '</div>' +
       '<div class="vvi-cardbtns">' + (i.detailUrl ? '<a class="vvi-btn dark vvi-view" href="' + esc(i.detailUrl) + '">View flat details</a>' : '') +
       '<button class="vvi-btn" data-enq="' + esc(i.id) + '" data-bhk="' + bhkNum(i.bhk) + '" data-type="' + esc(i.type) + '">Enquire</button></div></div></article>';
   }
@@ -116,13 +127,13 @@
       '<div class="vvi-body"><p class="vvi-kicker">Checked by Family&amp;Flats \u00B7 real photos</p>' +
       '<h4>' + (u ? '<a href="' + u + '">' : '') + bhkNum(i.bhk) + ' BHK \u00B7 ' + sizeLabel(i) + (u ? '</a>' : '') + '</h4>' +
       '<div class="vvi-price">' + vPrice(i) + '</div>' + vPsf(i) +
-      '<div>' + tags([i.floor, i.furnishing, i.availability].filter(Boolean)) + '</div>' +
+      '<div>' + tags(vTags(i)) + '</div>' +
       '<div class="vvi-feature-actions">' + (u ? '<a class="vvi-btn dark vvi-view" href="' + u + '">View flat and photos</a>' : '') + '<button class="vvi-btn' + (u ? '' : ' dark') + '" data-enq="' + esc(i.id) + '" data-bhk="' + bhkNum(i.bhk) + '" data-type="' + esc(i.type) + '">Enquire</button>' +
       '<span class="vvi-mut">Ref. ' + esc(i.id) + '</span></div></div></article>';
   }
   function noPhotoRow(i) {
     return '<div class="vvi-row"><div><span class="vvi-badge ok">Verified</span> <b>' + esc(i.id) + '</b> \u00B7 ' + vPrice(i) + ' \u00B7 ' + sizeLabel(i) + (vPsf(i) ? ' \u00B7 ' + vPsf(i).replace(/<[^>]+>/g, "") : "") + '<br>' +
-      tags([i.floor, i.furnishing].filter(Boolean)) + '<span class="vvi-tag">Photos on request</span></div>' +
+      tags(vTags(i)) + '<span class="vvi-tag">Photos on request</span></div>' +
       '<div class="vvi-actions"><button class="vvi-btn" data-photos="' + esc(i.id) + '" data-bhk="' + bhkNum(i.bhk) + '" data-type="' + esc(i.type) + '">Request photos</button>' +
       '<button class="vvi-btn" data-enq="' + esc(i.id) + '" data-bhk="' + bhkNum(i.bhk) + '" data-type="' + esc(i.type) + '">Enquire</button></div></div>';
   }
@@ -341,7 +352,7 @@
       '<div id="vvi-bhktabs"></div>' +
       '<div id="vvi-toplink" class="vvi-toplink"></div>' +
       (IS_VV || verified.length ? '<section class="vvs vvs-ver" aria-labelledby="vvs-ver-h">' +
-        '<div class="vvs-head"><span class="vvs-tag"><span class="vvs-dot">✓</span>Checked by our team · real photos</span>' +
+        '<div class="vvs-head"><span class="vvs-tag"><span class="vvs-dot">✓</span>Checked by our team' + (IS_VV || verified.some(photoCount) ? ' · real photos' : '') + '</span>' +
         '<h3 class="vvs-title" id="vvs-ver-h">Verified by Family&amp;Flats</h3>' +
         '</div>' +
         '<div id="vvi-ver"></div></section>' : '') +

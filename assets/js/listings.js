@@ -1,5 +1,6 @@
 (function () {
-  const listings = window.FF_LISTINGS || [];
+  // only flats with their own page; a flat without photos yet (e.g. IREO Skyon, 13 Nov 2026) shows on its project page only
+  const listings = (window.FF_LISTINGS || []).filter((item) => item && item.detailUrl);
   const moneyPhone = "919899273673";
 
   function qs(name) {

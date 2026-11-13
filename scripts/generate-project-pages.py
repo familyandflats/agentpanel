@@ -116,6 +116,11 @@ def agent_ads(slug):
     return json.loads(src[src.index('concat([') + 7:src.rindex(']);') + 1]), hashlib.md5(src.encode('utf-8')).hexdigest()[:8]
 
 
+def file_v(rel):
+    f = os.path.join(ROOT, rel)
+    return hashlib.md5(open(f, 'rb').read()).hexdigest()[:8] if os.path.exists(f) else V
+
+
 def inv_js_v():
     f = os.path.join(ROOT, 'assets/js/ff-vv-inventory.js')
     return hashlib.md5(open(f, 'rb').read()).hexdigest()[:8] if os.path.exists(f) else V
@@ -298,7 +303,9 @@ def page(slug, P, road):
     elif listed and lads:
         inv_block = ('      <div id="vv-inventory" data-slug="' + E(slug) + '" data-project="' + E(name) + '"></div>\n'
                      '      <p class="pjb-also">Listings come from agents\' current offers, read and checked by Family&amp;Flats. Agents appear by code only. Price on request: ask us and we get the price. We confirm every flat before your visit.</p>\n')
-        extra_js = (f'<script src="/assets/data/agent-ads-{slug}.js?v={lads_v}"></script>\n'
+        extra_js = (f'<script src="/assets/data/listings.js?v={file_v("assets/data/listings.js")}"></script>\n'
+                    f'<script src="/assets/data/verified-listings.js?v={file_v("assets/data/verified-listings.js")}"></script>\n'
+                    f'<script src="/assets/data/agent-ads-{slug}.js?v={lads_v}"></script>\n'
                     f'<script src="/assets/js/ff-vv-inventory.js?v={inv_js_v()}"></script>\n')
     else:
         inv_block = f'''      <div class="pjb-none">
