@@ -1,8 +1,10 @@
 (function () {
   "use strict";
-  var SLUG = "ireovictoryvalley", WA = "919899273673", PROJECT = "IREO Victory Valley";
   var mount = document.getElementById("vv-inventory");
   if (!mount) return;
+  // Victory Valley's page has no data attributes; other project pages say which project they show (13 Nov 2026)
+  var SLUG = mount.getAttribute("data-slug") || "ireovictoryvalley", WA = "919899273673",
+      PROJECT = mount.getAttribute("data-project") || "IREO Victory Valley", IS_VV = SLUG === "ireovictoryvalley";
 
   // Verified flats: hand-maintained listings.js plus flats published from the dashboard's Listing OS
   // (verified-listings.js). Same id appearing in both: the dashboard version wins.
@@ -126,6 +128,7 @@
   }
   // button to the static SEO page for a BHK tab ("P" = penthouses), when generate-bhk-pages.js has built one
   function pageSlug(tab) {
+    if (!IS_VV) return "";                       // the one-page BHK lists exist for Victory Valley only
     var slug = (tab === "P" ? "penthouse" : tab + "-bhk") + "-for-" + (state.type === "Lease" ? "rent" : "sale");
     return (window.FF_VV_PAGES || []).indexOf(slug) < 0 ? "" : slug;
   }
@@ -337,18 +340,18 @@
       '<div class="vvi-tabs" id="vvi-type"><button class="vvi-pill on" data-t="Sale">Buy</button><button class="vvi-pill" data-t="Lease">Rent</button></div>' +
       '<div id="vvi-bhktabs"></div>' +
       '<div id="vvi-toplink" class="vvi-toplink"></div>' +
-      '<section class="vvs vvs-ver" aria-labelledby="vvs-ver-h">' +
+      (IS_VV || verified.length ? '<section class="vvs vvs-ver" aria-labelledby="vvs-ver-h">' +
         '<div class="vvs-head"><span class="vvs-tag"><span class="vvs-dot">✓</span>Checked by our team · real photos</span>' +
         '<h3 class="vvs-title" id="vvs-ver-h">Verified by Family&amp;Flats</h3>' +
         '</div>' +
-        '<div id="vvi-ver"></div></section>' +
+        '<div id="vvi-ver"></div></section>' : '') +
       '<section class="vvs vvs-ads" aria-labelledby="vvs-ads-h">' +
         '<div class="vvs-head"><span class="vvs-tag"><span class="vvs-dot">i</span>Listed by agents · confirmed by us before your visit</span>' +
         '<h3 class="vvs-title" id="vvs-ads-h">From the market</h3>' +
         '</div>' +
         '<div id="vvi-ads"></div></section>' +
       (partners.length ? '<section class="vvs vvs-partners" aria-labelledby="vvs-par-h">' +
-        '<div class="vvs-head"><span class="vvs-tag"><span class="vvs-dot">\u2605</span>Most flats in Victory Valley</span>' +
+        '<div class="vvs-head"><span class="vvs-tag"><span class="vvs-dot">\u2605</span>Most flats in ' + esc(PROJECT.replace(/^(IREO|Conscient|M3M|Emaar MGF|Smart World)\s+/, "")) + '</span>' +
         '<h3 class="vvs-title" id="vvs-par-h">Featured partners</h3>' +
         '<p class="vvs-sub">Partners appear by code only. Every enquiry comes to Family&amp;Flats; we check price and availability with the partner and arrange your visit.</p>' +
         '</div><div id="vvi-partners"></div></section>' : '');
@@ -369,7 +372,8 @@
     document.getElementById("vvi-bhktabs").innerHTML = tabsHtml();
     // same "see all on one page" button as below the ads, repeated right under the BHK tabs so it is seen first
     document.getElementById("vvi-toplink").innerHTML = "";   // design B: the "see all" link sits at the end of the section only
-    document.getElementById("vvi-ver").innerHTML = verifiedHtml();
+    var vm = document.getElementById("vvi-ver");
+    if (vm) vm.innerHTML = verifiedHtml();
     document.getElementById("vvi-ads").innerHTML = adsHtml();
     var pm = document.getElementById("vvi-partners");
     if (pm) pm.innerHTML = partnersHtml();

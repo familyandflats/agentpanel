@@ -365,3 +365,6 @@ a.vvd-view{display:inline-block;text-decoration:none;box-sizing:border-box;text-
 .vvp-btn.wa{background:#15803d;color:#fff;border-color:#15803d}
 .vvp-more{background:#f8fafc}
 .vvs-partners .vvd-panel{margin-top:16px}
+
+/* 13 Nov 2026: the small "/mo" no longer makes the price line taller than its 34px box (visual QA: rent ranges flagged as clipped) */
+.vvd-range small{line-height:1}

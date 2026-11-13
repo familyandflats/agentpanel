@@ -117,7 +117,8 @@
    ],
    "brochure": null,
    "amenities": null,
-   "aboutExtra": "A joint development of Conscient Infrastructure and Hines."
+   "aboutExtra": "A joint development of Conscient Infrastructure and Hines.",
+   "inventory": "ads"
   },
   "mahindra-luminare": {
    "name": "Mahindra Luminare",
@@ -253,7 +254,8 @@
    "bhk": [
     "2 BHK",
     "3 BHK",
-    "4 BHK"
+    "4 BHK",
+    "Penthouse"
    ],
    "kind": "apartments",
    "size": null,
@@ -261,7 +263,8 @@
    "photos": [],
    "brochure": null,
    "amenities": null,
-   "aboutExtra": ""
+   "aboutExtra": "",
+   "inventory": "ads"
   },
   "pioneer-park": {
    "name": "Pioneer Park",

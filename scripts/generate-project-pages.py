@@ -107,6 +107,20 @@ def are_ads():
     return out, hashlib.md5(src.encode('utf-8')).hexdigest()[:8]
 
 
+def agent_ads(slug):
+    """Agent listings for a project page (assets/data/agent-ads-<slug>.js, written by publish_project_ads.py, 13 Nov 2026)."""
+    f = os.path.join(ROOT, f'assets/data/agent-ads-{slug}.js')
+    if not os.path.exists(f):
+        return [], ''
+    src = open(f, encoding='utf-8').read()
+    return json.loads(src[src.index('concat([') + 7:src.rindex(']);') + 1]), hashlib.md5(src.encode('utf-8')).hexdigest()[:8]
+
+
+def inv_js_v():
+    f = os.path.join(ROOT, 'assets/js/ff-vv-inventory.js')
+    return hashlib.md5(open(f, 'rb').read()).hexdigest()[:8] if os.path.exists(f) else V
+
+
 def are_texts(P):
     """Lead, about, facts and FAQs for Anant Raj Estate; price ranges are worked out from the listings on the page."""
     ads, _ = are_ads()
@@ -210,6 +224,18 @@ def page(slug, P, road):
                                               ["Listed now", f"{len(ads_)} floors, villas and plots"], ["Sector", "63A, Golf Course Extension Road"]],
                  desc=P.get('desc') or (f"{cnt('Independent floor', 'Sale')} independent floors for sale, {cnt('Independent floor', 'Rent')} for rent, {cnt('Plot')} plots and {cnt('Villa')} villas in Anant Raj Estate, Sector 63A, Golf Course Extension Road, Gurgaon."
                                         + (f" 3 BHK floors from \u20b9{min(f3):g} Cr." if f3 else "") + " Every enquiry handled by Family&Flats."))
+    listed = P.get('inventory') == 'ads'
+    if listed:
+        lads, lads_v = agent_ads(slug)
+        n_s = sum(1 for a in lads if a['type'] == 'Sale'); n_r = len(lads) - n_s
+        cr = [a['price'] for a in lads if a['type'] == 'Sale' and a.get('price')]
+        rn = [a['price'] for a in lads if a['type'] == 'Lease' and a.get('price')]
+        if lads:
+            P = dict(P, glance=P.get('glance') or [["Developer", P['developer']], ["Homes", f"{bhk_text(P['bhk'])} {P.get('kind') or 'homes'}"],
+                                                  ["Listed now", f"{n_s} for sale, {n_r} for rent"], ["Sector", f"{sector}, Golf Course Extension Road"]],
+                     desc=P.get('desc') or (f"{n_s} flats for sale & {n_r} for rent in {name}, Sector {sector} Gurgaon"
+                                            + (f", from \u20b9{min(cr) / 1e7:.2f} Cr" if cr else "") + (f", rent from \u20b9{min(rn):,}/month" if rn else "")
+                                            + ". Every enquiry handled by Family&Flats."))
     none_text = ("We share the developer's current price list and payment plan, and any bookings being resold (transfers), with what is still due. Tell us the BHK and budget." if uc else f"We have contacts in {E(name)}. Tell us the BHK and budget, and we check current homes with owners, then send photos, floor and final price on WhatsApp before any visit.")
     P = dict(P, lead=P.get('lead') or lead, about=P.get('about') or about, facts=P.get('facts') or facts, faqs=P.get('faqs') or faqs,
              pills=P.get('pills') or ([P['size'].split(',')[0]] if P.get('size') else []) + [bhk_text(P['bhk'])],
@@ -269,6 +295,11 @@ def page(slug, P, road):
                      '      <p class="pjb-also">Listings come from agents\' current offers, read and checked by Family&amp;Flats. Price on request: ask us and we get the price. We confirm every property before your visit.</p>\n')
         are_v = are_ads()[1]
         extra_js = f'<script src="/assets/data/anant-raj-ads.js?v={are_v}"></script>\n<script src="/assets/js/ff-are-inventory.js?v={V}"></script>\n'
+    elif listed and lads:
+        inv_block = ('      <div id="vv-inventory" data-slug="' + E(slug) + '" data-project="' + E(name) + '"></div>\n'
+                     '      <p class="pjb-also">Listings come from agents\' current offers, read and checked by Family&amp;Flats. Agents appear by code only. Price on request: ask us and we get the price. We confirm every flat before your visit.</p>\n')
+        extra_js = (f'<script src="/assets/data/agent-ads-{slug}.js?v={lads_v}"></script>\n'
+                    f'<script src="/assets/js/ff-vv-inventory.js?v={inv_js_v()}"></script>\n')
     else:
         inv_block = f'''      <div class="pjb-none">
         <div><h3>No listings on our website right now</h3><p>{none_text}</p></div>
