@@ -245,7 +245,9 @@ def page(slug, P, road):
     P = dict(P, lead=P.get('lead') or lead, about=P.get('about') or about, facts=P.get('facts') or facts, faqs=P.get('faqs') or faqs,
              pills=P.get('pills') or ([P['size'].split(',')[0]] if P.get('size') else []) + [bhk_text(P['bhk'])],
              amenities=P.get('amenities'))
-    photos = [photo(slug, f, a) for f, a in P['photos']]
+    # Gold Standard switch (Arun, 14 Nov 2026): a project's photos show only after he approves the set
+    # ("photosApproved": true in project-pages.json). Otherwise the page stays live with the fallback tiles.
+    photos = [photo(slug, f, a) for f, a in P['photos']] if P.get('photosApproved') is True else []
     n = len(photos)
     big = photos[0] if photos else None
     t1, t2 = (photos[1] if n > 1 else None), (photos[2] if n > 2 else None)
@@ -261,7 +263,7 @@ def page(slug, P, road):
     pills = ''.join([f'<li class="{stage[1]}">{E(stage[0])}</li>'] if stage else []) + ''.join(f'<li>{E(p)}</li>' for p in P['pills'] if p)
     near = nearby(slug, sector, road)
     gallery = [{'src': p['src'], 'w': p['w'], 'h': p['h'], 'alt': p['alt']} for p in photos]
-    og = SITE + (big['src'] if big else '/projects/ireovictoryvalley/images/ff-vv-ov-04.jpg')
+    og = SITE + (big['src'] if big else '/assets/main-logo.png')  # no approved photos: our logo, never another project's photo
     wa_text = f'Hi Family&Flats, I am looking for a flat in {name}, Sector {sector}.'
     from urllib.parse import quote
     cat = st or 'none'

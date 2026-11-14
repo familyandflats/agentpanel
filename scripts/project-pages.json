@@ -16,6 +16,7 @@
    "kind": "apartments",
    "size": "About 28 acres, 10 towers",
    "rera": null,
+   "photosApproved": true,
    "photos": [
     [
      "ff-ga-ov-01.jpg",
@@ -288,6 +289,7 @@
    "kind": "apartments",
    "size": null,
    "rera": null,
+   "photosApproved": true,
    "photos": [
     [
      "ff-sky-ov-01.jpg",
