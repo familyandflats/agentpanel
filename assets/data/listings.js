@@ -71,6 +71,7 @@ window.FF_LISTINGS = [
     clubMembership: true,
     features: ["Sun-facing", "Road-facing"],
     photoCount: 0,
+    detailUrl: "/listings/sale/ff-sky-sale-001.html",
     description: "A verified 2BHK resale flat in IREO Skyon, Sector 60, semi furnished and available now. South-facing balcony with good sunlight, first floor, one car parking and club membership.",
     highlights: ["South-facing balcony, sun-facing", "North entrance", "1st floor", "1 car parking, club membership", "Visit coordination through Family&Flats"]
   },
@@ -96,6 +97,7 @@ window.FF_LISTINGS = [
     clubMembership: false,
     features: ["Road-facing"],
     photoCount: 0,
+    detailUrl: "/listings/lease/ff-sky-rent-001.html",
     description: "A verified fully furnished 2BHK for rent in IREO Skyon, Sector 60, available from 1 December 2026. Third floor, west-facing balcony, east entrance and two car parkings.",
     highlights: ["Fully furnished", "West-facing balcony, east entrance", "3rd floor", "2 car parkings", "Available from 1 December 2026"]
   }

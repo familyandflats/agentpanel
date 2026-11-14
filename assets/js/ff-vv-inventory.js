@@ -134,7 +134,7 @@
   function noPhotoRow(i) {
     return '<div class="vvi-row"><div><span class="vvi-badge ok">Verified</span> <b>' + esc(i.id) + '</b> \u00B7 ' + vPrice(i) + ' \u00B7 ' + sizeLabel(i) + (vPsf(i) ? ' \u00B7 ' + vPsf(i).replace(/<[^>]+>/g, "") : "") + '<br>' +
       tags(vTags(i)) + '<span class="vvi-tag">Photos on request</span></div>' +
-      '<div class="vvi-actions"><button class="vvi-btn" data-photos="' + esc(i.id) + '" data-bhk="' + bhkNum(i.bhk) + '" data-type="' + esc(i.type) + '">Request photos</button>' +
+      '<div class="vvi-actions">' + (i.detailUrl ? '<a class="vvi-btn dark vvi-view" href="' + esc(i.detailUrl) + '">View flat details</a>' : '') + '<button class="vvi-btn" data-photos="' + esc(i.id) + '" data-bhk="' + bhkNum(i.bhk) + '" data-type="' + esc(i.type) + '">Request photos</button>' +
       '<button class="vvi-btn" data-enq="' + esc(i.id) + '" data-bhk="' + bhkNum(i.bhk) + '" data-type="' + esc(i.type) + '">Enquire</button></div></div>';
   }
   // button to the static SEO page for a BHK tab ("P" = penthouses), when generate-bhk-pages.js has built one

@@ -13,6 +13,8 @@
   var isLease = item.type === "Lease";
   var gallery = (item.gallery && item.gallery.length ? item.gallery : [item.image]).filter(Boolean);
   var caps = item.captions || [];
+  // 14 Nov 2026 (Arun): a flat can be verified by us before we have photos; it still gets its own page.
+  var hasPhotos = gallery.length > 0;
   var bhk = num(item.bhk), size = num(item.size);
   var priceText = String(item.price || "").replace(/^Rs\.?\s*/i, "₹");
   var cr = /cr/i.test(item.price || "") ? num(item.price) * 1e7 : 0;
@@ -22,6 +24,7 @@
   var h1 = kind + " " + (isLease ? "for Rent" : "for Sale") + " in " + item.project;
   var msg = "Hi Family&Flats, I am interested in " + item.id + " (" + bhk + " BHK, " + item.project + "). Please share details and a visit slot.";
   var wa = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(msg);
+  var waPhotos = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent("Hi Family&Flats, please share current photos of " + item.id + " (" + bhk + " BHK, " + item.project + ").");
   // The page's own <title> (written by scripts/prerender-flat-pages.js) stays: it is unique per flat.
   if (!document.title) document.title = h1 + " | Family&Flats";
 
@@ -40,21 +43,23 @@
 
   root.innerHTML =
     '<nav class="ffp-crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="' + esc(item.projectUrl) + '">' + esc(item.project) + '</a><span>›</span>' + esc(bhk + " BHK for " + (isLease ? "rent" : "sale")) + '</nav>' +
-    '<div class="ffp-top"><div><span class="ffp-badge">✓ Verified by Family&amp;Flats · real photos</span><h1>' + esc(h1) + '</h1><p class="ffp-loc">' + esc(item.location) + '</p></div></div>' +
+    '<div class="ffp-top"><div><span class="ffp-badge">✓ Verified by Family&amp;Flats' + (hasPhotos ? ' · real photos' : '') + '</span><h1>' + esc(h1) + '</h1><p class="ffp-loc">' + esc(item.location) + '</p></div></div>' +
+    (!hasPhotos ? '<div class="ffp-nophoto"><div><b>Photos on request</b><p>This flat is checked by Family&amp;Flats. Ask us and we share current photos or a video of the actual flat on WhatsApp.</p><a class="ffp-btn wa" href="' + esc(waPhotos) + '" target="_blank" rel="noopener">Request photos on WhatsApp</a></div></div>' :
     '<div class="ffp-gal"><div class="ffp-stage"><img id="ffp-main" alt=""><button class="ffp-arrow prev" aria-label="Previous photo">‹</button><button class="ffp-arrow next" aria-label="Next photo">›</button><span class="ffp-cap" id="ffp-cap"></span><span class="ffp-count" id="ffp-count"></span></div>' +
-    '<div class="ffp-thumbs">' + gallery.map(function (src, n) { return '<button type="button" class="ffp-thumb" data-n="' + n + '" aria-label="Show photo ' + (n + 1) + '"><img src="' + esc(src) + '" alt="" loading="lazy"></button>'; }).join("") + '</div></div>' +
+    '<div class="ffp-thumbs">' + gallery.map(function (src, n) { return '<button type="button" class="ffp-thumb" data-n="' + n + '" aria-label="Show photo ' + (n + 1) + '"><img src="' + esc(src) + '" alt="" loading="lazy"></button>'; }).join("") + '</div></div>') +
     '<div class="ffp-grid"><div>' +
       '<section class="ffp-sec"><h2>Key details</h2><dl class="ffp-facts">' + facts.map(function (f) { return '<div class="ffp-fact"><dt>' + esc(f[0]) + '</dt><dd>' + esc(f[1]) + '</dd></div>'; }).join("") + '</dl></section>' +
       '<section class="ffp-sec"><h2>About this flat</h2><p>' + esc(item.description) + '</p></section>' +
       ((item.highlights || []).length ? '<section class="ffp-sec"><h2>Highlights</h2><ul class="ffp-list">' + item.highlights.map(function (h) { return '<li>' + esc(h) + '</li>'; }).join("") + '</ul></section>' : "") +
-      '<section class="ffp-sec ffp-note"><h2>About these photos</h2><p>' + (item.photoNote ? esc(item.photoNote) : 'These photos have been cleaned and colour-corrected by Family&amp;Flats so rooms are easier to see. The layout, fittings and condition are as found. We recommend a visit before you decide.') + '</p></section>' +
-      (others.length ? '<section class="ffp-sec"><h2>Other verified flats in ' + esc(item.project) + '</h2><div class="ffp-more">' + others.map(function (o) { return '<a class="ffp-mini" href="' + esc(o.detailUrl) + '"><div style="background-image:url(\'' + esc(o.image) + '\')"></div><b>' + esc(num(o.bhk) + " BHK · " + o.size) + '</b><span>' + esc(String(o.price).replace(/^Rs\.?\s*/i, "₹")) + '</span></a>'; }).join("") + '</div></section>' : "") +
+      (!hasPhotos ? "" : '<section class="ffp-sec ffp-note"><h2>About these photos</h2><p>' + (item.photoNote ? esc(item.photoNote) : 'These photos have been cleaned and colour-corrected by Family&amp;Flats so rooms are easier to see. The layout, fittings and condition are as found. We recommend a visit before you decide.') + '</p></section>') +
+      (others.length ? '<section class="ffp-sec"><h2>Other verified flats in ' + esc(item.project) + '</h2><div class="ffp-more">' + others.map(function (o) { return '<a class="ffp-mini" href="' + esc(o.detailUrl) + '"><div' + (o.image ? ' style="background-image:url(\'' + esc(o.image) + '\')"' : ' class="ffp-mini-none">Photos on request') + '</div><b>' + esc(num(o.bhk) + " BHK · " + o.size) + '</b><span>' + esc(String(o.price).replace(/^Rs\.?\s*/i, "₹")) + '</span></a>'; }).join("") + '</div></section>' : "") +
     '</div><aside class="ffp-side"><div class="ffp-box"><div class="ffp-lbl">' + (isLease ? "Monthly rent" : "Asking price") + '</div><div class="ffp-price">' + esc(priceText) + '</div>' + (psf ? '<p class="ffp-psf">' + esc(psf) + '</p>' : "") + '<p class="ffp-ref">Ref. ' + esc(item.id) + '</p>' +
       '<a class="ffp-btn wa" href="' + esc(wa) + '" target="_blank" rel="noopener">Enquire on WhatsApp</a><a class="ffp-btn ghost" href="tel:+' + PHONE + '">Call Family&amp;Flats</a><a class="ffp-btn ghost" href="' + esc(item.projectUrl) + '">View all flats in this project</a>' +
       '<p class="ffp-trust">' + esc(item.priceNote || "") + ' Final price, availability and visit timing are confirmed with the owner side through Family&amp;Flats.</p></div></aside></div>' +
     '<div class="ffp-bar"><div><b>' + esc(priceText) + '</b><small>' + esc(bhk + " BHK · " + (size ? size.toLocaleString("en-IN") + " sq. ft." : "")) + '</small></div><a href="' + esc(wa) + '" target="_blank" rel="noopener">Enquire</a></div>' +
     '<div class="ffp-lb" id="ffp-lb" role="dialog" aria-modal="true" aria-label="Photo viewer"><button class="x" aria-label="Close photo viewer">×</button><button class="arrow prev" aria-label="Previous photo">‹</button><img id="ffp-lbimg" alt=""><div class="cap" id="ffp-lbcap"></div><button class="arrow next" aria-label="Next photo">›</button></div>';
 
+  if (!hasPhotos) return;   // no slider or photo viewer to wire up
   var cur = 0, main = document.getElementById("ffp-main"), lb = document.getElementById("ffp-lb"), lbimg = document.getElementById("ffp-lbimg"), opener = null;
   function alt(n) { return (caps[n] ? caps[n] + " – " : "") + bhk + " BHK flat in " + item.project + ", photo " + (n + 1) + " of " + gallery.length; }
   function show(n) {

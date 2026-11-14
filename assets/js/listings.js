@@ -1,6 +1,7 @@
 (function () {
   // only flats with their own page; a flat without photos yet (e.g. IREO Skyon, 13 Nov 2026) shows on its project page only
-  const listings = (window.FF_LISTINGS || []).filter((item) => item && item.detailUrl);
+  // 14 Nov 2026: photo-less verified flats now have their own page too, but these cards need a photo
+  const listings = (window.FF_LISTINGS || []).filter((item) => item && item.detailUrl && item.image);
   const moneyPhone = "919899273673";
 
   function qs(name) {

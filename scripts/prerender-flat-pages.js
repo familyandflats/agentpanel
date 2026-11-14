@@ -40,7 +40,7 @@ for (const item of all) {
   const cap0 = (item.captions && item.captions[0]) ? item.captions[0] + " – " : "";
   const n = (item.gallery || [item.image]).filter(Boolean).length;
   const imgAlt = `${cap0}${num(item.bhk)} BHK flat in ${item.project}, photo 1 of ${n}`.replace(/"/g, "&quot;");
-  const staticHtml0 = html.replace('<img id="ffp-main" alt="">', `<img id="ffp-main" src="${first}" alt="${imgAlt}">`);
+  const staticHtml0 = !n ? html : html.replace('<img id="ffp-main" alt="">', `<img id="ffp-main" src="${first}" alt="${imgAlt}">`);
   const staticHtml1 = staticHtml0.replace('<span class="ffp-cap" id="ffp-cap"></span><span class="ffp-count" id="ffp-count"></span>',
     `<span class="ffp-cap" id="ffp-cap">${String((item.captions || [])[0] || "").replace(/</g, "&lt;")}</span><span class="ffp-count" id="ffp-count">1 / ${n}</span>`);
   const staticHtml = staticHtml1.replace(/<div class="ffp-lb"[\s\S]*$/, "").replace(/<div class="ffp-bar">[\s\S]*?<\/a><\/div>/, "");
@@ -74,7 +74,7 @@ for (const item of all) {
     { "@context": "https://schema.org", "@type": "RealEstateListing", name: title, url: pageUrl, image: imgs,
       about: { "@type": "Apartment", name: `${label} in ${item.project}`, numberOfRooms: num(item.bhk) || undefined,
         floorSize: size ? { "@type": "QuantitativeValue", value: size, unitCode: "FTK" } : undefined,
-        address: { "@type": "PostalAddress", streetAddress: "Sector 67, Golf Course Extension Road", addressLocality: "Gurugram", addressRegion: "Haryana", addressCountry: "IN" } },
+        address: { "@type": "PostalAddress", streetAddress: String(item.location || "Sector 67, Golf Course Extension Road").replace(/,\s*Gurugram$/i, ""), addressLocality: "Gurugram", addressRegion: "Haryana", addressCountry: "IN" } },
       ...(priceVal ? { offers: { "@type": "Offer", price: priceVal, priceCurrency: "INR", availability: "https://schema.org/InStock",
         ...(isLease ? { priceSpecification: { "@type": "UnitPriceSpecification", price: priceVal, priceCurrency: "INR", unitText: "MONTH" } } : {}) } } : {}),
       provider: { "@type": "RealEstateAgent", name: "Family&Flats", url: SITE + "/", telephone: "+91-98992-73673" } } ];
@@ -84,7 +84,7 @@ for (const item of all) {
            .replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${tHtml}$2`)
            .replace(/<link rel="canonical" href="\/([^"]*)">/, `<link rel="canonical" href="${SITE}/$1">`)
            .replace(/(<meta property="og:url" content=")\/([^"]*")/, `$1${SITE}/$2`)
-           .replace(/ff-flat-page\.js\?v=\d+/, "ff-flat-page.js?v=7");
+           .replace(/ff-flat-page\.js\?v=\d+/, "ff-flat-page.js?v=8").replace(/ff-flat-page\.css\?v=\d+/, "ff-flat-page.css?v=6");
   out = out.includes(LDS) ? out.replace(new RegExp(LDS + "[\\s\\S]*?" + LDE), ldBlock) : out.replace("</head>", `  ${ldBlock}\n</head>`);
   out = out.replace(/\n/g, nl);
   if (out !== raw) { changed++; if (check) console.log(`OUT OF DATE ${item.detailUrl}`); else { fs.writeFileSync(file, out); console.log(`WROTE ${item.detailUrl}`); } }
