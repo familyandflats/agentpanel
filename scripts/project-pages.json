@@ -104,9 +104,9 @@
    "name": "Conscient Hines Elevate",
    "sector": "59",
    "developer": "Conscient and Hines",
-   "stage": "possession",
-   "stageResearched": "possession",
-   "possession": "Phase 1 from Dec 2024; Phase 2 due early 2026",
+   "stage": "ready",
+   "stageResearched": "ready",
+   "possession": "Completed",
    "bhk": [
     "3 BHK",
     "4 BHK"
@@ -153,9 +153,9 @@
    "name": "Mahindra Luminare",
    "sector": "59",
    "developer": "Mahindra Lifespaces",
-   "stage": "",
-   "stageResearched": "under-construction",
-   "possession": "Older phases ready; current phase due Aug 2026",
+   "stage": "ready",
+   "stageResearched": "ready",
+   "possession": "Completed",
    "bhk": [
     "3 BHK",
     "4 BHK"
