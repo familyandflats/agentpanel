@@ -219,7 +219,7 @@
         nearSlugs.forEach(function (s3) { groups2 = groups2.concat(groupAds(nearAds.filter(function (o) { return o.slug === s3; }).map(function (o) { return o.x; }), s3)); });
         groups2.sort(function (a, b) { return b.l.length - a.l.length; });
         var c2 = ourNear.slice(0, MAX).map(ourCard).concat(groups2.map(function (g2, i) { return groupCard(g2, i + 3); }));
-        out.near = section("Similar " + bhk + " BHK homes nearby", c2, "See all " + bhk + " BHK homes for " + word + " nearby", listPage + "?bhk=" + bhk + "bhk");
+        out.near = section("Similar " + bhk + " BHK homes nearby", c2, "See all " + bhk + " BHK homes for " + word, listPage + "?bhk=" + bhk + "bhk");
         paint();
       };
       if (!pending) return finish();
