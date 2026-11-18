@@ -116,6 +116,12 @@ def agent_ads(slug):
     return json.loads(src[src.index('concat([') + 7:src.rindex(']);') + 1]), hashlib.md5(src.encode('utf-8')).hexdigest()[:8]
 
 
+
+def own_flats(slug):
+    """T0196: a project with no agent listings still lists our own verified flats (assets/data/listings.js)."""
+    src = open(os.path.join(ROOT, 'assets/data/listings.js'), encoding='utf-8').read()
+    return any(re.search(r'status:\s*"Verified"', blk) for blk in re.findall(r'\{[^{}]*projectSlug:\s*"' + re.escape(slug) + r'"[^{}]*\}', src))
+
 def file_v(rel):
     f = os.path.join(ROOT, rel)
     return hashlib.md5(open(f, 'rb').read()).hexdigest()[:8] if os.path.exists(f) else V
@@ -316,12 +322,13 @@ def page(slug, P, road):
                      '      <p class="pjb-also">Listings come from agents\' current offers, read and checked by Family&amp;Flats. Price on request: ask us and we get the price. We confirm every property before your visit.</p>\n')
         are_v = are_ads()[1]
         extra_js = f'<script src="/assets/data/anant-raj-ads.js?v={are_v}"></script>\n<script src="/assets/js/ff-are-inventory.js?v={V}"></script>\n'
-    elif listed and lads:
+    elif (listed and lads) or own_flats(slug):
         inv_block = ('      <div id="vv-inventory" data-slug="' + E(slug) + '" data-project="' + E(name) + '"></div>\n'
-                     '      <p class="pjb-also">Listings come from agents\' current offers, read and checked by Family&amp;Flats. Agents appear by code only. Price on request: ask us and we get the price. We confirm every flat before your visit.</p>\n')
+                     + ('      <p class="pjb-also">Listings come from agents\' current offers, read and checked by Family&amp;Flats. Agents appear by code only. Price on request: ask us and we get the price. We confirm every flat before your visit.</p>\n' if lads else
+                        '      <p class="pjb-also">Flats checked by the Family&amp;Flats team. We confirm availability and price before your visit.</p>\n'))
         extra_js = (f'<script src="/assets/data/listings.js?v={file_v("assets/data/listings.js")}"></script>\n'
                     f'<script src="/assets/data/verified-listings.js?v={file_v("assets/data/verified-listings.js")}"></script>\n'
-                    f'<script src="/assets/data/agent-ads-{slug}.js?v={lads_v}"></script>\n'
+                    + (f'<script src="/assets/data/agent-ads-{slug}.js?v={lads_v}"></script>\n' if lads else '') +
                     f'<script src="/assets/js/ff-vv-inventory.js?v={inv_js_v()}"></script>\n')
     else:
         inv_block = f'''      <div class="pjb-none">
