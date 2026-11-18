@@ -77,6 +77,7 @@ window.FF_LISTINGS = [
   },
   {
     id: "FF-SKY-RENT-001",
+    flatId: "C0311",
     type: "Lease",
     status: "Verified",
     title: "2BHK Fully Furnished Flat for Rent in IREO Skyon",
@@ -96,9 +97,23 @@ window.FF_LISTINGS = [
     carParkings: 2,
     clubMembership: false,
     features: ["Road-facing"],
-    photoCount: 0,
+    image: "/projects/ireo-skyon/images/c0311-01.jpg",
+    photoCount: 10,
+    gallery: [
+      "/projects/ireo-skyon/images/c0311-01.jpg",
+      "/projects/ireo-skyon/images/c0311-02.jpg",
+      "/projects/ireo-skyon/images/c0311-03.jpg",
+      "/projects/ireo-skyon/images/c0311-04.jpg",
+      "/projects/ireo-skyon/images/c0311-05.jpg",
+      "/projects/ireo-skyon/images/c0311-06.jpg",
+      "/projects/ireo-skyon/images/c0311-07.jpg",
+      "/projects/ireo-skyon/images/c0311-08.jpg",
+      "/projects/ireo-skyon/images/c0311-09.jpg",
+      "/projects/ireo-skyon/images/c0311-10.jpg"
+    ],
+    captions: ["Living room", "Kitchen", "Bedroom 1", "Bedroom 2", "Bathroom 1", "Bathroom 2", "Dining area", "Living room with TV", "Bedroom 1", "Bedroom 2"],
     detailUrl: "/listings/lease/ff-sky-rent-001.html",
-    description: "A verified fully furnished 2BHK for rent in IREO Skyon, Sector 60, available from 1 December 2026. Third floor, west-facing balcony, east entrance and two car parkings.",
+    description: "A verified fully furnished 2BHK for rent in IREO Skyon, Sector 60, available from 1 December 2026. Third floor, west-facing balcony, east entrance and two car parkings. Photos are AI-enhanced for light and clarity only; nothing in the flat is added or removed.",
     highlights: ["Fully furnished", "West-facing balcony, east entrance", "3rd floor", "2 car parkings", "Available from 1 December 2026"]
   }
 ];
