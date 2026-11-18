@@ -1,0 +1,29 @@
+name: Link preview check
+# How WhatsApp, Facebook, Google and a phone browser see a page (status, size, title, og:image). Arun 18 Nov 2026.
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: Page to check
+        default: https://familyandflats.com/rent/ireo-skyon-2-bhk-14257
+  pull_request:
+    paths: [".github/workflows/link-preview-check.yml"]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch as each crawler
+        env:
+          URL: ${{ github.event.inputs.url || 'https://familyandflats.com/rent/ireo-skyon-2-bhk-14257' }}
+        run: |
+          for ua in "WhatsApp/2.24.10.78 A" "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)" "Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 Chrome/130 Mobile Safari/537.36" "Googlebot/2.1"; do
+            echo "=== $ua"
+            curl -sS -A "$ua" -o page.html -D head.txt -w "status %{http_code} bytes %{size_download} time %{time_total}s redirect %{redirect_url}\n" --max-time 20 "$URL" || true
+            grep -iE "^(content-type|content-encoding|server|location|cache-control|x-)" head.txt || true
+            grep -oE '<title>[^<]*|og:(title|image)" content="[^"]*' page.html | head -3 || true
+            head -c 300 page.html | tr '\n' ' '; echo
+          done
+          IMG=$(grep -oE 'og:image" content="[^"]*' page.html | head -1 | sed 's/.*content="//')
+          if [ -n "$IMG" ]; then echo "=== image $IMG"; curl -sS -A "WhatsApp/2.24.10.78 A" -o img -w "status %{http_code} bytes %{size_download} type %{content_type}\n" --max-time 20 "$IMG"; fi
