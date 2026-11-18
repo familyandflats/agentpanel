@@ -29,7 +29,8 @@
   // The page's own <title> (written by scripts/prerender-flat-pages.js) stays: it is unique per flat.
   if (!document.title) document.title = h1 + " | Family&Flats";
 
-  var facts = [["Configuration", bhk + " BHK"], ["Area", size ? size.toLocaleString("en-IN") + " sq. ft." : "On request"], ["Floor", item.floor], ["Furnishing", item.furnishing], ["Availability", item.availability], [isLease ? "Monthly rent" : "Asking price", priceText]];
+  // 18 Nov 2026 (Arun): "Available From 1 Dec 2026" shows as label Available From, value 1 Dec 2026
+  var facts = [["Configuration", bhk + " BHK"], ["Area", size ? size.toLocaleString("en-IN") + " sq. ft." : "On request"], ["Floor", item.floor], ["Furnishing", item.furnishing], (/^available from\s+/i.test(item.availability || "") ? ["Available From", String(item.availability).replace(/^available from\s+/i, "")] : ["Availability", item.availability]), [isLease ? "Monthly rent" : "Asking price", priceText]];
   if (psf) facts.push(["Rate", psf.replace(" per sq. ft.", " / sq. ft.")]);
   // 13 Nov 2026 (Arun): balcony and entrance direction, car parkings and club membership on every flat page
   if (item.balconyFacing) facts.push(["Balcony faces", item.balconyFacing]);
