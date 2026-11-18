@@ -986,6 +986,27 @@
     "Villas",
     "Plots"
    ]
+  },
+  "dlf-princeton-estate": {
+   "name": "DLF Princeton Estate",
+   "sector": "53",
+   "developer": "DLF",
+   "road": "Golf Course Road",
+   "stage": "ready",
+   "stageResearched": "ready",
+   "possession": "2002",
+   "bhk": [
+    "2 BHK",
+    "3 BHK",
+    "4 BHK"
+   ],
+   "kind": "apartments",
+   "size": "About 23 acres, 8 towers of 19 floors, 918 flats",
+   "aboutExtra": "It is in DLF City Phase V, Gurugram. Flats are about 964 to 1,562 sq ft.",
+   "rera": null,
+   "photosApproved": false,
+   "photos": [],
+   "inventory": "ads"
   }
  }
 }

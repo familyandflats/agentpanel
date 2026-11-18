@@ -116,6 +116,12 @@ def agent_ads(slug):
     return json.loads(src[src.index('concat([') + 7:src.rindex(']);') + 1]), hashlib.md5(src.encode('utf-8')).hexdigest()[:8]
 
 
+
+def own_flats(slug):
+    """T0196: a project with no agent listings still lists our own verified flats (assets/data/listings.js)."""
+    src = open(os.path.join(ROOT, 'assets/data/listings.js'), encoding='utf-8').read()
+    return any(re.search(r'status:\s*"Verified"', blk) for blk in re.findall(r'\{[^{}]*projectSlug:\s*"' + re.escape(slug) + r'"[^{}]*\}', src))
+
 def file_v(rel):
     f = os.path.join(ROOT, rel)
     return hashlib.md5(open(f, 'rb').read()).hexdigest()[:8] if os.path.exists(f) else V
@@ -160,18 +166,20 @@ def are_texts(P):
 def texts(P):
     """Lead, about, facts and FAQs, written only from the facts in project-pages.json."""
     name, sec, dev, st = P['name'], P['sector'], P['developer'], P.get('stage') or ''
+    rn = P.get('road') or 'Golf Course Extension Road'   # T0196: projects off the Extension (e.g. DLF Phase V, Golf Course Road)
+    at = f' on {rn}' if rn == 'Golf Course Extension Road' else f', {rn}'
     homes = bhk_text(P['bhk']).replace(' BHK and', ' and').replace(' BHK,', ',') if P['bhk'] else ''
     kind = P.get('kind') or 'homes'
     uc = st in ('under-construction', 'new-launch')
     word = STAGE_WORD.get(st, '')
     art = lambda w: ('an ' if w[:1] in 'aeiou' else 'a ') + w
-    lead = f"{art(word + ' ' + dev) if word else art(dev)} project in Sector {sec} on Golf Course Extension Road: {homes} {kind}. "
+    lead = f"{art(word + ' ' + dev) if word else art(dev)} project in Sector {sec}{at}: {homes} {kind}. "
     lead = lead[0].upper() + lead[1:]
     if uc:
         lead += "Buy from the developer or take over an existing booking; we share the current price and payment plan."
     else:
         lead += "Tell us what you need: we check current homes with owners and send photos before any visit."
-    about = f"{name} is {art(word + ' residential') if word else 'a residential'} project by {dev} in Sector {sec} on Golf Course Extension Road, Gurugram. "
+    about = f"{name} is {art(word + ' residential') if word else 'a residential'} project by {dev} in Sector {sec}{at}, Gurugram. "
     if P.get('size'):
         about += f"{P['size']}. "
     about += f"Homes are {homes} {kind}. "
@@ -184,7 +192,7 @@ def texts(P):
     about += "Details are from public listings and RERA filings; Family&Flats confirms them before any visit."
     label = STAGES.get(st, ('Ask us', ''))[0]
     # Same rows, in the same order, for every project in a category; a missing fact says "Ask us".
-    facts = [["Developer", dev], ["Location", f"Sector {sec}, Golf Course Extension Road"],
+    facts = [["Developer", dev], ["Location", f"Sector {sec}, {rn}"],
              ["Size", P.get('size') or "Ask us"], ["Homes", f"{homes} {kind}"],
              ["Status", label if st else "Ask us for the current status"]]
     if st == 'ready':
@@ -205,7 +213,7 @@ def texts(P):
     if st != 'ready':
         faqs.append([f"What is the RERA number of {name}?", f"{P['rera']}. You can check it on the Haryana RERA (Gurugram) portal." if P.get('rera') else "We confirm the RERA registration on the Haryana RERA (Gurugram) portal and share it before you book."])
     faqs.append([f"What homes are there in {name}?", f"{homes} {kind}. Sizes, floors and views vary; tell us what you need and we share current options."])
-    faqs.append([f"Where is {name}?", f"Sector {sec} on Golf Course Extension Road, Gurugram (Gurgaon), Haryana."])
+    faqs.append([f"Where is {name}?", f"Sector {sec}{at}, Gurugram (Gurgaon), Haryana."])
     faqs.append(["Can I see photos or a video before visiting?", "Yes. For serious enquiries, Family&Flats shares current photos or a video of the actual home on WhatsApp, so you only visit the homes that fit."])
     if not uc:
         faqs.append([f"I own a home in {name}. Can you help me sell or rent it?", "Yes. Share the details privately and Family&Flats will suggest a realistic price, market it to verified buyers or tenants, and handle the enquiries."])
@@ -215,6 +223,8 @@ def texts(P):
 
 def page(slug, P, road):
     name, sector = P['name'], P['sector']
+    road_name = P.get('road') or 'Golf Course Extension Road'
+    on_gce = road_name == 'Golf Course Extension Road'
     st = P.get('stage') or ''
     uc = st in ('under-construction', 'new-launch')
     url = f'{SITE}/projects/{slug}/'
@@ -237,7 +247,7 @@ def page(slug, P, road):
         rn = [a['price'] for a in lads if a['type'] == 'Lease' and a.get('price')]
         if lads:
             P = dict(P, glance=P.get('glance') or [["Developer", P['developer']], ["Homes", f"{bhk_text(P['bhk'])} {P.get('kind') or 'homes'}"],
-                                                  ["Listed now", f"{n_s} for sale, {n_r} for rent"], ["Sector", f"{sector}, Golf Course Extension Road"]],
+                                                  ["Listed now", f"{n_s} for sale, {n_r} for rent"], ["Sector", f"{sector}, {road_name}"]],
                      desc=P.get('desc') or (f"{n_s} flats for sale & {n_r} for rent in {name}, Sector {sector} Gurgaon"
                                             + (f", from \u20b9{min(cr) / 1e7:.2f} Cr" if cr else "") + (f", rent from \u20b9{min(rn):,}/month" if rn else "")
                                             + ". Every enquiry handled by Family&Flats."))
@@ -257,11 +267,21 @@ def page(slug, P, road):
         title = f'{name} Sector {sector} Gurgaon | Family&Flats'
     if len(title) > 60:
         title = f'{name} Sector {sector} | Family&Flats'
-    desc = f"{name}, Sector {sector}, Golf Course Extension Road, Gurgaon: {bhk_text(P['bhk'])} {P.get('kind') or ''}{', ' + stage[0].lower() if stage else ''}. Checked with owners, photos before you visit."
+    desc = f"{name}, Sector {sector}, {road_name}, Gurgaon: {bhk_text(P['bhk'])} {P.get('kind') or ''}{', ' + stage[0].lower() if stage else ''}. Checked with owners, photos before you visit."
     desc = re.sub(r'\s+', ' ', P.get('desc') or desc)[:160]
     title = P.get('title') or title
     pills = ''.join([f'<li class="{stage[1]}">{E(stage[0])}</li>'] if stage else []) + ''.join(f'<li>{E(p)}</li>' for p in P['pills'] if p)
-    near = nearby(slug, sector, road)
+    near = nearby(slug, sector, road) if on_gce else []
+    crumb_mid = (f'<a href="/locations/golf-course-extension-road-gurugram/">Golf Course Extension Road</a><span aria-hidden="true">/</span><a href="/locations/golf-course-extension-road-gurugram/#sector-{sector.lower()}">Sector {E(sector)}</a>'
+                 if on_gce else '<a href="/projects/">Projects</a>')
+    near_html = (f'''  <section class="section pjb-near" id="nearby" aria-labelledby="nearby-title">
+    <div class="wrap">
+      <h2 id="nearby-title">Nearby on Golf Course Extension Road</h2>
+      <p>Communities buyers often compare with {E(name)}.</p>
+      <div class="pjb-near-grid">{''.join(f'<a href="{E(u)}">' + (f'<img src="{E(img)}" alt="" width="72" height="72" loading="lazy">' if img else f'<span class="pjb-mono" aria-hidden="true">{E("".join(w[0] for w in n.split()[:2]).upper())}</span>') + f'<span><b>{E(n)}</b><small>Sector {E(sec)} · {E(meta)}</small></span></a>' for sec, u, n, meta, img in near)}</div>
+      <p class="pjb-also"><a href="/locations/golf-course-extension-road-gurugram/">All projects on Golf Course Extension Road</a></p>
+    </div>
+  </section>''' if near else '')
     gallery = [{'src': p['src'], 'w': p['w'], 'h': p['h'], 'alt': p['alt']} for p in photos]
     og = SITE + (big['src'] if big else '/assets/main-logo.png')  # no approved photos: our logo, never another project's photo
     wa_text = f'Hi Family&Flats, I am looking for a flat in {name}, Sector {sector}.'
@@ -271,7 +291,7 @@ def page(slug, P, road):
         + (f'<img src="{p["src"]}" srcset="{p["sm"]} 800w, {p["src"]} {p["w"]}w" sizes="(max-width:900px) 100vw, 680px" alt="{E(p["alt"])}" width="{p["w"]}" height="{p["h"]}" fetchpriority="high">' if big_
            else f'<img src="{p["sm"]}" alt="{E(p["alt"])}" width="{p["w"]}" height="{p["h"]}" loading="lazy">')
         + (f'<span class="vv-more">+{n - 3} photos</span>' if i == 2 and n > 3 else '') + '</button>')
-    glance = P.get('glance') or [["Developer", P['developer']], ["Size", P.get('size') or "Ask us"], ["Homes", f"{bhk_text(P['bhk'])} {P.get('kind') or 'homes'}"], ["Sector", f"{sector}, Golf Course Extension Road"]]
+    glance = P.get('glance') or [["Developer", P['developer']], ["Size", P.get('size') or "Ask us"], ["Homes", f"{bhk_text(P['bhk'])} {P.get('kind') or 'homes'}"], ["Sector", f"{sector}, {road_name}"]]
     tile_glance = (f'<div class="vv-tile vv-tile-big pjb-info pjb-info-big pjb-c-{cat}"><p class="pjb-info-k">At a glance</p>'
         f'<dl>{"".join(f"<div><dt>{E(k)}</dt><dd>{E(v)}</dd></div>" for k, v in glance)}</dl>'
         f'<p class="pjb-info-n">Photos after our next visit</p></div>')
@@ -291,10 +311,10 @@ def page(slug, P, road):
         {'@type': 'WebPage', '@id': url + '#webpage', 'url': url, 'name': title, 'description': desc, 'isPartOf': {'@type': 'WebSite', 'name': 'Family&Flats', 'url': SITE + '/'}},
         {'@type': 'BreadcrumbList', 'itemListElement': [
             {'@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': SITE + '/'},
-            {'@type': 'ListItem', 'position': 2, 'name': 'Golf Course Extension Road', 'item': SITE + '/locations/golf-course-extension-road-gurugram/'},
+            ({'@type': 'ListItem', 'position': 2, 'name': 'Golf Course Extension Road', 'item': SITE + '/locations/golf-course-extension-road-gurugram/'} if on_gce else {'@type': 'ListItem', 'position': 2, 'name': 'Projects', 'item': SITE + '/projects/'}),
             {'@type': 'ListItem', 'position': 3, 'name': name, 'item': url}]},
         {'@type': 'ApartmentComplex', '@id': url + '#place', 'name': name, 'url': url, 'image': og,
-         'address': {'@type': 'PostalAddress', 'streetAddress': f'Sector {sector}, Golf Course Extension Road', 'addressLocality': 'Gurugram', 'addressRegion': 'Haryana', 'addressCountry': 'IN'}},
+         'address': {'@type': 'PostalAddress', 'streetAddress': f'Sector {sector}, {road_name}', 'addressLocality': 'Gurugram', 'addressRegion': 'Haryana', 'addressCountry': 'IN'}},
         {'@type': 'FAQPage', 'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in P['faqs']]},
     ]}
     if are:
@@ -302,12 +322,13 @@ def page(slug, P, road):
                      '      <p class="pjb-also">Listings come from agents\' current offers, read and checked by Family&amp;Flats. Price on request: ask us and we get the price. We confirm every property before your visit.</p>\n')
         are_v = are_ads()[1]
         extra_js = f'<script src="/assets/data/anant-raj-ads.js?v={are_v}"></script>\n<script src="/assets/js/ff-are-inventory.js?v={V}"></script>\n'
-    elif listed and lads:
+    elif (listed and lads) or own_flats(slug):
         inv_block = ('      <div id="vv-inventory" data-slug="' + E(slug) + '" data-project="' + E(name) + '"></div>\n'
-                     '      <p class="pjb-also">Listings come from agents\' current offers, read and checked by Family&amp;Flats. Agents appear by code only. Price on request: ask us and we get the price. We confirm every flat before your visit.</p>\n')
+                     + ('      <p class="pjb-also">Listings come from agents\' current offers, read and checked by Family&amp;Flats. Agents appear by code only. Price on request: ask us and we get the price. We confirm every flat before your visit.</p>\n' if lads else
+                        '      <p class="pjb-also">Flats checked by the Family&amp;Flats team. We confirm availability and price before your visit.</p>\n'))
         extra_js = (f'<script src="/assets/data/listings.js?v={file_v("assets/data/listings.js")}"></script>\n'
                     f'<script src="/assets/data/verified-listings.js?v={file_v("assets/data/verified-listings.js")}"></script>\n'
-                    f'<script src="/assets/data/agent-ads-{slug}.js?v={lads_v}"></script>\n'
+                    + (f'<script src="/assets/data/agent-ads-{slug}.js?v={lads_v}"></script>\n' if lads else '') +
                     f'<script src="/assets/js/ff-vv-inventory.js?v={inv_js_v()}"></script>\n')
     else:
         inv_block = f'''      <div class="pjb-none">
@@ -366,7 +387,7 @@ def page(slug, P, road):
   <section class="vvb-hero" aria-labelledby="vvb-title">
     <div class="vvb-inner">
       <div class="vvb-copy">
-        <nav class="vvb-crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/locations/golf-course-extension-road-gurugram/">Golf Course Extension Road</a><span aria-hidden="true">/</span><a href="/locations/golf-course-extension-road-gurugram/#sector-{sector.lower()}">Sector {E(sector)}</a><span aria-hidden="true">/</span><span aria-current="page">{E(name)}</span></nav>
+        <nav class="vvb-crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span>{crumb_mid}<span aria-hidden="true">/</span><span aria-current="page">{E(name)}</span></nav>
         <h1 id="vvb-title">{E(name)}, Sector {E(sector)}</h1>
         <p class="vvb-lead">{E(P['lead'])}</p>
         <ul class="vvb-pills">{pills}</ul>
@@ -415,14 +436,7 @@ def page(slug, P, road):
     </div>
   </section>
 
-  <section class="section pjb-near" id="nearby" aria-labelledby="nearby-title">
-    <div class="wrap">
-      <h2 id="nearby-title">Nearby on Golf Course Extension Road</h2>
-      <p>Communities buyers often compare with {E(name)}.</p>
-      <div class="pjb-near-grid">{''.join(f'<a href="{E(u)}">' + (f'<img src="{E(img)}" alt="" width="72" height="72" loading="lazy">' if img else f'<span class="pjb-mono" aria-hidden="true">{E("".join(w[0] for w in n.split()[:2]).upper())}</span>') + f'<span><b>{E(n)}</b><small>Sector {E(sec)} · {E(meta)}</small></span></a>' for sec, u, n, meta, img in near)}</div>
-      <p class="pjb-also"><a href="/locations/golf-course-extension-road-gurugram/">All projects on Golf Course Extension Road</a></p>
-    </div>
-  </section>
+{near_html}
 
 <section class="section" id="enquire">
     <div class="wrap">

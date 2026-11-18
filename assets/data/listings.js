@@ -124,11 +124,11 @@ window.FF_LISTINGS = [
     ref: "14260",
     type: "Lease",
     status: "Verified",
-    title: "3BHK Fully Furnished Flat for Rent in Princeton Apartments, DLF Phase V",
-    project: "Princeton Apartments, DLF Phase V",
-    projectSlug: "dlf-phase-v",
-    projectUrl: "/lease.html",
-    location: "DLF Phase V, Golf Course Road, Gurugram",
+    title: "3BHK Fully Furnished Flat for Rent in DLF Princeton Estate, DLF Phase V",
+    project: "DLF Princeton Estate",
+    projectSlug: "dlf-princeton-estate",
+    projectUrl: "/projects/dlf-princeton-estate/",
+    location: "Sector 53, DLF Phase V, Golf Course Road, Gurugram",
     bhk: "3BHK",
     size: "1350 Sq. Ft.",
     floor: "Lower",
@@ -136,9 +136,18 @@ window.FF_LISTINGS = [
     availability: "Available now",
     price: "Rs. 70,000/month",
     priceNote: "Plus maintenance. Confirm before visit.",
-    photoCount: 0,
+    image: "/projects/dlf-princeton-estate/images/r14260-01.jpg",
+    photoCount: 5,
+    gallery: [
+      "/projects/dlf-princeton-estate/images/r14260-01.jpg",
+      "/projects/dlf-princeton-estate/images/r14260-02.jpg",
+      "/projects/dlf-princeton-estate/images/r14260-03.jpg",
+      "/projects/dlf-princeton-estate/images/r14260-04.jpg",
+      "/projects/dlf-princeton-estate/images/r14260-05.jpg"
+    ],
+    captions: ["Living and dining", "Bedroom with attached bathroom", "Bedroom", "Wardrobe and dresser", "Passage and crockery unit"],
     detailUrl: "/rent/princeton-dlf-phase-5-3-bhk-14260",
-    description: "A fully furnished 3BHK for rent in Princeton Apartments, DLF Phase V, Gurugram, available now. About 1,350 sq. ft. with two bathrooms and a modular kitchen.",
+    description: "A fully furnished 3BHK for rent in DLF Princeton Estate, Sector 53, DLF Phase V, Gurugram, available now. About 1,350 sq. ft. with two bathrooms and a modular kitchen.",
     highlights: ["Fully furnished", "Modular kitchen", "2 bathrooms", "Available now"]
   }
 ];

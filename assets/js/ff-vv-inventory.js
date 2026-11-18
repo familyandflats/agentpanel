@@ -18,7 +18,10 @@
   var ads = (window.FF_AGENT_ADS || []).filter(function (a) { return a.projectSlug === SLUG; });
   // featured partners: agents with more than 10 different listings here, or who say they have more than 10
   var partners = (window.FF_AGENT_PARTNERS || []).filter(function (p) { return p.projectSlug === SLUG; });
-  var state = { type: "Sale", bhk: "", days: 0, sort: "bhk", open: {}, adTab: null, openLayout: null, partner: null };   // default: 2 BHK first, then 3 BHK...   // days 0 = any time (ads never expire)
+  // T0196: a project with homes only for rent (no sale flats, no sale ads) opens on Rent.
+  var hasSale = verified.concat(ads).some(function (x) { return x.type === "Sale"; });
+  var hasRent = verified.concat(ads).some(function (x) { return x.type === "Lease"; });
+  var state = { type: !hasSale && hasRent ? "Lease" : "Sale", bhk: "", days: 0, sort: "bhk", open: {}, adTab: null, openLayout: null, partner: null };   // default: 2 BHK first, then 3 BHK...   // days 0 = any time (ads never expire)
 
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
@@ -129,7 +132,7 @@
       '<div class="vvi-price">' + vPrice(i) + '</div>' + vPsf(i) +
       '<div>' + tags(vTags(i)) + '</div>' +
       '<div class="vvi-feature-actions">' + (u ? '<a class="vvi-btn dark vvi-view" href="' + u + '">View flat and photos</a>' : '') + '<button class="vvi-btn' + (u ? '' : ' dark') + '" data-enq="' + esc(i.id) + '" data-bhk="' + bhkNum(i.bhk) + '" data-type="' + esc(i.type) + '">Enquire</button>' +
-      '<span class="vvi-mut">Ref. ' + esc(i.id) + '</span></div></div></article>';
+      '<span class="vvi-mut">Property ID ' + esc(i.ref || i.id) + '</span></div></div></article>';   // the public ref, not the internal FF code
   }
   function noPhotoRow(i) {
     return '<div class="vvi-row"><div><span class="vvi-badge ok">Verified</span> <b>' + esc(i.id) + '</b> \u00B7 ' + vPrice(i) + ' \u00B7 ' + sizeLabel(i) + (vPsf(i) ? ' \u00B7 ' + vPsf(i).replace(/<[^>]+>/g, "") : "") + '<br>' +
@@ -156,7 +159,7 @@
   }
   function verifiedHtml() {
     var list = verifiedList().filter(function (i) { return verTab(i) === state.adTab; });
-    if (!list.length) return '<p class="vvi-mut">No verified ' + tabLabel(state.adTab) + ' flats right now. Share your requirement below and we will check live options.</p>';
+    if (!list.length) return '<p class="vvi-mut">No verified ' + (state.adTab ? tabLabel(state.adTab) + ' flats' : 'flats for ' + (state.type === "Lease" ? "rent" : "sale")) + ' right now. Share your requirement below and we will check live options.</p>';
     var withPhoto = list.filter(function (i) { return i.image; }).sort(function (x, y) { return photoCount(y) - photoCount(x); });
     var noPhoto = list.filter(function (i) { return !i.image; });
     return (withPhoto.length === 1 ? featureCard(withPhoto[0]) : withPhoto.length ? '<div class="vvi-grid vvi-vgrid">' + withPhoto.map(photoCard).join("") + "</div>" : "") +
@@ -348,7 +351,7 @@
   }
   function shell() {
     mount.innerHTML =
-      '<div class="vvi-tabs" id="vvi-type"><button class="vvi-pill on" data-t="Sale">Buy</button><button class="vvi-pill" data-t="Lease">Rent</button></div>' +
+      '<div class="vvi-tabs" id="vvi-type"><button class="vvi-pill' + (state.type === "Sale" ? " on" : "") + '" data-t="Sale">Buy</button><button class="vvi-pill' + (state.type === "Lease" ? " on" : "") + '" data-t="Lease">Rent</button></div>' +
       '<div id="vvi-bhktabs"></div>' +
       '<div id="vvi-toplink" class="vvi-toplink"></div>' +
       (IS_VV || verified.length ? '<section class="vvs vvs-ver" aria-labelledby="vvs-ver-h">' +
@@ -356,11 +359,11 @@
         '<h3 class="vvs-title" id="vvs-ver-h">Verified by Family&amp;Flats</h3>' +
         '</div>' +
         '<div id="vvi-ver"></div></section>' : '') +
-      '<section class="vvs vvs-ads" aria-labelledby="vvs-ads-h">' +
+      (IS_VV || ads.length ? '<section class="vvs vvs-ads" aria-labelledby="vvs-ads-h">' +
         '<div class="vvs-head"><span class="vvs-tag"><span class="vvs-dot">i</span>Listed by agents · confirmed by us before your visit</span>' +
         '<h3 class="vvs-title" id="vvs-ads-h">From the market</h3>' +
         '</div>' +
-        '<div id="vvi-ads"></div></section>' +
+        '<div id="vvi-ads"></div></section>' : '') +
       (partners.length ? '<section class="vvs vvs-partners" aria-labelledby="vvs-par-h">' +
         '<div class="vvs-head"><span class="vvs-tag"><span class="vvs-dot">\u2605</span>Most flats in ' + esc(PROJECT.replace(/^(IREO|Conscient|M3M|Emaar MGF|Smart World)\s+/, "")) + '</span>' +
         '<h3 class="vvs-title" id="vvs-par-h">Featured partners</h3>' +
@@ -385,7 +388,8 @@
     document.getElementById("vvi-toplink").innerHTML = "";   // design B: the "see all" link sits at the end of the section only
     var vm = document.getElementById("vvi-ver");
     if (vm) vm.innerHTML = verifiedHtml();
-    document.getElementById("vvi-ads").innerHTML = adsHtml();
+    var am = document.getElementById("vvi-ads");
+    if (am) am.innerHTML = adsHtml();
     var pm = document.getElementById("vvi-partners");
     if (pm) pm.innerHTML = partnersHtml();
     fitRanges();
