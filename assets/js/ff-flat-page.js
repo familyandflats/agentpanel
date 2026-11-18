@@ -62,11 +62,48 @@
     '<div class="ffp-bar"><div><b>' + esc(priceText) + '</b><small>' + esc(bhk + " BHK · " + (size ? size.toLocaleString("en-IN") + " sq. ft." : "")) + '</small></div><a href="' + esc(wa) + '" target="_blank" rel="noopener">Enquire</a></div>' +
     '<div class="ffp-lb" id="ffp-lb" role="dialog" aria-modal="true" aria-label="Photo viewer"><button class="x" aria-label="Close photo viewer">×</button><button class="arrow prev" aria-label="Previous photo">‹</button><img id="ffp-lbimg" alt=""><div class="cap" id="ffp-lbcap"></div><button class="arrow next" aria-label="Next photo">›</button></div>';
 
+  // T0179 client links (Arun 18 Nov 2026): opened as familyandflats.com/f/<Property ID>-<code>, the page tells
+  // Family&Flats it was opened, how many photos were seen, whether the price came into view and whether Enquire or
+  // Call was tapped. Only a random id kept in this browser is sent; never a name, number or contacts.
+  var linkM = ((typeof location !== "undefined" && location.pathname) || "").match(/^\/f\/(\d{5})-([a-z0-9]{4,8})\/?$/) || [];
+  var track = function () {};
+  if (linkM[1] && linkM[1] === String(item.ref || "")) {
+    var dev = "";
+    try {
+      dev = localStorage.getItem("ff_dev") || "";
+      if (!dev) { dev = ((window.crypto && crypto.randomUUID) ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2)).replace(/[^A-Za-z0-9_-]/g, "").slice(0, 32); localStorage.setItem("ff_dev", dev); }
+    } catch (e) { dev = "tmp" + Math.random().toString(36).slice(2, 14); }
+    track = function (k, n, t, v) {
+      var body = JSON.stringify({ c: linkM[2], r: linkM[1], d: dev, k: k, n: n, t: t, v: v });
+      try {
+        if (!(navigator.sendBeacon && navigator.sendBeacon("/api/integrations/link-event", new Blob([body], { type: "application/json" }))))
+          fetch("/api/integrations/link-event", { method: "POST", headers: { "Content-Type": "application/json" }, body: body, keepalive: true });
+      } catch (e) {}
+    };
+    track("open");
+    var priceEl = root.querySelector(".ffp-price");
+    if (priceEl && "IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (es) { if (es.some(function (x) { return x.isIntersecting; })) { track("price"); io.disconnect(); } }, { threshold: 0.6 });
+      io.observe(priceEl);
+    }
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest("a.ffp-btn.wa, .ffp-bar a, a[href^='tel:']");
+      if (a) track("enquire", null, null, /^tel:/.test(a.getAttribute("href") || "") ? "call" : "whatsapp");
+    }, true);
+  }
+  var seenPhotos = {}, seenCount = 0, sentCount = 0, photoTimer = null;
+  function notePhoto(n) {
+    if (!seenPhotos[n]) { seenPhotos[n] = 1; seenCount++; }
+    if (!linkM[1]) return;   // only client links report photos
+    if (seenCount > sentCount) { clearTimeout(photoTimer); photoTimer = setTimeout(function () { sentCount = seenCount; track("photo", seenCount, gallery.length); }, 1500); }
+  }
+
   if (!hasPhotos) return;   // no slider or photo viewer to wire up
   var cur = 0, main = document.getElementById("ffp-main"), lb = document.getElementById("ffp-lb"), lbimg = document.getElementById("ffp-lbimg"), opener = null;
   function alt(n) { return (caps[n] ? caps[n] + " – " : "") + bhk + " BHK flat in " + item.project + ", photo " + (n + 1) + " of " + gallery.length; }
   function show(n) {
     cur = (n + gallery.length) % gallery.length;
+    notePhoto(cur);
     main.src = gallery[cur]; main.alt = alt(cur); lbimg.src = gallery[cur]; lbimg.alt = alt(cur);
     document.getElementById("ffp-lbcap").textContent = (caps[cur] ? caps[cur] + "  \u00B7  " : "") + (cur + 1) + " / " + gallery.length;
     document.getElementById("ffp-count").textContent = (cur + 1) + " / " + gallery.length;
