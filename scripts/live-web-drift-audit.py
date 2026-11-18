@@ -31,8 +31,17 @@ def blob(path: str) -> bytes:
 
 def main() -> None:
     if not PASSWORD: raise RuntimeError('FTP password is required (FF_FTP_PASSWORD or FTP_PASSWORD)')
-    ftp = ftplib.FTP_TLS(context=ssl._create_unverified_context(), timeout=60)
-    ftp.connect(HOST, 21); ftp.login(USER, PASSWORD); ftp.prot_p(); ftp.set_pasv(True)
+    # The host refuses new FTP connections for a short while right after a deploy: retry before calling it a failure.
+    import time
+    for attempt in range(1, 6):
+        try:
+            ftp = ftplib.FTP_TLS(context=ssl._create_unverified_context(), timeout=60)
+            ftp.connect(HOST, 21); ftp.login(USER, PASSWORD); ftp.prot_p(); ftp.set_pasv(True)
+            break
+        except (OSError, ftplib.Error) as exc:
+            if attempt == 5: raise
+            print(f'FTP connect attempt {attempt} failed ({type(exc).__name__}); retrying in {attempt * 30}s', flush=True)
+            time.sleep(attempt * 30)
     files = tracked(); drift = []; same = 0
     try:
         for path in files:
