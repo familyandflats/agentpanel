@@ -1,7 +1,8 @@
 (function () {
   // only flats with their own page; a flat without photos yet (e.g. IREO Skyon, 13 Nov 2026) shows on its project page only
   // 14 Nov 2026: photo-less verified flats now have their own page too, but these cards need a photo
-  const listings = (window.FF_LISTINGS || []).filter((item) => item && item.detailUrl && item.image);
+  // 19 Nov 2026: a verified flat without photos yet (photos still being checked) is listed too, with a "Photos on request" tile
+  const listings = (window.FF_LISTINGS || []).filter((item) => item && item.detailUrl && (item.image || /verified/i.test(item.status || "")));
   const moneyPhone = "919899273673";
 
   function qs(name) {
@@ -75,7 +76,7 @@
     const badgeClass = item.type === "Lease" ? "lease" : "sale";
     return `
       <article class="ff-listing-card" data-bhk="${slug(item.bhk)}" data-project="${slug(item.project)}">
-        <a class="ff-listing-photo" href="${item.detailUrl}" style="background-image:url('${item.image}')">
+        <a class="ff-listing-photo${item.image ? "" : " ff-listing-nophoto"}" href="${item.detailUrl}"${item.image ? ` style="background-image:url('${item.image}')"` : ""}>${item.image ? "" : '<span class="ff-listing-nophoto-text">Photos on request</span>'}
           <span class="ff-listing-badge ${badgeClass}">${item.type}</span>
           <span class="ff-listing-status">${item.status}</span>
         </a>
@@ -264,7 +265,7 @@
     setHref("[data-whatsapp]", wa("Hi Family&Flats, please share current details for " + item.id + "."));
 
     const hero = document.querySelector("[data-detail-hero]");
-    if (hero) hero.style.backgroundImage = "url('" + item.image + "')";
+    if (hero && item.image) hero.style.backgroundImage = "url('" + item.image + "')";
 
     const gallery = document.querySelector("[data-gallery]");
     if (gallery) {
