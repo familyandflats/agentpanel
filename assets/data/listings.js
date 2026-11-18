@@ -118,5 +118,27 @@ window.FF_LISTINGS = [
     detailUrl: "/rent/ireo-skyon-2-bhk-14257",
     description: "A verified fully furnished 2BHK for rent in IREO Skyon, Sector 60, available from 1 December 2026. West-facing balcony, east entrance and two car parkings.",
     highlights: ["Fully furnished", "West-facing balcony, east entrance", "2 car parkings", "Available from 1 December 2026"]
+  },
+  {
+    id: "FF-DLF5-RENT-001",
+    ref: "14260",
+    type: "Lease",
+    status: "Verified",
+    title: "3BHK Fully Furnished Flat for Rent in Princeton Apartments, DLF Phase V",
+    project: "Princeton Apartments, DLF Phase V",
+    projectSlug: "dlf-phase-v",
+    projectUrl: "/lease.html",
+    location: "DLF Phase V, Golf Course Road, Gurugram",
+    bhk: "3BHK",
+    size: "1350 Sq. Ft.",
+    floor: "Lower",
+    furnishing: "Fully Furnished",
+    availability: "Available now",
+    price: "Rs. 70,000/month",
+    priceNote: "Plus maintenance. Confirm before visit.",
+    photoCount: 0,
+    detailUrl: "/rent/princeton-dlf-phase-5-3-bhk-14260",
+    description: "A fully furnished 3BHK for rent in Princeton Apartments, DLF Phase V, Gurugram, available now. About 1,350 sq. ft. with two bathrooms and a modular kitchen.",
+    highlights: ["Fully furnished", "Modular kitchen", "2 bathrooms", "Available now"]
   }
 ];
