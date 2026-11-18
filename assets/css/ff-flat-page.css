@@ -135,3 +135,10 @@
 @media (max-width:1000px){.ffx-card{flex-basis:calc((100% - 28px) / 3)}}
 @media (max-width:760px){.ffx-card{flex-basis:calc((100% - 14px) / 2)}}
 @media (max-width:540px){.ffx-card{flex-basis:100%}.ffx-sec h2{font-size:18px}}
+
+/* 19 Nov 2026 (Arun): one gallery for every flat, as on the Princeton page: wide photo, thumbnails in a row below.
+   An upright photo is shown whole (not cropped) on a blurred copy of itself. */
+.ffp-gal.land .ffp-stage{position:relative;isolation:isolate}
+.ffp-gal.land .ffp-stage.tall::before{content:"";position:absolute;inset:-24px;background:var(--ffp-bg) center/cover no-repeat;filter:blur(22px) brightness(.92);z-index:-1}
+.ffp-gal.land .ffp-stage.tall img{object-fit:contain}
+@media(max-width:900px){.ffp-gal.land .ffp-stage{max-width:none;aspect-ratio:4/3}.ffp-gal.land .ffp-thumb{flex:0 0 96px;height:auto;padding:0;aspect-ratio:4/3}}
