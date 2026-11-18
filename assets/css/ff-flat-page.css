@@ -122,7 +122,7 @@
 .ffx-btn:hover{background:#0C5E36}
 .ffx-hlink{color:#0B1B33;text-decoration:none}
 .ffx-hlink:hover{color:#8A1414;text-decoration:underline}
-.ffx-note{margin:6px 0 2px;font-size:12.5px;line-height:1.5;color:#64748B;max-width:760px}
+.ffx-note{margin:4px 0 0;font-size:11px;line-height:1.45;color:#8A97A8;max-width:760px}
 .ffx-all{display:inline-block;margin-top:2px;font-weight:800;font-size:14px;color:#8A1414;text-decoration:none}
 .ffx-all:hover{text-decoration:underline}
 @media (max-width:1000px){.ffx-card{flex-basis:calc((100% - 28px) / 3)}}
