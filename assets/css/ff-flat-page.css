@@ -120,6 +120,8 @@
 .ffx-id{font-size:12px;color:#64748B;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ffx-btn{display:flex;align-items:center;justify-content:center;height:38px;border-radius:10px;font-weight:800;font-size:13.5px;background:#13804A;color:#fff !important;text-decoration:none}
 .ffx-btn:hover{background:#0C5E36}
+.ffx-hlink{color:#0B1B33;text-decoration:none}
+.ffx-hlink:hover{color:#8A1414;text-decoration:underline}
 .ffx-note{margin:6px 0 2px;font-size:12.5px;line-height:1.5;color:#64748B;max-width:760px}
 .ffx-all{display:inline-block;margin-top:2px;font-weight:800;font-size:14px;color:#8A1414;text-decoration:none}
 .ffx-all:hover{text-decoration:underline}
