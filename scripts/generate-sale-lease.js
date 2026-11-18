@@ -52,7 +52,7 @@ for (const a of W.FF_ARE_ADS || []) {
   homes.push({ id: a.id, c: "are", t, k: a.kind, b: a.kind === "Independent floor" ? a.bhk || null : null, p, plot: a.plot || 0, por: !!a.por });
 }
 const verified = (W.FF_LISTINGS || []).concat(W.FF_VERIFIED_LISTINGS || [])
-  .filter((i) => i && /verified/i.test(i.status || "") && i.detailUrl && fs.existsSync(path.join(ROOT, i.detailUrl.replace(/^\//, ""))));
+  .filter((i) => i && /verified/i.test(i.status || "") && i.detailUrl && fs.existsSync(path.join(ROOT, i.detailUrl.replace(/^\//, "") + (/\.html$|\/$/.test(i.detailUrl) ? "" : ".html"))));
 
 const COMM = {
   vv: { name: "IREO Victory Valley", url: "/projects/ireo-victory-valley/", line: "Sector 67 · high-rise apartments · ready to move",

@@ -1,6 +1,7 @@
 window.FF_LISTINGS = [
   {
     id: "FF-IVV-SALE-002",
+    ref: "14259",
     flatId: "D15-02-01",
     type: "Sale",
     status: "Verified",
@@ -39,7 +40,7 @@ window.FF_LISTINGS = [
       "/projects/ireovictoryvalley/images/d15-02-01-14.jpg"
     ],
     captions: ["Living and dining area", "Master bedroom entrance", "Kitchen", "Bedroom", "Bedroom", "Bedroom", "Bedroom with wardrobe", "Room", "Bathroom", "Bathroom", "Bathroom with bathtub", "Balcony", "Balcony with garden view", "Balcony"],
-    detailUrl: "/listings/sale/ff-ivv-sale-002.html",
+    detailUrl: "/buy/ireo-victory-valley-4-bhk-14259",
     legacyUrl: "/property-ff-ivv-sale-002.html",
     description: "A verified 4BHK resale option in Tower D of IREO Victory Valley, semi furnished and available now. AI-enhanced photos show the living room, bedrooms, bathrooms, kitchen and garden-facing balconies.",
     highlights: [
@@ -51,6 +52,7 @@ window.FF_LISTINGS = [
   },
   {
     id: "FF-SKY-SALE-001",
+    ref: "14258",
     type: "Sale",
     status: "Verified",
     title: "2BHK Flat on Sale in IREO Skyon",
@@ -71,12 +73,13 @@ window.FF_LISTINGS = [
     clubMembership: true,
     features: ["Sun-facing", "Road-facing"],
     photoCount: 0,
-    detailUrl: "/listings/sale/ff-sky-sale-001.html",
+    detailUrl: "/buy/ireo-skyon-2-bhk-14258",
     description: "A verified 2BHK resale flat in IREO Skyon, Sector 60, semi furnished and available now. South-facing balcony with good sunlight, first floor, one car parking and club membership.",
     highlights: ["South-facing balcony, sun-facing", "North entrance", "1st floor", "1 car parking, club membership", "Visit coordination through Family&Flats"]
   },
   {
     id: "FF-SKY-RENT-001",
+    ref: "14257",
     flatId: "C0311",
     type: "Lease",
     status: "Verified",
@@ -112,7 +115,7 @@ window.FF_LISTINGS = [
       "/projects/ireo-skyon/images/c0311-10.jpg"
     ],
     captions: ["Living room", "Kitchen", "Bedroom 1", "Bedroom 2", "Bathroom 1", "Bathroom 2", "Dining area", "Living room with TV", "Bedroom 1", "Bedroom 2"],
-    detailUrl: "/listings/lease/ff-sky-rent-001.html",
+    detailUrl: "/rent/ireo-skyon-2-bhk-14257",
     description: "A verified fully furnished 2BHK for rent in IREO Skyon, Sector 60, available from 1 December 2026. Third floor, west-facing balcony, east entrance and two car parkings. Photos are AI-enhanced for light and clarity only; nothing in the flat is added or removed.",
     highlights: ["Fully furnished", "West-facing balcony, east entrance", "3rd floor", "2 car parkings", "Available from 1 December 2026"]
   }

@@ -69,7 +69,7 @@ function verifiedFlats() {
   vm.runInNewContext(fs.readFileSync(path.join(ROOT, "assets/data/verified-listings.js"), "utf8"), ctx);
   const all = (ctx.window.FF_LISTINGS || []).concat(ctx.window.FF_VERIFIED_LISTINGS || []);
   const seen = new Set();
-  return all.filter((i) => i && /verified/i.test(i.status || "") && i.detailUrl && fs.existsSync(path.join(ROOT, i.detailUrl.replace(/^\//, ""))) && !seen.has(i.id) && seen.add(i.id));
+  return all.filter((i) => i && /verified/i.test(i.status || "") && i.detailUrl && fs.existsSync(path.join(ROOT, i.detailUrl.replace(/^\//, "") + (/\.html$|\/$/.test(i.detailUrl) ? "" : ".html"))) && !seen.has(i.id) && seen.add(i.id));
 }
 
 function agentAds() {
