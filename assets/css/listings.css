@@ -523,3 +523,7 @@
     position: static;
   }
 }
+
+/* 19 Nov 2026: verified flat whose photos are still being checked */
+.ff-listing-photo.ff-listing-nophoto{background:#DDE3EA;display:flex;align-items:center;justify-content:center}
+.ff-listing-nophoto-text{font-weight:700;font-size:15px;color:#334155}

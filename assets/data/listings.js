@@ -168,16 +168,7 @@ window.FF_LISTINGS = [
     price: "Rs. 2.40 Cr",
     priceNote: "Asking price. Confirm before visit.",
     features: ["Park / clubhouse view"],
-    image: "/projects/ireothecorridors/images/s14261-01.jpg",
-    photoCount: 5,
-    gallery: [
-      "/projects/ireothecorridors/images/s14261-01.jpg",
-      "/projects/ireothecorridors/images/s14261-02.jpg",
-      "/projects/ireothecorridors/images/s14261-03.jpg",
-      "/projects/ireothecorridors/images/s14261-04.jpg",
-      "/projects/ireothecorridors/images/s14261-05.jpg"
-    ],
-    captions: ["Living room", "Living room, other side", "Study room", "Bedroom", "Balcony and green view"],
+    photoCount: 0,
     detailUrl: "/sale/ireo-the-corridors-2-bhk-14261",
     description: "A 2BHK with a separate study room for sale in IREO The Corridors, Sector 67A, Gurugram, ready to move. About 1,480 sq. ft. with two bathrooms, two balconies, a modular kitchen and a park and clubhouse view.",
     highlights: ["2 BHK + study room", "2 bathrooms, 2 balconies", "Park / clubhouse view", "Ready to move"]
