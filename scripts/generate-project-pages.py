@@ -337,7 +337,7 @@ def page(slug, P, road):
 <link rel="stylesheet" href="/assets/css/components.css?v=phase3-batch8-redesign">
 <link rel="stylesheet" href="/assets/css/forms.css?v=phase3-batch8-redesign">
 <link rel="stylesheet" href="/assets/css/header.css?v=phase3-batch8-redesign-b">
-<link rel="stylesheet" href="/assets/css/footer.css?v=footer-final-2">
+<link rel="stylesheet" href="/assets/css/footer.css?v=t0195">
 <link rel="stylesheet" href="/assets/css/responsive.css?v=phase3-batch8-redesign">
 <link rel="stylesheet" href="/assets/css/project-detail.css?v=phase3-batch8-redesign-2">
 <link rel="stylesheet" href="/assets/css/listings.css?v=phase3-all-projects">

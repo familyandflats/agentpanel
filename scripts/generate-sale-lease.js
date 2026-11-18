@@ -165,7 +165,7 @@ function page(sale) {
 <link rel="stylesheet" href="/assets/css/tokens.css?v=home-v2">
 <link rel="stylesheet" href="/assets/css/typography.css?v=home-v2">
 <link rel="stylesheet" href="/assets/css/header.css?v=header-standard-20260925a">
-<link rel="stylesheet" href="/assets/css/footer.css?v=footer-standard-20260924c">
+<link rel="stylesheet" href="/assets/css/footer.css?v=t0195">
 <link rel="stylesheet" href="/assets/css/ff-sale-lease.css?v=${CSS_V}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Family&amp;Flats">
