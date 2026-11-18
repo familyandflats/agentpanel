@@ -160,24 +160,46 @@
     var host = document.createElement("div"); host.className = "ffx"; host.id = "ffx-more";
     var grid = root.querySelector(".ffp-grid"); if (!grid) return;
     grid.parentNode.insertBefore(host, grid.nextSibling);
+    // T0191 (Arun 18 Nov 2026 13:48): 4 cards at a time, no scrollbar, ‹ › buttons; "See all" opens the rent/buy
+    // page with the filter already set (2 BHK, and the society for the first section).
+    var MAX = 12;
     var section = function (title, cards, seeAll, seeHref) {
       if (!cards.length) return "";
-      return '<section class="ffx-sec"><h2>' + esc(title) + '</h2><div class="ffx-row">' + cards.join("") + '</div>' + (seeAll ? '<a class="ffx-all" href="' + esc(seeHref) + '">' + esc(seeAll) + ' →</a>' : "") + '</section>';
+      return '<section class="ffx-sec"><div class="ffx-head"><h2>' + esc(title) + '</h2><span class="ffx-nav">' +
+        '<button type="button" class="ffx-arw" data-dir="-1" aria-label="Previous homes">&#8249;</button>' +
+        '<button type="button" class="ffx-arw" data-dir="1" aria-label="Next homes">&#8250;</button></span></div>' +
+        '<div class="ffx-row">' + cards.join("") + '</div>' + (seeAll ? '<a class="ffx-all" href="' + esc(seeHref) + '">' + esc(seeAll) + ' →</a>' : "") + '</section>';
     };
+    var listPage = isLease ? "/lease.html" : "/sale.html";
+    var filterSlug = function (s3) { return s3 === "ireovictoryvalley" ? "ireo-victory-valley" : s3; };
+    var arrows = function () {
+      Array.prototype.forEach.call(host.querySelectorAll(".ffx-sec"), function (sec) {
+        var row = sec.querySelector(".ffx-row"), b = sec.querySelectorAll(".ffx-arw");
+        var upd = function () {
+          var max = row.scrollWidth - row.clientWidth;
+          sec.classList.toggle("ffx-fits", max <= 2);
+          b[0].disabled = row.scrollLeft <= 2; b[1].disabled = row.scrollLeft >= max - 2;
+        };
+        if (!row._ffx) { row._ffx = 1; row.addEventListener("scroll", function () { clearTimeout(row._t); row._t = setTimeout(upd, 80); }, { passive: true }); }
+        Array.prototype.forEach.call(b, function (btn) { btn.onclick = function () { row.scrollBy({ left: +btn.getAttribute("data-dir") * (row.clientWidth + 14), behavior: "smooth" }); }; });
+        upd();
+      });
+    };
+    if (window.addEventListener) window.addEventListener("resize", function () { arrows(); });
     var out = { same: "", near: "" };
-    var paint = function () { host.innerHTML = out.same + out.near; };
+    var paint = function () { host.innerHTML = out.same + out.near; arrows(); };
     loadAds(mySlug, function (list) {
       var ads = list.filter(fits).sort(near);
-      var cards = ourSame.slice(0, 6).map(ourCard).concat(ads.slice(0, Math.max(0, 6 - ourSame.length)).map(function (x, i) { return adCard(x, mySlug, i); }));
+      var cards = ourSame.slice(0, MAX).map(ourCard).concat(ads.slice(0, Math.max(0, MAX - ourSame.length)).map(function (x, i) { return adCard(x, mySlug, i); }));
       var total = ourSame.length + ads.length;
       out.same = section("More " + bhk + " BHK homes for " + word + " in " + item.project, cards,
-        total > cards.length ? "See all: " + (ourSame.length ? ourSame.length + " verified by us + " : "") + ads.length + " agent listings" : "", (PROJ[mySlug] || {}).url || item.projectUrl || (isLease ? "/lease.html" : "/sale.html"));
+        "See all " + bhk + " BHK homes for " + word + " in " + item.project + " (" + total + ")", listPage + "?project=" + encodeURIComponent(filterSlug(mySlug)) + "&bhk=" + bhk + "bhk");
       paint();
       var pending = nearSlugs.length, nearAds = [];
       var finish = function () {
         nearAds.sort(function (a, b) { return near(a.x, b.x); });
-        var c2 = ourNear.slice(0, 6).map(ourCard).concat(nearAds.slice(0, Math.max(0, 6 - ourNear.length)).map(function (o, i) { return adCard(o.x, o.slug, i + 3); }));
-        out.near = section("Similar " + bhk + " BHK homes nearby", c2, (ourNear.length + nearAds.length) > c2.length ? "See all " + bhk + " BHK homes for " + word + " nearby" : "", isLease ? "/lease.html" : "/sale.html");
+        var c2 = ourNear.slice(0, MAX).map(ourCard).concat(nearAds.slice(0, Math.max(0, MAX - ourNear.length)).map(function (o, i) { return adCard(o.x, o.slug, i + 3); }));
+        out.near = section("Similar " + bhk + " BHK homes nearby", c2, "See all " + bhk + " BHK homes for " + word, listPage + "?bhk=" + bhk + "bhk");
         paint();
       };
       if (!pending) return finish();

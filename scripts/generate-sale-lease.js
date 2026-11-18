@@ -2,7 +2,8 @@
 /* Family&Flats: writes /sale.html and /lease.html (design B) from the site data.
    Run from anywhere:  node scripts/generate-sale-lease.js [--check]
    Reads  assets/data/listings.js, verified-listings.js (our verified homes)
-          assets/data/agent-ads.js (IREO Victory Valley agent ads), anant-raj-ads.js (Anant Raj Estate)
+          assets/data/agent-ads.js (IREO Victory Valley agent ads), anant-raj-ads.js (Anant Raj Estate),
+          agent-ads-ireo-skyon.js and agent-ads-conscienthineselevate.js (T0191, Arun 18 Nov 2026)
           locations/golf-course-extension-road-gurugram/index.html (the list of projects on the road)
    Writes plain HTML that Google and no-JavaScript visitors can read; assets/js/ff-sale-lease.js
    only adds the filters. After running: inject-shell.py --apply (rule 2.9), then the deploy check.
@@ -20,7 +21,8 @@ function load(files) {
   for (const f of files) { const p = path.join(ROOT, f); if (fs.existsSync(p)) vm.runInNewContext(fs.readFileSync(p, "utf8"), ctx); }
   return ctx.window;
 }
-const W = load(["assets/data/listings.js", "assets/data/verified-listings.js", "assets/data/agent-ads.js", "assets/data/anant-raj-ads.js"]);
+const W = load(["assets/data/listings.js", "assets/data/verified-listings.js", "assets/data/agent-ads.js", "assets/data/anant-raj-ads.js",
+  "assets/data/agent-ads-ireo-skyon.js", "assets/data/agent-ads-conscienthineselevate.js"]);
 const esc = (s) => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const fmtCr = (v) => (v / 1e7).toFixed(2).replace(/\.?0+$/, "");
 const fmtRent = (v) => (v >= 1e5 ? (v / 1e5).toFixed(2).replace(/\.?0+$/, "") + " L" : Math.round(v / 1000) + "K");
@@ -38,10 +40,12 @@ const toRupees = (s) => { const m = String(s || "").replace(/,/g, "").match(/([\
 // Each home: {c: community key, t: "s"|"r", k: kind, b: bhk|null, p: price in rupees|0, z: size text}
 const held = [];
 const homes = [];
+const AD_COMM = { ireovictoryvalley: "vv", "ireo-skyon": "sk", conscienthineselevate: "ce" };
 for (const a of W.FF_AGENT_ADS || []) {
-  if (a.projectSlug !== "ireovictoryvalley") continue;
+  const c = AD_COMM[a.projectSlug];
+  if (!c) continue;
   const ph = (a.tags || []).some((t) => /pent/i.test(t));
-  homes.push({ id: a.id, c: "vv", t: a.type === "Sale" ? "s" : "r", k: ph ? "Penthouse" : "Flat", b: a.bhk || null, p: a.price || 0, sz: a.size || 0 });
+  homes.push({ id: a.id, c, t: a.type === "Sale" ? "s" : "r", k: ph ? "Penthouse" : "Flat", b: a.bhk || null, p: a.price || 0, sz: a.size || 0 });
 }
 for (const a of W.FF_ARE_ADS || []) {
   const t = a.txn === "Sale" ? "s" : "r";
@@ -57,6 +61,10 @@ const verified = (W.FF_LISTINGS || []).concat(W.FF_VERIFIED_LISTINGS || [])
 const COMM = {
   vv: { name: "IREO Victory Valley", url: "/projects/ireo-victory-valley/", line: "Sector 67 · high-rise apartments · ready to move",
         img: "/projects/ireovictoryvalley/images/ff-vv-ov-04-800.jpg", slug: "ireo-victory-valley" },
+  sk: { name: "IREO Skyon", url: "/projects/ireo-skyon/", line: "Sector 60 · high-rise apartments · ready to move",
+        img: "/projects/ireo-skyon/images/ff-sky-ov-01-800.jpg", slug: "ireo-skyon" },
+  ce: { name: "Conscient Hines Elevate", url: "/projects/conscienthineselevate/", line: "Sector 59 · high-rise apartments",
+        img: "/projects/conscienthineselevate/images/banner-800.jpg", slug: "conscienthineselevate" },
   are: { name: "Anant Raj Estate", url: "/projects/anant-raj-estate/", line: { s: "Sector 63A · independent floors, villas and plots · blocks A–L", r: "Sector 63A · independent floors and villas · blocks A–L" },
          mono: "AR", slug: "anant-raj-estate" },
 };
@@ -68,6 +76,10 @@ function group(h, sale) {
     const dir = h.k === "Penthouse" ? "penthouse" : `${h.b}-bhk`;
     const rel = `projects/ireo-victory-valley/${dir}-for-${sale ? "sale" : "rent"}/index.html`;
     return { key: name, name, order: h.k === "Penthouse" ? 99 : h.b, url: fs.existsSync(path.join(ROOT, rel)) ? "/" + rel.replace("index.html", "") : COMM.vv.url };
+  }
+  if (h.c === "sk" || h.c === "ce") {   // the project page opens on this BHK for rent/sale (?for=&bhk=, T0191)
+    const name = h.k === "Penthouse" ? "Penthouse" : `${h.b} BHK`;
+    return { key: name, name, order: h.k === "Penthouse" ? 99 : h.b, url: `${COMM[h.c].url}?for=${sale ? "buy" : "rent"}&bhk=${h.k === "Penthouse" ? "P" : h.b}#vv-inventory` };
   }
   if (h.k === "Independent floor") return { key: h.b ? `${h.b} BHK floor` : "Independent floor", name: h.b ? `${h.b} BHK floor` : "Independent floor", order: h.b || 9, url: COMM.are.url };
   return { key: h.k + "s", name: h.k + "s", order: h.k === "Villa" ? 20 : 30, url: COMM.are.url };
@@ -109,7 +121,7 @@ function page(sale) {
   const word = sale ? "sale" : "rent";
   const title = `Flats & Floors for ${sale ? "Sale" : "Rent"} in Gurugram | Family&Flats`;
   const comms = Object.keys(COMM).filter((c) => byC(c).length);
-  const desc = `${total} homes for ${word} on Golf Course Extension Road, Gurugram: ${comms.map((c) => COMM[c].name).join(" and ")}. Verified first, agent listings checked before you visit.`;
+  const desc = `${total} homes for ${word} in ${comms.map((c) => COMM[c].name).join(", ").replace(/, ([^,]*)$/, " and $1")}, Golf Course Extension Road, Gurugram. Verified first.`;
   if (desc.length > 160) console.log(`NOTE description is ${desc.length} characters`);
   const withHomes = new Set(comms.map((c) => COMM[c].url));
   const others = roadProjects().filter((p) => !withHomes.has(p.url));
@@ -133,7 +145,7 @@ function page(sale) {
     { "@type": "CollectionPage", "@id": url + "#page", url, name: title.replace(" | Family&Flats", ""), description: desc, isPartOf: { "@type": "WebSite", name: "Family&Flats", url: SITE + "/" } },
     { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: SITE + "/" }, { "@type": "ListItem", position: 2, name: sale ? "Buy" : "Rent", item: url }] },
     { "@type": "ItemList", name: `Homes for ${word} in Gurugram`, itemListElement: mine.map((v) => ({ url: SITE + v.detailUrl, name: v.title }))
-        .concat(comms.flatMap((c) => groups(byC(c), sale).map((x) => ({ url: SITE + x.url, name: `${x.name} for ${word} in ${COMM[c].name}` }))))
+        .concat(comms.flatMap((c) => groups(byC(c), sale).map((x) => ({ url: SITE + x.url.replace(/\?.*$/, ""), name: `${x.name} for ${word} in ${COMM[c].name}` }))))
         .filter((x, i, a) => a.findIndex((y) => y.url === x.url && y.name === x.name) === i).map((x, i) => ({ "@type": "ListItem", position: i + 1, ...x })) },
   ] };
 
