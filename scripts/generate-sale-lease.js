@@ -117,7 +117,7 @@ function page(sale) {
   const vcard = (v) => `<a class="sl-vcard" href="${esc(v.detailUrl)}" data-c="${v.projectSlug === "ireovictoryvalley" ? "ireo-victory-valley" : esc(v.projectSlug)}" data-k="flat" data-b="${parseInt(v.bhk, 10) || ""}" data-ps="${Math.round(toRupees(v.price))}">
 <span class="sl-vphoto"><img src="${esc(v.image)}" alt="${esc(v.title)}" width="800" height="600" loading="lazy"><span class="sl-badge">Verified</span>${v.photoCount ? `<span class="sl-count">${v.photoCount} photos</span>` : ""}</span>
 <span class="sl-vbody"><span class="sl-vprice">${esc(String(v.price).replace(/^Rs\.?\s*/i, "₹"))}${sale ? "" : ""}</span><span class="sl-vline">${esc(String(v.bhk).replace(/(\d)\s*BHK/i, "$1 BHK"))} · ${esc(String(v.size).replace(/(\d)(\d{3})\b/, "$1,$2").replace(/\s*Sq\.?\s*Ft\.?/i, " sq ft"))}</span>
-<span class="sl-vmeta">${esc(v.project)} · ${esc(v.floor)} · ${esc(v.furnishing)}</span><span class="sl-vlink">View flat and photos →</span></span></a>`;
+<span class="sl-vmeta">${[v.project, v.floor && (/floor/i.test(v.floor) ? v.floor : v.floor + " floor"), v.furnishing].filter(Boolean).map(esc).join(" · ")}</span><span class="sl-vlink">View flat and photos →</span></span></a>`;
   const verifiedHtml = mine.length
     ? `<div class="sl-vgrid" id="sl-verified">${mine.map(vcard).join("\n")}
 <div class="sl-vnext"><p class="sl-eyebrow">Coming next</p><p>New verified homes are being photographed. They appear here first, with real photos and a confirmed price.</p><a class="sl-link" href="#need">Tell us what you need →</a></div></div>`

@@ -20,11 +20,12 @@
   var cr = /cr/i.test(item.price || "") ? num(item.price) * 1e7 : 0;
   var psf = cr && size ? "₹" + (Math.round(cr / size / 100) * 100).toLocaleString("en-IN") + " per sq. ft." : "";
   var kindTxt = (item.bhk || "") + " " + (item.title || "");
-  var kind = /penthouse/i.test(kindTxt) ? bhk + " BHK " + (/duplex/i.test(kindTxt) ? "Duplex " : "") + "Penthouse" : bhk + " BHK Flat";
+  var kind = /penthouse/i.test(kindTxt) ? bhk + " BHK " + (/duplex/i.test(kindTxt) ? "Duplex " : "") + "Penthouse" : bhk + " BHK " + (/furnished/i.test(item.furnishing || "") ? item.furnishing + " " : "") + "Flat";  // 18 Nov 2026 (Arun): "2 BHK Fully Furnished Flat for Rent"
   var h1 = kind + " " + (isLease ? "for Rent" : "for Sale") + " in " + item.project;
-  var msg = "Hi Family&Flats, I am interested in " + item.id + " (" + bhk + " BHK, " + item.project + "). Please share details and a visit slot.";
+  var pid = item.ref || item.id;  // 18 Nov 2026 (Arun): shown as "Property ID: 14257"; the internal FF-... code is never shown
+  var msg = "Hi Family&Flats, I am interested in Property ID " + pid + " (" + bhk + " BHK, " + item.project + "). Please share details and a visit slot.";
   var wa = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(msg);
-  var waPhotos = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent("Hi Family&Flats, please share current photos of " + item.id + " (" + bhk + " BHK, " + item.project + ").");
+  var waPhotos = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent("Hi Family&Flats, please share current photos of Property ID " + pid + " (" + bhk + " BHK, " + item.project + ").");
   // The page's own <title> (written by scripts/prerender-flat-pages.js) stays: it is unique per flat.
   if (!document.title) document.title = h1 + " | Family&Flats";
 
@@ -36,7 +37,9 @@
   if (item.carParkings != null) facts.push(["Car parking", item.carParkings ? String(item.carParkings) : "None"]);
   if (item.clubMembership != null) facts.push(["Club membership", item.clubMembership ? "Yes" : "No"]);
   if ((item.features || []).length) facts.push(["Facing / view", item.features.join(", ")]);
-  facts.push(["Project", item.project], ["Reference", item.ref || item.id]);
+  facts.push(["Project", item.project], ["Property ID", pid]);
+  // 18 Nov 2026 (Arun): the floor is never disclosed unless he gives the wording for that flat (e.g. "Lower"); empty rows are not shown
+  facts = facts.filter(function (f) { return f[1] != null && String(f[1]).trim() !== ""; });
 
   var others = all.filter(function (i) { return i && i.id !== item.id && i.projectSlug === item.projectSlug && /verified/i.test(i.status || "") && i.type === item.type && i.detailUrl; });
   var seen = {}; others = others.filter(function (i) { if (seen[i.id]) return false; seen[i.id] = 1; return true; });
@@ -51,9 +54,9 @@
       '<section class="ffp-sec"><h2>Key details</h2><dl class="ffp-facts">' + facts.map(function (f) { return '<div class="ffp-fact"><dt>' + esc(f[0]) + '</dt><dd>' + esc(f[1]) + '</dd></div>'; }).join("") + '</dl></section>' +
       '<section class="ffp-sec"><h2>About this flat</h2><p>' + esc(item.description) + '</p></section>' +
       ((item.highlights || []).length ? '<section class="ffp-sec"><h2>Highlights</h2><ul class="ffp-list">' + item.highlights.map(function (h) { return '<li>' + esc(h) + '</li>'; }).join("") + '</ul></section>' : "") +
-      (!hasPhotos ? "" : '<section class="ffp-sec ffp-note"><h2>About these photos</h2><p>' + (item.photoNote ? esc(item.photoNote) : 'These photos have been cleaned and colour-corrected by Family&amp;Flats so rooms are easier to see. The layout, fittings and condition are as found. We recommend a visit before you decide.') + '</p></section>') +
+      // 18 Nov 2026 (Arun): no "About these photos" note and nothing about photo editing on the website
       (others.length ? '<section class="ffp-sec"><h2>Other verified flats in ' + esc(item.project) + '</h2><div class="ffp-more">' + others.map(function (o) { return '<a class="ffp-mini" href="' + esc(o.detailUrl) + '"><div' + (o.image ? ' style="background-image:url(\'' + esc(o.image) + '\')"' : ' class="ffp-mini-none">Photos on request') + '</div><b>' + esc(num(o.bhk) + " BHK · " + o.size) + '</b><span>' + esc(String(o.price).replace(/^Rs\.?\s*/i, "₹")) + '</span></a>'; }).join("") + '</div></section>' : "") +
-    '</div><aside class="ffp-side"><div class="ffp-box"><div class="ffp-lbl">' + (isLease ? "Monthly rent" : "Asking price") + '</div><div class="ffp-price">' + esc(priceText) + '</div>' + (psf ? '<p class="ffp-psf">' + esc(psf) + '</p>' : "") + '<p class="ffp-ref">Ref. ' + esc(item.id) + '</p>' +
+    '</div><aside class="ffp-side"><div class="ffp-box"><div class="ffp-lbl">' + (isLease ? "Monthly rent" : "Asking price") + '</div><div class="ffp-price">' + esc(priceText) + '</div>' + (psf ? '<p class="ffp-psf">' + esc(psf) + '</p>' : "") + '<p class="ffp-ref">Property ID: ' + esc(pid) + '</p>' +
       '<a class="ffp-btn wa" href="' + esc(wa) + '" target="_blank" rel="noopener">Enquire on WhatsApp</a><a class="ffp-btn ghost" href="tel:+' + PHONE + '">Call Family&amp;Flats</a><a class="ffp-btn ghost" href="' + esc(item.projectUrl) + '">View all flats in this project</a>' +
       '<p class="ffp-trust">' + esc(item.priceNote || "") + ' Final price, availability and visit timing are confirmed with the owner side through Family&amp;Flats.</p></div></aside></div>' +
     '<div class="ffp-bar"><div><b>' + esc(priceText) + '</b><small>' + esc(bhk + " BHK · " + (size ? size.toLocaleString("en-IN") + " sq. ft." : "")) + '</small></div><a href="' + esc(wa) + '" target="_blank" rel="noopener">Enquire</a></div>' +
