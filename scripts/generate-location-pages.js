@@ -114,7 +114,7 @@ function build(road) {
   const flatCard = (f) => {
     const isLease = f.type === "Lease", bhk = (String(f.bhk).match(/\d+/) || [""])[0];
     const price = String(f.price || "").replace(/^Rs\.?\s*/i, "₹");
-    return `<a class="ffloc-flat" href="${esc(f.detailUrl)}"><img src="${esc(f.image)}" alt="${esc(`${bhk} BHK flat ${isLease ? "for rent" : "for sale"} in ${f.project}`)}" loading="lazy" width="320" height="220"><span class="ffloc-tag">${isLease ? "For rent" : "For sale"} · verified</span><b>${esc(`${bhk} BHK in ${f.project}`)}</b><span>${esc([(String(f.size).match(/[\d,]+/) ? (+String(f.size).replace(/,/g, "").match(/\d+/)[0]).toLocaleString("en-IN") + " sq. ft." : f.size), f.floor, f.furnishing].filter(Boolean).join(" · "))}</span><strong>${esc(price)}</strong></a>`;
+    return `<a class="ffloc-flat" href="${esc(f.detailUrl)}"><img src="${esc(f.image)}" alt="${esc(`${bhk} BHK flat ${isLease ? "for rent" : "for sale"} in ${f.project}`)}" loading="lazy" width="320" height="220"><span class="ffloc-tag">${isLease ? "For rent" : "For sale"} · verified</span><b>${esc(`${bhk} BHK in ${f.project}`)}</b><span>${esc([(String(f.size).match(/[\d,]+/) ? (+String(f.size).replace(/,/g, "").match(/\d+/)[0]).toLocaleString("en-IN") + " sq. ft." : f.size), f.floor && (/floor/i.test(f.floor) ? f.floor : f.floor + " floor"), f.furnishing].filter(Boolean).join(" · "))}</span><strong>${esc(price)}</strong></a>`;
   };
   const secInv = (s, long) => {
     const t = bySector.get(s).reduce((o, p) => ({ sale: o.sale + p.inv.sale, rent: o.rent + p.inv.rent }), { sale: 0, rent: 0 });

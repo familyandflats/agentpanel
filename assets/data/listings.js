@@ -12,7 +12,7 @@ window.FF_LISTINGS = [
     location: "Sector 67, Golf Course Extension Road, Gurugram",
     bhk: "4BHK",
     size: "2850 Sq. Ft.",
-    floor: "2nd Floor",
+    floor: "",
     furnishing: "Semi Furnished",
     availability: "Available",
     price: "Rs. 5.80 Cr",
@@ -42,9 +42,9 @@ window.FF_LISTINGS = [
     captions: ["Living and dining area", "Master bedroom entrance", "Kitchen", "Bedroom", "Bedroom", "Bedroom", "Bedroom with wardrobe", "Room", "Bathroom", "Bathroom", "Bathroom with bathtub", "Balcony", "Balcony with garden view", "Balcony"],
     detailUrl: "/buy/ireo-victory-valley-4-bhk-14259",
     legacyUrl: "/property-ff-ivv-sale-002.html",
-    description: "A verified 4BHK resale option in Tower D of IREO Victory Valley, semi furnished and available now. AI-enhanced photos show the living room, bedrooms, bathrooms, kitchen and garden-facing balconies.",
+    description: "A verified 4BHK resale option in Tower D of IREO Victory Valley, semi furnished and available now. Photos show the living room, bedrooms, bathrooms, kitchen and garden-facing balconies.",
     highlights: [
-      "Tower D, 2nd floor",
+      "Tower D",
       "Semi furnished, available now",
       "Garden-facing balconies",
       "Visit coordination through Family&Flats"
@@ -62,7 +62,7 @@ window.FF_LISTINGS = [
     location: "Sector 60, Golf Course Extension Road, Gurugram",
     bhk: "2BHK",
     size: "1374 Sq. Ft.",
-    floor: "1st Floor",
+    floor: "",
     furnishing: "Semi Furnished",
     availability: "Available now",
     price: "Rs. 2.65 Cr",
@@ -74,8 +74,8 @@ window.FF_LISTINGS = [
     features: ["Sun-facing", "Road-facing"],
     photoCount: 0,
     detailUrl: "/buy/ireo-skyon-2-bhk-14258",
-    description: "A verified 2BHK resale flat in IREO Skyon, Sector 60, semi furnished and available now. South-facing balcony with good sunlight, first floor, one car parking and club membership.",
-    highlights: ["South-facing balcony, sun-facing", "North entrance", "1st floor", "1 car parking, club membership", "Visit coordination through Family&Flats"]
+    description: "A verified 2BHK resale flat in IREO Skyon, Sector 60, semi furnished and available now. South-facing balcony with good sunlight, one car parking and club membership.",
+    highlights: ["South-facing balcony, sun-facing", "North entrance", "1 car parking, club membership", "Visit coordination through Family&Flats"]
   },
   {
     id: "FF-SKY-RENT-001",
@@ -90,9 +90,9 @@ window.FF_LISTINGS = [
     location: "Sector 60, Golf Course Extension Road, Gurugram",
     bhk: "2BHK",
     size: "1374 Sq. Ft.",
-    floor: "3rd Floor",
+    floor: "Lower",
     furnishing: "Fully Furnished",
-    availability: "Available from 1 Dec 2026",
+    availability: "Available From 1 Dec 2026",
     price: "Rs. 75,000/month",
     priceNote: "Plus maintenance. Confirm before visit.",
     balconyFacing: "West",
@@ -116,7 +116,7 @@ window.FF_LISTINGS = [
     ],
     captions: ["Living room", "Kitchen", "Bedroom 1", "Bedroom 2", "Bathroom 1", "Bathroom 2", "Dining area", "Living room with TV", "Bedroom 1", "Bedroom 2"],
     detailUrl: "/rent/ireo-skyon-2-bhk-14257",
-    description: "A verified fully furnished 2BHK for rent in IREO Skyon, Sector 60, available from 1 December 2026. Third floor, west-facing balcony, east entrance and two car parkings. Photos are AI-enhanced for light and clarity only; nothing in the flat is added or removed.",
-    highlights: ["Fully furnished", "West-facing balcony, east entrance", "3rd floor", "2 car parkings", "Available from 1 December 2026"]
+    description: "A verified fully furnished 2BHK for rent in IREO Skyon, Sector 60, available from 1 December 2026. West-facing balcony, east entrance and two car parkings.",
+    highlights: ["Fully furnished", "West-facing balcony, east entrance", "2 car parkings", "Available from 1 December 2026"]
   }
 ];
