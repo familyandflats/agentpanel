@@ -51,6 +51,7 @@ RewriteRule ^f/14259-([a-z0-9]{4,8})/?$ buy/ireo-victory-valley-4-bhk-14259.html
 RewriteRule ^f/14258-([a-z0-9]{4,8})/?$ buy/ireo-skyon-2-bhk-14258.html [L]
 RewriteRule ^f/14257-([a-z0-9]{4,8})/?$ rent/ireo-skyon-2-bhk-14257.html [L]
 RewriteRule ^f/14260-([a-z0-9]{4,8})/?$ rent/princeton-dlf-phase-5-3-bhk-14260.html [L]
+RewriteRule ^f/14261-([a-z0-9]{4,8})/?$ buy/ireo-the-corridors-2-bhk-14261.html [L]
 # END FF CLIENT LINKS
 
 # BEGIN FF CLEAN FLAT LINKS (Arun, 18 Nov 2026): /rent/<project>-<n>-bhk-<id> and /buy/<project>-<n>-bhk-<id>
