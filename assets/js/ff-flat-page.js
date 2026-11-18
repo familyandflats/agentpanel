@@ -134,17 +134,34 @@
         '<span class="ffx-chips">' + feats.map(function (f) { return '<i>' + esc(f) + '</i>'; }).join("") + '</span>' +
         '<span class="ffx-id">Property ID ' + esc(o.ref || o.id) + '</span><span class="ffx-btn">View flat</span></a>';
     };
-    var adCard = function (x, slug, n) {
-      var P = PROJ[slug], pic = P.pics[n % P.pics.length];
-      var feats = (x.tags || []).filter(function (t) { return !/plus maintenance|possession ready/i.test(t); }).slice(0, 2);
-      if (feats.length < 2 && x.size) feats.push(Math.round(x.size).toLocaleString("en-IN") + " sq ft");
-      var msg = "Hi Family&Flats, I am interested in listing " + x.id + " (" + bhk + " BHK for " + word + ", " + P.name + "). Please share details.";
-      return '<div class="ffx-card"><span class="ffx-img"><img src="' + esc(pic) + '" alt="' + esc(P.name) + ' project photo" loading="lazy"><em>Project photo</em></span>' +
-        '<span class="ffx-badge ag">' + (slug === mySlug ? "Agent listing" : esc(P.name.replace(/^IREO\s+/, "")) + " · agent") + '</span>' +
-        '<b class="ffx-price">' + esc(adPrice(x)) + (isLease ? '<small> /month</small>' : "") + '</b>' +
-        '<span class="ffx-chips">' + feats.map(function (f) { return '<i>' + esc(f) + '</i>'; }).join("") + '</span>' +
-        '<span class="ffx-id">' + esc(dayWord(x.advertisedOn)) + (x.id ? " · " + esc(x.id) : "") + '</span>' +
-        '<a class="ffx-btn wa" target="_blank" rel="noopener" href="https://wa.me/' + PHONE + '?text=' + encodeURIComponent(msg) + '">Enquire</a></div>';
+    // T0192 (Arun 18 Nov 2026 14:07, design B): agent listings are grouped by furnishing, one card per group
+    // with the rent range and an "N options" badge; per society in the nearby section.
+    var FURN = ["Fully furnished", "Semi-furnished", "Unfurnished", "Furnishing not stated"];
+    var furnOf = function (x) { var t = (x.tags || []).join("|"); return /fully/i.test(t) ? FURN[0] : /semi/i.test(t) ? FURN[1] : /unfurn/i.test(t) ? FURN[2] : FURN[3]; };
+    var monthWord = function (d) { var t = new Date(d); return isNaN(t) ? "" : t.getDate() + " " + ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][t.getMonth()]; };
+    var groupAds = function (list, slug) {
+      var g = {};
+      list.forEach(function (x) { var f = furnOf(x); (g[f] = g[f] || []).push(x); });
+      return FURN.filter(function (f) { return g[f]; }).map(function (f) { return { slug: slug, furn: f, l: g[f] }; });
+    };
+    var groupRange = function (l) {
+      var P = l.map(priceOf).filter(Boolean); if (!P.length) return "On request";
+      var lo = Math.min.apply(null, P), hi = Math.max.apply(null, P);
+      return lo === hi ? "₹" + k(lo).replace("k", "K") : "₹" + k(lo).replace(/k$/, "K").replace(/ Cr$/, "") + "–" + k(hi).replace("k", "K");
+    };
+    var groupCard = function (gr, n) {
+      var P = PROJ[gr.slug], pic = P.pics[n % P.pics.length], l = gr.l, cnt = l.length;
+      var range = groupRange(l), latest = l.map(function (x) { return x.advertisedOn || ""; }).sort().pop();
+      var sizes = l.map(function (x) { return +x.size || 0; }).filter(Boolean);
+      var chips = [P.name.replace(/^(IREO|Conscient Hines)\s+/, "")];
+      if (sizes.length) { var a = Math.min.apply(null, sizes), b = Math.max.apply(null, sizes); chips.push((a === b ? a.toLocaleString("en-IN") : a.toLocaleString("en-IN") + "–" + b.toLocaleString("en-IN")) + " sq ft"); } else chips.push("Agent listings");
+      var href = P.url + "?for=" + (isLease ? "rent" : "buy") + "&bhk=" + bhk + "#vv-inventory";
+      return '<a class="ffx-card ffx-group" href="' + esc(href) + '"><span class="ffx-img"><img src="' + esc(pic) + '" alt="' + esc(P.name) + ' project photo" loading="lazy"><em>Project photo</em></span>' +
+        '<span class="ffx-brow"><span class="ffx-badge ag">' + esc(gr.furn) + '</span><span class="ffx-count">' + cnt + (cnt === 1 ? " option" : " options") + '</span></span>' +
+        '<b class="ffx-price">' + esc(range) + (range !== "On request" && isLease ? '<small> /month</small>' : "") + '</b>' +
+        '<span class="ffx-chips">' + chips.map(function (f) { return '<i>' + esc(f) + '</i>'; }).join("") + '</span>' +
+        '<span class="ffx-id">' + (cnt === 1 ? (latest ? "Listed " + esc(monthWord(latest)) + " · agent's ad" : "Agent's ad") : (latest ? "Newest " + esc(monthWord(latest)) + " · " : "") + "some may repeat") + '</span>' +
+        '<span class="ffx-btn">' + (cnt === 1 ? "See this option" : "See " + cnt + " options") + '</span></a>';
     };
     var loadAds = function (slug, done) {
       var P = PROJ[slug]; if (!P) return done([]);
@@ -168,7 +185,7 @@
       return '<section class="ffx-sec"><div class="ffx-head"><h2>' + esc(title) + '</h2><span class="ffx-nav">' +
         '<button type="button" class="ffx-arw" data-dir="-1" aria-label="Previous homes">&#8249;</button>' +
         '<button type="button" class="ffx-arw" data-dir="1" aria-label="Next homes">&#8250;</button></span></div>' +
-        '<div class="ffx-row">' + cards.join("") + '</div>' + (seeAll ? '<a class="ffx-all" href="' + esc(seeHref) + '">' + esc(seeAll) + ' →</a>' : "") + '</section>';
+        '<div class="ffx-row">' + cards.join("") + '</div>' + (/ffx-group/.test(cards.join("")) ? '<p class="ffx-note">Agent listings are ads from many agents. The same flat is often advertised by more than one agent, so the real number of flats can be much lower. We confirm each one before your visit.</p>' : "") + (seeAll ? '<a class="ffx-all" href="' + esc(seeHref) + '">' + esc(seeAll) + ' →</a>' : "") + '</section>';
     };
     var listPage = isLease ? "/lease.html" : "/sale.html";
     var filterSlug = function (s3) { return s3 === "ireovictoryvalley" ? "ireo-victory-valley" : s3; };
@@ -187,18 +204,20 @@
     };
     if (window.addEventListener) window.addEventListener("resize", function () { arrows(); });
     var out = { same: "", near: "" };
-    var paint = function () { host.innerHTML = out.same + out.near; arrows(); };
+    var paint = function () { host.innerHTML = out.same + out.near; Array.prototype.slice.call(host.querySelectorAll(".ffx-note"), 1).forEach(function (n) { n.parentNode.removeChild(n); }); arrows(); };
     loadAds(mySlug, function (list) {
       var ads = list.filter(fits).sort(near);
-      var cards = ourSame.slice(0, MAX).map(ourCard).concat(ads.slice(0, Math.max(0, MAX - ourSame.length)).map(function (x, i) { return adCard(x, mySlug, i); }));
+      var cards = ourSame.slice(0, MAX).map(ourCard).concat(groupAds(ads, mySlug).map(groupCard));
       var total = ourSame.length + ads.length;
       out.same = section("More " + bhk + " BHK homes for " + word + " in " + item.project, cards,
         "See all " + bhk + " BHK homes for " + word + " in " + item.project + " (" + total + ")", listPage + "?project=" + encodeURIComponent(filterSlug(mySlug)) + "&bhk=" + bhk + "bhk");
       paint();
       var pending = nearSlugs.length, nearAds = [];
       var finish = function () {
-        nearAds.sort(function (a, b) { return near(a.x, b.x); });
-        var c2 = ourNear.slice(0, MAX).map(ourCard).concat(nearAds.slice(0, Math.max(0, MAX - ourNear.length)).map(function (o, i) { return adCard(o.x, o.slug, i + 3); }));
+        var groups2 = [];
+        nearSlugs.forEach(function (s3) { groups2 = groups2.concat(groupAds(nearAds.filter(function (o) { return o.slug === s3; }).map(function (o) { return o.x; }), s3)); });
+        groups2.sort(function (a, b) { return b.l.length - a.l.length; });
+        var c2 = ourNear.slice(0, MAX).map(ourCard).concat(groups2.map(function (g2, i) { return groupCard(g2, i + 3); }));
         out.near = section("Similar " + bhk + " BHK homes nearby", c2, "See all " + bhk + " BHK homes for " + word, listPage + "?bhk=" + bhk + "bhk");
         paint();
       };
