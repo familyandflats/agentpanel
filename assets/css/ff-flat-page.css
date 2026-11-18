@@ -41,6 +41,10 @@
  .ffp-bar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:900;gap:12px;align-items:center;justify-content:space-between;background:#fff;border-top:1px solid var(--line);padding:10px 16px;box-shadow:0 -10px 30px rgba(15,23,42,.12)}
  .ffp-bar b{font-size:20px;display:block}.ffp-bar small{color:var(--mut)}.ffp-bar a{background:#0f172a;color:#fff;text-decoration:none;font-weight:900;border-radius:12px;padding:12px 18px}}
 @media(max-width:520px){.ffp-stage{height:52vh}.ffp-sec{padding:18px}}
+/* T0195 (Arun 18 Nov 15:36): on phones the bottom bar keeps Enquire clear of the WhatsApp button, and the page ends above the bar */
+@media(max-width:900px){.ffp-bar{padding-bottom:calc(10px + env(safe-area-inset-bottom,0px))}
+ body:has(.ffp-bar){padding-bottom:calc(82px + env(safe-area-inset-bottom,0px))}
+ body:has(.ffp-bar) .ff-whatsapp-float{bottom:calc(94px + env(safe-area-inset-bottom,0px)) !important;right:16px !important}}
 
 /* v2: portrait photos shown whole (3:4), thumbnails in a grid beside them */
 .ffp-gal{display:grid;grid-template-columns:minmax(0,480px) minmax(0,1fr);gap:14px;background:none;border-radius:0;overflow:visible}

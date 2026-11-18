@@ -122,7 +122,7 @@
       document.body.appendChild(footer);
     }
     if (footer && !footer.hasAttribute("data-include")) {
-      loadStyleOnce("/assets/css/footer.css?v=footer-standard-20260924c", "ff-shared-footer-style");
+      loadStyleOnce("/assets/css/footer.css?v=t0195", "ff-shared-footer-style");
       includeFragment(footer, "/footer.html").catch(function (error) {
         console.error("Footer include failed:", error);
       });

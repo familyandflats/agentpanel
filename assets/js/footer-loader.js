@@ -5,7 +5,7 @@
     var link = document.createElement("link");
     link.id = "ff-shared-footer-style";
     link.rel = "stylesheet";
-    link.href = "/assets/css/footer.css?v=" + VERSION;
+    link.href = "/assets/css/footer.css?v=t0195" + VERSION;
     document.head.appendChild(link);
   }
   function loadFooter() {
