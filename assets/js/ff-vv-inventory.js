@@ -479,4 +479,16 @@
 
   shell();
   draw();
+
+  // T0191 (Arun 18 Nov 2026): links from the rent/buy pages and flat pages open on one BHK for rent or sale,
+  // e.g. /projects/ireo-skyon/?for=rent&bhk=2#vv-inventory
+  try {
+    var q = new URLSearchParams(window.location.search), want = q.get("for"), wantBhk = (q.get("bhk") || "").replace(/bhk$/i, "");
+    if (want || wantBhk) {
+      if (/^(\d|P)$/.test(wantBhk)) { state.adTab = wantBhk; state.openLayout = null; }
+      if (want === "rent" || want === "buy") setType(want === "rent" ? "Lease" : "Sale");
+      draw();
+      if (window.location.hash === "#vv-inventory") setTimeout(function () { mount.scrollIntoView({ block: "start" }); }, 60);
+    }
+  } catch (e) { /* plain page */ }
 })();
