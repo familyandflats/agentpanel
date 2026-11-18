@@ -27,7 +27,7 @@ function render(flatId) {
 let changed = 0, problems = 0;
 for (const item of all) {
   if (!item || !item.detailUrl || !/verified/i.test(item.status || "")) continue;
-  const file = path.join(ROOT, item.detailUrl.replace(/^\//, ""));
+  const file = path.join(ROOT, item.detailUrl.replace(/^\//, "") + (/\.html$|\/$/.test(item.detailUrl) ? "" : ".html"));  // clean links (/rent/..., /buy/...) live in .html files (18 Nov 2026)
   if (!fs.existsSync(file)) continue;
   const raw = fs.readFileSync(file, "utf8"), nl = raw.includes("\r\n") ? "\r\n" : "\n";
   let src = raw.replace(/\r\n/g, "\n");

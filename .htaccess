@@ -46,6 +46,34 @@ RewriteRule ^listings/sale/ff-ivv-sale-00[134]\.html$ /projects/ireo-victory-val
 RewriteRule ^listings/lease/ff-ivv-rent-00[12]\.html$ /projects/ireo-victory-valley/ [R=301,L]
 RewriteRule ^property-ff-ivv-(sale|rent)-001\.html$ /projects/ireo-victory-valley/ [R=301,L]
 
+# BEGIN FF CLEAN FLAT LINKS (Arun, 18 Nov 2026): /rent/<project>-<n>-bhk-<id> and /buy/<project>-<n>-bhk-<id>
+# Typed or old .html / trailing-slash forms go to the clean link (THE_REQUEST, so the internal rewrite below never loops)
+RewriteCond %{THE_REQUEST} \s/(rent|buy)/([a-z0-9-]+-[0-9]{5})(\.html|/)[\s?]
+RewriteRule ^ /%1/%2 [R=301,L]
+# /rent and /buy on their own open the full lists
+RewriteRule ^rent/?$ /lease.html [R=301,L]
+RewriteRule ^buy/?$ /sale.html [R=301,L]
+# Clean link serves its .html file
+RewriteRule ^(rent|buy)/([a-z0-9-]+-[0-9]{5})$ $1/$2.html [L]
+# Old flat links
+RewriteRule ^listings/lease/ff-sky-rent-001\.html$ /rent/ireo-skyon-2-bhk-14257 [R=301,L]
+RewriteRule ^listings/sale/ff-sky-sale-001\.html$ /buy/ireo-skyon-2-bhk-14258 [R=301,L]
+RewriteRule ^listings/sale/ff-ivv-sale-002\.html$ /buy/ireo-victory-valley-4-bhk-14259 [R=301,L]
+RewriteRule ^property-ff-ivv-sale-002\.html$ /buy/ireo-victory-valley-4-bhk-14259 [R=301,L]
+# END FF CLEAN FLAT LINKS
+
+# BEGIN FF FOLDER LINKS (18 Nov 2026): folders without their own page opened "403 Forbidden"; send them to the right page
+RewriteRule ^listings/sale/?$ /sale.html [R=301,L]
+RewriteRule ^listings/lease/?$ /lease.html [R=301,L]
+RewriteRule ^listings/?$ /listings.html [R=301,L]
+RewriteRule ^content/news/?$ /news.html [R=301,L]
+RewriteRule ^content(/blogs)?/?$ /blogs.html [R=301,L]
+RewriteRule ^services/?$ /services.html [R=301,L]
+RewriteRule ^team/?$ /about-company.html [R=301,L]
+RewriteRule ^locations/?$ /locations/golf-course-extension-road-gurugram/ [R=301,L]
+RewriteRule ^developers/?$ /projects/ [R=301,L]
+# END FF FOLDER LINKS
+
 # Old blog URLs to new blog folder
 RedirectMatch 301 ^/blog-(.*)\.html$ /content/blogs/blog-$1.html
 

@@ -36,7 +36,7 @@
   if (item.carParkings != null) facts.push(["Car parking", item.carParkings ? String(item.carParkings) : "None"]);
   if (item.clubMembership != null) facts.push(["Club membership", item.clubMembership ? "Yes" : "No"]);
   if ((item.features || []).length) facts.push(["Facing / view", item.features.join(", ")]);
-  facts.push(["Project", item.project], ["Reference", item.id]);
+  facts.push(["Project", item.project], ["Reference", item.ref || item.id]);
 
   var others = all.filter(function (i) { return i && i.id !== item.id && i.projectSlug === item.projectSlug && /verified/i.test(i.status || "") && i.type === item.type && i.detailUrl; });
   var seen = {}; others = others.filter(function (i) { if (seen[i.id]) return false; seen[i.id] = 1; return true; });
