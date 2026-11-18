@@ -68,7 +68,9 @@
   // T0179 client links (Arun 18 Nov 2026): opened as familyandflats.com/f/<Property ID>-<code>, the page tells
   // Family&Flats it was opened, how many photos were seen, whether the price came into view and whether Enquire or
   // Call was tapped. Only a random id kept in this browser is sent; never a name, number or contacts.
-  var linkM = ((typeof location !== "undefined" && location.pathname) || "").match(/^\/f\/(\d{5})-([a-z0-9]{4,8})\/?$/) || [];
+  // Client links: /f/<ref>-<code> and (T0200) /rent|buy/<flat>-<ref>-<code>. linkM[1] = Property ID, linkM[2] = code.
+  var linkPath = (typeof location !== "undefined" && location.pathname) || "";
+  var linkM = linkPath.match(/^\/f\/(\d{5})-([a-z0-9]{4,8})\/?$/) || linkPath.match(/^\/(?:rent|buy)\/[a-z0-9-]+-(\d{5})-([a-z0-9]{4,8})\/?$/) || [];
   var track = function () {};
   if (linkM[1] && linkM[1] === String(item.ref || "")) {
     var dev = "";

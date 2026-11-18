@@ -62,6 +62,8 @@ RewriteRule ^rent/?$ /lease.html [R=301,L]
 RewriteRule ^buy/?$ /sale.html [R=301,L]
 # Clean link serves its .html file
 RewriteRule ^(rent|buy)/([a-z0-9-]+-[0-9]{5})$ $1/$2.html [L]
+# Client links in the flat's own address (Arun 18 Nov 16:18): /rent/<flat>-14257-<code> serves the same page, tracked
+RewriteRule ^(rent|buy)/([a-z0-9-]+-[0-9]{5})-([a-z0-9]{4,8})/?$ $1/$2.html [L]
 # Old flat links
 RewriteRule ^listings/lease/ff-sky-rent-001\.html$ /rent/ireo-skyon-2-bhk-14257 [R=301,L]
 RewriteRule ^listings/sale/ff-sky-sale-001\.html$ /buy/ireo-skyon-2-bhk-14258 [R=301,L]
