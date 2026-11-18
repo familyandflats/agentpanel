@@ -86,7 +86,7 @@ for (const item of all) {
            .replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${tHtml}$2`)
            .replace(/<link rel="canonical" href="\/([^"]*)">/, `<link rel="canonical" href="${SITE}/$1">`)
            .replace(/(<meta property="og:url" content=")\/([^"]*")/, `$1${SITE}/$2`)
-           .replace(/ff-flat-page\.js\?v=[A-Za-z0-9_-]+/, "ff-flat-page.js?v=" + ver("assets/js/ff-flat-page.js")).replace(/listings\.js\?v=[A-Za-z0-9_-]+/, "listings.js?v=" + ver("assets/data/listings.js")).replace(/ff-flat-page\.css\?v=\d+/, "ff-flat-page.css?v=6");
+           .replace(/ff-flat-page\.js\?v=[A-Za-z0-9_-]+/, "ff-flat-page.js?v=" + ver("assets/js/ff-flat-page.js")).replace(/listings\.js\?v=[A-Za-z0-9_-]+/, "listings.js?v=" + ver("assets/data/listings.js")).replace(/ff-flat-page\.css\?v=[A-Za-z0-9_-]+/, "ff-flat-page.css?v=" + ver("assets/css/ff-flat-page.css"));
   out = out.includes(LDS) ? out.replace(new RegExp(LDS + "[\\s\\S]*?" + LDE), ldBlock) : out.replace("</head>", `  ${ldBlock}\n</head>`);
   out = out.replace(/\n/g, nl);
   if (out !== raw) { changed++; if (check) console.log(`OUT OF DATE ${item.detailUrl}`); else { fs.writeFileSync(file, out); console.log(`WROTE ${item.detailUrl}`); } }
