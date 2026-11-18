@@ -149,5 +149,37 @@ window.FF_LISTINGS = [
     detailUrl: "/rent/princeton-dlf-phase-5-3-bhk-14260",
     description: "A fully furnished 3BHK for rent in DLF Princeton Estate, Sector 53, DLF Phase V, Gurugram, available now. About 1,350 sq. ft. with two bathrooms and a modular kitchen.",
     highlights: ["Fully furnished", "Modular kitchen", "2 bathrooms", "Available now"]
+  },
+  {
+    id: "FF-CD-SALE-001",
+    ref: "14261",
+    type: "Sale",
+    status: "Verified",
+    title: "2BHK + Study Flat on Sale in IREO The Corridors",
+    project: "IREO The Corridors",
+    projectSlug: "ireothecorridors",
+    projectUrl: "/projects/ireothecorridors/",
+    location: "Sector 67A, Southern Peripheral Road, Gurugram",
+    bhk: "2BHK + Study",
+    size: "1480 Sq. Ft.",
+    floor: "Mid",
+    furnishing: "",
+    availability: "Ready to move",
+    price: "Rs. 2.40 Cr",
+    priceNote: "Asking price. Confirm before visit.",
+    features: ["Park / clubhouse view"],
+    image: "/projects/ireothecorridors/images/s14261-01.jpg",
+    photoCount: 5,
+    gallery: [
+      "/projects/ireothecorridors/images/s14261-01.jpg",
+      "/projects/ireothecorridors/images/s14261-02.jpg",
+      "/projects/ireothecorridors/images/s14261-03.jpg",
+      "/projects/ireothecorridors/images/s14261-04.jpg",
+      "/projects/ireothecorridors/images/s14261-05.jpg"
+    ],
+    captions: ["Living room", "Living room, other side", "Study room", "Bedroom", "Balcony and green view"],
+    detailUrl: "/buy/ireo-the-corridors-2-bhk-14261",
+    description: "A 2BHK with a separate study room for sale in IREO The Corridors, Sector 67A, Gurugram, ready to move. About 1,480 sq. ft. with two bathrooms, two balconies, a modular kitchen and a park and clubhouse view.",
+    highlights: ["2 BHK + study room", "2 bathrooms, 2 balconies", "Park / clubhouse view", "Ready to move"]
   }
 ];
