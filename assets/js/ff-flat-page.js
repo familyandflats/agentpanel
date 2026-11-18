@@ -177,15 +177,16 @@
     var host = document.createElement("div"); host.className = "ffx"; host.id = "ffx-more";
     var grid = root.querySelector(".ffp-grid"); if (!grid) return;
     grid.parentNode.insertBefore(host, grid.nextSibling);
+    // T0194 (Arun 18 Nov 2026 14:44/15:02): the heading itself is the See-all link; no link under the cards.
     // T0191 (Arun 18 Nov 2026 13:48): 4 cards at a time, no scrollbar, ‹ › buttons; "See all" opens the rent/buy
     // page with the filter already set (2 BHK, and the society for the first section).
     var MAX = 12;
     var section = function (title, cards, seeAll, seeHref) {
       if (!cards.length) return "";
-      return '<section class="ffx-sec"><div class="ffx-head"><h2>' + esc(title) + '</h2><span class="ffx-nav">' +
+      return '<section class="ffx-sec"><div class="ffx-head"><h2>' + (seeAll ? '<a class="ffx-hlink" href="' + esc(seeHref) + '">' + esc(seeAll) + '\u00A0→</a>' : esc(title)) + '</h2><span class="ffx-nav">' +
         '<button type="button" class="ffx-arw" data-dir="-1" aria-label="Previous homes">&#8249;</button>' +
         '<button type="button" class="ffx-arw" data-dir="1" aria-label="Next homes">&#8250;</button></span></div>' +
-        '<div class="ffx-row">' + cards.join("") + '</div>' + (/ffx-group/.test(cards.join("")) ? '<p class="ffx-note">Agent listings are ads from many agents. The same flat is often advertised by more than one agent, so the real number of flats can be much lower. We confirm each one before your visit.</p>' : "") + (seeAll ? '<a class="ffx-all" href="' + esc(seeHref) + '">' + esc(seeAll) + ' →</a>' : "") + '</section>';
+        '<div class="ffx-row">' + cards.join("") + '</div>' + (/ffx-group/.test(cards.join("")) ? '<p class="ffx-note">Agent listings are ads from other agents and the same flat is often advertised by more than one agent.</p>' : "") + '</section>';
     };
     var listPage = isLease ? "/lease.html" : "/sale.html";
     var filterSlug = function (s3) { return s3 === "ireovictoryvalley" ? "ireo-victory-valley" : s3; };
@@ -218,7 +219,7 @@
         nearSlugs.forEach(function (s3) { groups2 = groups2.concat(groupAds(nearAds.filter(function (o) { return o.slug === s3; }).map(function (o) { return o.x; }), s3)); });
         groups2.sort(function (a, b) { return b.l.length - a.l.length; });
         var c2 = ourNear.slice(0, MAX).map(ourCard).concat(groups2.map(function (g2, i) { return groupCard(g2, i + 3); }));
-        out.near = section("Similar " + bhk + " BHK homes nearby", c2, "See all " + bhk + " BHK homes for " + word, listPage + "?bhk=" + bhk + "bhk");
+        out.near = section("Similar " + bhk + " BHK homes nearby", c2, "See all " + bhk + " BHK homes for " + word + " nearby", listPage + "?bhk=" + bhk + "bhk");
         paint();
       };
       if (!pending) return finish();
