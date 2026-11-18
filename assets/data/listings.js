@@ -40,7 +40,7 @@ window.FF_LISTINGS = [
       "/projects/ireovictoryvalley/images/d15-02-01-14.jpg"
     ],
     captions: ["Living and dining area", "Master bedroom entrance", "Kitchen", "Bedroom", "Bedroom", "Bedroom", "Bedroom with wardrobe", "Room", "Bathroom", "Bathroom", "Bathroom with bathtub", "Balcony", "Balcony with garden view", "Balcony"],
-    detailUrl: "/buy/ireo-victory-valley-4-bhk-14259",
+    detailUrl: "/sale/ireo-victory-valley-4-bhk-14259",
     legacyUrl: "/property-ff-ivv-sale-002.html",
     description: "A verified 4BHK resale option in Tower D of IREO Victory Valley, semi furnished and available now. Photos show the living room, bedrooms, bathrooms, kitchen and garden-facing balconies.",
     highlights: [
@@ -73,7 +73,7 @@ window.FF_LISTINGS = [
     clubMembership: true,
     features: ["Sun-facing", "Road-facing"],
     photoCount: 0,
-    detailUrl: "/buy/ireo-skyon-2-bhk-14258",
+    detailUrl: "/sale/ireo-skyon-2-bhk-14258",
     description: "A verified 2BHK resale flat in IREO Skyon, Sector 60, semi furnished and available now. South-facing balcony with good sunlight, one car parking and club membership.",
     highlights: ["South-facing balcony, sun-facing", "North entrance", "1 car parking, club membership", "Visit coordination through Family&Flats"]
   },
@@ -178,7 +178,7 @@ window.FF_LISTINGS = [
       "/projects/ireothecorridors/images/s14261-05.jpg"
     ],
     captions: ["Living room", "Living room, other side", "Study room", "Bedroom", "Balcony and green view"],
-    detailUrl: "/buy/ireo-the-corridors-2-bhk-14261",
+    detailUrl: "/sale/ireo-the-corridors-2-bhk-14261",
     description: "A 2BHK with a separate study room for sale in IREO The Corridors, Sector 67A, Gurugram, ready to move. About 1,480 sq. ft. with two bathrooms, two balconies, a modular kitchen and a park and clubhouse view.",
     highlights: ["2 BHK + study room", "2 bathrooms, 2 balconies", "Park / clubhouse view", "Ready to move"]
   }
