@@ -165,7 +165,7 @@ function build(road) {
   <link rel="stylesheet" href="/assets/css/typography.css?v=evergreen-inventory">
   <link rel="stylesheet" href="/assets/css/layout.css?v=evergreen-inventory">
   <link rel="stylesheet" href="/assets/css/components.css?v=evergreen-inventory">
-  <link rel="stylesheet" href="/assets/css/header.css?v=remove-top-project-search-20260620a">
+  <link rel="stylesheet" href="/assets/css/header.css?v=t0181">
   <link rel="stylesheet" href="/assets/css/footer.css?v=t0195">
   <link rel="stylesheet" href="/assets/css/ff-location.css?v=1">
   <link rel="stylesheet" href="/assets/css/ff-location-b.css?v=3">

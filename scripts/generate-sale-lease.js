@@ -164,7 +164,7 @@ function page(sale) {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <link rel="stylesheet" href="/assets/css/tokens.css?v=home-v2">
 <link rel="stylesheet" href="/assets/css/typography.css?v=home-v2">
-<link rel="stylesheet" href="/assets/css/header.css?v=header-standard-20260925a">
+<link rel="stylesheet" href="/assets/css/header.css?v=t0181">
 <link rel="stylesheet" href="/assets/css/footer.css?v=t0195">
 <link rel="stylesheet" href="/assets/css/ff-sale-lease.css?v=${CSS_V}">
 <meta property="og:type" content="website">

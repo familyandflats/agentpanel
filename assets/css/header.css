@@ -227,3 +227,14 @@
 #header-placeholder{min-height:77px}
 @media (max-width:900px){#header-placeholder{min-height:90px}}
 @media (max-width:530px){#header-placeholder{min-height:134px}}
+
+/* T0181 (Arun 18 Nov 2026, design A): the maroon logo tile beside the wordmark; tagline REALTORS · ADVISORS · MANAGERS */
+.ff-brand { flex-direction: row !important; align-items: center !important; gap: 10px !important; }
+.ff-brand-icon { width: 38px !important; height: 38px !important; flex: 0 0 auto !important; border-radius: 9px !important; display: block !important; }
+.ff-brand-text { display: flex !important; flex-direction: column !important; min-width: 0 !important; }
+.ff-brand-tagline { letter-spacing: .14em !important; white-space: nowrap !important; }
+@media (max-width: 640px) {
+  .ff-brand { gap: 8px !important; }
+  .ff-brand-icon { width: 34px !important; height: 34px !important; border-radius: 8px !important; }
+  .ff-brand-tagline { letter-spacing: .1em !important; }
+}

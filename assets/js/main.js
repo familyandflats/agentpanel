@@ -109,7 +109,7 @@
 
     var header = document.getElementById("header-placeholder");
     if (header && !header.hasAttribute("data-include")) {
-      loadStyleOnce("/assets/css/header.css?v=header-standard-20260925a", "ff-shared-header-style");
+      loadStyleOnce("/assets/css/header.css?v=t0181", "ff-shared-header-style");
       includeFragment(header, "/header.html").catch(function (error) {
         console.error("Header include failed:", error);
       });
