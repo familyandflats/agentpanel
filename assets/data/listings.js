@@ -189,5 +189,27 @@ window.FF_LISTINGS = [
     detailUrl: "/sale/ireo-the-corridors-2-bhk-14261",
     description: "A 2BHK with a separate study room for sale in IREO The Corridors, Sector 67A, Gurugram, ready to move. About 1,480 sq. ft. with two bathrooms, two balconies, a modular kitchen and a park and clubhouse view.",
     highlights: ["2 BHK + study room", "2 bathrooms, 2 balconies", "Park / clubhouse view", "Ready to move"]
+  },
+  {
+    id: "FF-HE-RENT-001",
+    ref: "14262",
+    type: "Lease",
+    status: "Verified",
+    title: "3BHK + Lounge Flat for Rent in Conscient Hines Elevate",
+    project: "Conscient Hines Elevate",
+    projectSlug: "conscienthineselevate",
+    projectUrl: "/projects/conscienthineselevate/",
+    location: "Sector 59, Golf Course Extension Road, Gurugram",
+    bhk: "3BHK + Lounge",
+    size: "2595 Sq. Ft.",
+    floor: "",
+    furnishing: "",
+    availability: "",
+    price: "Rs. 1,60,000/month",
+    priceNote: "Plus maintenance. Confirm before visit.",
+    photoCount: 0,
+    detailUrl: "/rent/conscient-hines-elevate-3-bhk-14262",
+    description: "A 3BHK with a separate lounge for rent in Conscient Hines Elevate, Sector 59, Golf Course Extension Road, Gurugram. About 2,595 sq. ft.",
+    highlights: ["3 BHK + lounge", "About 2,595 sq. ft.", "Sector 59, Golf Course Extension Road"]
   }
 ];
