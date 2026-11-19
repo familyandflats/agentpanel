@@ -51,7 +51,7 @@
     '<nav class="ffp-crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="' + esc(item.projectUrl) + '">' + esc(item.project) + '</a><span>›</span>' + esc(bhk + " BHK for " + (isLease ? "rent" : "sale")) + '</nav>' +
     '<div class="ffp-top"><div><span class="ffp-badge">✓ Verified by Family&amp;Flats' + (hasPhotos ? ' · real photos' : '') + '</span><h1>' + esc(h1) + '</h1><p class="ffp-loc">' + esc(item.location) + '</p></div></div>' +
     (!hasPhotos ? '<div class="ffp-nophoto"><div><b>Photos on request</b><p>This flat is checked by Family&amp;Flats. Ask us and we share current photos or a video of the actual flat on WhatsApp.</p><a class="ffp-btn wa" href="' + esc(waPhotos) + '" target="_blank" rel="noopener">Request photos on WhatsApp</a></div></div>' :
-    '<div class="ffp-gal land"><div class="ffp-stage"><img id="ffp-main" alt=""><button class="ffp-arrow prev" aria-label="Previous photo">‹</button><button class="ffp-arrow next" aria-label="Next photo">›</button><span class="ffp-cap" id="ffp-cap"></span><span class="ffp-count" id="ffp-count"></span></div>' +
+    '<div class="ffp-gal land"><div class="ffp-stage' + (item.photoFit === "whole" ? ' whole' : '') + '"><img id="ffp-main" alt=""><button class="ffp-arrow prev" aria-label="Previous photo">‹</button><button class="ffp-arrow next" aria-label="Next photo">›</button><span class="ffp-cap" id="ffp-cap"></span><span class="ffp-count" id="ffp-count"></span></div>' +
     '<div class="ffp-thumbs">' + gallery.map(function (src, n) { return '<button type="button" class="ffp-thumb" data-n="' + n + '" aria-label="Show photo ' + (n + 1) + '"><img src="' + esc(src) + '" alt="" loading="lazy"></button>'; }).join("") + '</div></div>') +
     '<div class="ffp-grid"><div>' +
       '<section class="ffp-sec"><h2>Key details</h2><dl class="ffp-facts">' + facts.map(function (f) { return '<div class="ffp-fact"><dt>' + esc(f[0]) + '</dt><dd>' + esc(f[1]) + '</dd></div>'; }).join("") + '</dl></section>' +
@@ -260,6 +260,8 @@
     else if (e.key === "ArrowLeft") show(cur - 1);
     else if (e.key === "ArrowRight") show(cur + 1);
   });
+  // 19 Nov 2026 (Arun): a flat whose photos come from a low-quality video has photoFit "whole": each photo is shown whole
+  // at its own size on a plain background, never enlarged to fill the box.
   main.addEventListener("load", function () {
     main.parentNode.classList.toggle("tall", main.naturalHeight > main.naturalWidth * 1.05);
   });
