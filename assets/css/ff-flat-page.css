@@ -142,3 +142,7 @@
 .ffp-gal.land .ffp-stage{position:relative;isolation:isolate}
 .ffp-gal.land .ffp-stage.tall img{object-fit:cover;object-position:50% 50%}
 @media(max-width:900px){.ffp-gal.land .ffp-stage{max-width:none;aspect-ratio:4/3}.ffp-gal.land .ffp-thumb{flex:0 0 96px;height:auto;padding:0;aspect-ratio:4/3}}
+
+/* 19 Nov 2026 (Arun): photos from a low-quality video (listing photoFit "whole") are shown whole on a plain background, never enlarged */
+.ffp-gal.land .ffp-stage.whole{background:#f3f1ed}
+.ffp-gal.land .ffp-stage.whole img,.ffp-gal.land .ffp-stage.whole.tall img{object-fit:contain}
