@@ -42,9 +42,8 @@ window.FF_LISTINGS = [
     captions: ["Living and dining area", "Master bedroom entrance", "Kitchen", "Bedroom", "Bedroom", "Bedroom", "Bedroom with wardrobe", "Room", "Bathroom", "Bathroom", "Bathroom with bathtub", "Balcony", "Balcony with garden view", "Balcony"],
     detailUrl: "/sale/ireo-victory-valley-4-bhk-14259",
     legacyUrl: "/property-ff-ivv-sale-002.html",
-    description: "A verified 4BHK resale option in Tower D of IREO Victory Valley, semi furnished and available now. Photos show the living room, bedrooms, bathrooms, kitchen and garden-facing balconies.",
+    description: "A verified 4 BHK resale flat in IREO Victory Valley, semi furnished and available now. Photos show the living room, bedrooms, bathrooms, kitchen and garden-facing balconies.",
     highlights: [
-      "Tower D",
       "Semi furnished, available now",
       "Garden-facing balconies",
       "Visit coordination through Family&Flats"
